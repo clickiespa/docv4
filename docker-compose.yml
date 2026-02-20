@@ -1,0 +1,7 @@
+services:
+  clickie-manual:
+    build: .
+    container_name: clickie-manual
+    ports:
+      - "8080:80"
+    restart: unless-stopped
