@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Uso — Clickie Plataforma</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow:   #FDC400;
+    --yellow-bg:rgba(253,196,0,0.12);
+    --violet:   #20217F;
+    --violet-m: #3537A8;
+    --violet-l: #CCCDFF;
+    --violet-bg:rgba(32,33,127,0.06);
+    --green:    #7A8C1F;
+    --orange:   #DB6A00;
+    --white:    #FFFFFF;
+    --off:      #F5F6FB;
+    --text:     #2B2C6B;
+    --body:     #444468;
+    --muted:    #7B7BAA;
+    --border:   #E3E4F3;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--white);color:var(--body);font-family:'Open Sans',sans-serif;font-size:14px;line-height:1.7;display:flex;min-height:100vh;}
+
+  /* ── SIDEBAR ── */
+  .sidebar{width:268px;min-width:268px;background:var(--violet);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:100;display:flex;flex-direction:column;}
+  .sidebar::-webkit-scrollbar{width:3px;}
+  .sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:2px;}
+  .sb-logo{padding:24px 20px 18px;border-bottom:1px solid rgba(255,255,255,0.1);}
+  .sb-logo a{display:flex;align-items:center;gap:11px;text-decoration:none;}
+  .sb-badge{width:36px;height:36px;background:var(--yellow);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Raleway',sans-serif;font-weight:900;font-size:17px;color:var(--violet);flex-shrink:0;}
+  .sb-title{font-family:'Raleway',sans-serif;font-weight:800;font-size:18px;color:#fff;letter-spacing:-.3px;}
+  .sb-sub{font-size:10.5px;color:var(--violet-l);font-weight:300;margin-top:1px;}
+  nav{padding:12px 0;flex:1;}
+  .nav-sec{margin-bottom:2px;}
+  .nav-sec-title{font-family:'Raleway',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:rgba(204,205,255,0.45);padding:10px 20px 3px;}
+  .nav-item{display:flex;align-items:center;gap:9px;padding:8px 20px;color:rgba(255,255,255,0.58);text-decoration:none;font-size:12.5px;font-weight:400;transition:all .14s;border-left:3px solid transparent;}
+  .nav-item:hover,.nav-item.active{color:#fff;background:rgba(253,196,0,0.1);border-left-color:var(--yellow);}
+  .nav-icon{font-size:13px;flex-shrink:0;opacity:.65;}
+  .nav-item:hover .nav-icon,.nav-item.active .nav-icon{opacity:1;}
+  .nav-sub{padding-left:32px;font-size:11.5px;color:rgba(255,255,255,0.45);display:block;padding-top:4px;padding-bottom:4px;text-decoration:none;transition:color .14s;border-left:3px solid transparent;}
+  .nav-sub:hover{color:#fff;border-left-color:rgba(253,196,0,0.5);}
+
+  /* ── MAIN ── */
+  .main{margin-left:268px;flex:1;min-height:100vh;}
+
+  /* ── HERO ── */
+  .hero{background:var(--violet);padding:56px 64px 48px;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:-90px;right:-70px;width:330px;height:330px;background:var(--yellow);border-radius:50% 35% 55% 40%;opacity:.14;}
+  .hero::after{content:'';position:absolute;bottom:-50px;right:140px;width:180px;height:180px;background:var(--violet-l);border-radius:50%;opacity:.06;}
+  .hero-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(253,196,0,.14);border:1px solid rgba(253,196,0,.35);color:var(--yellow);padding:3px 12px;border-radius:100px;font-size:11px;font-weight:600;letter-spacing:.4px;margin-bottom:18px;}
+  .hero h1{font-family:'Raleway',sans-serif;font-weight:900;font-size:clamp(28px,3.5vw,46px);color:#fff;line-height:1.08;letter-spacing:-1.3px;margin-bottom:12px;max-width:580px;}
+  .hero h1 em{color:var(--yellow);font-style:normal;}
+  .hero-desc{color:var(--violet-l);font-size:14px;max-width:520px;font-weight:300;line-height:1.65;margin-bottom:20px;}
+  .hero-bar{position:absolute;bottom:0;left:64px;width:48px;height:4px;background:var(--yellow);border-radius:2px 2px 0 0;}
+
+  /* version badge */
+  .hero-version{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);padding:3px 10px;border-radius:6px;font-size:11px;font-weight:500;}
+
+  /* ── CONTENT ── */
+  .content{padding:0 64px 96px;background:var(--white);}
+
+  /* ── SECTION ── */
+  .section{padding-top:64px;max-width:860px;}
+
+  .sec-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:28px;padding-bottom:20px;border-bottom:2px solid var(--border);position:relative;}
+  .sec-header::after{content:'';position:absolute;bottom:-2px;left:0;width:42px;height:2px;background:var(--yellow);}
+  .sec-icon{width:46px;height:46px;border-radius:11px;background:var(--violet);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;margin-top:2px;color:#fff;}
+  .sec-label{font-family:'Raleway',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+  .section h2{font-family:'Raleway',sans-serif;font-weight:800;font-size:22px;letter-spacing:-.4px;color:var(--violet);margin-bottom:3px;}
+  .sec-desc{color:var(--muted);font-size:13px;font-weight:300;}
+
+  /* subsections */
+  .subsection{margin-top:36px;}
+  .subsection h3{font-family:'Raleway',sans-serif;font-weight:700;font-size:15px;color:var(--violet);margin-bottom:12px;padding-left:10px;border-left:3px solid var(--yellow);}
+
+  /* ── INTRO PROSE ── */
+  .prose{color:var(--body);font-size:13.5px;line-height:1.8;}
+  .prose p{margin-bottom:14px;}
+  .prose strong{color:var(--violet);font-weight:600;}
+  .prose em{font-style:italic;}
+
+  /* ── STEPS ── */
+  .steps{display:flex;flex-direction:column;}
+  .step{display:flex;gap:16px;}
+  .step-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:34px;}
+  .step-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Raleway',sans-serif;font-weight:800;font-size:13px;background:var(--violet-l);color:var(--violet);flex-shrink:0;transition:all .2s;z-index:1;}
+  .step:hover .step-num{background:var(--yellow);color:var(--violet);}
+  .step-line{flex:1;width:2px;background:var(--border);margin:4px 0;min-height:12px;}
+  .step-body{flex:1;padding:2px 0 24px;}
+  .step-title{font-family:'Raleway',sans-serif;font-weight:700;font-size:14px;color:var(--violet);margin-bottom:6px;}
+  .step-text{color:var(--body);font-size:13.5px;line-height:1.75;}
+
+  /* ── CARDS ── */
+  .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+  .card-grid.three{grid-template-columns:1fr 1fr 1fr;}
+  .card{background:var(--off);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;transition:all .18s;}
+  .card:hover{border-color:var(--violet);background:#fff;box-shadow:0 3px 12px rgba(32,33,127,.08);}
+  .card-title{font-family:'Raleway',sans-serif;font-weight:700;font-size:12.5px;color:var(--violet);margin-bottom:4px;display:flex;align-items:center;gap:6px;}
+  .dot{width:7px;height:7px;border-radius:2px;background:var(--yellow);flex-shrink:0;}
+  .card-text{color:var(--body);font-size:12.5px;line-height:1.6;}
+
+  /* ── TAGS ── */
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+  .tag{background:var(--off);border:1px solid var(--border);border-radius:6px;padding:3px 10px;font-size:11.5px;color:var(--body);font-weight:500;}
+  .tag.v{background:rgba(32,33,127,.08);border-color:rgba(32,33,127,.2);color:var(--violet);}
+  .tag.y{background:rgba(253,196,0,.14);border-color:rgba(253,196,0,.4);color:#6B5100;}
+  .tag.r{background:rgba(219,106,0,.1);border-color:rgba(219,106,0,.25);color:#7A3500;}
+  .tag.g{background:rgba(122,140,31,.1);border-color:rgba(122,140,31,.25);color:#3A4400;}
+
+  /* ── INFOBOX ── */
+  .infobox{background:var(--violet-bg);border-left:3px solid var(--violet);border-radius:0 8px 8px 0;padding:13px 17px;font-size:13.5px;color:var(--body);margin-top:16px;line-height:1.7;}
+  .infobox strong{color:var(--violet);}
+  .infobox.yellow{background:rgba(253,196,0,.08);border-left-color:var(--yellow);}
+
+  /* ── CHIP ── */
+  .chip{display:inline-block;background:var(--yellow);color:var(--violet);font-family:'Raleway',sans-serif;font-weight:800;font-size:10px;letter-spacing:.5px;padding:2px 10px;border-radius:4px;margin-bottom:6px;text-transform:uppercase;}
+
+  /* ── TABLE ── */
+  .ftable{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px;border-radius:10px;overflow:hidden;border:1.5px solid var(--border);}
+  .ftable th{text-align:left;padding:9px 14px;font-family:'Raleway',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#fff;background:var(--violet);}
+  .ftable td{padding:9px 14px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--body);}
+  .ftable tr:last-child td{border-bottom:none;}
+  .ftable tr:hover td{background:var(--off);}
+
+  code{font-family:'Courier New',monospace;background:rgba(32,33,127,.07);border:1px solid rgba(32,33,127,.14);border-radius:4px;padding:1px 6px;font-size:11.5px;color:var(--violet);}
+
+  /* ── STYPE GRID ── */
+  .sg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-top:12px;}
+  .stype{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;transition:all .18s;}
+  .stype:hover{border-color:var(--violet);transform:translateY(-2px);box-shadow:0 4px 12px rgba(32,33,127,.09);}
+  .stype-name{font-family:'Raleway',sans-serif;font-weight:700;font-size:12px;color:var(--violet);margin-bottom:3px;}
+  .stype-desc{color:var(--muted);font-size:11.5px;line-height:1.5;}
+
+  /* ── MODULE INTRO STRIP ── */
+  .module-strip{background:var(--off);border:1.5px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:20px;font-size:13px;color:var(--body);line-height:1.65;}
+  .module-strip strong{color:var(--violet);}
+
+  /* ── GLOSARIO ── */
+  .glos-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+  .glos-item{background:var(--off);border:1.5px solid var(--border);border-radius:8px;padding:12px 15px;}
+  .glos-term{font-family:'Raleway',sans-serif;font-weight:700;font-size:12.5px;color:var(--violet);margin-bottom:3px;}
+  .glos-def{font-size:12px;color:var(--body);line-height:1.55;}
+
+  /* ── INTRO PRINCIPLE ── */
+  .intro-principle{
+    display:flex;align-items:flex-start;gap:16px;
+    background:var(--violet);border-radius:12px;
+    padding:22px 24px;margin-bottom:24px;
+  }
+  .intro-principle-icon{font-size:22px;flex-shrink:0;margin-top:2px;color:var(--yellow);}
+  .intro-principle-text{color:rgba(255,255,255,0.9);font-size:14.5px;line-height:1.7;font-weight:300;}
+  .intro-principle-text strong{color:var(--yellow);font-weight:700;}
+
+  /* ── METRIC DEFINITION ── */
+  .metric-definition{
+    display:grid;grid-template-columns:1fr 1fr;gap:0;
+    border:1.5px solid var(--border);border-radius:12px;overflow:hidden;
+    margin-top:12px;
+  }
+  .metric-def-left{
+    background:var(--violet);padding:22px 24px;
+  }
+  .metric-def-label{
+    font-family:'Raleway',sans-serif;font-size:9.5px;font-weight:700;
+    letter-spacing:1.8px;text-transform:uppercase;
+    color:rgba(204,205,255,0.6);margin-bottom:6px;
+  }
+  .metric-def-title{
+    font-family:'Raleway',sans-serif;font-weight:800;font-size:18px;
+    color:var(--yellow);margin-bottom:10px;letter-spacing:-.3px;
+  }
+  .metric-def-body{color:rgba(255,255,255,0.85);font-size:13px;line-height:1.7;font-weight:300;}
+  .metric-def-body strong{color:#fff;font-weight:600;}
+  .metric-def-right{background:var(--off);padding:22px 24px;border-left:1.5px solid var(--border);}
+  .metric-def-examples-label{
+    font-family:'Raleway',sans-serif;font-size:10px;font-weight:700;
+    letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;
+  }
+
+  /* ── LEARNING PATH ── */
+  .learning-path{
+    background:var(--off);border:1.5px solid var(--border);border-radius:12px;
+    padding:24px 26px;margin-top:32px;
+  }
+  .lp-title{
+    font-family:'Raleway',sans-serif;font-weight:800;font-size:13px;
+    color:var(--violet);letter-spacing:.5px;text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  .lp-steps{display:flex;align-items:flex-start;gap:8px;margin-bottom:20px;}
+  .lp-step{flex:1;background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;min-width:0;}
+  .lp-num{
+    width:28px;height:28px;border-radius:50%;
+    background:var(--yellow);color:var(--violet);
+    font-family:'Raleway',sans-serif;font-weight:900;font-size:13px;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:8px;flex-shrink:0;
+  }
+  .lp-step-title{font-family:'Raleway',sans-serif;font-weight:700;font-size:12.5px;color:var(--violet);margin-bottom:4px;}
+  .lp-step-text{font-size:12px;color:var(--body);line-height:1.55;}
+  .lp-arrow{font-size:18px;color:var(--yellow);margin-top:20px;flex-shrink:0;font-weight:700;}
+  .lp-note{font-size:13px;color:var(--body);line-height:1.7;border-top:1px solid var(--border);padding-top:16px;}
+  .lp-note strong{color:var(--violet);font-weight:700;}
+
+  /* ── ACCESS BOX ── */
+  .access-box{background:var(--violet);border-radius:12px;padding:20px 24px;margin-top:14px;display:flex;align-items:center;gap:16px;}
+  .access-url{font-family:'Raleway',sans-serif;font-weight:700;font-size:14px;color:var(--yellow);letter-spacing:-.2px;}
+  .access-text{color:rgba(255,255,255,0.7);font-size:12.5px;margin-top:3px;}
+  .access-icon{font-size:28px;flex-shrink:0;}
+
+  /* ── DIVIDER ── */
+  .divider{height:1px;background:var(--border);margin:44px 0 0;}
+
+  /* ── FOOTER ── */
+  .footer{margin-top:68px;padding:24px 0 44px;border-top:2px solid var(--border);display:flex;align-items:center;gap:14px;}
+  .ft-logo{width:32px;height:32px;background:var(--violet);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Raleway',sans-serif;font-weight:900;font-size:15px;color:var(--yellow);flex-shrink:0;}
+  .ft-text{color:var(--muted);font-size:11.5px;line-height:1.6;}
+  .ft-text strong{color:var(--violet);font-weight:600;}
+
+  @media(max-width:920px){
+    .sidebar{display:none;}.main{margin-left:0;}
+    .hero,.content{padding-left:20px;padding-right:20px;}
+    .card-grid,.card-grid.three{grid-template-columns:1fr;}
+    .sg{grid-template-columns:1fr 1fr;}
+    .glos-grid{grid-template-columns:1fr;}
+  }
+  ::-webkit-scrollbar{width:5px;}
+  ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+</style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<aside class="sidebar">
+  <div class="sb-logo">
+    <a href="#inicio">
+      <div class="sb-badge">C</div>
+      <div>
+        <div class="sb-title">Clickie</div>
+        <div class="sb-sub">Manual de uso · v1.1</div>
+      </div>
+    </a>
+  </div>
+  <nav>
+    <div class="nav-sec">
+      <div class="nav-sec-title">Introducción</div>
+      <a class="nav-item active" href="#intro"><span class="nav-icon">◆</span>Introducción</a>
+      <a class="nav-item" href="#acceso"><span class="nav-icon">🔑</span>Acceso a la plataforma</a>
+      <a class="nav-item" href="#interfaz"><span class="nav-icon">⬡</span>Estructura de la interfaz</a>
+      <a class="nav-item" href="#inicio-home"><span class="nav-icon">⌂</span>Inicio (Home)</a>
+    </div>
+    <div class="nav-sec">
+      <div class="nav-sec-title">Módulos</div>
+      <a class="nav-item" href="#paneles"><span class="nav-icon">▦</span>Paneles y reportes</a>
+      <a class="nav-item" href="#metricas"><span class="nav-icon">◇</span>Mis métricas</a>
+      <a class="nav-item" href="#visor"><span class="nav-icon">◎</span>Visor de datos</a>
+      <a class="nav-item" href="#exportador"><span class="nav-icon">⬇</span>Exportador de datos</a>
+      <a class="nav-item" href="#monitoreos"><span class="nav-icon">◉</span>Monitoreos</a>
+      <a class="nav-item" href="#activos"><span class="nav-icon">◈</span>Mis activos</a>
+      <a class="nav-item" href="#gemelos"><span class="nav-icon">✦</span>Gemelos digitales</a>
+      <a class="nav-item" href="#configuracion"><span class="nav-icon">⚙</span>Configuración</a>
+    </div>
+    <div class="nav-sec">
+      <div class="nav-sec-title">Referencia</div>
+      <a class="nav-item" href="#selector"><span class="nav-icon">◇</span>Selector de métricas</a>
+      <a class="nav-item" href="#formulas"><span class="nav-icon">∑</span>Fórmulas de cálculo</a>
+      <a class="nav-item" href="#glosario"><span class="nav-icon">≡</span>Glosario</a>
+    </div>
+  </nav>
+</aside>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- HERO -->
+  <header class="hero" id="inicio">
+    <div class="hero-tag">◆ Documentación oficial · Plataforma Clickie</div>
+    <h1>Manual de uso<br><em>Clickie</em></h1>
+    <p class="hero-desc">Guía completa para operar la plataforma: métricas, gemelos digitales, monitoreos, visor de datos, activos y configuración. Simplificamos la gestión de la energía.</p>
+    <div class="hero-version">v1.1 · Plataforma Clickie</div>
+    <div class="hero-bar"></div>
+  </header>
+
+  <div class="content">
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- 1. INTRODUCCIÓN -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="intro">
+      <div class="sec-header">
+        <div class="sec-icon">◆</div>
+        <div>
+          <div class="sec-label">Capítulo 1</div>
+          <h2>Introducción</h2>
+          <div class="sec-desc">Conceptos fundamentales de la plataforma Clickie</div>
+        </div>
+      </div>
+
+      <!-- Principio fundacional -->
+      <div class="intro-principle">
+        <div class="intro-principle-icon">◆</div>
+        <div class="intro-principle-text">Todo en Clickie se construye a partir de <strong>métricas</strong>. Comprender qué es una métrica, cómo se genera y cómo se utiliza es el primer paso —y el más importante— para aprovechar el resto de las herramientas de la plataforma.</div>
+      </div>
+
+      <div class="prose">
+        <p>La plataforma Clickie está diseñada para <strong>transformar datos en información útil para la toma de decisiones</strong>. Para lograrlo, propone un enfoque claro y estructurado centrado en las métricas como elemento central de toda la experiencia.</p>
+      </div>
+
+      <!-- Bloque: Qué es una métrica -->
+      <div class="subsection">
+        <h3>¿Qué es una métrica?</h3>
+        <div class="metric-definition">
+          <div class="metric-def-left">
+            <div class="metric-def-label">DEFINICIÓN</div>
+            <div class="metric-def-title">Serie temporal de datos</div>
+            <div class="metric-def-body">Una <strong>métrica</strong> en Clickie representa una sucesión de valores que se registran y almacenan a lo largo del tiempo. Cada valor corresponde a una medición realizada en un momento determinado y refleja el comportamiento de una variable del mundo real.</div>
+          </div>
+          <div class="metric-def-right">
+            <div class="metric-def-examples-label">Ejemplos de variables</div>
+            <div class="tags" style="margin-top:8px;">
+              <span class="tag v">Consumo de energía</span>
+              <span class="tag v">Temperatura</span>
+              <span class="tag v">Caudal de agua</span>
+              <span class="tag v">Flujo de personas</span>
+              <span class="tag v">Estado de un equipo</span>
+              <span class="tag">Y muchas más...</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prose" style="margin-top:16px;">
+          <p>Desde el instante en que una métrica comienza a registrar datos, se convierte en una <strong>línea de tiempo en constante crecimiento</strong>, que va desde el inicio de la medición hasta el momento presente.</p>
+          <p>Clickie almacena la información de forma estructurada a través de estas métricas. No importa si los datos provienen de sensores físicos, dispositivos instalados en terreno, sistemas externos o cálculos internos: <strong>todo dato que ingresa a la plataforma lo hace en forma de métrica</strong>. Por este motivo, las métricas constituyen la fuente primaria de información y el pilar fundamental sobre el cual se apoyan todas las demás funcionalidades del producto.</p>
+        </div>
+      </div>
+
+      <!-- Bloque: Herramientas -->
+      <div class="subsection">
+        <h3>Herramientas que se construyen sobre las métricas</h3>
+        <p class="step-text" style="margin-bottom:16px;">A partir de las métricas, la plataforma habilita distintas herramientas que permiten analizar, visualizar y accionar sobre los datos:</p>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-title"><span class="dot"></span>Monitoreos</div>
+            <div class="card-text">Observan ventanas de tiempo específicas de una o más métricas y verifican si sus valores cumplen con condiciones definidas por el usuario. En función de esas condiciones, el sistema determina estados (OK, advertencia, alarma, etc.) y puede ejecutar acciones automáticas.</div>
+          </div>
+          <div class="card">
+            <div class="card-title"><span class="dot"></span>Paneles y reportes</div>
+            <div class="card-text">Utilizan métricas para construir visualizaciones persistentes que facilitan el análisis periódico de la información, combinando gráficos, tablas e indicadores.</div>
+          </div>
+          <div class="card">
+            <div class="card-title"><span class="dot"></span>Visor de datos</div>
+            <div class="card-text">Funciona como un entorno de exploración o "caja de arena", donde el usuario puede probar distintas métricas, combinarlas, ajustar parámetros y experimentar con visualizaciones antes de decidir qué información desea conservar en un panel.</div>
+          </div>
+          <div class="card">
+            <div class="card-title"><span class="dot"></span>Gemelos digitales</div>
+            <div class="card-text">Representan visualmente activos reales y muestran, en tiempo real, valores provenientes de métricas superpuestas sobre esquemas o imágenes.</div>
+          </div>
+          <div class="card" style="grid-column:1/-1;">
+            <div class="card-title"><span class="dot"></span>Activos</div>
+            <div class="card-text">Permiten organizar métricas, paneles y gemelos digitales bajo una misma unidad lógica, facilitando el acceso y la comprensión de la información.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bloque: Selector de métricas -->
+      <div class="subsection">
+        <h3>El selector de métricas — herramienta transversal</h3>
+        <div class="prose" style="margin-bottom:14px;">
+          <p>Un componente clave en toda la plataforma es el <strong>selector de métricas</strong>, una herramienta transversal que aparece cada vez que el usuario necesita elegir datos para una visualización, un monitoreo o un cálculo. Este selector no solo permite navegar por las métricas disponibles según distintas estructuras lógicas (activos, instalaciones, unidades de medida, etiquetas), sino que además habilita la <strong>personalización del uso de las métricas en cada contexto</strong>, sin modificar los datos originales.</p>
+          <p>A través del selector de métricas, el usuario puede:</p>
+        </div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-title"><span class="dot"></span>Ajustar parámetros de visualización</div>
+            <div class="card-text">Modificá agregación, interpolación, resolución o nombre para cada uso específico, sin alterar la métrica original.</div>
+          </div>
+          <div class="card">
+            <div class="card-title"><span class="dot"></span>Crear métricas virtuales</div>
+            <div class="card-text">Mediante etiquetas, combiná múltiples métricas reales en una sola serie temporal unificada.</div>
+          </div>
+          <div class="card" style="grid-column:1/-1;">
+            <div class="card-title"><span class="dot"></span>Definir fórmulas de cálculo</div>
+            <div class="card-text">Generá nuevas métricas derivadas a partir de operaciones matemáticas entre métricas existentes o valores constantes, usando el ID (<code>@número</code>) de cada métrica. Estas capacidades permiten que Clickie no solo registre datos, sino que los convierta en información flexible, adaptable y significativa según las necesidades de cada usuario.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Camino de aprendizaje -->
+      <div class="learning-path">
+        <div class="lp-title">Camino de aprendizaje recomendado</div>
+        <div class="lp-steps">
+          <div class="lp-step">
+            <div class="lp-num">1</div>
+            <div class="lp-body">
+              <div class="lp-step-title">Comprender las métricas</div>
+              <div class="lp-step-text">Entender qué es una métrica, cómo se registra y cómo fluye la información hacia la plataforma.</div>
+            </div>
+          </div>
+          <div class="lp-arrow">→</div>
+          <div class="lp-step">
+            <div class="lp-num">2</div>
+            <div class="lp-body">
+              <div class="lp-step-title">Seleccionar y combinar</div>
+              <div class="lp-step-text">Aprender a usar el selector, crear etiquetas, definir fórmulas y ajustar parámetros.</div>
+            </div>
+          </div>
+          <div class="lp-arrow">→</div>
+          <div class="lp-step">
+            <div class="lp-num">3</div>
+            <div class="lp-body">
+              <div class="lp-step-title">Configurar herramientas</div>
+              <div class="lp-step-text">Utilizar ese conocimiento para crear monitoreos, paneles, reportes y gemelos digitales.</div>
+            </div>
+          </div>
+        </div>
+        <div class="lp-note">Este manual acompaña ese recorrido: comienza explicando los conceptos fundamentales y luego profundiza en cada módulo de la plataforma, mostrando qué habilita cada herramienta y cómo se relaciona con las métricas, <strong>el verdadero corazón de Clickie</strong>.</div>
+      </div>
+
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- 2. ACCESO -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="acceso">
+      <div class="sec-header">
+        <div class="sec-icon">🔑</div>
+        <div>
+          <div class="sec-label">Capítulo 2</div>
+          <h2>Acceso a la plataforma</h2>
+          <div class="sec-desc">Cómo ingresar y configurar tu cuenta</div>
+        </div>
+      </div>
+
+      <div class="access-box">
+        <div class="access-icon">🌐</div>
+        <div>
+          <div class="access-url">https://my.clickie.io/authentication</div>
+          <div class="access-text">Ingresá con tu usuario y contraseña desde cualquier navegador</div>
+        </div>
+      </div>
+
+      <div class="card-grid" style="margin-top:16px;">
+        <div class="card">
+          <div class="card-title"><span class="dot"></span>Recuperar contraseña</div>
+          <div class="card-text">Seleccioná "¿Olvidaste tu contraseña?", ingresá tu correo electrónico y seguí los pasos de recuperación.</div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot"></span>Idioma de la plataforma</div>
+          <div class="card-text">Desde la pantalla de login podés configurar el idioma: <strong>Inglés</strong>, <strong>Español</strong> o <strong>Portugués</strong>.</div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot"></span>Web institucional</div>
+          <div class="card-text">Accedé a la web de Clickie desde el enlace "Clickie Spa" en la pantalla de login.</div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot"></span>Contacto</div>
+          <div class="card-text">Para consultas o soporte: <strong>contacto@clickie.io</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- 3. INTERFAZ -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="interfaz">
+      <div class="sec-header">
+        <div class="sec-icon">⬡</div>
+        <div>
+          <div class="sec-label">Capítulo 3</div>
+          <h2>Estructura general de la interfaz</h2>
+          <div class="sec-desc">Navegación, buscador global y perfil de usuario</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>3.1 Menú lateral izquierdo</h3>
+        <p class="step-text" style="margin-bottom:12px;">La plataforma presenta un menú principal con los siguientes módulos:</p>
+        <div class="tags">
+          <span class="tag v">Inicio</span>
+          <span class="tag">Paneles y reportes</span>
+          <span class="tag">Mis métricas</span>
+          <span class="tag">Monitoreos</span>
+          <span class="tag">Mis activos</span>
+          <span class="tag">Gemelos digitales</span>
+          <span class="tag">Configuración</span>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>3.2 Buscador global</h3>
+        <p class="step-text" style="margin-bottom:10px;">Permite buscar rápidamente recursos dentro de la cuenta:</p>
+        <div class="tags">
+          <span class="tag">Métricas</span>
+          <span class="tag">Activos</span>
+          <span class="tag">Paneles</span>
+          <span class="tag">Reportes</span>
+          <span class="tag">Monitoreos</span>
+          <span class="tag">Gemelos digitales</span>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>3.3 Notificaciones y perfil de usuario</h3>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-title"><span class="dot"></span>Comunicaciones</div>
+            <div class="card-text">Notificaciones asociadas al usuario, accesibles desde la esquina superior derecha.</div>
+          </div>
+          <div class="card">
+            <div class="card-title"><span class="dot"></span>Perfil de usuario</div>
+            <div class="card-text">Configuración de idioma, modo de cuenta y opción para cerrar sesión.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- 4. INICIO HOME -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="inicio-home">
+      <div class="sec-header">
+        <div class="sec-icon">⌂</div>
+        <div>
+          <div class="sec-label">Capítulo 4</div>
+          <h2>Inicio (Home)</h2>
+          <div class="sec-desc">Página principal y resumen de estado de la cuenta</div>
+        </div>
+      </div>
+      <div class="card-grid">
+        <div class="card"><div class="card-title"><span class="dot"></span>Bienvenida</div><div class="card-text">Saludo de bienvenida con acceso directo a la guía de uso de la plataforma.</div></div>
+        <div class="card"><div class="card-title"><span class="dot"></span>Comentarios</div><div class="card-text">Envío de comentarios vía correo electrónico directamente desde la pantalla de inicio.</div></div>
+        <div class="card"><div class="card-title"><span class="dot"></span>Conectividad</div><div class="card-text">Estado general de conectividad: porcentaje de dispositivos que reportan datos en tiempo real.</div></div>
+        <div class="card"><div class="card-title"><span class="dot"></span>Colaboradores</div><div class="card-text">Cantidad de colaboradores y héroes conectados en tiempo real.</div></div>
+        <div class="card" style="grid-column:1/-1;"><div class="card-title"><span class="dot"></span>Centro de monitoreo</div><div class="card-text">Visualización de eventos de monitoreo en curso, con su estado actual.</div></div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- 5. PANELES Y REPORTES -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="paneles">
+      <div class="sec-header">
+        <div class="sec-icon">▦</div>
+        <div>
+          <div class="sec-label">Capítulo 5</div>
+          <h2>Paneles y reportes</h2>
+          <div class="sec-desc">Visualizaciones persistentes para análisis periódico de datos</div>
+        </div>
+      </div>
+
+      <p class="step-text" style="margin-bottom:14px;">El listado de paneles y reportes muestra los siguientes datos por cada elemento:</p>
+      <div class="tags" style="margin-bottom:16px;">
+        <span class="tag v">Nombre del panel</span>
+        <span class="tag">Tipo de panel</span>
+        <span class="tag">Fecha y hora de creación</span>
+        <span class="tag">Acciones</span>
+      </div>
+
+      <div class="card-grid">
+        <div class="card"><div class="card-title"><span class="dot"></span>Acción Ver</div><div class="card-text">Visualizá el panel o reporte con todos sus widgets y datos.</div></div>
+        <div class="card"><div class="card-title"><span class="dot"></span>Acción Información</div><div class="card-text">Consultá los metadatos del panel: ID, nombre, fechas de creación y actualización.</div></div>
+        <div class="card"><div class="card-title"><span class="dot"></span>Acción Modificar</div><div class="card-text">Editá el nombre, descripción y configuración del panel.</div></div>
+        <div class="card"><div class="card-title"><span class="dot"></span>Acción Archivar</div><div class="card-text">Guardá y ocultá el panel del listado principal sin eliminarlo.</div></div>
+      </div>
+
+      <div class="subsection">
+        <h3>Filtros disponibles</h3>
+        <div class="tags">
+          <span class="tag">Tipo: Classic</span>
+          <span class="tag">Tipo: Report</span>
+          <span class="tag">Panel archivado / no archivado</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- 6. MIS MÉTRICAS -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="metricas">
+      <div class="sec-header">
+        <div class="sec-icon">◇</div>
+        <div>
+          <div class="sec-label">Capítulo 6</div>
+          <h2>Mis métricas</h2>
+          <div class="sec-desc">Gestión y configuración de todas las métricas de la cuenta</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>6.1 Todas las métricas — Listado</h3>
+        <p class="step-text" style="margin-bottom:10px;">Cada métrica muestra los siguientes datos:</p>
+        <div class="tags">
+          <span class="tag v">ID</span>
+          <span class="tag">Nombre de métrica</span>
+          <span class="tag">Unidad de medida</span>
+          <span class="tag">Fuente de métrica</span>
+          <span class="tag">Fecha y hora de creación</span>
+          <span class="tag">Acciones: Ver · Exportar · Información</span>
+        </div>
+        <div style="margin-top:12px;">
+          <div class="chip">Fuentes de métrica</div>
+          <div class="tags" style="margin-top:6px;">
+            <span class="tag">Dispositivo</span><span class="tag">Calculado</span><span class="tag">Calculated Externally</span><span class="tag">API</span><span class="tag">Clickie Core</span><span class="tag">Core - Health</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>6.2 Detalle y configuración de una métrica</h3>
+        <p class="step-text" style="margin-bottom:12px;">Al ingresar a una métrica se visualizan sus datos principales y las siguientes secciones:</p>
+        <div class="tags" style="margin-bottom:14px;">
+          <span class="tag v">Resumen</span><span class="tag">Datos originales</span><span class="tag">Activos asociados</span><span class="tag">Monitoreos</span><span class="tag">Eventos</span><span class="tag">Filtros</span><span class="tag">Actividad</span><span class="tag">Configuración</span>
+        </div>
+
+        <div class="chip">Opciones de configuración</div>
+        <div class="card-grid" style="margin-top:10px;">
+          <div class="card"><div class="card-title"><span class="dot"></span>Nombre y Descripción</div><div class="card-text">Identificador y descripción de la métrica.</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Etiquetas</div><div class="card-text">Tags para organizar y filtrar métricas por categorías.</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Agregación predeterminada</div><div class="card-text">Método utilizado para resumir o consolidar los datos de la métrica.</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Interpolación predeterminada</div><div class="card-text">Método para completar valores faltantes entre puntos de datos.</div></div>
+          <div class="card" style="grid-column:1/-1;"><div class="card-title"><span class="dot"></span>Forzar disponibilidad</div><div class="card-text">Cómo se completan los datos faltantes cuando la métrica participa en un cálculo: <em>No forzar</em> · <em>Forzar mediante valores neutros</em> · <em>Forzar mediante método de interpolación</em></div></div>
+        </div>
+
+        <div style="margin-top:18px;">
+          <div class="chip">Tipos de agregación</div>
+          <div class="card-grid" style="margin-top:10px;">
+            <div class="card"><div class="card-title"><span class="dot"></span>Promedio</div><div class="card-text">Promedio de valores dentro del intervalo.</div></div>
+            <div class="card"><div class="card-title"><span class="dot"></span>Máximo</div><div class="card-text">Valor máximo dentro del intervalo.</div></div>
+            <div class="card"><div class="card-title"><span class="dot"></span>Mínimo</div><div class="card-text">Valor mínimo dentro del intervalo.</div></div>
+            <div class="card"><div class="card-title"><span class="dot"></span>Suma</div><div class="card-text">Suma de valores dentro del intervalo.</div></div>
+            <div class="card"><div class="card-title"><span class="dot"></span>Primer valor</div><div class="card-text">Primer valor del intervalo.</div></div>
+            <div class="card"><div class="card-title"><span class="dot"></span>Último valor</div><div class="card-text">Último valor del intervalo.</div></div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;">
+          <div class="chip">Métodos de interpolación</div>
+          <div class="card-grid" style="margin-top:10px;">
+            <div class="card"><div class="card-title"><span class="dot"></span>Lineal</div><div class="card-text">Conecta ambos extremos del período faltante con valores intermedios.</div></div>
+            <div class="card"><div class="card-title"><span class="dot"></span>Continuidad</div><div class="card-text">Mantiene el último valor registrado constante hasta el próximo dato.</div></div>
+            <div class="card"><div class="card-title"><span class="dot"></span>Agujero negro</div><div class="card-text">Los intervalos faltantes se eliminan (sin dato disponible).</div></div>
+            <div class="card"><div class="card-title"><span class="dot"></span>Relleno cero</div><div class="card-text">Los intervalos faltantes se rellenan con el valor 0.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- 6.3 VISOR DE DATOS -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="visor">
+      <div class="sec-header">
+        <div class="sec-icon">◎</div>
+        <div>
+          <div class="sec-label">Capítulo 6.3</div>
+          <h2>Visor de datos</h2>
+          <div class="sec-desc">Exploración y visualización personalizada de una o más métricas</div>
+        </div>
+      </div>
+
+      <div class="module-strip">El <strong>Visor de datos</strong> permite crear visualizaciones personalizadas. Desde la pestaña <strong>Explorar</strong> seleccionás las métricas, y desde <strong>Selección actual</strong> editás parámetros como color, nombre, resolución, agregación e interpolación — sin modificar los datos originales.</div>
+
+      <div class="steps">
+        <div class="step"><div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Ir a Mis métricas → Visor de Datos</div><p class="step-text">Expandí <strong>Mis métricas</strong> en el menú lateral y seleccioná <strong>Visor de Datos</strong>.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Seleccionar rango de tiempo</div><div class="tags"><span class="tag v">Hoy</span><span class="tag">Ayer</span><span class="tag">Esta semana</span><span class="tag">Semana pasada</span><span class="tag">Este mes</span><span class="tag">Mes pasado</span><span class="tag">Este año</span></div></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Seleccionar métricas desde Explorar</div><p class="step-text">Navegá por las categorías (todas las métricas, calculadas, por activos, por etiquetas, etc.) y tildá las métricas a visualizar.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Personalizar desde Selección actual</div><p class="step-text">Editá por cada métrica: color, nombre, unidad de medida, resolución, agregación e interpolación. Podés añadir etiquetas y fórmulas de cálculo.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">5</div></div><div class="step-body"><div class="step-title">Elegir tipo de visualización</div>
+          <div style="margin-top:10px;">
+            <div class="chip">Tipos de gráfico disponibles</div>
+            <div class="card-grid three" style="margin-top:10px;">
+              <div class="card"><div class="card-title"><span class="dot"></span>Gráfico de línea</div><div class="card-text">Para seguir métricas en el tiempo.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Gráfico de barras</div><div class="card-text">Compara métricas entre categorías o períodos.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Mapa de calor</div><div class="card-text">Destaca intensidades en intervalos o ubicaciones.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Waffle de progreso</div><div class="card-text">Cuadrícula ideal para mostrar avance hacia un objetivo.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Gráfico de área</div><div class="card-text">Áreas apiladas para métricas acumuladas.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Gráfico de tarta</div><div class="card-text">Distribución de una métrica por categoría.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Gráfico de dona</div><div class="card-text">Proporción de una métrica respecto del total.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Donut comparativo</div><div class="card-text">Compara datos entre varios segmentos.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Gauge</div><div class="card-text">Indicador con colores en gradiente para verificar estado rápidamente.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Gráfico de Pareto</div><div class="card-text">Ordena categorías por impacto con línea acumulada opcional.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Gráfico de Categoría</div><div class="card-text">Gauge que muestra categorías y rangos definidos por el usuario.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Medidor sólido</div><div class="card-text">Medidor radial sólido, ideal para métricas en porcentaje.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Dispersión</div><div class="card-text">Identifica relaciones entre dos métricas.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Instantánea de métricas</div><div class="card-text">Tarjeta con hasta 6 métricas y su valor más reciente.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Tabla comparativa por período</div><div class="card-text">Compara métricas en períodos consecutivos.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Momentos</div><div class="card-text">Indicadores configurables que combinan métricas en rangos y fórmulas.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Mapa de ubicaciones</div><div class="card-text">Activos o sitios en un mapa interactivo geográfico.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Barras y líneas</div><div class="card-text">Combina series de barras y líneas para comparar métricas.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Barras por umbral</div><div class="card-text">Cambia el color de barras cuando superan la línea de referencia.</div></div>
+              <div class="card"><div class="card-title"><span class="dot"></span>Widget de comparación</div><div class="card-text">Compara una métrica principal con otras mostrando variaciones clave.</div></div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- 6.4 EXPORTADOR -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="exportador">
+      <div class="sec-header">
+        <div class="sec-icon">⬇</div>
+        <div>
+          <div class="sec-label">Capítulo 6.4</div>
+          <h2>Exportador de datos</h2>
+          <div class="sec-desc">Descarga de datos de métricas en formato Excel</div>
+        </div>
+      </div>
+      <div class="module-strip">Permite generar un tablero dinámico con información de una o más métricas en un período determinado y descargarlo en formato <strong>.xlsx</strong>. Funciona igual que el Visor de datos: desde <strong>Explorar</strong> seleccionás las métricas, y desde <strong>Selección actual</strong> editás parámetros como etiqueta, fórmula de cálculo, resolución, agregación e interpolación.</div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- 7. MONITOREOS -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="monitoreos">
+      <div class="sec-header">
+        <div class="sec-icon">◉</div>
+        <div>
+          <div class="sec-label">Capítulo 7</div>
+          <h2>Monitoreos</h2>
+          <div class="sec-desc">Configuración de alertas automáticas y disparadores sobre métricas</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>7.1 Listado de monitoreos</h3>
+        <p class="step-text" style="margin-bottom:10px;">Cada monitoreo muestra:</p>
+        <div class="tags" style="margin-bottom:14px;">
+          <span class="tag v">Nombre / Descripción</span><span class="tag">Estado</span><span class="tag">Frecuencia de muestreo</span><span class="tag">Tipo</span><span class="tag">Fecha de creación</span><span class="tag">Acciones</span>
+        </div>
+        <div class="chip">Filtros</div>
+        <div class="tags" style="margin-top:6px;">
+          <span class="tag">Tipo: Aviso · Información · Advertencia · Error · Crítico · Alerta · Emergencia · Depuración</span>
+          <span class="tag">Estado: OK · Advertencia · Alarma · Sin datos</span>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>7.2 Detalle de un monitoreo</h3>
+        <p class="step-text" style="margin-bottom:10px;">Al ingresar a un monitoreo se visualizan sus datos principales y las siguientes secciones:</p>
+        <div class="tags">
+          <span class="tag v">Resumen</span><span class="tag">Reglas</span><span class="tag">Disparadores</span><span class="tag">Historial</span><span class="tag">Actividad</span>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>7.3 Creación y configuración de monitoreos</h3>
+        <div class="steps">
+          <div class="step"><div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Nuevo monitoreo — Campos básicos</div><div class="card-grid"><div class="card"><div class="card-title"><span class="dot"></span>Nombre y Descripción</div><div class="card-text">Identificador del monitoreo.</div></div><div class="card"><div class="card-title"><span class="dot"></span>Tipo de monitor</div><div class="card-text">Aviso · Información · Advertencia · Error · Crítico · Alerta · Emergencia · Depuración</div></div><div class="card"><div class="card-title"><span class="dot"></span>Ventana de muestreo</div><div class="card-text">Período de tiempo observado (en minutos).</div></div><div class="card"><div class="card-title"><span class="dot"></span>Frecuencia de muestreo</div><div class="card-text">Frecuencia de evaluación (en minutos).</div></div></div></div></div>
+          <div class="step"><div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div><div class="step-body"><div class="step-title">Reglas → + Nueva regla</div><p class="step-text" style="margin-bottom:10px;">Define las condiciones que determinan el estado del monitoreo:</p><div class="card-grid"><div class="card"><div class="card-title"><span class="dot"></span>Nombre y Descripción</div><div class="card-text">Identificador de la regla.</div></div><div class="card"><div class="card-title"><span class="dot"></span>Métrica</div><div class="card-text">Métrica a monitorear (seleccionada con el Selector).</div></div><div class="card"><div class="card-title"><span class="dot"></span>Método</div><div class="card-text">Mayor que · Menor que · Dentro del rango · Fuera de rango</div></div><div class="card"><div class="card-title"><span class="dot"></span>Límite y Umbral</div><div class="card-text">Límite superior/inferior (según método) y umbral de activación.</div></div></div></div></div>
+          <div class="step"><div class="step-left"><div class="step-num">3</div></div><div class="step-body"><div class="step-title">Disparadores → + Nuevo disparador</div><div class="card-grid"><div class="card"><div class="card-title"><span class="dot"></span>Tipo</div><div class="card-text"><strong>Comunicación:</strong> notificaciones por medios configurados. <strong>Reenvío de evento:</strong> envío a custom endpoint.</div></div><div class="card"><div class="card-title"><span class="dot"></span>Disparar en</div><div class="card-text">Estado que activa el disparo: OK · Advertencia · Alarma · Sin datos</div></div><div class="card"><div class="card-title"><span class="dot"></span>Patrón de tiempo</div><div class="card-text">Horas · Días de la semana · Días del mes · Meses</div></div><div class="card"><div class="card-title"><span class="dot"></span>Comunicar a</div><div class="card-text">Colaborador destinatario · Título · Resumen · Contenido del mensaje</div></div></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- 8. MIS ACTIVOS -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="activos">
+      <div class="sec-header">
+        <div class="sec-icon">◈</div>
+        <div>
+          <div class="sec-label">Capítulo 8</div>
+          <h2>Mis activos</h2>
+          <div class="sec-desc">Gestión y organización de activos físicos o lógicos</div>
+        </div>
+      </div>
+
+      <p class="step-text" style="margin-bottom:14px;">El listado muestra por cada activo: nombre, categoría, fecha de creación y acciones (Ver, Información). Incluye buscador y filtro por categoría y por archivado/no archivado.</p>
+
+      <div class="subsection">
+        <h3>Secciones del detalle de un activo</h3>
+        <div class="card-grid">
+          <div class="card"><div class="card-title"><span class="dot"></span>Resumen</div><div class="card-text">Visualiza y configura paneles con datos del activo.</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Subactivos</div><div class="card-text">Gestiona y organiza los subactivos relacionados. Acción: Enlazar activos.</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Métricas</div><div class="card-text">Gestiona las métricas relacionadas al activo. Acción: Enlazar métricas.</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Gemelos digitales</div><div class="card-text">Visualiza y gestiona los gemelos digitales del activo. Acción: Enlazar gemelos.</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Instalaciones</div><div class="card-text">Vincula configuraciones de instalación al activo. Acción: Enlazar instalaciones.</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Documentos</div><div class="card-text">Documentos asociados al activo, organizados por carpetas.</div></div>
+          <div class="card" style="grid-column:1/-1;"><div class="card-title"><span class="dot"></span>Actividad</div><div class="card-text">Rastrea acciones recientes y cambios relacionados con el activo.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- 9. GEMELOS DIGITALES -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="gemelos">
+      <div class="sec-header">
+        <div class="sec-icon">✦</div>
+        <div>
+          <div class="sec-label">Capítulo 9</div>
+          <h2>Gemelos digitales</h2>
+          <div class="sec-desc">Representaciones virtuales de activos con datos en tiempo real</div>
+        </div>
+      </div>
+
+      <div class="module-strip">Permite gestionar representaciones digitales de activos. El listado muestra nombre, estado (borrador/publicado), fecha de creación y el menú de <strong>Acciones</strong>.</div>
+
+      <div class="subsection">
+        <h3>Acciones disponibles</h3>
+        <div class="card-grid">
+          <div class="card"><div class="card-title"><span class="dot"></span>Ver</div><div class="card-text">Visualiza gráficamente el gemelo digital con su diseño y variables en tiempo real.</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Diseñar</div><div class="card-text">Configura variables y superposiciones. Visualiza el diseño terminado.</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Info</div><div class="card-text">Id de avatar · Identificador · Nombre · Fechas de creación/actualización</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Configuración</div><div class="card-text">Nombre · Descripción · Etiquetas · Ajustar a pantalla · Alto (px) · Tamaño (px)</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Archivar</div><div class="card-text">Guarda y oculta el gemelo del listado principal sin eliminarlo.</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Publicar / Borrador</div><div class="card-text">Publicá para activar el gemelo o guardá como borrador para seguir editando.</div></div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Diseñar — Variables</h3>
+        <p class="step-text" style="margin-bottom:12px;">Desde la pestaña <strong>Variables</strong> → <strong>+ Nueva variable</strong>, completá:</p>
+        <div class="card-grid">
+          <div class="card"><div class="card-title"><span class="dot"></span>Nombre y Descripción</div><div class="card-text">Identificador y descripción de la variable.</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Origen de los datos</div><div class="card-text">Métrica · Fórmula de cálculo · Etiqueta</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Tipo de extracción</div><div class="card-text">Último valor · Valor desde intervalo · Valor desde patrón de tiempo</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Formato numérico</div><div class="card-text">Sin decimales · 1 · 2 · 3 · 4 decimales</div></div>
+          <div class="card" style="grid-column:1/-1;"><div class="card-title"><span class="dot"></span>Presentación de valores</div><div class="card-text">Sin UOM · UOM a la izquierda · UOM a la derecha</div></div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Diseñar — Superposiciones</h3>
+        <p class="step-text" style="margin-bottom:10px;">Desde <strong>Superposiciones</strong> → <strong>+ Nueva superposición</strong>. Campos comunes a todos los tipos: Tipo · Identificador · Visibilidad (visible/oculto) · Tamaño fijo.</p>
+        <div class="sg">
+          <div class="stype"><div class="stype-name">🖼 Capa de fondo</div><div class="stype-desc">Imagen de fondo (background_image). Máx. 50MB, 1 archivo.</div></div>
+          <div class="stype"><div class="stype-name">📦 Contenedor</div><div class="stype-desc">Tipo de fondo · Tipo/radio de borde · Relleno · Sombra · Desplazable</div></div>
+          <div class="stype"><div class="stype-name">🖱 Acción Clicable</div><div class="stype-desc">Tipo de botón · Texto · Acción (alternar/mostrar/ocultar overlay, ir a recurso, URL)</div></div>
+          <div class="stype"><div class="stype-name">📝 Texto Enriquecido</div><div class="stype-desc">Editor de contenido libre · Objetivo de botón puntero · Estilo</div></div>
+          <div class="stype"><div class="stype-name">📍 Puntero</div><div class="stype-desc">Tamaño (px) · Color · Objetivo del puntero</div></div>
+          <div class="stype"><div class="stype-name">🔧 Control de PLC</div><div class="stype-desc">Clickiemota ID · Control Law. Elemento interactivo para dispositivos PLC.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- 10. CONFIGURACIÓN -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="configuracion">
+      <div class="sec-header">
+        <div class="sec-icon">⚙</div>
+        <div>
+          <div class="sec-label">Capítulo 10</div>
+          <h2>Configuración</h2>
+          <div class="sec-desc">Gestión de cuenta, apariencia y fuentes de datos</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>10.1 Gestión de cuenta</h3>
+        <div class="card-grid">
+          <div class="card"><div class="card-title"><span class="dot"></span>Colaboradores</div><div class="card-text">Listado con nombre, tipo de autorización y acciones: Ver, modificar, eliminar.</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Datos de la cuenta</div><div class="card-text">Nombre, descripción, imagen, dashboard para home y zonas horarias.</div></div>
+          <div class="card" style="grid-column:1/-1;"><div class="card-title"><span class="dot"></span>Apariencia de la cuenta</div><div class="card-text">Personaliza nombre del sitio, texto descriptivo, encabezado de bienvenida, ícono de pestaña, subdominio de Clickie, logo en pantalla de autenticación, imagen de autenticación, logo interno y <strong>color de marca</strong>.</div></div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>10.2 Datos y fuentes</h3>
+        <div class="card-grid">
+          <div class="card"><div class="card-title"><span class="dot"></span>Instalaciones</div><div class="card-text">Listado con nombre, activo, dispositivo, fecha de creación y acciones disponibles.</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Dispositivos</div><div class="card-text">Inventario de dispositivos con nombre, tipo, fecha de creación y acciones disponibles.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- SELECTOR DE MÉTRICAS -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="selector">
+      <div class="sec-header">
+        <div class="sec-icon">◇</div>
+        <div>
+          <div class="sec-label">Referencia</div>
+          <h2>Selector de métricas</h2>
+          <div class="sec-desc">Herramienta transversal para seleccionar y personalizar datos en cada contexto</div>
+        </div>
+      </div>
+
+      <div class="infobox">El <strong>Selector de métricas</strong> aparece cada vez que necesitás elegir datos para una visualización, un monitoreo o un cálculo. En el listado se visualiza la <strong>UOM</strong>, el nombre y el <strong>ID</strong> — código numérico que empieza con <code>@</code>, usado para identificar métricas y generar fórmulas.</div>
+
+      <div style="margin-top:22px;">
+        <div class="chip">Categorías en Explorar</div>
+        <div class="tags" style="margin-top:8px;">
+          <span class="tag v">Todas las métricas</span><span class="tag">Métricas calculadas</span><span class="tag">Por unidades de medida</span><span class="tag">Por activos</span><span class="tag">Por instalaciones</span><span class="tag">Por etiquetas</span>
+        </div>
+      </div>
+
+      <div style="margin-top:22px;">
+        <div class="chip">Funciones en Selección actual</div>
+        <div class="card-grid" style="margin-top:10px;">
+          <div class="card"><div class="card-title"><span class="dot"></span>Personalizar métricas</div><div class="card-text">Editá color, nombre, UOM, resolución, agregación e interpolación para el contexto actual — sin modificar la métrica original.</div></div>
+          <div class="card"><div class="card-title"><span class="dot"></span>Añadir etiqueta</div><div class="card-text">Creá métricas virtuales combinando varias reales en una serie temporal con un nombre, tag y método (suma o promedio).</div></div>
+          <div class="card" style="grid-column:1/-1;"><div class="card-title"><span class="dot"></span>Añadir fórmula de cálculo</div><div class="card-text">Generá métricas derivadas mediante operaciones matemáticas entre métricas existentes usando sus IDs (<code>@número</code>).</div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- FÓRMULAS -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="formulas">
+      <div class="sec-header">
+        <div class="sec-icon">∑</div>
+        <div>
+          <div class="sec-label">Referencia</div>
+          <h2>Fórmulas de cálculo</h2>
+          <div class="sec-desc">Métricas calculadas bajo demanda con operadores matemáticos e IDs de métricas</div>
+        </div>
+      </div>
+
+      <div class="infobox">Las métricas calculadas se obtienen aplicando una fórmula sobre otras métricas. Se calculan <strong>bajo demanda</strong>: el sistema resuelve la fórmula para el rango de fechas pedido. Usá el <strong>ID (@número)</strong> de cada métrica para construir la fórmula. La estructura debe ser lógica para obtener resultados consistentes y trazables.</div>
+
+      <div style="margin-top:20px;">
+        <div class="chip">Ejemplos de fórmulas</div>
+        <table class="ftable">
+          <tr><th>Fórmula</th><th>Descripción</th></tr>
+          <tr><td><code>@111-@111[-1]</code></td><td>Diferencia de consumo respecto a la lectura anterior</td></tr>
+          <tr><td><code>(@222+@333)/2</code></td><td>Promedio de potencia de dos generadores</td></tr>
+          <tr><td><code>@444/1000</code></td><td>Convierte de watt-hora a kilowatt-hora</td></tr>
+          <tr><td><code>pow(@555,2)/@666</code></td><td>Voltaje al cuadrado sobre resistencia</td></tr>
+          <tr><td><code>(@777>5000)?5000:@777</code></td><td>Limita el consumo a 5000 cuando supera ese valor</td></tr>
+          <tr><td><code>(@888>0)?@999:@111</code></td><td>Si la métrica 888 es positiva usa la 999; si no, la 111</td></tr>
+          <tr><td><code>(@111>0)?@111:false</code></td><td>Elimina valores negativos — false deja vacío (distinto de 0)</td></tr>
+          <tr><td><code>(@222>1000)?(@333>500?@333:@444):@555</code></td><td>Condicional anidado para elegir entre varias métricas</td></tr>
+        </table>
+      </div>
+
+      <div style="margin-top:20px;">
+        <div class="chip">Funciones matemáticas</div>
+        <div class="tags" style="margin-top:8px;">
+          <span class="tag v"><code>abs(x)</code></span><span class="tag v"><code>pow(x,y)</code></span><span class="tag v"><code>sqrt(x)</code></span><span class="tag v"><code>sin(x)</code></span><span class="tag v"><code>cos(x)</code></span><span class="tag v"><code>tan(x)</code></span><span class="tag v"><code>log(x)</code></span><span class="tag v"><code>exp(x)</code></span><span class="tag v"><code>deg2rad(x)</code></span><span class="tag v"><code>rad2deg(x)</code></span><span class="tag v"><code>rand(min,max)</code></span>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;">
+        <div class="chip">Operadores</div>
+        <div class="tags" style="margin-top:8px;">
+          <span class="tag"><code>+</code> Suma</span><span class="tag"><code>-</code> Resta</span><span class="tag"><code>*</code> Multiplicación</span><span class="tag"><code>/</code> División</span><span class="tag"><code>></code> Mayor que</span><span class="tag"><code>&lt;</code> Menor que</span><span class="tag"><code>>=</code></span><span class="tag"><code>&lt;=</code></span><span class="tag"><code>==</code> Igual</span><span class="tag"><code>!=</code> Distinto</span><span class="tag"><code>&&</code> AND</span><span class="tag"><code>||</code> OR</span><span class="tag y"><code>cond?A:B</code> Condicional</span><span class="tag y"><code>[-n]</code> Desplazamiento n puntos</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- GLOSARIO -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="glosario">
+      <div class="sec-header">
+        <div class="sec-icon">≡</div>
+        <div>
+          <div class="sec-label">Referencia</div>
+          <h2>Glosario de términos</h2>
+          <div class="sec-desc">Definición de los conceptos clave de la plataforma</div>
+        </div>
+      </div>
+
+      <div class="glos-grid">
+        <div class="glos-item"><div class="glos-term">Activo</div><div class="glos-def">Elemento físico o lógico que genera datos dentro de la plataforma.</div></div>
+        <div class="glos-item"><div class="glos-term">Agregación</div><div class="glos-def">Método utilizado para resumir o consolidar datos en un intervalo de tiempo.</div></div>
+        <div class="glos-item"><div class="glos-term">Archivar</div><div class="glos-def">Acción de ocultar un elemento sin eliminarlo de la plataforma.</div></div>
+        <div class="glos-item"><div class="glos-term">Disponibilidad</div><div class="glos-def">Determina cómo se completan los datos faltantes cuando una métrica participa en un cálculo.</div></div>
+        <div class="glos-item"><div class="glos-term">Fuente de métrica</div><div class="glos-def">Origen del dato: dispositivo, sistema externo, cálculo interno, API, etc.</div></div>
+        <div class="glos-item"><div class="glos-term">Gemelo digital</div><div class="glos-def">Representación virtual de un activo real, con sus datos y comportamiento mostrados en tiempo real.</div></div>
+        <div class="glos-item"><div class="glos-term">Interpolación</div><div class="glos-def">Método para completar valores faltantes entre puntos de datos conocidos.</div></div>
+        <div class="glos-item"><div class="glos-term">Métrica</div><div class="glos-def">Variable cuantitativa registrada como serie temporal en la plataforma. Es el pilar de toda la información en Clickie.</div></div>
+        <div class="glos-item"><div class="glos-term">Monitoreo</div><div class="glos-def">Proceso que evalúa condiciones o umbrales sobre métricas para generar eventos y alertas automáticas.</div></div>
+        <div class="glos-item"><div class="glos-term">Panel</div><div class="glos-def">Espacio visual que agrupa gráficos, tablas y widgets para el análisis de datos.</div></div>
+        <div class="glos-item"><div class="glos-term">Selector de métricas</div><div class="glos-def">Herramienta transversal que aparece cada vez que el usuario necesita elegir métricas para una visualización, monitoreo o cálculo.</div></div>
+        <div class="glos-item"><div class="glos-term">Visualización</div><div class="glos-def">Representación gráfica de datos de métricas: gráficos de línea, barras, calor, dona, gauge, entre otros.</div></div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer">
+        <div class="ft-logo">C</div>
+        <div class="ft-text">
+          <strong>Clickie · energía consciente</strong><br>
+          Manual de uso de la Plataforma v1.1 &nbsp;·&nbsp; hola@clickie.io &nbsp;·&nbsp; www.clickie.io
+        </div>
+      </div>
+
+    </section>
+
+  </div><!-- /content -->
+</main>
+
+<script>
+  const navItems = document.querySelectorAll('.nav-item');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navItems.forEach(n => {
+          n.classList.toggle('active', n.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '-60px 0px -65% 0px' });
+
+  document.querySelectorAll('[id]').forEach(el => obs.observe(el));
+  navItems.forEach(n => n.addEventListener('click', () => {
+    navItems.forEach(i => i.classList.remove('active'));
+    n.classList.add('active');
+  }));
+</script>
+</body>
+</html>
