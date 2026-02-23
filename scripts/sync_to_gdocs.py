@@ -335,13 +335,16 @@ def replace_google_doc_content(service, doc_id: str, text: str, style_requests: 
     end_index = doc.get("body", {}).get("content", [{}])[-1].get("endIndex", 1)
 
     requests: List[Dict[str, Any]] = []
-    if end_index > 1:
+    # Google Docs requires startIndex < endIndex.
+    # On nearly-empty docs end_index is usually 2, so end_index - 1 == 1 (empty range).
+    delete_end = end_index - 1
+    if delete_end > 1:
         requests.append(
             {
                 "deleteContentRange": {
                     "range": {
                         "startIndex": 1,
-                        "endIndex": end_index - 1,
+                        "endIndex": delete_end,
                     }
                 }
             }
