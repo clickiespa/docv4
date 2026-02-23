@@ -1,3 +1,11 @@
+---
+title: "Metricas y formulas"
+version: "v4"
+last_updated: "2026-02-23"
+owner: "Product"
+status: "stable"
+---
+
 # Metricas y formulas
 
 ## Que es una metrica

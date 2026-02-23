@@ -1,6 +1,14 @@
+---
+title: "Monitoreos"
+version: "v4"
+last_updated: "2026-02-23"
+owner: "Product"
+status: "stable"
+---
+
 # Monitoreos
 
-El modulo de monitoreos evalua condiciones sobre metricas y genera estados operativos automáticos.
+El modulo de Monitoreos evalua condiciones sobre metricas y genera estados operativos automaticos.
 
 ## Listado de monitoreos
 

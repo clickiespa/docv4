@@ -1,3 +1,11 @@
+---
+title: "Manual de uso de Clickie"
+version: "v4"
+last_updated: "2026-02-23"
+owner: "Product"
+status: "stable"
+---
+
 # Manual de uso de Clickie
 
 Guia oficial de la plataforma Clickie para operacion de datos, metricas, monitoreos, visor y gemelos digitales.
@@ -24,7 +32,7 @@ Todo en Clickie se construye a partir de **metricas**. Cada metrica representa u
 La interfaz principal incluye:
 
 1. Menu lateral con modulos funcionales.
-2. Buscador global para metricas, activos, paneles, reportes, monitoreos y gemelos.
+2. Buscador global para metricas, activos, paneles, reportes, monitoreos y gemelos digitales.
 3. Perfil de usuario para configuraciones de cuenta e idioma.
 
 ## Camino de aprendizaje recomendado
@@ -35,7 +43,13 @@ La interfaz principal incluye:
 
 ## Navegacion de esta documentacion
 
-- [Metricas y formulas](./metricas.md)
-- [Visor de datos](./visor-datos.md)
-- [Monitoreos](./monitoreos.md)
-- [Gemelos digitales](./gemelos-digitales.md)
+- [Conceptos](./conceptos/index.md)
+- [Metricas](./conceptos/metricas.md)
+- [Selector de metricas](./conceptos/selector.md)
+- [Visor de datos](./analisis/visor-datos.md)
+- [Paneles y reportes](./analisis/paneles.md)
+- [Monitoreos](./automatizacion/monitoreos.md)
+- [Gemelos digitales](./modelado/gemelos-digitales.md)
+- [Activos](./organizacion/activos.md)
+- [Configuracion de cuenta](./configuracion/cuenta.md)
+- [Datos y fuentes](./configuracion/datos-y-fuentes.md)

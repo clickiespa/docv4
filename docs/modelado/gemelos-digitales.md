@@ -1,6 +1,14 @@
+---
+title: "Gemelos digitales"
+version: "v4"
+last_updated: "2026-02-23"
+owner: "Product"
+status: "stable"
+---
+
 # Gemelos digitales
 
-Los gemelos digitales representan activos en una vista visual con datos en tiempo real provenientes de metricas.
+Los Gemelos digitales representan activos en una vista visual con datos en tiempo real provenientes de metricas.
 
 ## Gestion del modulo
 
@@ -48,14 +56,7 @@ Parametros comunes:
 - Visibilidad
 - Tamano fijo
 
-## Relacion con activos
+## Referencias
 
-Un activo puede agrupar:
-
-- Metricas
-- Paneles
-- Gemelos digitales
-- Instalaciones
-- Documentos
-
-Esto mejora la navegacion y el contexto operativo por unidad de negocio.
+- [Activos](../organizacion/activos.md)
+- [Metricas](../conceptos/metricas.md)
