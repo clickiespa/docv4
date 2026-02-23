@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 576" role="img" aria-label="Clickie favicon">
+  <rect width="576" height="576" fill="#000000" />
+
+  <path
+    d="M154 305a198 198 0 1 0 92-106"
+    fill="none"
+    stroke="#45474B"
+    stroke-width="40"
+    stroke-linecap="round"
+  />
+
+  <circle cx="395" cy="377" r="33" fill="#45474B" />
+  <path
+    d="M349 473c40 41 112 45 155 8"
+    fill="none"
+    stroke="#45474B"
+    stroke-width="34"
+    stroke-linecap="round"
+  />
+
+  <path
+    d="M0 -52C0 -20 20 0 52 0C20 0 0 20 0 52C0 20 -20 0 -52 0C-20 0 0 -20 0 -52Z"
+    fill="#FDC400"
+    transform="translate(199 262) scale(2.05)"
+  />
+  <path
+    d="M0 -52C0 -20 20 0 52 0C20 0 0 20 0 52C0 20 -20 0 -52 0C-20 0 0 -20 0 -52Z"
+    fill="#FDC400"
+    transform="translate(121 140) scale(1.16)"
+  />
+  <path
+    d="M0 -52C0 -20 20 0 52 0C20 0 0 20 0 52C0 20 -20 0 -52 0C-20 0 0 -20 0 -52Z"
+    fill="#FDC400"
+    transform="translate(259 96) scale(0.78)"
+  />
+</svg>
