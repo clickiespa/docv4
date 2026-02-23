@@ -1,25 +1,38 @@
-# Clickie Docs Platform
+# Clickie Docs Platform (docv4)
 
-Repositorio de documentacion **docs-first** para Clickie.
+Repositorio docs-first para Clickie.
 
 ## Arquitectura
 
-- **Fuente unica de verdad**: Markdown en `/docs`
-- **Presentacion documental**: MkDocs genera una salida estandar en `/site`
-- **Presentacion publica**: la web en GitHub Pages se despliega desde la app React/Vite
-- **Sincronizacion documental**: `scripts/sync_to_gdocs.py` actualiza un Google Doc con el contenido de `/docs`
+- **Fuente unica de verdad**: Markdown en `/docs`.
+- **Salida documental**: MkDocs compila la documentacion a `/site`.
+- **Salida editorial externa**: `scripts/sync_to_gdocs.py` publica el contenido Markdown en Google Docs.
+- **Sitio publico**: GitHub Pages despliega la app React/Vite del repositorio.
 
-## Estructura
+> Google Doc es salida generada: no se edita manualmente como fuente primaria.
+
+## Estructura actual
 
 ```text
 /docs
   index.md
-  metricas.md
-  visor-datos.md
-  monitoreos.md
-  gemelos-digitales.md
-/site
-  .gitkeep
+  changelog.md
+  /conceptos
+    index.md
+    metricas.md
+    selector.md
+  /analisis
+    visor-datos.md
+    paneles.md
+  /automatizacion
+    monitoreos.md
+  /modelado
+    gemelos-digitales.md
+  /organizacion
+    activos.md
+  /configuracion
+    cuenta.md
+    datos-y-fuentes.md
 /scripts
   sync_to_gdocs.py
 .github/workflows
@@ -29,6 +42,26 @@ mkdocs.yml
 requirements.txt
 README.md
 ```
+
+## Frontmatter editorial obligatorio
+
+Cada archivo Markdown debe iniciar con:
+
+```yaml
+---
+title: "<Titulo humano>"
+version: "v4"
+last_updated: "2026-02-23"
+owner: "Product"
+status: "stable"
+---
+```
+
+Reglas:
+
+- `title` debe coincidir con el H1.
+- `last_updated` en formato `YYYY-MM-DD`.
+- `status`: `stable`, `draft` o `deprecated`.
 
 ## Desarrollo local
 
@@ -40,45 +73,26 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 2. Levantar sitio de documentacion
+### 2. Ver sitio MkDocs
 
 ```bash
 mkdocs serve
 ```
 
-Sitio local: `http://127.0.0.1:8000`
-
-### 3. Build de produccion
+### 3. Build de validacion
 
 ```bash
 mkdocs build --strict
 ```
 
-Salida generada en `/site`.
+## Sync a Google Docs
 
-## Sincronizacion a Google Docs
-
-El script `scripts/sync_to_gdocs.py` reemplaza el contenido del documento destino de forma idempotente:
-
-- Borra el contenido actual (excepto el nodo raiz del documento)
-- Inserta nuevamente el contenido mergeado desde Markdown
-- Aplica estilos de encabezado H1/H2/H3
-- Aplica listas numeradas y con bullets
-- Mantiene enlaces
-
-### Variables de entorno
-
-Opcion A (recomendada en CI):
-
-- `GOOGLE_DOC_ID`: ID del documento destino
-- `GOOGLE_SERVICE_ACCOUNT_FILE`: ruta a JSON de service account
-
-Opcion B:
+Variables soportadas:
 
 - `GOOGLE_DOC_ID`
-- `GOOGLE_SERVICE_ACCOUNT_JSON`: contenido JSON inline
+- `GOOGLE_SERVICE_ACCOUNT_FILE` (ruta a JSON) **o** `GOOGLE_SERVICE_ACCOUNT_JSON` (inline)
 
-### Ejecucion local
+Ejemplo local:
 
 ```bash
 export GOOGLE_DOC_ID="<doc_id>"
@@ -86,50 +100,41 @@ export GOOGLE_SERVICE_ACCOUNT_FILE="/ruta/credenciales.json"
 python scripts/sync_to_gdocs.py
 ```
 
-## CI/CD (GitHub Actions)
+Prueba sin API (parsing + merge + orden):
 
-### 1. Documentacion y sync
+```bash
+python scripts/sync_to_gdocs.py --dry-run
+```
 
-Workflow: `.github/workflows/docs_pipeline.yml`
+## CI/CD
 
-Trigger:
+### Workflow de docs
 
-- `push` a `main` cuando cambia `/docs/**`, `mkdocs.yml`, `requirements.txt` o el script de sync
-- `workflow_dispatch` manual
+Archivo: `.github/workflows/docs_pipeline.yml`
 
-Pipeline:
+- Trigger: cambios en `docs/**`, `mkdocs.yml`, `requirements.txt`, `scripts/sync_to_gdocs.py`.
+- Pasos:
+  1. `mkdocs build --strict`
+  2. `sync_to_gdocs.py`
 
-1. Instala dependencias Python
-2. Valida build documental (`mkdocs build --strict`)
-3. Ejecuta sincronizacion a Google Docs
-
-### 2. Deploy web publico
-
-Workflow: `.github/workflows/site_deploy.yml`
-
-Trigger:
-
-- `push` a `main` cuando cambia la app web (`src/**`, `public/**`, `index.html`, `package.json`, `vite.config.js`)
-- `workflow_dispatch` manual
-
-Pipeline:
-
-1. Instala dependencias Node
-2. Build de Vite con base path para GitHub Pages
-3. Deploy a GitHub Pages
-
-## Secrets requeridos en GitHub
-
-Configurar en `Settings > Secrets and variables > Actions`:
+Secrets requeridos:
 
 - `GOOGLE_DOC_ID`
 - `GOOGLE_SERVICE_ACCOUNT_JSON`
 
-> El service account debe tener permisos de edicion sobre el Google Doc destino.
+### Workflow del sitio publico
+
+Archivo: `.github/workflows/site_deploy.yml`
+
+- Trigger: cambios en `src/**`, `public/**`, `index.html`, `package.json`, `vite.config.js`.
+- Pasos:
+  1. Build Vite
+  2. Deploy a GitHub Pages
 
 ## Como agregar nueva documentacion
 
-1. Crear nuevo archivo Markdown en `/docs`.
-2. Agregarlo al `nav` en `mkdocs.yml`.
-3. Hacer commit/push a `main`.
-4. El pipeline de docs sincronizara Google Docs automaticamente.
+1. Crear el archivo en la subcarpeta semantica correcta dentro de `/docs`.
+2. Agregar frontmatter obligatorio y H1 consistente.
+3. Enlazar el documento en `mkdocs.yml` dentro de la seccion correspondiente.
+4. Verificar `mkdocs build --strict`.
+5. Hacer push a `main`.
