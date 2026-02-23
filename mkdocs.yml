@@ -10,10 +10,23 @@ theme:
 
 nav:
   - Inicio: index.md
-  - Metricas: metricas.md
-  - Visor de datos: visor-datos.md
-  - Monitoreos: monitoreos.md
-  - Gemelos digitales: gemelos-digitales.md
+  - Conceptos:
+      - Introduccion: conceptos/index.md
+      - Metricas y formulas: conceptos/metricas.md
+      - Selector de metricas: conceptos/selector.md
+  - Analisis:
+      - Visor de datos: analisis/visor-datos.md
+      - Paneles y reportes: analisis/paneles.md
+  - Automatizacion:
+      - Monitoreos: automatizacion/monitoreos.md
+  - Modelado:
+      - Gemelos digitales: modelado/gemelos-digitales.md
+  - Organizacion:
+      - Activos: organizacion/activos.md
+  - Configuracion:
+      - Configuracion de cuenta: configuracion/cuenta.md
+      - Datos y fuentes: configuracion/datos-y-fuentes.md
+  - Changelog: changelog.md
 
 markdown_extensions:
   - admonition
