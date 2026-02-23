@@ -8,16 +8,26 @@ status: "stable"
 
 # Gemelos digitales
 
-Los Gemelos digitales representan activos en una vista visual con datos en tiempo real provenientes de metricas.
+Los **Gemelos digitales** representan activos en una vista visual con datos en tiempo real provenientes de metricas, formulas y etiquetas.
+
+## Para que sirve este modulo
+
+Gemelos digitales conecta operacion y comunicacion visual en un mismo entorno.
+
+Permite:
+
+- mostrar estado operativo de equipos e instalaciones,
+- dar contexto grafico a los datos,
+- y crear experiencias de consulta mas intuitivas para usuarios tecnicos y no tecnicos.
 
 ## Gestion del modulo
 
 El listado principal permite revisar:
 
-- Nombre
-- Estado (`borrador` o `publicado`)
-- Fecha de creacion
-- Acciones
+- nombre,
+- estado (`borrador` o `publicado`),
+- fecha de creacion,
+- acciones disponibles.
 
 ## Acciones disponibles
 
@@ -28,17 +38,27 @@ El listado principal permite revisar:
 - **Archivar**: ocultar sin eliminar.
 - **Publicar/Borrador**: controlar el estado de exposicion.
 
-## Diseno de variables
+## Diseno: flujo recomendado
 
-Al crear una variable se define:
+### 1. Configurar variables
 
-- Nombre y descripcion
-- Origen de datos (metrica, formula, etiqueta)
-- Tipo de extraccion (ultimo valor o por intervalo)
-- Formato numerico
-- Presentacion de UOM
+Dentro de **Disenar > Variables > + Nueva variable** se define:
 
-## Diseno de superposiciones
+- nombre y descripcion,
+- origen de datos (metrica, formula de calculo o etiqueta),
+- tipo de extraccion (`ultimo valor`, `valor desde intervalo`, `valor desde patron de tiempo`),
+- formato numerico,
+- presentacion de UOM.
+
+### 2. Configurar superposiciones
+
+Dentro de **Disenar > Superposiciones > + Nueva superposicion** se define:
+
+Campos comunes:
+
+- tipo de superposicion,
+- visibilidad predeterminada,
+- tamano fijo.
 
 Tipos principales:
 
@@ -49,14 +69,19 @@ Tipos principales:
 - Puntero
 - Control PLC
 
-Parametros comunes:
+### 3. Validar experiencia final
 
-- Tipo
-- Identificador
-- Visibilidad
-- Tamano fijo
+Abrir **Ver** para comprobar lectura, jerarquia visual y comportamiento de acciones clicables.
+
+## Criterios de calidad recomendados
+
+- Priorizar legibilidad: menos elementos, mejor jerarquia.
+- Evitar saturar la vista con indicadores redundantes.
+- Mantener consistencia de nombres entre metrica, variable y etiqueta.
+- Publicar solo gemelos validados con usuarios finales.
 
 ## Referencias
 
 - [Activos](../organizacion/activos.md)
-- [Metricas](../conceptos/metricas.md)
+- [Metricas y formulas](../conceptos/metricas.md)
+- [Selector de metricas](../conceptos/selector.md)
