@@ -247,6 +247,11 @@ def parse_args() -> argparse.Namespace:
         default=os.getenv("GOOGLE_DOC_ID", ""),
         help="Target Google Docs document ID",
     )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Validate parsing/merge and print summary without calling Google Docs API",
+    )
     return parser.parse_args()
 
 
@@ -293,6 +298,42 @@ def resolve_markdown_files(docs_dir: Path, mkdocs_config_path: Path) -> List[Pat
             files.append(resolved)
             seen.add(resolved)
 
+    if not nav_paths:
+        files = []
+        seen = set()
+        fallback_sections = [
+            docs_dir / "index.md",
+            docs_dir / "conceptos",
+            docs_dir / "analisis",
+            docs_dir / "automatizacion",
+            docs_dir / "modelado",
+            docs_dir / "organizacion",
+            docs_dir / "configuracion",
+            docs_dir / "changelog.md",
+        ]
+
+        for section in fallback_sections:
+            if not section.exists():
+                continue
+            if section.is_file():
+                resolved = section.resolve()
+                if resolved not in seen and resolved.suffix.lower() == ".md":
+                    files.append(resolved)
+                    seen.add(resolved)
+                continue
+
+            for candidate in sorted(section.rglob("*.md")):
+                resolved = candidate.resolve()
+                if resolved not in seen:
+                    files.append(resolved)
+                    seen.add(resolved)
+
+        for candidate in sorted(docs_dir.rglob("*.md")):
+            resolved = candidate.resolve()
+            if resolved not in seen:
+                files.append(resolved)
+                seen.add(resolved)
+
     return files
 
 
@@ -319,9 +360,23 @@ def load_service_account_credentials():
 
 
 def merge_markdown_sources(markdown_files: List[Path]) -> str:
+    def strip_frontmatter(markdown_text: str) -> str:
+        if not markdown_text.startswith("---\n"):
+            return markdown_text
+
+        lines = markdown_text.splitlines()
+        if not lines or lines[0].strip() != "---":
+            return markdown_text
+
+        for idx in range(1, len(lines)):
+            if lines[idx].strip() == "---":
+                return "\n".join(lines[idx + 1 :]).lstrip("\n")
+        return markdown_text
+
     chunks: List[str] = []
     for idx, file_path in enumerate(markdown_files):
-        content = file_path.read_text(encoding="utf-8").strip()
+        raw_content = file_path.read_text(encoding="utf-8")
+        content = strip_frontmatter(raw_content).strip()
         if not content:
             continue
         chunks.append(content)
@@ -366,7 +421,7 @@ def replace_google_doc_content(service, doc_id: str, text: str, style_requests: 
 def main() -> int:
     args = parse_args()
 
-    if not args.doc_id:
+    if not args.doc_id and not args.dry_run:
         print("ERROR: falta GOOGLE_DOC_ID o --doc-id", file=sys.stderr)
         return 1
 
@@ -388,6 +443,14 @@ def main() -> int:
 
     payload_builder = GoogleDocsPayloadBuilder()
     text, style_requests = payload_builder.build(blocks)
+
+    if args.dry_run:
+        print(f"Dry run OK. Parsed {len(markdown_files)} markdown files.")
+        for file_path in markdown_files:
+            print(f"- {file_path}")
+        print(f"Generated payload chars: {len(text)}")
+        print(f"Generated style requests: {len(style_requests)}")
+        return 0
 
     credentials = load_service_account_credentials()
     service = build("docs", "v1", credentials=credentials)
