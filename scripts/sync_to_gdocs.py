@@ -373,10 +373,18 @@ def merge_markdown_sources(markdown_files: List[Path]) -> str:
                 return "\n".join(lines[idx + 1 :]).lstrip("\n")
         return markdown_text
 
+    def strip_web_directives(markdown_text: str) -> str:
+        cleaned_lines: List[str] = []
+        for line in markdown_text.splitlines():
+            if line.strip().startswith(":::"):
+                continue
+            cleaned_lines.append(line)
+        return "\n".join(cleaned_lines)
+
     chunks: List[str] = []
     for idx, file_path in enumerate(markdown_files):
         raw_content = file_path.read_text(encoding="utf-8")
-        content = strip_frontmatter(raw_content).strip()
+        content = strip_web_directives(strip_frontmatter(raw_content)).strip()
         if not content:
             continue
         chunks.append(content)

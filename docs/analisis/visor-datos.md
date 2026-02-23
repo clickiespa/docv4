@@ -10,6 +10,10 @@ status: "stable"
 
 El **Visor de datos** funciona como una caja de arena para explorar metricas, validar comportamiento y transformar observaciones en decisiones accionables.
 
+:::module-strip
+Visor de datos es el entorno recomendado para validar una hipotesis antes de escalarla a paneles, reportes o monitoreos. Primero se contrasta el dato, despues se comunica.
+:::
+
 ## Valor para usuarios y clientes
 
 Antes de fijar una vista en un panel o disparar alertas en Monitoreos, el Visor de datos permite responder preguntas clave:
@@ -30,14 +34,12 @@ Este paso reduce errores de interpretacion y mejora la calidad de lo que luego s
 
 ## Flujo sugerido paso a paso
 
-1. Ingresar a **Mis metricas** y abrir **Visor de datos**.
-2. Definir el rango temporal de analisis.
-3. Desde **Explorar**, seleccionar una o mas metricas.
-4. En **Seleccion actual**, personalizar parametros si hace falta.
-5. Si aplica, crear etiqueta para combinar metricas.
-6. Si aplica, agregar formula de calculo.
-7. Ajustar opciones de visualizacion y tipo de grafico.
-8. Validar resultado final y decidir siguiente accion (exportar o promover a panel/reporte).
+:::steps
+1. **Abrir contexto de analisis**: Ingresar a **Mis metricas**, abrir **Visor de datos** y definir el rango temporal.
+2. **Seleccionar fuentes**: Desde **Explorar** elegir metricas y, si aplica, agregar etiquetas o formulas.
+3. **Ajustar lectura**: En **Seleccion actual** personalizar parametros y elegir tipo de grafico.
+4. **Validar y escalar**: Revisar consistencia y decidir si exportar o promover a panel/reporte.
+:::
 
 ## Tipos de visualizacion comunes
 

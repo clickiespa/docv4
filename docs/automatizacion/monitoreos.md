@@ -10,6 +10,10 @@ status: "stable"
 
 El modulo **Monitoreos** evalua condiciones sobre metricas y genera estados operativos automaticos para deteccion temprana, seguimiento y comunicacion.
 
+:::module-strip
+Monitoreos convierte comportamiento de datos en alertas operativas. El objetivo es detectar desvio, priorizar impacto y comunicar al equipo correcto con reglas claras.
+:::
+
 ## Que aporta a la operacion
 
 Monitoreos transforma datos continuos en senales accionables.
@@ -51,30 +55,11 @@ Estados operativos:
 
 ## Flujo de configuracion recomendado
 
-### 1. Crear monitoreo base
-
-Desde **Monitoreos** seleccionar **+ Nuevo monitoreo** y completar:
-
-- nombre,
-- descripcion (opcional),
-- tipo de monitor,
-- ventana de muestreo,
-- frecuencia de evaluacion.
-
-### 2. Definir reglas
-
-Ingresar al monitoreo creado, abrir **Reglas** y seleccionar **+ Nueva regla**.
-
-Para cada regla se define:
-
-- nombre y descripcion,
-- metrica objetivo,
-- metodo de evaluacion (`Mayor que`, `Menor que`, `Dentro de rango`, `Fuera de rango`),
-- umbral o limites.
-
-### 3. Configurar disparadores
-
-Desde **Disparadores** seleccionar **+ Nuevo disparador**.
+:::steps
+1. **Crear monitoreo base**: Desde **Monitoreos** elegir **+ Nuevo monitoreo** y definir nombre, tipo, ventana y frecuencia de evaluacion.
+2. **Definir reglas**: Ingresar al monitoreo, abrir **Reglas** y asignar metrica, metodo (`Mayor que`, `Menor que`, `Dentro de rango`, `Fuera de rango`) y umbral.
+3. **Configurar disparadores**: En **Disparadores** crear notificacion o reenvio de evento y completar estado, patron de tiempo y destinatarios.
+:::
 
 Tipos de disparador:
 

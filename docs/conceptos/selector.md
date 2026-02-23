@@ -10,6 +10,10 @@ status: "stable"
 
 El **Selector de metricas** es una herramienta transversal que aparece cada vez que el usuario necesita elegir datos para una visualizacion, un monitoreo o un calculo.
 
+:::module-strip
+El Selector de metricas es la puerta de entrada para convertir datos disponibles en decisiones consistentes. Se usa en toda la plataforma y evita configuraciones aisladas por modulo.
+:::
+
 ## Para que sirve en terminos de negocio
 
 El Selector de metricas permite pasar de "dato disponible" a "dato util" sin pedir desarrollos adicionales.
@@ -30,7 +34,11 @@ Con una misma interfaz, equipos tecnicos y de negocio pueden:
 
 ## Flujo recomendado de uso
 
-### 1. Explorar y seleccionar
+:::steps
+1. **Explorar y seleccionar**: Desde la pestana **Explorar** ingresar por categorias y seleccionar una o mas metricas para operar.
+2. **Revisar Seleccion actual**: Editar solo el contexto en curso (visualizacion, monitoreo o calculo) sin afectar la configuracion original.
+3. **Personalizar parametros de lectura**: Ajustar color, nombre, unidad de medida, resolucion temporal, agregacion e interpolacion.
+:::
 
 Desde la pestana **Explorar** se puede ingresar a distintas categorias y seleccionar una o mas metricas.
 
@@ -39,22 +47,6 @@ En el listado se visualizan normalmente:
 - nombre,
 - unidad de medida (UOM),
 - identificador de metrica.
-
-### 2. Revisar Seleccion actual
-
-Desde la pestana **Seleccion actual** se editan las metricas seleccionadas para el contexto en curso.
-
-Esta edicion aplica solo a la accion que se esta realizando (visualizacion, monitoreo o calculo) y **no modifica** la configuracion original de la metrica.
-
-### 3. Personalizar parametros de lectura
-
-Parametros frecuentes:
-
-- color y nombre de visualizacion,
-- unidad de medida,
-- resolucion temporal,
-- metodo de agregacion,
-- metodo de interpolacion.
 
 ## Agregacion e interpolacion (criterios clave)
 

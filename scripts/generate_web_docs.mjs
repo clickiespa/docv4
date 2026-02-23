@@ -45,6 +45,299 @@ function removeFirstH1(markdownText) {
   return [...lines.slice(0, idx), ...lines.slice(idx + 1)].join('\n').replace(/^\s+/, '');
 }
 
+function parseDirectiveArgs(raw = '') {
+  const args = {};
+  const argRegex = /([a-zA-Z0-9_-]+)=("([^"]*)"|'([^']*)'|([^\s]+))/g;
+  let match = argRegex.exec(raw);
+
+  while (match) {
+    const key = match[1];
+    const value = match[3] ?? match[4] ?? match[5] ?? '';
+    args[key] = value;
+    match = argRegex.exec(raw);
+  }
+
+  return args;
+}
+
+function parseOrderedItems(raw = '') {
+  const lines = raw.split('\n');
+  const items = [];
+  let idx = 0;
+
+  while (idx < lines.length) {
+    const match = lines[idx].match(/^\s*\d+\.\s+(.*)$/);
+    if (!match) {
+      idx += 1;
+      continue;
+    }
+
+    const buffer = [match[1].trim()];
+    idx += 1;
+
+    while (idx < lines.length && !/^\s*\d+\.\s+/.test(lines[idx])) {
+      const nextLine = lines[idx].trim();
+      if (nextLine) {
+        buffer.push(nextLine);
+      }
+      idx += 1;
+    }
+
+    const item = buffer.join(' ').replace(/\s+/g, ' ').trim();
+    if (item) {
+      items.push(item);
+    }
+  }
+
+  return items;
+}
+
+function parseBulletItems(raw = '') {
+  return raw
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => /^[-*]\s+/.test(line))
+    .map((line) => line.replace(/^[-*]\s+/, '').trim())
+    .filter(Boolean);
+}
+
+function parseTitleBody(raw = '') {
+  const strongMatch = raw.match(/^\*\*(.+?)\*\*:?[\s]*(.*)$/);
+  if (strongMatch) {
+    return {
+      title: strongMatch[1].trim(),
+      body: strongMatch[2].trim(),
+    };
+  }
+
+  const colonMatch = raw.match(/^([^:]{3,}):\s*(.*)$/);
+  if (colonMatch) {
+    return {
+      title: colonMatch[1].trim(),
+      body: colonMatch[2].trim(),
+    };
+  }
+
+  return {
+    title: raw.trim(),
+    body: '',
+  };
+}
+
+function parseAccessBox(raw = '') {
+  const lines = raw
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  if (lines.length === 0) {
+    return {
+      label: 'Acceso',
+      url: '',
+      description: '',
+    };
+  }
+
+  const linkMatch = lines[0].match(/^\[(.+?)\]\((.+?)\)$/);
+
+  return {
+    label: linkMatch?.[1] || lines[0],
+    url: linkMatch?.[2] || lines[0],
+    description: lines.slice(1).join(' '),
+  };
+}
+
+function renderDirective(type, args, body) {
+  const normalizedType = type.toLowerCase();
+  const parsedBody = body.trim();
+
+  if (normalizedType === 'module-strip') {
+    return `<div class="module-strip">${marked.parse(parsedBody)}</div>`;
+  }
+
+  if (normalizedType === 'info') {
+    return `<div class="infobox">${marked.parse(parsedBody)}</div>`;
+  }
+
+  if (normalizedType === 'info-yellow') {
+    return `<div class="infobox yellow">${marked.parse(parsedBody)}</div>`;
+  }
+
+  if (normalizedType === 'intro-principle') {
+    const icon = args.icon || '◆';
+    return `
+      <div class="intro-principle">
+        <div class="intro-principle-icon">${escapeHtml(icon)}</div>
+        <div class="intro-principle-text">${marked.parse(parsedBody)}</div>
+      </div>
+    `;
+  }
+
+  if (normalizedType === 'access-box') {
+    const access = parseAccessBox(parsedBody);
+    const safeLabel = escapeHtml(access.label);
+    const safeUrl = escapeHtml(access.url);
+    const safeDescription = escapeHtml(access.description || 'Ingreso oficial a la plataforma.');
+
+    return `
+      <div class="access-box">
+        <div class="access-icon">↗</div>
+        <div>
+          <a class="access-url" href="${safeUrl}" target="_blank" rel="noopener noreferrer">${safeLabel}</a>
+          <div class="access-text">${safeDescription}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  if (normalizedType === 'steps') {
+    const items = parseOrderedItems(parsedBody);
+    if (items.length === 0) {
+      return marked.parse(parsedBody);
+    }
+
+    const stepHtml = items
+      .map((item, index) => {
+        const parsedItem = parseTitleBody(item);
+        const title = escapeHtml(parsedItem.title);
+        const bodyHtml = parsedItem.body ? marked.parseInline(parsedItem.body) : '';
+        const connector = index < items.length - 1 ? '<div class="step-line"></div>' : '';
+
+        return `
+          <div class="step">
+            <div class="step-left">
+              <div class="step-num">${index + 1}</div>
+              ${connector}
+            </div>
+            <div class="step-body">
+              <div class="step-title">${title}</div>
+              ${bodyHtml ? `<div class="step-text">${bodyHtml}</div>` : ''}
+            </div>
+          </div>
+        `;
+      })
+      .join('\n');
+
+    return `<div class="steps">${stepHtml}</div>`;
+  }
+
+  if (normalizedType === 'cards') {
+    const cols = Number.parseInt(args.cols || '2', 10);
+    const className = cols >= 3 ? 'card-grid three' : 'card-grid';
+    const items = parseBulletItems(parsedBody);
+
+    if (items.length === 0) {
+      return marked.parse(parsedBody);
+    }
+
+    const cardsHtml = items
+      .map((item) => {
+        const parsedItem = parseTitleBody(item);
+        const title = escapeHtml(parsedItem.title);
+        const bodyHtml = parsedItem.body ? marked.parseInline(parsedItem.body) : '';
+
+        return `
+          <article class="card">
+            <div class="card-title"><span class="dot"></span>${title}</div>
+            ${bodyHtml ? `<div class="card-text">${bodyHtml}</div>` : ''}
+          </article>
+        `;
+      })
+      .join('\n');
+
+    return `<div class="${className}">${cardsHtml}</div>`;
+  }
+
+  if (normalizedType === 'learning-path') {
+    const title = args.title || 'Camino de aprendizaje recomendado';
+    const items = parseOrderedItems(parsedBody);
+
+    if (items.length === 0) {
+      return marked.parse(parsedBody);
+    }
+
+    const stepsHtml = items
+      .map((item, index) => {
+        const parsedItem = parseTitleBody(item);
+        const itemTitle = escapeHtml(parsedItem.title);
+        const itemBody = parsedItem.body ? marked.parseInline(parsedItem.body) : '';
+        const arrow = index < items.length - 1 ? '<div class="lp-arrow">→</div>' : '';
+
+        return `
+          <article class="lp-step">
+            <div class="lp-num">${index + 1}</div>
+            <div class="lp-step-title">${itemTitle}</div>
+            ${itemBody ? `<div class="lp-step-text">${itemBody}</div>` : ''}
+          </article>
+          ${arrow}
+        `;
+      })
+      .join('\n');
+
+    return `
+      <div class="learning-path">
+        <div class="lp-title">${escapeHtml(title)}</div>
+        <div class="lp-steps">${stepsHtml}</div>
+      </div>
+    `;
+  }
+
+  return marked.parse(parsedBody);
+}
+
+function renderMarkdownWithBlocks(markdownText) {
+  const lines = markdownText.split('\n');
+  const output = [];
+  let idx = 0;
+
+  while (idx < lines.length) {
+    const currentLine = lines[idx];
+    const startMatch = currentLine.trim().match(/^:::([a-zA-Z0-9_-]+)(?:\s+(.*))?$/);
+
+    if (!startMatch) {
+      output.push(currentLine);
+      idx += 1;
+      continue;
+    }
+
+    const type = startMatch[1];
+    const args = parseDirectiveArgs(startMatch[2] || '');
+    const blockLines = [];
+    let endIdx = idx + 1;
+
+    while (endIdx < lines.length && lines[endIdx].trim() !== ':::') {
+      blockLines.push(lines[endIdx]);
+      endIdx += 1;
+    }
+
+    if (endIdx >= lines.length) {
+      output.push(currentLine);
+      idx += 1;
+      continue;
+    }
+
+    const blockHtml = renderDirective(type, args, blockLines.join('\n'));
+    output.push(blockHtml);
+    idx = endIdx + 1;
+  }
+
+  return marked.parse(output.join('\n'));
+}
+
+function extractHeroDescription(content) {
+  const cleaned = content
+    .replace(/^:::[^\n]*$/gm, '')
+    .replace(/^\s*:::\s*$/gm, '')
+    .trim();
+
+  const paragraph = cleaned
+    .split('\n\n')
+    .map((part) => part.trim())
+    .find((part) => part && !part.startsWith('#') && !part.startsWith('<'));
+
+  return paragraph ? paragraph.replace(/\s+/g, ' ') : '';
+}
+
 function flattenNav(nav) {
   const items = [];
 
@@ -110,12 +403,9 @@ async function build() {
       if (h1?.[1]) {
         heroTitle = h1[1].trim();
       }
-      const paragraph = parsed.content
-        .split('\n\n')
-        .map((part) => part.trim())
-        .find((part) => part && !part.startsWith('#'));
+      const paragraph = extractHeroDescription(parsed.content);
       if (paragraph) {
-        heroDesc = paragraph.replace(/\s+/g, ' ');
+        heroDesc = paragraph;
       }
     }
 
@@ -127,7 +417,7 @@ async function build() {
     sidebarGroups.get(group).push({ label, sectionId });
 
     const bodyNoH1 = removeFirstH1(parsed.content);
-    const bodyHtml = marked.parse(bodyNoH1);
+    const bodyHtml = renderMarkdownWithBlocks(bodyNoH1);
     const icon = ICON_BY_GROUP[group] || '◆';
     const dividerHtml = idx < navItems.length - 1 ? '<div class="divider"></div>' : '';
 

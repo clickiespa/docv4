@@ -10,6 +10,10 @@ status: "stable"
 
 Los **Gemelos digitales** representan activos en una vista visual con datos en tiempo real provenientes de metricas, formulas y etiquetas.
 
+:::module-strip
+Gemelos digitales combina contexto visual y dato operativo para que los equipos interpreten mas rapido el estado de una instalacion, equipo o proceso.
+:::
+
 ## Para que sirve este modulo
 
 Gemelos digitales conecta operacion y comunicacion visual en un mismo entorno.
@@ -40,21 +44,13 @@ El listado principal permite revisar:
 
 ## Diseno: flujo recomendado
 
-### 1. Configurar variables
+:::steps
+1. **Configurar variables**: En **Disenar > Variables > + Nueva variable** definir nombre, origen de datos, extraccion, formato numerico y presentacion de UOM.
+2. **Configurar superposiciones**: En **Disenar > Superposiciones > + Nueva superposicion** definir tipo, visibilidad y tamano fijo.
+3. **Validar experiencia final**: Abrir **Ver** para revisar lectura, jerarquia visual y accion de overlays.
+:::
 
-Dentro de **Disenar > Variables > + Nueva variable** se define:
-
-- nombre y descripcion,
-- origen de datos (metrica, formula de calculo o etiqueta),
-- tipo de extraccion (`ultimo valor`, `valor desde intervalo`, `valor desde patron de tiempo`),
-- formato numerico,
-- presentacion de UOM.
-
-### 2. Configurar superposiciones
-
-Dentro de **Disenar > Superposiciones > + Nueva superposicion** se define:
-
-Campos comunes:
+Campos comunes de superposiciones:
 
 - tipo de superposicion,
 - visibilidad predeterminada,
@@ -68,10 +64,6 @@ Tipos principales:
 - Texto enriquecido
 - Puntero
 - Control PLC
-
-### 3. Validar experiencia final
-
-Abrir **Ver** para comprobar lectura, jerarquia visual y comportamiento de acciones clicables.
 
 ## Criterios de calidad recomendados
 

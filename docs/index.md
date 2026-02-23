@@ -18,7 +18,9 @@ El objetivo no es solo mostrar pantallas: es explicar decisiones, criterios de c
 
 ## Principio base de la plataforma
 
+:::intro-principle icon="◆"
 Todo en Clickie se construye a partir de **metricas**. Cada metrica representa una serie temporal de datos que evoluciona en el tiempo y sirve como base para:
+:::
 
 - Monitoreos
 - Paneles y reportes
@@ -30,7 +32,11 @@ Cuando la capa de metricas esta bien definida, el resto de los modulos se vuelve
 
 ## Acceso a la plataforma
 
-- URL: [https://my.clickie.io/authentication](https://my.clickie.io/authentication)
+:::access-box
+[https://my.clickie.io/authentication](https://my.clickie.io/authentication)
+Ingreso oficial a la plataforma Clickie para comenzar la operacion.
+:::
+
 - Recuperacion de contrasena: opcion "Olvidaste tu contrasena" en login
 - Idiomas disponibles: Espanol, Ingles y Portugues
 - Contacto: [contacto@clickie.io](mailto:contacto@clickie.io)
@@ -45,12 +51,14 @@ La interfaz principal incluye:
 
 ## Camino de aprendizaje recomendado
 
-1. Comprender que es una metrica y como se registra.
-2. Aprender a seleccionar, combinar y transformar metricas.
-3. Validar resultados en Visor de datos.
-4. Operativizar reglas en Monitoreos.
-5. Comunicar resultados en Paneles y Reportes.
-6. Llevar el contexto de operacion a Gemelos digitales.
+:::learning-path title="Camino de aprendizaje recomendado"
+1. **Comprender las metricas**: Entender que es una metrica, como se registra y que calidad de dato tiene.
+2. **Seleccionar y combinar**: Aprender a elegir metricas, aplicar etiquetas y construir formulas utiles.
+3. **Validar en Visor**: Contrastar tendencias, rangos y visualizaciones antes de publicar resultados.
+4. **Automatizar con Monitoreos**: Definir reglas y disparadores para pasar de analisis a accion operativa.
+5. **Comunicar en paneles**: Convertir hallazgos en lectura ejecutiva para equipos y clientes.
+6. **Modelar con Gemelos**: Llevar el contexto visual del activo para acelerar interpretacion y decisiones.
+:::
 
 ## Que resultado deberias esperar
 

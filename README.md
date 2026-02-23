@@ -64,6 +64,45 @@ Reglas:
 - `last_updated` en formato `YYYY-MM-DD`.
 - `status`: `stable`, `draft` o `deprecated`.
 
+## Bloques visuales para el sitio publico
+
+Para enriquecer el diseno web sin perder Markdown como fuente, se pueden usar directivas `:::...` dentro de `/docs`.
+
+Ejemplos:
+
+```md
+:::module-strip
+Texto introductorio del modulo.
+:::
+
+:::steps
+1. **Paso 1**: descripcion.
+2. **Paso 2**: descripcion.
+:::
+
+:::learning-path title="Camino de aprendizaje recomendado"
+1. **Base**: descripcion.
+2. **Operacion**: descripcion.
+3. **Escalado**: descripcion.
+:::
+```
+
+Directivas soportadas actualmente:
+
+- `module-strip`
+- `intro-principle` (opcional `icon="◆"`)
+- `access-box`
+- `steps`
+- `cards` (opcional `cols=3`)
+- `learning-path` (opcional `title="..."`)
+- `info`
+- `info-yellow`
+
+Notas:
+
+- `scripts/generate_web_docs.mjs` interpreta estas directivas para la web React.
+- `scripts/sync_to_gdocs.py` elimina automaticamente solo los wrappers `:::` y conserva el contenido para Google Docs.
+
 ## Desarrollo local
 
 ### 1. Instalar dependencias
