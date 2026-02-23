@@ -45,6 +45,50 @@ function removeFirstH1(markdownText) {
   return [...lines.slice(0, idx), ...lines.slice(idx + 1)].join('\n').replace(/^\s+/, '');
 }
 
+function normalizeDocPath(docPath = '') {
+  return docPath.replace(/\\/g, '/').replace(/^\.\/+/, '').replace(/^\/+/, '');
+}
+
+function isExternalHref(href = '') {
+  return /^(https?:|mailto:|tel:|data:|javascript:)/i.test(href);
+}
+
+function rewriteInternalDocLinks(html, currentDocPath, docPathToSectionId) {
+  const normalizedCurrent = normalizeDocPath(currentDocPath);
+  const currentDir = path.posix.dirname(normalizedCurrent);
+
+  return html.replace(/href="([^"]+)"/g, (fullMatch, rawHref) => {
+    const href = String(rawHref || '').trim();
+    if (!href || href.startsWith('#') || isExternalHref(href)) {
+      return fullMatch;
+    }
+
+    const [hrefNoHash] = href.split('#');
+    const [hrefPath] = hrefNoHash.split('?');
+    if (!/\.md$/i.test(hrefPath)) {
+      return fullMatch;
+    }
+
+    let resolvedDocPath = '';
+    if (hrefPath.startsWith('/')) {
+      resolvedDocPath = normalizeDocPath(hrefPath);
+    } else {
+      resolvedDocPath = normalizeDocPath(path.posix.normalize(path.posix.join(currentDir, hrefPath)));
+    }
+
+    if (resolvedDocPath.startsWith('..')) {
+      return fullMatch;
+    }
+
+    const targetSectionId = docPathToSectionId.get(resolvedDocPath);
+    if (!targetSectionId) {
+      return fullMatch;
+    }
+
+    return `href="#${targetSectionId}"`;
+  });
+}
+
 function parseDirectiveArgs(raw = '') {
   const args = {};
   const argRegex = /([a-zA-Z0-9_-]+)=("([^"]*)"|'([^']*)'|([^\s]+))/g;
@@ -385,7 +429,16 @@ function flattenNav(nav) {
 async function build() {
   const mkdocsRaw = await fs.readFile(MKDOCS_CONFIG, 'utf-8');
   const mkdocsConfig = yaml.load(mkdocsRaw) || {};
-  const navItems = flattenNav(mkdocsConfig.nav || []);
+  const navItems = flattenNav(mkdocsConfig.nav || []).map((item) => ({
+    ...item,
+    docPath: normalizeDocPath(item.docPath),
+  }));
+  const docPathToSectionId = new Map(
+    navItems.map((item) => [
+      item.docPath,
+      slugify(item.docPath.replace(/\.md$/i, '').replace(/\/index$/i, '')),
+    ])
+  );
 
   const sidebarGroups = new Map();
   const sectionsHtml = [];
@@ -428,7 +481,11 @@ async function build() {
     sidebarGroups.get(group).push({ label, sectionId });
 
     const bodyNoH1 = removeFirstH1(parsed.content);
-    const bodyHtml = renderMarkdownWithBlocks(bodyNoH1);
+    const bodyHtml = rewriteInternalDocLinks(
+      renderMarkdownWithBlocks(bodyNoH1),
+      docPath,
+      docPathToSectionId
+    );
     const icon = ICON_BY_GROUP[group] || '◆';
     const dividerHtml = idx < navItems.length - 1 ? '<div class="divider"></div>' : '';
 
