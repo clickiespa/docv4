@@ -5,8 +5,8 @@ Repositorio de documentacion **docs-first** para Clickie.
 ## Arquitectura
 
 - **Fuente unica de verdad**: Markdown en `/docs`
-- **Presentacion web**: MkDocs genera sitio estatico en `/site`
-- **Publicacion automatica**: GitHub Actions despliega a GitHub Pages
+- **Presentacion documental**: MkDocs genera una salida estandar en `/site`
+- **Presentacion publica**: la web en GitHub Pages se despliega desde la app React/Vite
 - **Sincronizacion documental**: `scripts/sync_to_gdocs.py` actualiza un Google Doc con el contenido de `/docs`
 
 ## Estructura
@@ -24,6 +24,7 @@ Repositorio de documentacion **docs-first** para Clickie.
   sync_to_gdocs.py
 .github/workflows
   docs_pipeline.yml
+  site_deploy.yml
 mkdocs.yml
 requirements.txt
 README.md
@@ -87,19 +88,35 @@ python scripts/sync_to_gdocs.py
 
 ## CI/CD (GitHub Actions)
 
+### 1. Documentacion y sync
+
 Workflow: `.github/workflows/docs_pipeline.yml`
 
 Trigger:
 
-- `push` a `main` **solo cuando cambia `/docs/**`**
+- `push` a `main` cuando cambia `/docs/**`, `mkdocs.yml`, `requirements.txt` o el script de sync
 - `workflow_dispatch` manual
 
 Pipeline:
 
 1. Instala dependencias Python
-2. Build del sitio (`mkdocs build --strict`)
+2. Valida build documental (`mkdocs build --strict`)
 3. Ejecuta sincronizacion a Google Docs
-4. Publica `site/` en GitHub Pages
+
+### 2. Deploy web publico
+
+Workflow: `.github/workflows/site_deploy.yml`
+
+Trigger:
+
+- `push` a `main` cuando cambia la app web (`src/**`, `public/**`, `index.html`, `package.json`, `vite.config.js`)
+- `workflow_dispatch` manual
+
+Pipeline:
+
+1. Instala dependencias Node
+2. Build de Vite con base path para GitHub Pages
+3. Deploy a GitHub Pages
 
 ## Secrets requeridos en GitHub
 
@@ -115,4 +132,4 @@ Configurar en `Settings > Secrets and variables > Actions`:
 1. Crear nuevo archivo Markdown en `/docs`.
 2. Agregarlo al `nav` en `mkdocs.yml`.
 3. Hacer commit/push a `main`.
-4. El pipeline regenerara sitio + Google Doc automaticamente.
+4. El pipeline de docs sincronizara Google Docs automaticamente.

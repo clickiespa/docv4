@@ -6,15 +6,16 @@ on:
       - main
     paths:
       - "docs/**"
+      - "scripts/sync_to_gdocs.py"
+      - "mkdocs.yml"
+      - "requirements.txt"
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: docs-pages
+  group: docs-sync
   cancel-in-progress: true
 
 jobs:
@@ -49,20 +50,3 @@ jobs:
           DOCS_DIR: docs
           MKDOCS_CONFIG: mkdocs.yml
         run: python scripts/sync_to_gdocs.py
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
-  deploy:
-    needs: build_and_sync
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
