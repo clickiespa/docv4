@@ -5,8 +5,11 @@ on:
     branches:
       - main
     paths:
+      - "docs/**"
       - "src/**"
+      - "scripts/generate_web_docs.mjs"
       - "public/**"
+      - "mkdocs.yml"
       - "index.html"
       - "package.json"
       - "vite.config.js"

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import manualHtml from './manual.html?raw';
+import manualHtml from './manual.generated.html?raw';
 
 const normalizeText = (value = '') =>
   value

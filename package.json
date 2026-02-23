@@ -4,11 +4,16 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/generate_web_docs.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/generate_web_docs.mjs",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0",
+    "marked": "^14.1.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

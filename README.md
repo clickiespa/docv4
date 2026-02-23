@@ -7,7 +7,7 @@ Repositorio docs-first para Clickie.
 - **Fuente unica de verdad**: Markdown en `/docs`.
 - **Salida documental**: MkDocs compila la documentacion a `/site`.
 - **Salida editorial externa**: `scripts/sync_to_gdocs.py` publica el contenido Markdown en Google Docs.
-- **Sitio publico**: GitHub Pages despliega la app React/Vite del repositorio.
+- **Sitio publico**: GitHub Pages despliega la app React/Vite del repositorio, con contenido generado desde `/docs` mediante `scripts/generate_web_docs.mjs`.
 
 > Google Doc es salida generada: no se edita manualmente como fuente primaria.
 
@@ -34,6 +34,7 @@ Repositorio docs-first para Clickie.
     cuenta.md
     datos-y-fuentes.md
 /scripts
+  generate_web_docs.mjs
   sync_to_gdocs.py
 .github/workflows
   docs_pipeline.yml
@@ -126,10 +127,15 @@ Secrets requeridos:
 
 Archivo: `.github/workflows/site_deploy.yml`
 
-- Trigger: cambios en `src/**`, `public/**`, `index.html`, `package.json`, `vite.config.js`.
+- Trigger: cambios en `docs/**`, `src/**`, `public/**`, `scripts/generate_web_docs.mjs`, `mkdocs.yml`, `index.html`, `package.json`, `vite.config.js`.
 - Pasos:
-  1. Build Vite
-  2. Deploy a GitHub Pages
+  1. Generar `src/manual.generated.html` desde `/docs`
+  2. Build Vite
+  3. Deploy a GitHub Pages
+
+## Regla de reflejo en sitio publico
+
+Los cambios en `/docs` se reflejan en la web publica porque el workflow del sitio ejecuta `scripts/generate_web_docs.mjs` antes del build de React.
 
 ## Como agregar nueva documentacion
 
