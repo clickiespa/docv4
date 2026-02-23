@@ -74,6 +74,9 @@ Tipos habituales:
 - `Agujero negro`: no completa faltantes.
 - `Relleno cero`: completa faltantes con cero.
 
+:::interpolation-examples
+:::
+
 ## Metricas virtuales por etiqueta
 
 El selector permite combinar dos o mas metricas reales en una metrica virtual.

@@ -191,6 +191,65 @@ function parseAccessBox(raw = '') {
   };
 }
 
+function getInterpolationExamples() {
+  return [
+    {
+      key: 'lineal',
+      title: 'Lineal',
+      description: 'Une los puntos conocidos con una transicion progresiva entre ambos extremos.',
+      svg: `
+        <svg viewBox="0 0 220 84" aria-hidden="true" focusable="false">
+          <polyline points="10,62 58,28 112,44 168,18 210,24" class="interp-line known"/>
+          <line x1="58" y1="28" x2="112" y2="44" class="interp-line estimated"/>
+          <circle cx="58" cy="28" r="4" class="interp-point"/>
+          <circle cx="112" cy="44" r="4" class="interp-point"/>
+        </svg>
+      `,
+    },
+    {
+      key: 'continuidad',
+      title: 'Continuidad',
+      description: 'Conserva el ultimo valor conocido hasta que aparece un nuevo dato valido.',
+      svg: `
+        <svg viewBox="0 0 220 84" aria-hidden="true" focusable="false">
+          <polyline points="10,58 52,30 52,30 120,30 120,30 162,44 210,20" class="interp-line known"/>
+          <line x1="52" y1="30" x2="120" y2="30" class="interp-line estimated"/>
+          <circle cx="52" cy="30" r="4" class="interp-point"/>
+          <circle cx="120" cy="30" r="4" class="interp-point soft"/>
+        </svg>
+      `,
+    },
+    {
+      key: 'agujero-negro',
+      title: 'Agujero negro',
+      description: 'No rellena los faltantes: mantiene un corte visible en la serie temporal.',
+      svg: `
+        <svg viewBox="0 0 220 84" aria-hidden="true" focusable="false">
+          <polyline points="10,54 56,26" class="interp-line known"/>
+          <polyline points="140,40 182,22 210,26" class="interp-line known"/>
+          <line x1="56" y1="26" x2="140" y2="40" class="interp-gap"/>
+          <circle cx="56" cy="26" r="4" class="interp-point"/>
+          <circle cx="140" cy="40" r="4" class="interp-point"/>
+        </svg>
+      `,
+    },
+    {
+      key: 'relleno-cero',
+      title: 'Relleno cero',
+      description: 'Completa los intervalos faltantes con valor cero para continuidad operativa.',
+      svg: `
+        <svg viewBox="0 0 220 84" aria-hidden="true" focusable="false">
+          <line x1="10" y1="68" x2="210" y2="68" class="interp-axis"/>
+          <polyline points="10,56 60,24 106,68 156,68 210,20" class="interp-line known"/>
+          <line x1="60" y1="24" x2="156" y2="68" class="interp-line estimated"/>
+          <circle cx="106" cy="68" r="4" class="interp-point zero"/>
+          <circle cx="156" cy="68" r="4" class="interp-point zero"/>
+        </svg>
+      `,
+    },
+  ];
+}
+
 function renderDirective(type, args, body) {
   const normalizedType = type.toLowerCase();
   const parsedBody = body.trim();
@@ -322,6 +381,27 @@ function renderDirective(type, args, body) {
       <div class="learning-path">
         <div class="lp-title">${escapeHtml(title)}</div>
         <div class="lp-steps">${stepsHtml}</div>
+      </div>
+    `;
+  }
+
+  if (normalizedType === 'interpolation-examples') {
+    const cardsHtml = getInterpolationExamples()
+      .map(
+        (item) => `
+          <article class="interp-card interp-${item.key}">
+            <div class="interp-chart">${item.svg}</div>
+            <div class="interp-name">${escapeHtml(item.title)}</div>
+            <div class="interp-text">${escapeHtml(item.description)}</div>
+          </article>
+        `
+      )
+      .join('\n');
+
+    return `
+      <div class="interp-block">
+        <div class="interp-title">Ejemplos graficos de interpolacion</div>
+        <div class="interp-grid">${cardsHtml}</div>
       </div>
     `;
   }
