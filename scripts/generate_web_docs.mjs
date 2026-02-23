@@ -287,15 +287,24 @@ function renderDirective(type, args, body) {
 
 function renderMarkdownWithBlocks(markdownText) {
   const lines = markdownText.split('\n');
-  const output = [];
+  const htmlParts = [];
+  const markdownBuffer = [];
   let idx = 0;
+
+  const flushMarkdownBuffer = () => {
+    if (markdownBuffer.length === 0) {
+      return;
+    }
+    htmlParts.push(marked.parse(markdownBuffer.join('\n')));
+    markdownBuffer.length = 0;
+  };
 
   while (idx < lines.length) {
     const currentLine = lines[idx];
     const startMatch = currentLine.trim().match(/^:::([a-zA-Z0-9_-]+)(?:\s+(.*))?$/);
 
     if (!startMatch) {
-      output.push(currentLine);
+      markdownBuffer.push(currentLine);
       idx += 1;
       continue;
     }
@@ -311,17 +320,19 @@ function renderMarkdownWithBlocks(markdownText) {
     }
 
     if (endIdx >= lines.length) {
-      output.push(currentLine);
+      markdownBuffer.push(currentLine);
       idx += 1;
       continue;
     }
 
+    flushMarkdownBuffer();
     const blockHtml = renderDirective(type, args, blockLines.join('\n'));
-    output.push(blockHtml);
+    htmlParts.push(blockHtml.trim());
     idx = endIdx + 1;
   }
 
-  return marked.parse(output.join('\n'));
+  flushMarkdownBuffer();
+  return htmlParts.join('\n');
 }
 
 function extractHeroDescription(content) {
