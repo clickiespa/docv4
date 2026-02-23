@@ -1,0 +1,6 @@
+mkdocs==1.6.1
+mkdocs-material==9.5.34
+google-api-python-client==2.164.0
+google-auth==2.38.0
+markdown-it-py==3.0.0
+PyYAML==6.0.2

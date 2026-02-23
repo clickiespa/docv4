@@ -1,0 +1,23 @@
+site_name: Documentacion Clickie
+site_description: Manual operativo de Clickie generado desde Markdown
+site_url: https://clickiespa.github.io/docv4/
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  language: es
+
+nav:
+  - Inicio: index.md
+  - Metricas: metricas.md
+  - Visor de datos: visor-datos.md
+  - Monitoreos: monitoreos.md
+  - Gemelos digitales: gemelos-digitales.md
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - tables
+  - attr_list
