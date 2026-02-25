@@ -250,6 +250,41 @@ function getInterpolationExamples() {
   ];
 }
 
+function getMonitoringFpotExample() {
+  return {
+    monitorName: 'Control de Factor de Potencia',
+    metricName: 'F. de Pot.',
+    monitorType: 'Alerta',
+    sampleWindow: '10 min',
+    sampleFrequency: '5 min',
+    thresholdValue: '0.93',
+    breachPercent: '10%',
+    triggerState: 'ALARMA',
+    svg: `
+      <svg viewBox="0 0 560 210" aria-hidden="true" focusable="false">
+        <rect x="22" y="18" width="516" height="160" class="mon-grid-bg"/>
+        <line x1="22" y1="58" x2="538" y2="58" class="mon-threshold"/>
+        <text x="30" y="52" class="mon-threshold-label">Umbral 0.93</text>
+
+        <polyline points="30,42 76,48 122,62 168,54 214,50 260,64 306,68 352,46 398,52 444,72 490,60 530,56" class="mon-series"/>
+
+        <circle cx="122" cy="62" r="5" class="mon-point-breach"/>
+        <circle cx="260" cy="64" r="5" class="mon-point-breach"/>
+        <circle cx="306" cy="68" r="5" class="mon-point-breach"/>
+        <circle cx="444" cy="72" r="5" class="mon-point-breach"/>
+
+        <line x1="120" y1="190" x2="520" y2="190" class="mon-axis"/>
+        <line x1="120" y1="184" x2="120" y2="196" class="mon-tick"/>
+        <line x1="320" y1="184" x2="320" y2="196" class="mon-tick"/>
+        <line x1="520" y1="184" x2="520" y2="196" class="mon-tick"/>
+        <text x="95" y="206" class="mon-axis-label">-10 min</text>
+        <text x="302" y="206" class="mon-axis-label">-5 min</text>
+        <text x="506" y="206" class="mon-axis-label">Ahora</text>
+      </svg>
+    `,
+  };
+}
+
 function renderDirective(type, args, body) {
   const normalizedType = type.toLowerCase();
   const parsedBody = body.trim();
@@ -402,6 +437,62 @@ function renderDirective(type, args, body) {
       <div class="interp-block">
         <div class="interp-title">Ejemplos graficos de interpolacion</div>
         <div class="interp-grid">${cardsHtml}</div>
+      </div>
+    `;
+  }
+
+  if (normalizedType === 'monitoring-example-fpot') {
+    const example = getMonitoringFpotExample();
+    return `
+      <div class="mon-example">
+        <div class="mon-title">Ejemplo visual - Monitoreo de ${escapeHtml(example.metricName)}</div>
+        <div class="mon-grid">
+          <article class="mon-step">
+            <div class="mon-step-kicker">Paso 1</div>
+            <div class="mon-step-name">Monitoreo</div>
+            <ul>
+              <li><strong>Nombre:</strong> ${escapeHtml(example.monitorName)}</li>
+              <li><strong>Tipo:</strong> ${escapeHtml(example.monitorType)}</li>
+              <li><strong>Ventana:</strong> ${escapeHtml(example.sampleWindow)}</li>
+              <li><strong>Frecuencia:</strong> ${escapeHtml(example.sampleFrequency)}</li>
+            </ul>
+          </article>
+
+          <article class="mon-step">
+            <div class="mon-step-kicker">Paso 2</div>
+            <div class="mon-step-name">Regla</div>
+            <ul>
+              <li><strong>Nombre:</strong> ${escapeHtml(example.metricName)}</li>
+              <li><strong>Metodo:</strong> Menor que</li>
+              <li><strong>Limite:</strong> ${escapeHtml(example.thresholdValue)}</li>
+              <li><strong>Umbral:</strong> ${escapeHtml(example.breachPercent)} de puntos bajo limite</li>
+            </ul>
+          </article>
+
+          <article class="mon-step">
+            <div class="mon-step-kicker">Paso 3</div>
+            <div class="mon-step-name">Disparador</div>
+            <ul>
+              <li><strong>Tipo:</strong> Comunicacion</li>
+              <li><strong>Estado:</strong> ${escapeHtml(example.triggerState)}</li>
+              <li><strong>Patron:</strong> Horario operativo o todo el dia</li>
+              <li><strong>Destino:</strong> Colaboradores responsables</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mon-chart-wrap">
+          <div class="mon-chart-legend">
+            <span class="legend-item"><span class="legend-dot normal"></span> Valor dentro de limite</span>
+            <span class="legend-item"><span class="legend-dot breach"></span> Valor por debajo de 0.93</span>
+            <span class="legend-item"><span class="legend-line"></span> Evaluacion cada 5 min en ventana de 10 min</span>
+          </div>
+          <div class="mon-chart">${example.svg}</div>
+          <p class="mon-caption">
+            Si en los ultimos 10 minutos al menos el 10% de los puntos de <strong>${escapeHtml(example.metricName)}</strong> cae por debajo de <strong>${escapeHtml(example.thresholdValue)}</strong>,
+            el monitoreo pasa a estado <strong>${escapeHtml(example.triggerState)}</strong> y ejecuta comunicacion.
+          </p>
+        </div>
       </div>
     `;
   }

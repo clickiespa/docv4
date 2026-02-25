@@ -19,6 +19,7 @@ status: "stable"
 - Ajuste de `scripts/generate_web_docs.mjs` para soportar navegacion anidada en el sidebar web.
 - Actualizacion de `src/App.jsx` y `src/manual.css` para activar y estilizar enlaces anidados.
 - Mejora de usabilidad: submodulos de Boletines colapsados por defecto y toggle de expandir/colapsar al hacer clic en el nombre del grupo.
+- Incorporacion en `automatizacion/monitoreos.md` de un ejemplo practico de monitoreo de factor de potencia (`F. de Pot.`) con esquema visual web-only en tres pasos: Monitoreo, Regla y Disparador.
 - Regla editorial formalizada: cada cambio en documentacion debe registrar su entrada en este changelog con fecha (`YYYY-MM-DD`).
 
 ## 2026-02-23

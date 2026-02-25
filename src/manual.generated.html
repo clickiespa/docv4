@@ -778,6 +778,123 @@
             </div>
           </div>
         </div>
+<h2>Ejemplo practico: monitoreo de factor de potencia</h2>
+<p>Caso de referencia para capacitacion:</p>
+<ul>
+<li><strong>Metrica</strong>: <code>F. de Pot.</code></li>
+<li><strong>Regla</strong>: entrar en alarma cuando en una ventana de 10 min al menos el 10% de los puntos este por debajo de 0.93.</li>
+<li><strong>Frecuencia de evaluacion</strong>: cada 5 min.</li>
+</ul>
+<p>Configuracion en tres pasos logicos de Clickie:</p>
+
+<div class="steps">
+          <div class="step">
+            <div class="step-left">
+              <div class="step-num">1</div>
+              <div class="step-line"></div>
+            </div>
+            <div class="step-body">
+              <div class="step-title">Monitoreo</div>
+              <div class="step-text">Nombre <code>Control de Factor de Potencia</code>, tipo <code>Alerta</code>, ventana de muestreo <code>10 min</code>, frecuencia <code>5 min</code>.</div>
+            </div>
+          </div>
+        
+
+          <div class="step">
+            <div class="step-left">
+              <div class="step-num">2</div>
+              <div class="step-line"></div>
+            </div>
+            <div class="step-body">
+              <div class="step-title">Regla</div>
+              <div class="step-text">Nombre <code>F. de Pot.</code>, metodo <code>Menor que</code>, limite <code>0.93</code>, umbral <code>10%</code>.</div>
+            </div>
+          </div>
+        
+
+          <div class="step">
+            <div class="step-left">
+              <div class="step-num">3</div>
+              
+            </div>
+            <div class="step-body">
+              <div class="step-title">Disparador</div>
+              <div class="step-text">Tipo <code>Comunicacion</code>, disparar en estado <code>ALARMA</code>, patron de tiempo segun operacion, notificar a colaboradores responsables.</div>
+            </div>
+          </div>
+        </div>
+
+<div class="mon-example">
+        <div class="mon-title">Ejemplo visual - Monitoreo de F. de Pot.</div>
+        <div class="mon-grid">
+          <article class="mon-step">
+            <div class="mon-step-kicker">Paso 1</div>
+            <div class="mon-step-name">Monitoreo</div>
+            <ul>
+              <li><strong>Nombre:</strong> Control de Factor de Potencia</li>
+              <li><strong>Tipo:</strong> Alerta</li>
+              <li><strong>Ventana:</strong> 10 min</li>
+              <li><strong>Frecuencia:</strong> 5 min</li>
+            </ul>
+          </article>
+
+          <article class="mon-step">
+            <div class="mon-step-kicker">Paso 2</div>
+            <div class="mon-step-name">Regla</div>
+            <ul>
+              <li><strong>Nombre:</strong> F. de Pot.</li>
+              <li><strong>Metodo:</strong> Menor que</li>
+              <li><strong>Limite:</strong> 0.93</li>
+              <li><strong>Umbral:</strong> 10% de puntos bajo limite</li>
+            </ul>
+          </article>
+
+          <article class="mon-step">
+            <div class="mon-step-kicker">Paso 3</div>
+            <div class="mon-step-name">Disparador</div>
+            <ul>
+              <li><strong>Tipo:</strong> Comunicacion</li>
+              <li><strong>Estado:</strong> ALARMA</li>
+              <li><strong>Patron:</strong> Horario operativo o todo el dia</li>
+              <li><strong>Destino:</strong> Colaboradores responsables</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mon-chart-wrap">
+          <div class="mon-chart-legend">
+            <span class="legend-item"><span class="legend-dot normal"></span> Valor dentro de limite</span>
+            <span class="legend-item"><span class="legend-dot breach"></span> Valor por debajo de 0.93</span>
+            <span class="legend-item"><span class="legend-line"></span> Evaluacion cada 5 min en ventana de 10 min</span>
+          </div>
+          <div class="mon-chart">
+      <svg viewBox="0 0 560 210" aria-hidden="true" focusable="false">
+        <rect x="22" y="18" width="516" height="160" class="mon-grid-bg"/>
+        <line x1="22" y1="58" x2="538" y2="58" class="mon-threshold"/>
+        <text x="30" y="52" class="mon-threshold-label">Umbral 0.93</text>
+
+        <polyline points="30,42 76,48 122,62 168,54 214,50 260,64 306,68 352,46 398,52 444,72 490,60 530,56" class="mon-series"/>
+
+        <circle cx="122" cy="62" r="5" class="mon-point-breach"/>
+        <circle cx="260" cy="64" r="5" class="mon-point-breach"/>
+        <circle cx="306" cy="68" r="5" class="mon-point-breach"/>
+        <circle cx="444" cy="72" r="5" class="mon-point-breach"/>
+
+        <line x1="120" y1="190" x2="520" y2="190" class="mon-axis"/>
+        <line x1="120" y1="184" x2="120" y2="196" class="mon-tick"/>
+        <line x1="320" y1="184" x2="320" y2="196" class="mon-tick"/>
+        <line x1="520" y1="184" x2="520" y2="196" class="mon-tick"/>
+        <text x="95" y="206" class="mon-axis-label">-10 min</text>
+        <text x="302" y="206" class="mon-axis-label">-5 min</text>
+        <text x="506" y="206" class="mon-axis-label">Ahora</text>
+      </svg>
+    </div>
+          <p class="mon-caption">
+            Si en los ultimos 10 minutos al menos el 10% de los puntos de <strong>F. de Pot.</strong> cae por debajo de <strong>0.93</strong>,
+            el monitoreo pasa a estado <strong>ALARMA</strong> y ejecuta comunicacion.
+          </p>
+        </div>
+      </div>
 <p>Tipos de disparador:</p>
 <ul>
 <li>Comunicacion (notificaciones)</li>
@@ -1571,6 +1688,7 @@ Controlan cabeceras, pie de pagina y contenedor donde se inyectan bloques dinami
 <li>Ajuste de <code>scripts/generate_web_docs.mjs</code> para soportar navegacion anidada en el sidebar web.</li>
 <li>Actualizacion de <code>src/App.jsx</code> y <code>src/manual.css</code> para activar y estilizar enlaces anidados.</li>
 <li>Mejora de usabilidad: submodulos de Boletines colapsados por defecto y toggle de expandir/colapsar al hacer clic en el nombre del grupo.</li>
+<li>Incorporacion en <code>automatizacion/monitoreos.md</code> de un ejemplo practico de monitoreo de factor de potencia (<code>F. de Pot.</code>) con esquema visual web-only en tres pasos: Monitoreo, Regla y Disparador.</li>
 <li>Regla editorial formalizada: cada cambio en documentacion debe registrar su entrada en este changelog con fecha (<code>YYYY-MM-DD</code>).</li>
 </ul>
 <h2>2026-02-23</h2>
