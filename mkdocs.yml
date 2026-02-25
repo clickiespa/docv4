@@ -26,6 +26,11 @@ nav:
   - Configuracion:
       - Configuracion de cuenta: configuracion/cuenta.md
       - Datos y fuentes: configuracion/datos-y-fuentes.md
+      - Boletines:
+          - Vista general: configuracion/boletines.md
+          - Bloques de contenido: configuracion/boletines-bloques.md
+          - Grupos de destinatarios: configuracion/boletines-grupos.md
+          - Plantillas: configuracion/boletines-plantillas.md
   - Changelog: changelog.md
 
 markdown_extensions:

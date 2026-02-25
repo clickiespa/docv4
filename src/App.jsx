@@ -27,8 +27,44 @@ function App() {
       return undefined;
     }
 
-    const navItems = Array.from(root.querySelectorAll('.nav-item'));
+    const navItems = Array.from(root.querySelectorAll('.nav-item[href], .nav-sub[href]'));
+    const navToggles = Array.from(root.querySelectorAll('[data-nav-toggle]'));
     const sections = Array.from(root.querySelectorAll('[id]'));
+
+    const setGroupExpanded = (toggle, expanded) => {
+      const groupId = toggle.getAttribute('data-nav-toggle');
+      if (!groupId) {
+        return;
+      }
+      const groupContainer = root.querySelector(`#${groupId}`);
+      if (!groupContainer) {
+        return;
+      }
+
+      groupContainer.hidden = !expanded;
+      toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      toggle.classList.toggle('is-open', expanded);
+    };
+
+    const expandParentGroups = (navItem) => {
+      let current = navItem.parentElement;
+      while (current && current !== root) {
+        if (current.classList.contains('nav-group-children')) {
+          current.hidden = false;
+          const groupId = current.getAttribute('id');
+          if (groupId) {
+            const toggle = root.querySelector(`[data-nav-toggle="${groupId}"]`);
+            if (toggle) {
+              toggle.setAttribute('aria-expanded', 'true');
+              toggle.classList.add('is-open');
+            }
+          }
+        }
+        current = current.parentElement;
+      }
+    };
+
+    navToggles.forEach((toggle) => setGroupExpanded(toggle, false));
 
     let observer;
     if ('IntersectionObserver' in window && navItems.length > 0 && sections.length > 0) {
@@ -43,6 +79,9 @@ function App() {
             navItems.forEach((item) => {
               const isActive = item.getAttribute('href') === `#${id}`;
               item.classList.toggle('active', isActive);
+              if (isActive) {
+                expandParentGroups(item);
+              }
             });
           });
         },
@@ -56,10 +95,20 @@ function App() {
       const onClick = () => {
         navItems.forEach((navItem) => navItem.classList.remove('active'));
         item.classList.add('active');
+        expandParentGroups(item);
       };
 
       item.addEventListener('click', onClick);
       return { item, onClick };
+    });
+
+    const toggleHandlers = navToggles.map((toggle) => {
+      const onToggle = () => {
+        const currentlyExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        setGroupExpanded(toggle, !currentlyExpanded);
+      };
+      toggle.addEventListener('click', onToggle);
+      return { toggle, onToggle };
     });
 
     const searchForm = root.querySelector('.top-search-form');
@@ -300,6 +349,7 @@ function App() {
     return () => {
       observer?.disconnect();
       clickHandlers.forEach(({ item, onClick }) => item.removeEventListener('click', onClick));
+      toggleHandlers.forEach(({ toggle, onToggle }) => toggle.removeEventListener('click', onToggle));
       searchForm?.removeEventListener('submit', runSearch);
       searchInput?.removeEventListener('input', onInput);
       searchInput?.removeEventListener('keydown', onKeyDown);

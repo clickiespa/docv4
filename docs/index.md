@@ -81,3 +81,7 @@ Si seguis el recorrido de este manual, deberias poder:
 - [Activos](./organizacion/activos.md)
 - [Configuracion de cuenta](./configuracion/cuenta.md)
 - [Datos y fuentes](./configuracion/datos-y-fuentes.md)
+- [Boletines](./configuracion/boletines.md)
+- [Boletines - Bloques de contenido](./configuracion/boletines-bloques.md)
+- [Boletines - Grupos de destinatarios](./configuracion/boletines-grupos.md)
+- [Boletines - Plantillas](./configuracion/boletines-plantillas.md)

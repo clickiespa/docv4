@@ -181,5 +181,6 @@ Los cambios en `/docs` se reflejan en la web publica porque el workflow del siti
 1. Crear el archivo en la subcarpeta semantica correcta dentro de `/docs`.
 2. Agregar frontmatter obligatorio y H1 consistente.
 3. Enlazar el documento en `mkdocs.yml` dentro de la seccion correspondiente.
-4. Verificar `mkdocs build --strict`.
-5. Hacer push a `main`.
+4. Registrar el cambio en `/docs/changelog.md` con fecha (`YYYY-MM-DD`) y resumen del ajuste.
+5. Verificar `mkdocs build --strict`.
+6. Hacer push a `main`.

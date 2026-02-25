@@ -473,8 +473,53 @@ function extractHeroDescription(content) {
   return paragraph ? paragraph.replace(/\s+/g, ' ') : '';
 }
 
-function flattenNav(nav) {
-  const items = [];
+function parseNavEntry(label, value, groupName, docItems, docPathToSectionId) {
+  if (typeof value === 'string') {
+    const docPath = normalizeDocPath(value);
+    const sectionId = slugify(docPath.replace(/\.md$/i, '').replace(/\/index$/i, ''));
+
+    docItems.push({ group: groupName, label, docPath, sectionId });
+    docPathToSectionId.set(docPath, sectionId);
+
+    return { type: 'link', label, sectionId };
+  }
+
+  if (!Array.isArray(value)) {
+    return null;
+  }
+
+  const children = [];
+  for (const childEntry of value) {
+    if (!childEntry || typeof childEntry !== 'object' || Array.isArray(childEntry)) {
+      continue;
+    }
+
+    for (const [childLabel, childValue] of Object.entries(childEntry)) {
+      const parsedChild = parseNavEntry(
+        childLabel,
+        childValue,
+        groupName,
+        docItems,
+        docPathToSectionId
+      );
+      if (parsedChild) {
+        children.push(parsedChild);
+      }
+    }
+  }
+
+  if (children.length === 0) {
+    return null;
+  }
+
+  return { type: 'group', label, children };
+}
+
+function parseNav(nav) {
+  const docItems = [];
+  const docPathToSectionId = new Map();
+  const sidebarGroups = [];
+  const inicioGroup = { groupName: 'Inicio', entries: [] };
 
   for (const section of nav || []) {
     if (!section || typeof section !== 'object' || Array.isArray(section)) {
@@ -483,44 +528,104 @@ function flattenNav(nav) {
 
     for (const [sectionName, sectionValue] of Object.entries(section)) {
       if (typeof sectionValue === 'string') {
-        items.push({ group: 'Inicio', label: sectionName, docPath: sectionValue });
+        const parsedEntry = parseNavEntry(
+          sectionName,
+          sectionValue,
+          'Inicio',
+          docItems,
+          docPathToSectionId
+        );
+        if (parsedEntry) {
+          inicioGroup.entries.push(parsedEntry);
+        }
         continue;
       }
 
-      if (Array.isArray(sectionValue)) {
-        for (const entry of sectionValue) {
-          if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
-            continue;
-          }
+      if (!Array.isArray(sectionValue)) {
+        continue;
+      }
 
-          for (const [label, docPath] of Object.entries(entry)) {
-            if (typeof docPath === 'string') {
-              items.push({ group: sectionName, label, docPath });
-            }
+      const sectionEntries = [];
+      for (const entry of sectionValue) {
+        if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
+          continue;
+        }
+
+        for (const [entryLabel, entryValue] of Object.entries(entry)) {
+          const parsedEntry = parseNavEntry(
+            entryLabel,
+            entryValue,
+            sectionName,
+            docItems,
+            docPathToSectionId
+          );
+          if (parsedEntry) {
+            sectionEntries.push(parsedEntry);
           }
         }
+      }
+
+      if (sectionEntries.length > 0) {
+        sidebarGroups.push({ groupName: sectionName, entries: sectionEntries });
       }
     }
   }
 
-  return items;
+  if (inicioGroup.entries.length > 0) {
+    sidebarGroups.unshift(inicioGroup);
+  }
+
+  return { docItems, docPathToSectionId, sidebarGroups };
+}
+
+function renderSidebarEntries(entries, activeState, treeState, level = 0) {
+  return entries
+    .map((entry) => {
+      if (entry.type === 'link') {
+        const isFirst = !activeState.assigned;
+        if (isFirst) {
+          activeState.assigned = true;
+        }
+
+        if (level > 0) {
+          const activeClass = isFirst ? ' active' : '';
+          return `<a class="nav-sub${activeClass}" href="#${entry.sectionId}">${escapeHtml(entry.label)}</a>`;
+        }
+
+        const activeClass = isFirst ? ' active' : '';
+        return `<a class="nav-item${activeClass}" href="#${entry.sectionId}"><span class="nav-icon">◆</span>${escapeHtml(entry.label)}</a>`;
+      }
+
+      if (entry.type === 'group') {
+        const groupId = `nav-group-${treeState.counter}`;
+        treeState.counter += 1;
+        const nestedHtml = renderSidebarEntries(entry.children || [], activeState, treeState, level + 1);
+        const parentClass = level > 0 ? 'nav-sub nav-sub-parent nav-group-toggle' : 'nav-item nav-item-parent nav-group-toggle';
+        const iconHtml = level > 0 ? '' : '<span class="nav-icon">◆</span>';
+        return `
+          <div class="nav-group">
+            <button type="button" class="${parentClass}" data-nav-toggle="${groupId}" aria-expanded="false">
+              ${iconHtml}
+              <span class="nav-label">${escapeHtml(entry.label)}</span>
+              <span class="nav-caret">▸</span>
+            </button>
+            <div class="nav-group-children" id="${groupId}" hidden>
+              ${nestedHtml}
+            </div>
+          </div>
+        `;
+      }
+
+      return '';
+    })
+    .filter(Boolean)
+    .join('\n      ');
 }
 
 async function build() {
   const mkdocsRaw = await fs.readFile(MKDOCS_CONFIG, 'utf-8');
   const mkdocsConfig = yaml.load(mkdocsRaw) || {};
-  const navItems = flattenNav(mkdocsConfig.nav || []).map((item) => ({
-    ...item,
-    docPath: normalizeDocPath(item.docPath),
-  }));
-  const docPathToSectionId = new Map(
-    navItems.map((item) => [
-      item.docPath,
-      slugify(item.docPath.replace(/\.md$/i, '').replace(/\/index$/i, '')),
-    ])
-  );
-
-  const sidebarGroups = new Map();
+  const { docItems, docPathToSectionId, sidebarGroups } = parseNav(mkdocsConfig.nav || []);
   const sectionsHtml = [];
 
   let heroTitle = 'Manual de uso';
@@ -528,8 +633,8 @@ async function build() {
   let heroDesc =
     'Guia completa para operar la plataforma: metricas, gemelos digitales, monitoreos, visor de datos, activos y configuracion.';
 
-  for (let idx = 0; idx < navItems.length; idx += 1) {
-    const { group, label, docPath } = navItems[idx];
+  for (let idx = 0; idx < docItems.length; idx += 1) {
+    const { group, label, docPath, sectionId } = docItems[idx];
     const absolutePath = path.join(DOCS_DIR, docPath);
 
     try {
@@ -553,13 +658,6 @@ async function build() {
       }
     }
 
-    const sectionId = slugify(docPath.replace(/\.md$/i, '').replace(/\/index$/i, ''));
-
-    if (!sidebarGroups.has(group)) {
-      sidebarGroups.set(group, []);
-    }
-    sidebarGroups.get(group).push({ label, sectionId });
-
     const bodyNoH1 = removeFirstH1(parsed.content);
     const bodyHtml = rewriteInternalDocLinks(
       renderMarkdownWithBlocks(bodyNoH1),
@@ -567,7 +665,7 @@ async function build() {
       docPathToSectionId
     );
     const icon = ICON_BY_GROUP[group] || '◆';
-    const dividerHtml = idx < navItems.length - 1 ? '<div class="divider"></div>' : '';
+    const dividerHtml = idx < docItems.length - 1 ? '<div class="divider"></div>' : '';
 
     sectionsHtml.push(`
     <section class="section" id="${sectionId}">
@@ -584,15 +682,11 @@ async function build() {
     ${dividerHtml}`);
   }
 
-  const navHtml = [...sidebarGroups.entries()]
-    .map(([groupName, entries]) => {
-      const links = entries
-        .map((entry, idx) => {
-          const activeClass = idx === 0 && groupName === 'Inicio' ? ' active' : '';
-          return `<a class="nav-item${activeClass}" href="#${entry.sectionId}"><span class="nav-icon">◆</span>${escapeHtml(entry.label)}</a>`;
-        })
-        .join('\n      ');
-
+  const activeState = { assigned: false };
+  const treeState = { counter: 0 };
+  const navHtml = sidebarGroups
+    .map(({ groupName, entries }) => {
+      const links = renderSidebarEntries(entries, activeState, treeState);
       return `
     <div class="nav-sec">
       <div class="nav-sec-title">${escapeHtml(groupName)}</div>
