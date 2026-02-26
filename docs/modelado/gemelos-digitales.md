@@ -1,79 +1,79 @@
 ---
 title: "Gemelos digitales"
 version: "v4"
-last_updated: "2026-02-23"
+last_updated: "2026-02-26"
 owner: "Product"
 status: "stable"
 ---
 
 # Gemelos digitales
 
-Los **Gemelos digitales** representan activos en una vista visual con datos en tiempo real provenientes de metricas, formulas y etiquetas.
+Los **Gemelos digitales** representan activos en una vista visual con datos en tiempo real provenientes de métricas, fórmulas y etiquetas.
 
 :::module-strip
-Gemelos digitales combina contexto visual y dato operativo para que los equipos interpreten mas rapido el estado de una instalacion, equipo o proceso.
+Gemelos digitales combina contexto visual y dato operativo para que los equipos interpreten más rápido el estado de una instalación, equipo o proceso.
 :::
 
-## Para que sirve este modulo
+## Para qué sirve este módulo
 
-Gemelos digitales conecta operacion y comunicacion visual en un mismo entorno.
+Gemelos digitales conecta operación y comunicación visual en un mismo entorno.
 
 Permite:
 
 - mostrar estado operativo de equipos e instalaciones,
-- dar contexto grafico a los datos,
-- y crear experiencias de consulta mas intuitivas para usuarios tecnicos y no tecnicos.
+- dar contexto gráfico a los datos,
+- y crear experiencias de consulta más intuitivas para usuarios técnicos y no técnicos.
 
-## Gestion del modulo
+## Gestión del módulo
 
 El listado principal permite revisar:
 
 - nombre,
 - estado (`borrador` o `publicado`),
-- fecha de creacion,
+- fecha de creación,
 - acciones disponibles.
 
 ## Acciones disponibles
 
 - **Ver**: abrir el gemelo operativo.
-- **Disenar**: editar variables y superposiciones.
+- **Diseñar**: editar variables y superposiciones.
 - **Info**: revisar metadatos e identificadores.
-- **Configuracion**: ajustar nombre, descripcion y layout.
+- **Configuración**: ajustar nombre, descripción y layout.
 - **Archivar**: ocultar sin eliminar.
-- **Publicar/Borrador**: controlar el estado de exposicion.
+- **Publicar/Borrador**: controlar el estado de exposición.
 
-## Diseno: flujo recomendado
+## Diseño: flujo recomendado
 
 :::steps
-1. **Configurar variables**: En **Disenar > Variables > + Nueva variable** definir nombre, origen de datos, extraccion, formato numerico y presentacion de UOM.
-2. **Configurar superposiciones**: En **Disenar > Superposiciones > + Nueva superposicion** definir tipo, visibilidad y tamano fijo.
-3. **Validar experiencia final**: Abrir **Ver** para revisar lectura, jerarquia visual y accion de overlays.
+1. **Configurar variables**: En **Diseñar > Variables > + Nueva variable** definir nombre, origen de datos, extracción, formato numérico y presentación de UOM.
+2. **Configurar superposiciones**: En **Diseñar > Superposiciones > + Nueva superposición** definir tipo, visibilidad y tamaño fijo.
+3. **Validar experiencia final**: Abrir **Ver** para revisar lectura, jerarquía visual y acción de overlays.
 :::
 
 Campos comunes de superposiciones:
 
-- tipo de superposicion,
+- tipo de superposición,
 - visibilidad predeterminada,
-- tamano fijo.
+- tamaño fijo.
 
 Tipos principales:
 
 - Capa de fondo
 - Contenedor
-- Accion clicable
+- Acción clicable
 - Texto enriquecido
 - Puntero
 - Control PLC
 
 ## Criterios de calidad recomendados
 
-- Priorizar legibilidad: menos elementos, mejor jerarquia.
+- Priorizar legibilidad: menos elementos, mejor jerarquía.
 - Evitar saturar la vista con indicadores redundantes.
-- Mantener consistencia de nombres entre metrica, variable y etiqueta.
+- Mantener consistencia de nombres entre métrica, variable y etiqueta.
 - Publicar solo gemelos validados con usuarios finales.
 
 ## Referencias
 
 - [Activos](../organizacion/activos.md)
-- [Metricas y formulas](../conceptos/metricas.md)
-- [Selector de metricas](../conceptos/selector.md)
+- [Métricas y fórmulas](../conceptos/metricas.md)
+- [Selector de métricas](../conceptos/selector.md)

@@ -1,30 +1,36 @@
 ---
 title: "Changelog"
 version: "v4"
-last_updated: "2026-02-25"
+last_updated: "2026-02-26"
 owner: "Product"
 status: "stable"
 ---
 
 # Changelog
 
+## 2026-02-26
+
+- Revisión ortográfica integral de la documentación en `/docs` (acentuación, tildes diacríticas y consistencia editorial en títulos y contenidos).
+- Alineación de textos visibles del sitio web generado (`scripts/generate_web_docs.mjs`) para mantener ortografía consistente con la fuente Markdown.
+- Ajustes de ortografía en `README.md` y navegación de `mkdocs.yml` (sin alterar rutas ni nombres de archivo).
+
 ## 2026-02-25
 
-- Incorporacion de la documentacion completa de **Boletines** en `configuracion/`:
+- Incorporación de la documentación completa de **Boletines** en `configuracion/`:
   - `boletines.md`
   - `boletines-bloques.md`
   - `boletines-grupos.md`
   - `boletines-plantillas.md`
-- Reestructuracion de `mkdocs.yml` para anidar Boletines dentro de un unico menu de navegacion.
-- Ajuste de `scripts/generate_web_docs.mjs` para soportar navegacion anidada en el sidebar web.
-- Actualizacion de `src/App.jsx` y `src/manual.css` para activar y estilizar enlaces anidados.
-- Mejora de usabilidad: submodulos de Boletines colapsados por defecto y toggle de expandir/colapsar al hacer clic en el nombre del grupo.
-- Incorporacion en `automatizacion/monitoreos.md` de un ejemplo practico de monitoreo de factor de potencia (`F. de Pot.`) con esquema visual web-only en tres pasos: Monitoreo, Regla y Disparador.
-- Regla editorial formalizada: cada cambio en documentacion debe registrar su entrada en este changelog con fecha (`YYYY-MM-DD`).
+- Reestructuración de `mkdocs.yml` para anidar Boletines dentro de un único menú de navegación.
+- Ajuste de `scripts/generate_web_docs.mjs` para soportar navegación anidada en el sidebar web.
+- Actualización de `src/App.jsx` y `src/manual.css` para activar y estilizar enlaces anidados.
+- Mejora de usabilidad: submódulos de Boletines colapsados por defecto y toggle de expandir/colapsar al hacer clic en el nombre del grupo.
+- Incorporación en `automatizacion/monitoreos.md` de un ejemplo práctico de monitoreo de factor de potencia (`F. de Pot.`) con esquema visual web-only en tres pasos: Monitoreo, Regla y Disparador.
+- Regla editorial formalizada: cada cambio en documentación debe registrar su entrada en este changelog con fecha (`YYYY-MM-DD`).
 
 ## 2026-02-23
 
-- Reorganizacion de documentacion por dominios (`conceptos`, `analisis`, `automatizacion`, `modelado`, `organizacion`, `configuracion`).
-- Incorporacion de frontmatter editorial en todos los documentos Markdown.
-- Actualizacion de `mkdocs.yml` para navegacion semantica.
+- Reorganización de documentación por dominios (`conceptos`, `analisis`, `automatizacion`, `modelado`, `organizacion`, `configuracion`).
+- Incorporación de frontmatter editorial en todos los documentos Markdown.
+- Actualización de `mkdocs.yml` para navegación semántica.
 - Ajuste de `scripts/sync_to_gdocs.py` para ignorar frontmatter y respetar orden de `nav`.

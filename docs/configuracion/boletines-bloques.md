@@ -1,38 +1,38 @@
 ---
 title: "Boletines - Bloques de contenido"
 version: "v4"
-last_updated: "2026-02-25"
+last_updated: "2026-02-26"
 owner: "Product"
 status: "stable"
 ---
 
 # Boletines - Bloques de contenido
 
-Los bloques determinan que informacion aparece en un boletin y en que formato se presenta.
-Cada bloque combina una plantilla visual con parametros de configuracion (titulos, metricas, ventanas temporales o HTML) y el orden final define la narrativa del envio.
+Los bloques determinan qué información aparece en un boletín y en qué formato se presenta.
+Cada bloque combina una plantilla visual con parámetros de configuración (títulos, métricas, ventanas temporales o HTML) y el orden final define la narrativa del envío.
 
-## Como funcionan los bloques
+## Cómo funcionan los bloques
 
 :::steps
-1. **Seleccion del tipo**: Al crear un bloque se elige el tipo desde catalogo y se carga su formulario especifico.
-2. **Configuracion**: Se completan campos segun tipo con validaciones de consistencia.
-3. **Descripcion interna**: Documenta proposito del bloque para otros editores.
-4. **Orden**: El drag and drop guarda la secuencia para la proxima ejecucion.
-5. **Previsualizacion**: Cada cambio se valida en vista previa con datos reales para una fecha elegida.
+1. **Selección del tipo**: Al crear un bloque se elige el tipo desde catálogo y se carga su formulario específico.
+2. **Configuración**: Se completan campos según tipo con validaciones de consistencia.
+3. **Descripción interna**: Documenta propósito del bloque para otros editores.
+4. **Orden**: El drag and drop guarda la secuencia para la próxima ejecución.
+5. **Previsualización**: Cada cambio se valida en vista previa con datos reales para una fecha elegida.
 :::
 
 ## Resumen de bloques disponibles
 
 | Bloque | Cuando usarlo |
 | --- | --- |
-| **Free Text** | Mensajes editoriales, disclaimers o contexto narrativo sin dependencia de metricas. |
-| **KPI Snapshot** | Resumen rapido de indicadores criticos y comparaciones. |
-| **Line Chart** | Evolucion temporal de una o varias metricas con resolucion alineada. |
-| **Bar Chart** | Comparaciones por periodo o entre metricas (incluye stacking). |
+| **Free Text** | Mensajes editoriales, disclaimers o contexto narrativo sin dependencia de métricas. |
+| **KPI Snapshot** | Resumen rápido de indicadores críticos y comparaciones. |
+| **Line Chart** | Evolución temporal de una o varias métricas con resolución alineada. |
+| **Bar Chart** | Comparaciones por periodo o entre métricas (incluye stacking). |
 
 ## Free Text
 
-**Proposito**: insertar HTML personalizado para introducciones, notas operativas o llamados a la accion.
+**Propósito**: insertar HTML personalizado para introducciones, notas operativas o llamados a la acción.
 
 Campos:
 
@@ -40,75 +40,75 @@ Campos:
 
 ## KPI Snapshot
 
-**Proposito**: responder rapidamente "como vamos" con tarjetas de indicadores agregados.
+**Propósito**: responder rápidamente "cómo vamos" con tarjetas de indicadores agregados.
 
 Campos:
 
-- **Titulo** (obligatorio)
-- **Subtitulo**
-- **Metricas** (obligatorio, multiple)
+- **Título** (obligatorio)
+- **Subtítulo**
+- **Métricas** (obligatorio, multiple)
 - **Ventana** (obligatorio): `P1D`, `P1W`, `P1M`, `P1Y`
-- **Usar ultimo periodo cerrado**
-- **Modo de comparacion**
+- **Usar último periodo cerrado**
+- **Modo de comparación**
 - **Mostrar sparkline**
 
 Casos de uso:
 
-- Consumo energetico vs metas.
-- Eficiencia operativa por linea o sede.
+- Consumo energético vs metas.
+- Eficiencia operativa por línea o sede.
 - Indicadores de mantenimiento con impacto en gasto diario.
 
 ## Line Chart
 
-**Proposito**: visualizar tendencias temporales sincronizadas en una resolucion comun.
+**Propósito**: visualizar tendencias temporales sincronizadas en una resolución común.
 
 Campos:
 
-- **Titulo** (obligatorio)
-- **Subtitulo**
-- **Metricas** (obligatorio, multiple, misma resolucion)
+- **Título** (obligatorio)
+- **Subtítulo**
+- **Métricas** (obligatorio, multiple, misma resolución)
 - **Ventana** (obligatorio)
-- **Usar ultimo periodo cerrado**
-- **Habilitar comparacion**
-- **Modo de comparacion**
+- **Usar último periodo cerrado**
+- **Habilitar comparación**
+- **Modo de comparación**
 - **Mostrar leyenda**
 - **Mostrar puntos**
 
 Casos de uso:
 
 - Tendencias de consumo por planta.
-- Generacion vs demanda.
-- Comparacion de estacionalidad contra ano anterior.
+- Generación vs demanda.
+- Comparación de estacionalidad contra año anterior.
 
 ## Bar Chart
 
-**Proposito**: comparar magnitudes por periodo o por metrica individual.
+**Propósito**: comparar magnitudes por periodo o por métrica individual.
 
 Campos:
 
-- **Titulo** (obligatorio)
-- **Subtitulo**
-- **Metricas** (obligatorio)
+- **Título** (obligatorio)
+- **Subtítulo**
+- **Métricas** (obligatorio)
 - **Ventana** (obligatorio)
-- **Usar ultimo periodo cerrado**
-- **Modo de comparacion**
+- **Usar último periodo cerrado**
+- **Modo de comparación**
 - **Modo de barras** (obligatorio): `time`, `stacked_time`, `aggregate_per_metric`
-- **Bucket** (opcional): hora, dia, semana, mes
+- **Bucket** (opcional): hora, día, semana, mes
 
 Casos de uso:
 
 - Comparativas por turno/sede.
-- Distribucion de fuentes energeticas.
-- Ranking de activos con desvio.
+- Distribución de fuentes energéticas.
+- Ranking de activos con desvío.
 
-## Buenas practicas al combinar bloques
+## Buenas prácticas al combinar bloques
 
 - Alternar bloques narrativos y cuantitativos para mejorar legibilidad.
-- Documentar dependencias en descripcion interna del bloque.
+- Documentar dependencias en descripción interna del bloque.
 - Mantener 5-6 bloques para evitar fatiga de lectura.
 - Para escenarios excepcionales, duplicar boletin en lugar de editar sobre la marcha.
 
-## Proximos pasos
+## Próximos pasos
 
 - [Boletines](./boletines.md)
 - [Boletines - Plantillas](./boletines-plantillas.md)

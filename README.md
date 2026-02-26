@@ -4,10 +4,10 @@ Repositorio docs-first para Clickie.
 
 ## Arquitectura
 
-- **Fuente unica de verdad**: Markdown en `/docs`.
-- **Salida documental**: MkDocs compila la documentacion a `/site`.
+- **Fuente única de verdad**: Markdown en `/docs`.
+- **Salida documental**: MkDocs compila la documentación a `/site`.
 - **Salida editorial externa**: `scripts/sync_to_gdocs.py` publica el contenido Markdown en Google Docs.
-- **Sitio publico**: GitHub Pages despliega la app React/Vite del repositorio, con contenido generado desde `/docs` mediante `scripts/generate_web_docs.mjs`.
+- **Sitio público**: GitHub Pages despliega la app React/Vite del repositorio, con contenido generado desde `/docs` mediante `scripts/generate_web_docs.mjs`.
 
 > Google Doc es salida generada: no se edita manualmente como fuente primaria.
 
@@ -50,7 +50,7 @@ Cada archivo Markdown debe iniciar con:
 
 ```yaml
 ---
-title: "<Titulo humano>"
+title: "<Título humano>"
 version: "v4"
 last_updated: "2026-02-23"
 owner: "Product"
@@ -64,26 +64,26 @@ Reglas:
 - `last_updated` en formato `YYYY-MM-DD`.
 - `status`: `stable`, `draft` o `deprecated`.
 
-## Bloques visuales para el sitio publico
+## Bloques visuales para el sitio público
 
-Para enriquecer el diseno web sin perder Markdown como fuente, se pueden usar directivas `:::...` dentro de `/docs`.
+Para enriquecer el diseño web sin perder Markdown como fuente, se pueden usar directivas `:::...` dentro de `/docs`.
 
 Ejemplos:
 
 ```md
 :::module-strip
-Texto introductorio del modulo.
+Texto introductorio del módulo.
 :::
 
 :::steps
-1. **Paso 1**: descripcion.
-2. **Paso 2**: descripcion.
+1. **Paso 1**: descripción.
+2. **Paso 2**: descripción.
 :::
 
 :::learning-path title="Camino de aprendizaje recomendado"
-1. **Base**: descripcion.
-2. **Operacion**: descripcion.
-3. **Escalado**: descripcion.
+1. **Base**: descripción.
+2. **Operación**: descripción.
+3. **Escalado**: descripción.
 :::
 ```
 
@@ -101,7 +101,7 @@ Directivas soportadas actualmente:
 Notas:
 
 - `scripts/generate_web_docs.mjs` interpreta estas directivas para la web React.
-- `scripts/sync_to_gdocs.py` elimina automaticamente solo los wrappers `:::` y conserva el contenido para Google Docs.
+- `scripts/sync_to_gdocs.py` elimina automáticamente solo los wrappers `:::` y conserva el contenido para Google Docs.
 
 ## Desarrollo local
 
@@ -119,7 +119,7 @@ pip install -r requirements.txt
 mkdocs serve
 ```
 
-### 3. Build de validacion
+### 3. Build de validación
 
 ```bash
 mkdocs build --strict
@@ -162,7 +162,7 @@ Secrets requeridos:
 - `GOOGLE_DOC_ID`
 - `GOOGLE_SERVICE_ACCOUNT_JSON`
 
-### Workflow del sitio publico
+### Workflow del sitio público
 
 Archivo: `.github/workflows/site_deploy.yml`
 
@@ -172,15 +172,15 @@ Archivo: `.github/workflows/site_deploy.yml`
   2. Build Vite
   3. Deploy a GitHub Pages
 
-## Regla de reflejo en sitio publico
+## Regla de reflejo en sitio público
 
-Los cambios en `/docs` se reflejan en la web publica porque el workflow del sitio ejecuta `scripts/generate_web_docs.mjs` antes del build de React.
+Los cambios en `/docs` se reflejan en la web pública porque el workflow del sitio ejecuta `scripts/generate_web_docs.mjs` antes del build de React.
 
-## Como agregar nueva documentacion
+## Como agregar nueva documentación
 
-1. Crear el archivo en la subcarpeta semantica correcta dentro de `/docs`.
+1. Crear el archivo en la subcarpeta semántica correcta dentro de `/docs`.
 2. Agregar frontmatter obligatorio y H1 consistente.
-3. Enlazar el documento en `mkdocs.yml` dentro de la seccion correspondiente.
+3. Enlazar el documento en `mkdocs.yml` dentro de la sección correspondiente.
 4. Registrar el cambio en `/docs/changelog.md` con fecha (`YYYY-MM-DD`) y resumen del ajuste.
 5. Verificar `mkdocs build --strict`.
 6. Hacer push a `main`.

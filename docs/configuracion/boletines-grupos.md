@@ -1,33 +1,33 @@
 ---
 title: "Boletines - Grupos de destinatarios"
 version: "v4"
-last_updated: "2026-02-25"
+last_updated: "2026-02-26"
 owner: "Product"
 status: "stable"
 ---
 
 # Boletines - Grupos de destinatarios
 
-Los grupos de destinatarios reunen personas que recibiran boletines en conjunto.
+Los grupos de destinatarios reúnen personas que recibirán boletines en conjunto.
 Funcionan como contenedores reutilizables para segmentar equipos y cohorts de usuarios con objetivos operativos comunes.
 
 :::module-strip
 Usar grupos aporta consistencia, reduce trabajo manual y mejora gobernanza cuando los boletines forman parte de acuerdos de servicio o reportes regulatorios.
 :::
 
-## Por que usar grupos en lugar de destinatarios sueltos
+## Por qué usar grupos en lugar de destinatarios sueltos
 
-- Cada boletin hereda automaticamente cambios del grupo.
-- Se reutilizan en multiples boletines e idiomas.
-- Permiten delegar gestion de contactos con permisos limitados.
+- Cada boletín hereda automáticamente cambios del grupo.
+- Se reutilizan en múltiples boletines e idiomas.
+- Permiten delegar gestión de contactos con permisos limitados.
 - El indicador de uso evita cambios con impacto no deseado en envios activos.
-- Garantizan que solo usuarios vigentes de la plataforma reciban comunicacion.
+- Garantizan que solo usuarios vigentes de la plataforma reciban comunicación.
 
 ## Acceso y listado
 
-- Ruta: **Configuracion -> Boletines -> Grupos de destinatarios**.
-- Tabla con busqueda, orden por fecha y acciones masivas.
-- **Crear grupo** solicita nombre y descripcion.
+- Ruta: **Configuración -> Boletines -> Grupos de destinatarios**.
+- Tabla con búsqueda, orden por fecha y acciones masivas.
+- **Crear grupo** solicita nombre y descripción.
 - Columnas de miembros y uso ayudan a priorizar mantenimiento.
 
 ## Detalle de un grupo
@@ -35,40 +35,40 @@ Usar grupos aporta consistencia, reduce trabajo manual y mejora gobernanza cuand
 Encabezado con:
 
 - identificador interno,
-- descripcion funcional,
+- descripción funcional,
 - resumen de miembros,
 - cantidad de boletines que lo consumen,
-- acciones de edicion/eliminacion segun permisos.
+- acciones de edición/eliminación según permisos.
 
-## Pestana Resumen
+## Pestaña Resumen
 
 - Tarjetas con totales de miembros y boletines vinculados.
-- Fecha de ultima actualizacion.
-- Atajos para crear boletin nuevo o duplicar grupo.
+- Fecha de última actualización.
+- Atajos para crear boletín nuevo o duplicar grupo.
 
-## Pestana Uso en boletines
+## Pestaña Uso en boletines
 
 - Tabla de solo lectura con boletines que usan el grupo.
-- Estado y proxima ejecucion para evaluar impacto antes de editar audiencia.
+- Estado y próxima ejecución para evaluar impacto antes de editar audiencia.
 
-## Pestana Miembros
+## Pestaña Miembros
 
-- Tabla de miembros por fecha de incorporacion.
+- Tabla de miembros por fecha de incorporación.
 - **Agregar miembro** para vincular usuarios habilitados.
 - Acciones por fila para pausar o quitar miembros.
 - Contador de idiomas para revisar compatibilidad de plantillas.
 
-## Pestana Configuracion
+## Pestaña Configuración
 
-- Edicion de nombre y descripcion.
-- Registro de auditoria (ultimo editor y fecha).
-- Cambios se reflejan automaticamente en boletines que reutilizan el grupo.
+- Edición de nombre y descripción.
+- Registro de auditoría (último editor y fecha).
+- Cambios se reflejan automáticamente en boletines que reutilizan el grupo.
 
-## Mejores practicas
+## Mejores prácticas
 
 - Usar nombres de grupo descriptivos (ejemplo: "Equipo Operaciones LATAM").
-- Revisar periodicamente indicador de uso y limpiar grupos obsoletos.
-- Preferir administracion centralizada desde Grupos para sostener consistencia.
+- Revisar periódicamente indicador de uso y limpiar grupos obsoletos.
+- Preferir administración centralizada desde Grupos para sostener consistencia.
 - Duplicar un grupo antes de pruebas para no afectar audiencias activas.
 
 ## Referencias

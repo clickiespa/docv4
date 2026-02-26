@@ -1,4 +1,4 @@
-site_name: Documentacion Clickie
+site_name: Documentación Clickie
 site_description: Manual operativo de Clickie generado desde Markdown
 site_url: https://clickiespa.github.io/docv4/
 docs_dir: docs
@@ -11,20 +11,20 @@ theme:
 nav:
   - Inicio: index.md
   - Conceptos:
-      - Introduccion: conceptos/index.md
-      - Metricas y formulas: conceptos/metricas.md
-      - Selector de metricas: conceptos/selector.md
-  - Analisis:
+      - Introducción: conceptos/index.md
+      - Métricas y fórmulas: conceptos/metricas.md
+      - Selector de métricas: conceptos/selector.md
+  - Análisis:
       - Visor de datos: analisis/visor-datos.md
       - Paneles y reportes: analisis/paneles.md
-  - Automatizacion:
+  - Automatización:
       - Monitoreos: automatizacion/monitoreos.md
   - Modelado:
       - Gemelos digitales: modelado/gemelos-digitales.md
-  - Organizacion:
+  - Organización:
       - Activos: organizacion/activos.md
-  - Configuracion:
-      - Configuracion de cuenta: configuracion/cuenta.md
+  - Configuración:
+      - Configuración de cuenta: configuracion/cuenta.md
       - Datos y fuentes: configuracion/datos-y-fuentes.md
       - Boletines:
           - Vista general: configuracion/boletines.md

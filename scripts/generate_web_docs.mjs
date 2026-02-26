@@ -12,11 +12,11 @@ const OUTPUT_FILE = path.join(ROOT, 'src', 'manual.generated.html');
 const ICON_BY_GROUP = {
   Inicio: '◆',
   Conceptos: '◆',
-  Analisis: '▦',
-  Automatizacion: '◉',
+  Análisis: '▦',
+  Automatización: '◉',
   Modelado: '✦',
-  Organizacion: '◈',
-  Configuracion: '⚙',
+  Organización: '◈',
+  Configuración: '⚙',
   Changelog: '≡',
 };
 
@@ -209,7 +209,7 @@ function getInterpolationExamples() {
     {
       key: 'continuidad',
       title: 'Continuidad',
-      description: 'Conserva el ultimo valor conocido hasta que aparece un nuevo dato valido.',
+      description: 'Conserva el último valor conocido hasta que aparece un nuevo dato válido.',
       svg: `
         <svg viewBox="0 0 220 84" aria-hidden="true" focusable="false">
           <polyline points="10,58 52,30 52,30 120,30 120,30 162,44 210,20" class="interp-line known"/>
@@ -435,7 +435,7 @@ function renderDirective(type, args, body) {
 
     return `
       <div class="interp-block">
-        <div class="interp-title">Ejemplos graficos de interpolacion</div>
+        <div class="interp-title">Ejemplos gráficos de interpolación</div>
         <div class="interp-grid">${cardsHtml}</div>
       </div>
     `;
@@ -463,9 +463,9 @@ function renderDirective(type, args, body) {
             <div class="mon-step-name">Regla</div>
             <ul>
               <li><strong>Nombre:</strong> ${escapeHtml(example.metricName)}</li>
-              <li><strong>Metodo:</strong> Menor que</li>
-              <li><strong>Limite:</strong> ${escapeHtml(example.thresholdValue)}</li>
-              <li><strong>Umbral:</strong> ${escapeHtml(example.breachPercent)} de puntos bajo limite</li>
+              <li><strong>Método:</strong> Menor que</li>
+              <li><strong>Límite:</strong> ${escapeHtml(example.thresholdValue)}</li>
+              <li><strong>Umbral:</strong> ${escapeHtml(example.breachPercent)} de puntos bajo límite</li>
             </ul>
           </article>
 
@@ -473,9 +473,9 @@ function renderDirective(type, args, body) {
             <div class="mon-step-kicker">Paso 3</div>
             <div class="mon-step-name">Disparador</div>
             <ul>
-              <li><strong>Tipo:</strong> Comunicacion</li>
+              <li><strong>Tipo:</strong> Comunicación</li>
               <li><strong>Estado:</strong> ${escapeHtml(example.triggerState)}</li>
-              <li><strong>Patron:</strong> Horario operativo o todo el dia</li>
+              <li><strong>Patrón:</strong> Horario operativo o todo el día</li>
               <li><strong>Destino:</strong> Colaboradores responsables</li>
             </ul>
           </article>
@@ -483,14 +483,14 @@ function renderDirective(type, args, body) {
 
         <div class="mon-chart-wrap">
           <div class="mon-chart-legend">
-            <span class="legend-item"><span class="legend-dot normal"></span> Valor dentro de limite</span>
+            <span class="legend-item"><span class="legend-dot normal"></span> Valor dentro de límite</span>
             <span class="legend-item"><span class="legend-dot breach"></span> Valor por debajo de 0.93</span>
             <span class="legend-item"><span class="legend-line"></span> Evaluacion cada 5 min en ventana de 10 min</span>
           </div>
           <div class="mon-chart">${example.svg}</div>
           <p class="mon-caption">
-            Si en los ultimos 10 minutos al menos el 10% de los puntos de <strong>${escapeHtml(example.metricName)}</strong> cae por debajo de <strong>${escapeHtml(example.thresholdValue)}</strong>,
-            el monitoreo pasa a estado <strong>${escapeHtml(example.triggerState)}</strong> y ejecuta comunicacion.
+            Si en los últimos 10 minutos al menos el 10% de los puntos de <strong>${escapeHtml(example.metricName)}</strong> cae por debajo de <strong>${escapeHtml(example.thresholdValue)}</strong>,
+            el monitoreo pasa a estado <strong>${escapeHtml(example.triggerState)}</strong> y ejecuta comunicación.
           </p>
         </div>
       </div>
@@ -722,7 +722,7 @@ async function build() {
   let heroTitle = 'Manual de uso';
   const heroEmphasis = 'Clickie';
   let heroDesc =
-    'Guia completa para operar la plataforma: metricas, gemelos digitales, monitoreos, visor de datos, activos y configuracion.';
+    'Guía completa para operar la plataforma: métricas, gemelos digitales, monitoreos, visor de datos, activos y configuración.';
 
   for (let idx = 0; idx < docItems.length; idx += 1) {
     const { group, label, docPath, sectionId } = docItems[idx];
@@ -800,7 +800,7 @@ async function build() {
     <input class="top-search-input" type="search" placeholder="Buscar contenido del manual..." autocomplete="off" aria-label="Buscar contenido del manual" />
     <button class="top-search-btn" type="submit">Buscar</button>
     <div class="top-search-dropdown" hidden>
-      <ul class="top-search-suggestions" role="listbox" aria-label="Sugerencias de busqueda"></ul>
+      <ul class="top-search-suggestions" role="listbox" aria-label="Sugerencias de búsqueda"></ul>
     </div>
   </form>
 
@@ -814,7 +814,7 @@ async function build() {
 
 <main class="main">
   <header class="hero" id="inicio">
-    <div class="hero-tag">◆ Documentacion oficial · Plataforma Clickie</div>
+    <div class="hero-tag">◆ Documentación oficial · Plataforma Clickie</div>
     <h1>${escapeHtml(heroTitle)}<br><em>${escapeHtml(heroEmphasis)}</em></h1>
     <p class="hero-desc">${escapeHtml(heroDesc)}</p>
     <div class="hero-version">v4 · Plataforma Clickie</div>

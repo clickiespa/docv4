@@ -1,14 +1,14 @@
 ---
 title: "Datos y fuentes"
 version: "v4"
-last_updated: "2026-02-23"
+last_updated: "2026-02-26"
 owner: "Product"
 status: "stable"
 ---
 
 # Datos y fuentes
 
-La seccion **Datos y fuentes** concentra la gestion de origenes de datos para la cuenta.
+La sección **Datos y fuentes** concentra la gestión de orígenes de datos para la cuenta.
 
 ## Instalaciones
 
@@ -17,7 +17,7 @@ Listado de instalaciones con:
 - Nombre
 - Activo asociado
 - Dispositivo asociado
-- Fecha de creacion
+- Fecha de creación
 - Acciones disponibles
 
 ## Dispositivos
@@ -26,10 +26,10 @@ Inventario de dispositivos con:
 
 - Nombre
 - Tipo
-- Fecha de creacion
+- Fecha de creación
 - Acciones disponibles
 
 ## Referencias
 
-- [Configuracion de cuenta](./cuenta.md)
-- [Metricas](../conceptos/metricas.md)
+- [Configuración de cuenta](./cuenta.md)
+- [Métricas](../conceptos/metricas.md)

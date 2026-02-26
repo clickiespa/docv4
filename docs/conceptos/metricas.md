@@ -1,68 +1,68 @@
 ---
-title: "Metricas y formulas"
+title: "Métricas y fórmulas"
 version: "v4"
-last_updated: "2026-02-23"
+last_updated: "2026-02-26"
 owner: "Product"
 status: "stable"
 ---
 
-# Metricas y formulas
+# Métricas y fórmulas
 
-## Que es una metrica
+## Qué es una métrica
 
-Una metrica en Clickie es una serie temporal de valores asociados a una variable del mundo real.
+Una métrica en Clickie es una serie temporal de valores asociados a una variable del mundo real.
 
 Ejemplos comunes:
 
-- Consumo de energia
+- Consumo de energía
 - Temperatura
 - Caudal de agua
 - Flujo de personas
 - Estado de equipos
 
-## Modulo "Mis metricas"
+## Módulo "Mis métricas"
 
-### Todas las metricas
+### Todas las métricas
 
 El listado principal muestra:
 
 - Nombre
 - Unidad de medida (UOM)
 - Fuente
-- Fecha de creacion
+- Fecha de creación
 - Acciones disponibles
 
-### Detalle de metrica
+### Detalle de métrica
 
 Desde el detalle se gestionan:
 
-- Identificacion y descripcion
-- Configuracion de origen de datos
-- Resolucion y agregacion
+- Identificación y descripción
+- Configuración de origen de datos
+- Resolución y agregación
 - Etiquetas y relaciones con activos
 
-## Selector de metricas
+## Selector de métricas
 
-El selector es transversal y permite reutilizar una metrica sin alterar su dato original.
+El selector es transversal y permite reutilizar una métrica sin alterar su dato original.
 
 ### Capacidades
 
-- Personalizar visualmente una metrica por contexto
-- Crear metricas virtuales por etiqueta
-- Construir metricas calculadas con formulas
+- Personalizar visualmente una métrica por contexto
+- Crear métricas virtuales por etiqueta
+- Construir métricas calculadas con fórmulas
 
-## Formulas de calculo
+## Fórmulas de cálculo
 
-Se usan IDs de metricas en formato `@numero`.
+Se usan IDs de métricas en formato `@número`.
 
 ### Ejemplos
 
-| Formula | Descripcion |
+| Fórmula | Descripción |
 | --- | --- |
 | `@111-@111[-1]` | Diferencia contra lectura anterior |
-| `(@222+@333)/2` | Promedio de dos metricas |
-| `@444/1000` | Conversion de unidad |
-| `pow(@555,2)/@666` | Operacion matematica compuesta |
+| `(@222+@333)/2` | Promedio de dos métricas |
+| `@444/1000` | Conversión de unidad |
+| `pow(@555,2)/@666` | Operación matemática compuesta |
 | `(@777>5000)?5000:@777` | Limitador por umbral |
 
 ### Funciones frecuentes
@@ -75,7 +75,7 @@ Se usan IDs de metricas en formato `@numero`.
 
 ### Operadores frecuentes
 
-- Aritmeticos: `+`, `-`, `*`, `/`
-- Comparacion: `>`, `<`, `>=`, `<=`, `==`, `!=`
-- Logicos: `&&`, `||`
+- Aritméticos: `+`, `-`, `*`, `/`
+- Comparación: `>`, `<`, `>=`, `<=`, `==`, `!=`
+- Lógicos: `&&`, `||`
 - Condicional: `cond?A:B`

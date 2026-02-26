@@ -1,103 +1,103 @@
 ---
 title: "Boletines"
 version: "v4"
-last_updated: "2026-02-25"
+last_updated: "2026-02-26"
 owner: "Product"
 status: "stable"
 ---
 
 # Boletines
 
-Los boletines permiten compartir informacion periodica con audiencias definidas dentro de la plataforma.
-Cada envio combina contenido dinamico basado en metricas con bloques editoriales y se distribuye automaticamente segun la programacion indicada.
+Los boletines permiten compartir información periódica con audiencias definidas dentro de la plataforma.
+Cada envío combina contenido dinámico basado en métricas con bloques editoriales y se distribuye automáticamente según la programación indicada.
 
 :::module-strip
-Boletines esta pensado para automatizar reportes recurrentes, reducir tareas manuales y mantener equipos y stakeholders alineados con la evolucion de datos.
+Boletines está pensado para automatizar reportes recurrentes, reducir tareas manuales y mantener equipos y stakeholders alineados con la evolución de datos.
 :::
 
-Cada boletin coordina tres componentes:
+Cada boletín coordina tres componentes:
 
 - **Destinatarios**: usuarios individuales o grupos reutilizables de la plataforma.
-- **Plantilla**: estructura visual y estilos comunes para todos los envios.
+- **Plantilla**: estructura visual y estilos comunes para todos los envíos.
 - **Bloques de contenido**: componentes ordenables para texto, KPIs y graficos.
 
-## Cuando crear un boletin
+## Cuándo crear un boletín
 
-- Cuando necesitas comunicar resultados periodicos (diarios, semanales o mensuales) sin exportaciones manuales.
-- Cuando quieres distribuir paneles o metricas clave a una audiencia acotada y mantener historial de envio.
+- Cuando necesitas comunicar resultados periódicos (diarios, semanales o mensuales) sin exportaciones manuales.
+- Cuando quieres distribuir paneles o métricas clave a una audiencia acotada y mantener historial de envío.
 
 ## Acceso y vista general
 
-- Ruta: **Configuracion -> Boletines -> Boletines**.
-- La tabla principal incluye busqueda global, filtros por plantilla y acciones masivas.
-- El boton **Crear boletin** abre un formulario inicial con nombre y descripcion.
-- El listado muestra estado (Activo/Pausado), plantilla y senales de salud para detectar boletines detenidos.
+- Ruta: **Configuración -> Boletines -> Boletines**.
+- La tabla principal incluye búsqueda global, filtros por plantilla y acciones masivas.
+- El botón **Crear boletín** abre un formulario inicial con nombre y descripción.
+- El listado muestra estado (Activo/Pausado), plantilla y señales de salud para detectar boletines detenidos.
 
-## Estructura de la ficha del boletin
+## Estructura de la ficha del boletín
 
 El encabezado del detalle muestra:
 
-- estado y accion rapida para activar o pausar,
-- identificador interno, plantilla, patron horario y zona horaria,
-- resumen de envios (ultimo/proximo disparo y cantidad de destinatarios),
-- acciones contextuales segun permisos (editar, duplicar, eliminar, enviar manualmente).
+- estado y acción rápida para activar o pausar,
+- identificador interno, plantilla, patrón horario y zona horaria,
+- resumen de envíos (último/próximo disparo y cantidad de destinatarios),
+- acciones contextuales según permisos (editar, duplicar, eliminar, enviar manualmente).
 
-## Pestana Resumen
+## Pestaña Resumen
 
-- Historial de envios con totales enviados/fallidos y tasa de entrega.
+- Historial de envíos con totales enviados/fallidos y tasa de entrega.
 - Direcciones suprimidas para identificar rebotes o bajas.
-- Cronologia de ejecuciones con proximos disparos y eventos completados.
+- Cronología de ejecuciones con próximos disparos y eventos completados.
 
-## Pestana Diseno
+## Pestaña Diseño
 
-- Columna de **bloques de contenido** con orden, edicion y eliminacion.
+- Columna de **bloques de contenido** con orden, edición y eliminación.
 - **Vista previa** interactiva con fecha de referencia para validar variables relativas.
-- Para perfiles administrativos: modo depuracion y accion **Enviar ahora**.
+- Para perfiles administrativos: modo depuración y acción **Enviar ahora**.
 
-## Pestana Destinatarios
+## Pestaña Destinatarios
 
 - Tabla de audiencia por tipo (usuario o grupo).
 - Formulario de alta con selector por tipo de destinatario.
 - Soporte de filtros por cuenta/idioma para reutilizar grupos.
 - Solo se admiten miembros activos de la plataforma.
 
-## Pestana Historial
+## Pestaña Historial
 
 - Lista de despachos ejecutados con estado y marca temporal.
 - Vista de detalle por despacho para revisar destinatarios y diagnosticar fallos.
 
-## Pestana Configuracion
+## Pestaña Configuración
 
-- Formulario completo: nombre, descripcion, plantilla, patron horario y zona horaria.
-- Cambios de patron/horario recalculan proximos disparos.
-- Si el boletin esta pausado, no se ejecuta ninguna programacion.
+- Formulario completo: nombre, descripción, plantilla, patrón horario y zona horaria.
+- Cambios de patrón/horario recalculan próximos disparos.
+- Si el boletín está pausado, no se ejecuta ninguna programación.
 
 ## Organizacion recomendada de contenido
 
 :::steps
 1. **Abrir contexto**: Comenzar con un bloque narrativo (Free Text) que explique objetivo y alcance.
 2. **Priorizar datos**: Ubicar KPIs y tendencias por importancia de negocio.
-3. **Cerrar con accion**: Agregar recordatorios operativos o proximos pasos.
-4. **Validar antes de enviar**: Usar vista previa y modo depuracion para revisar calculos y consistencia visual.
+3. **Cerrar con acción**: Agregar recordatorios operativos o próximos pasos.
+4. **Validar antes de enviar**: Usar vista previa y modo depuración para revisar cálculos y consistencia visual.
 :::
 
 ## Bloques disponibles
 
-Catalogo actual:
+Catálogo actual:
 
 - **Free Text**
 - **KPI Snapshot**
 - **Line Chart**
 - **Bar Chart**
 
-Para detalle de parametros y casos de uso, revisar [Boletines - Bloques de contenido](./boletines-bloques.md).
+Para detalle de parámetros y casos de uso, revisar [Boletines - Bloques de contenido](./boletines-bloques.md).
 
-## Buenas practicas operativas
+## Buenas prácticas operativas
 
 - Mantener solo bloques necesarios para facilitar lectura.
 - Coordinar cambios de plantilla con administradores de estilos.
-- Revisar rebotes periodicamente para limpiar audiencias inactivas.
-- Documentar objetivo del boletin en descripcion para facilitar reutilizacion.
+- Revisar rebotes periódicamente para limpiar audiencias inactivas.
+- Documentar objetivo del boletín en descripción para facilitar reutilización.
 
 ## Recursos complementarios
 

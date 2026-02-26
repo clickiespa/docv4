@@ -1,16 +1,16 @@
 ---
-title: "Configuracion de cuenta"
+title: "Configuración de cuenta"
 version: "v4"
-last_updated: "2026-02-23"
+last_updated: "2026-02-26"
 owner: "Product"
 status: "stable"
 ---
 
-# Configuracion de cuenta
+# Configuración de cuenta
 
-La seccion de **Configuracion de cuenta** centraliza la administracion de colaboradores, datos de cuenta y apariencia.
+La sección de **Configuración de cuenta** centraliza la administración de colaboradores, datos de cuenta y apariencia.
 
-## Gestion de cuenta
+## Gestión de cuenta
 
 Incluye:
 
@@ -26,9 +26,9 @@ Permite ajustar:
 - Nombre del sitio
 - Texto descriptivo
 - Encabezado de bienvenida
-- Icono de pestana
+- Icono de pestaña
 - Subdominio de Clickie
-- Logo de autenticacion e imagen de autenticacion
+- Logo de autenticación e imagen de autenticación
 - Logo interno
 - Color de marca
 
