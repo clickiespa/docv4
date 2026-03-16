@@ -5,7 +5,7 @@ Welcome to the API v4 documentation hub.
 This page is designed as a client-facing guide so you can quickly find the right documentation file, understand where each endpoint group is documented, and navigate the platform with confidence.
 
 ## Quick references
-- [Postman collection (production v4)](../postman/lambda-api-v4.postman_collection.json) — executable request examples aligned with the `/v4` API surface.
+- [Postman collection (production v4)](lambda-api-v4-v4.postman_collection.json) — executable request examples aligned with the `/v4` API surface.
 
 ## Recommended reading order
 1. Start here: [Getting Started with v4](Getting_started_with_v4/getting_started.md)
