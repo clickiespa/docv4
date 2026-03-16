@@ -1,12 +1,17 @@
 ---
 title: "Changelog"
 version: "v4"
-last_updated: "2026-02-26"
+last_updated: "2026-03-16"
 owner: "Product"
 status: "stable"
 ---
 
 # Changelog
+
+## 2026-03-16
+
+- Se incorporó la sección **API v4** en la navegación de `mkdocs.yml`, incluyendo estructura anidada por dominios de endpoint.
+- Se habilitó la visibilidad de `docs/api/**` tanto en MkDocs como en la web pública generada por React/Vite.
 
 ## 2026-02-26
 

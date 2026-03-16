@@ -31,6 +31,61 @@ nav:
           - Bloques de contenido: configuracion/boletines-bloques.md
           - Grupos de destinatarios: configuracion/boletines-grupos.md
           - Plantillas: configuracion/boletines-plantillas.md
+  - API v4:
+      - Introducción API: api/README.md
+      - Getting Started: api/Getting_started_with_v4/getting_started.md
+      - Endpoints:
+          - Assets: api/Assets/assets.md
+          - Collaborators: api/Collaborators/collaborators.md
+          - Dashboards:
+              - Dashboards: api/Dashboards/dashboards.md
+              - Widgets: api/Dashboards/widgets.md
+          - Devices:
+              - Devices: api/Devices/devices.md
+              - Device Models: api/Devices/device_models.md
+          - Entities: api/Entities/eav_entities.md
+          - Filters: api/Filters/filters.md
+          - Forms: api/Forms/forms.md
+          - Global Resources:
+              - Icons: api/Global_resources/icons.md
+              - Languages: api/Global_resources/languages.md
+              - Methods: api/Global_resources/methods.md
+              - Templates: api/Global_resources/templates.md
+              - Time Patterns: api/Global_resources/time_patterns.md
+              - Time Zones: api/Global_resources/time_zones.md
+          - Metrics and Data:
+              - Metrics: api/Metrics_and_data/metrics.md
+              - Data Ingestion and Deletion: api/Metrics_and_data/data_ingestion_and_deletion.md
+              - Legacy Data Notes: api/Metrics_and_data/data_no_usar.md
+          - Monitors:
+              - Monitors: api/Monitors/monitors.md
+              - Ground Monitor: api/Monitors/ground_monitor.md
+          - Scope:
+              - Accounts: api/Scope/accounts.md
+              - Clearances: api/Scope/clearances.md
+              - Environments: api/Scope/environments.md
+              - Relationships: api/Scope/relationships.md
+              - Roles: api/Scope/roles.md
+          - Search:
+              - Metrics Search: api/Search/Metrics.md
+          - Setups:
+              - Setups: api/Setups/setups.md
+              - Setup Metrics: api/Setups/setup_metrics.md
+              - Device Setups: api/Setups/device_setups.md
+              - Inventories: api/Setups/inventories.md
+          - Types:
+              - Types: api/Types/types.md
+              - Asset Categories: api/Types/asset_categories.md
+              - Metric Events: api/Types/metric_events.md
+          - UOMs: api/Uoms/uoms.md
+          - Gateways:
+              - Health: api/gateways/health.md
+              - Devices: api/gateways/devices.md
+              - Actions: api/gateways/actions.md
+              - Jobs: api/gateways/jobs.md
+              - Logs: api/gateways/logs.md
+              - Gateway Changelog: api/gateways/changelog.md
+      - API Changelog: api/changelog.md
   - Changelog: changelog.md
 
 markdown_extensions:
