@@ -11,13 +11,78 @@ const OUTPUT_FILE = path.join(ROOT, 'src', 'manual.generated.html');
 
 const ICON_BY_GROUP = {
   Inicio: '◆',
+  Home: '◆',
   Conceptos: '◆',
+  Concepts: '◆',
   Análisis: '▦',
+  Analysis: '▦',
   Automatización: '◉',
+  Automation: '◉',
   Modelado: '✦',
+  Modeling: '✦',
   Organización: '◈',
+  Organization: '◈',
   Configuración: '⚙',
+  Configuration: '⚙',
+  'API v4': '⧉',
   Changelog: '≡',
+};
+
+const UI_TEXT = {
+  es: {
+    topSubtitle: 'Manual de uso · v4',
+    searchAria: 'Buscar en el manual',
+    searchPlaceholder: 'Buscar contenido del manual...',
+    searchButton: 'Buscar',
+    searchSuggestions: 'Sugerencias de búsqueda',
+    heroTag: '◆ Documentación oficial · Plataforma Clickie',
+    heroVersion: 'v4 · Plataforma Clickie',
+    languageLabel: 'Idioma',
+    languageEs: 'Español',
+    languageEn: 'English',
+  },
+  en: {
+    topSubtitle: 'User manual · v4',
+    searchAria: 'Search in manual',
+    searchPlaceholder: 'Search documentation content...',
+    searchButton: 'Search',
+    searchSuggestions: 'Search suggestions',
+    heroTag: '◆ Official documentation · Clickie Platform',
+    heroVersion: 'v4 · Clickie Platform',
+    languageLabel: 'Language',
+    languageEs: 'Español',
+    languageEn: 'English',
+  },
+};
+
+const LABEL_TRANSLATIONS = {
+  en: {
+    Inicio: 'Home',
+    Conceptos: 'Concepts',
+    Introducción: 'Introduction',
+    'Métricas y fórmulas': 'Metrics and formulas',
+    'Selector de métricas': 'Metrics selector',
+    Análisis: 'Analysis',
+    'Visor de datos': 'Data viewer',
+    'Paneles y reportes': 'Dashboards and reports',
+    Automatización: 'Automation',
+    Monitoreos: 'Monitoring',
+    Modelado: 'Modeling',
+    'Gemelos digitales': 'Digital twins',
+    Organización: 'Organization',
+    Activos: 'Assets',
+    Configuración: 'Configuration',
+    'Configuración de cuenta': 'Account settings',
+    'Datos y fuentes': 'Data and sources',
+    Boletines: 'Newsletters',
+    'Vista general': 'Overview',
+    'Bloques de contenido': 'Content blocks',
+    'Grupos de destinatarios': 'Recipient groups',
+    Plantillas: 'Templates',
+    'Introducción API': 'API introduction',
+    Endpoints: 'Endpoints',
+    'API Changelog': 'API changelog',
+  },
 };
 
 const slugify = (value) =>
@@ -47,6 +112,26 @@ function removeFirstH1(markdownText) {
 
 function normalizeDocPath(docPath = '') {
   return docPath.replace(/\\/g, '/').replace(/^\.\/+/, '').replace(/^\/+/, '');
+}
+
+function resolveDocPathForLocale(docPath, locale) {
+  const normalized = normalizeDocPath(docPath);
+
+  if (locale === 'es') {
+    if (normalized.startsWith('api/')) {
+      return `api-es/${normalized.slice('api/'.length)}`;
+    }
+    return normalized;
+  }
+
+  if (normalized.startsWith('api/')) {
+    return normalized;
+  }
+  return `en/${normalized}`;
+}
+
+function translateLabel(label, locale) {
+  return LABEL_TRANSLATIONS[locale]?.[label] || label;
 }
 
 function isExternalHref(href = '') {
@@ -191,12 +276,15 @@ function parseAccessBox(raw = '') {
   };
 }
 
-function getInterpolationExamples() {
+function getInterpolationExamples(locale = 'es') {
+  const isEnglish = locale === 'en';
   return [
     {
       key: 'lineal',
-      title: 'Lineal',
-      description: 'Une los puntos conocidos con una transicion progresiva entre ambos extremos.',
+      title: isEnglish ? 'Linear' : 'Lineal',
+      description: isEnglish
+        ? 'Connects known points with a progressive transition between both ends.'
+        : 'Une los puntos conocidos con una transicion progresiva entre ambos extremos.',
       svg: `
         <svg viewBox="0 0 220 84" aria-hidden="true" focusable="false">
           <polyline points="10,62 58,28 112,44 168,18 210,24" class="interp-line known"/>
@@ -208,8 +296,10 @@ function getInterpolationExamples() {
     },
     {
       key: 'continuidad',
-      title: 'Continuidad',
-      description: 'Conserva el último valor conocido hasta que aparece un nuevo dato válido.',
+      title: isEnglish ? 'Continuity' : 'Continuidad',
+      description: isEnglish
+        ? 'Keeps the latest known value until a new valid datapoint appears.'
+        : 'Conserva el último valor conocido hasta que aparece un nuevo dato válido.',
       svg: `
         <svg viewBox="0 0 220 84" aria-hidden="true" focusable="false">
           <polyline points="10,58 52,30 52,30 120,30 120,30 162,44 210,20" class="interp-line known"/>
@@ -221,8 +311,10 @@ function getInterpolationExamples() {
     },
     {
       key: 'agujero-negro',
-      title: 'Agujero negro',
-      description: 'No rellena los faltantes: mantiene un corte visible en la serie temporal.',
+      title: isEnglish ? 'Black hole' : 'Agujero negro',
+      description: isEnglish
+        ? 'Does not fill missing values: keeps a visible gap in the timeline.'
+        : 'No rellena los faltantes: mantiene un corte visible en la serie temporal.',
       svg: `
         <svg viewBox="0 0 220 84" aria-hidden="true" focusable="false">
           <polyline points="10,54 56,26" class="interp-line known"/>
@@ -235,8 +327,10 @@ function getInterpolationExamples() {
     },
     {
       key: 'relleno-cero',
-      title: 'Relleno cero',
-      description: 'Completa los intervalos faltantes con valor cero para continuidad operativa.',
+      title: isEnglish ? 'Zero fill' : 'Relleno cero',
+      description: isEnglish
+        ? 'Fills missing intervals with zero to keep operational continuity.'
+        : 'Completa los intervalos faltantes con valor cero para continuidad operativa.',
       svg: `
         <svg viewBox="0 0 220 84" aria-hidden="true" focusable="false">
           <line x1="10" y1="68" x2="210" y2="68" class="interp-axis"/>
@@ -250,7 +344,8 @@ function getInterpolationExamples() {
   ];
 }
 
-function getMonitoringFpotExample() {
+function getMonitoringFpotExample(locale = 'es') {
+  const isEnglish = locale === 'en';
   return {
     monitorName: 'Control de Factor de Potencia',
     metricName: 'F. de Pot.',
@@ -259,7 +354,7 @@ function getMonitoringFpotExample() {
     sampleFrequency: '5 min',
     thresholdValue: '0.93',
     breachPercent: '10%',
-    triggerState: 'ALARMA',
+    triggerState: isEnglish ? 'ALARM' : 'ALARMA',
     svg: `
       <svg viewBox="0 0 560 210" aria-hidden="true" focusable="false">
         <rect x="22" y="18" width="516" height="160" class="mon-grid-bg"/>
@@ -285,7 +380,8 @@ function getMonitoringFpotExample() {
   };
 }
 
-function renderDirective(type, args, body) {
+function renderDirective(type, args, body, locale = 'es') {
+  const isEnglish = locale === 'en';
   const normalizedType = type.toLowerCase();
   const parsedBody = body.trim();
 
@@ -315,7 +411,10 @@ function renderDirective(type, args, body) {
     const access = parseAccessBox(parsedBody);
     const safeLabel = escapeHtml(access.label);
     const safeUrl = escapeHtml(access.url);
-    const safeDescription = escapeHtml(access.description || 'Ingreso oficial a la plataforma.');
+    const safeDescription = escapeHtml(
+      access.description ||
+        (isEnglish ? 'Official access to the platform.' : 'Ingreso oficial a la plataforma.')
+    );
 
     return `
       <div class="access-box">
@@ -387,7 +486,7 @@ function renderDirective(type, args, body) {
   }
 
   if (normalizedType === 'learning-path') {
-    const title = args.title || 'Camino de aprendizaje recomendado';
+    const title = args.title || (isEnglish ? 'Recommended learning path' : 'Camino de aprendizaje recomendado');
     const items = parseOrderedItems(parsedBody);
 
     if (items.length === 0) {
@@ -421,7 +520,7 @@ function renderDirective(type, args, body) {
   }
 
   if (normalizedType === 'interpolation-examples') {
-    const cardsHtml = getInterpolationExamples()
+    const cardsHtml = getInterpolationExamples(locale)
       .map(
         (item) => `
           <article class="interp-card interp-${item.key}">
@@ -435,62 +534,65 @@ function renderDirective(type, args, body) {
 
     return `
       <div class="interp-block">
-        <div class="interp-title">Ejemplos gráficos de interpolación</div>
+        <div class="interp-title">${isEnglish ? 'Graphical interpolation examples' : 'Ejemplos gráficos de interpolación'}</div>
         <div class="interp-grid">${cardsHtml}</div>
       </div>
     `;
   }
 
   if (normalizedType === 'monitoring-example-fpot') {
-    const example = getMonitoringFpotExample();
+    const example = getMonitoringFpotExample(locale);
     return `
       <div class="mon-example">
-        <div class="mon-title">Ejemplo visual - Monitoreo de ${escapeHtml(example.metricName)}</div>
+        <div class="mon-title">${isEnglish ? 'Visual example' : 'Ejemplo visual'} - ${isEnglish ? 'Monitoring' : 'Monitoreo'} ${isEnglish ? 'of' : 'de'} ${escapeHtml(example.metricName)}</div>
         <div class="mon-grid">
           <article class="mon-step">
-            <div class="mon-step-kicker">Paso 1</div>
-            <div class="mon-step-name">Monitoreo</div>
+            <div class="mon-step-kicker">${isEnglish ? 'Step' : 'Paso'} 1</div>
+            <div class="mon-step-name">${isEnglish ? 'Monitoring' : 'Monitoreo'}</div>
             <ul>
-              <li><strong>Nombre:</strong> ${escapeHtml(example.monitorName)}</li>
-              <li><strong>Tipo:</strong> ${escapeHtml(example.monitorType)}</li>
-              <li><strong>Ventana:</strong> ${escapeHtml(example.sampleWindow)}</li>
-              <li><strong>Frecuencia:</strong> ${escapeHtml(example.sampleFrequency)}</li>
+              <li><strong>${isEnglish ? 'Name' : 'Nombre'}:</strong> ${escapeHtml(example.monitorName)}</li>
+              <li><strong>${isEnglish ? 'Type' : 'Tipo'}:</strong> ${escapeHtml(example.monitorType)}</li>
+              <li><strong>${isEnglish ? 'Window' : 'Ventana'}:</strong> ${escapeHtml(example.sampleWindow)}</li>
+              <li><strong>${isEnglish ? 'Frequency' : 'Frecuencia'}:</strong> ${escapeHtml(example.sampleFrequency)}</li>
             </ul>
           </article>
 
           <article class="mon-step">
-            <div class="mon-step-kicker">Paso 2</div>
-            <div class="mon-step-name">Regla</div>
+            <div class="mon-step-kicker">${isEnglish ? 'Step' : 'Paso'} 2</div>
+            <div class="mon-step-name">${isEnglish ? 'Rule' : 'Regla'}</div>
             <ul>
-              <li><strong>Nombre:</strong> ${escapeHtml(example.metricName)}</li>
-              <li><strong>Método:</strong> Menor que</li>
-              <li><strong>Límite:</strong> ${escapeHtml(example.thresholdValue)}</li>
-              <li><strong>Umbral:</strong> ${escapeHtml(example.breachPercent)} de puntos bajo límite</li>
+              <li><strong>${isEnglish ? 'Name' : 'Nombre'}:</strong> ${escapeHtml(example.metricName)}</li>
+              <li><strong>${isEnglish ? 'Method' : 'Método'}:</strong> ${isEnglish ? 'Lower than' : 'Menor que'}</li>
+              <li><strong>${isEnglish ? 'Limit' : 'Límite'}:</strong> ${escapeHtml(example.thresholdValue)}</li>
+              <li><strong>${isEnglish ? 'Threshold' : 'Umbral'}:</strong> ${escapeHtml(example.breachPercent)} ${isEnglish ? 'of points below limit' : 'de puntos bajo límite'}</li>
             </ul>
           </article>
 
           <article class="mon-step">
-            <div class="mon-step-kicker">Paso 3</div>
-            <div class="mon-step-name">Disparador</div>
+            <div class="mon-step-kicker">${isEnglish ? 'Step' : 'Paso'} 3</div>
+            <div class="mon-step-name">${isEnglish ? 'Trigger' : 'Disparador'}</div>
             <ul>
-              <li><strong>Tipo:</strong> Comunicación</li>
-              <li><strong>Estado:</strong> ${escapeHtml(example.triggerState)}</li>
-              <li><strong>Patrón:</strong> Horario operativo o todo el día</li>
-              <li><strong>Destino:</strong> Colaboradores responsables</li>
+              <li><strong>${isEnglish ? 'Type' : 'Tipo'}:</strong> ${isEnglish ? 'Communication' : 'Comunicación'}</li>
+              <li><strong>${isEnglish ? 'State' : 'Estado'}:</strong> ${escapeHtml(example.triggerState)}</li>
+              <li><strong>${isEnglish ? 'Pattern' : 'Patrón'}:</strong> ${isEnglish ? 'Operational schedule or full day' : 'Horario operativo o todo el día'}</li>
+              <li><strong>${isEnglish ? 'Target' : 'Destino'}:</strong> ${isEnglish ? 'Responsible collaborators' : 'Colaboradores responsables'}</li>
             </ul>
           </article>
         </div>
 
         <div class="mon-chart-wrap">
           <div class="mon-chart-legend">
-            <span class="legend-item"><span class="legend-dot normal"></span> Valor dentro de límite</span>
-            <span class="legend-item"><span class="legend-dot breach"></span> Valor por debajo de 0.93</span>
-            <span class="legend-item"><span class="legend-line"></span> Evaluacion cada 5 min en ventana de 10 min</span>
+            <span class="legend-item"><span class="legend-dot normal"></span> ${isEnglish ? 'Value within limit' : 'Valor dentro de límite'}</span>
+            <span class="legend-item"><span class="legend-dot breach"></span> ${isEnglish ? 'Value below 0.93' : 'Valor por debajo de 0.93'}</span>
+            <span class="legend-item"><span class="legend-line"></span> ${isEnglish ? 'Evaluation every 5 min in a 10 min window' : 'Evaluacion cada 5 min en ventana de 10 min'}</span>
           </div>
           <div class="mon-chart">${example.svg}</div>
           <p class="mon-caption">
-            Si en los últimos 10 minutos al menos el 10% de los puntos de <strong>${escapeHtml(example.metricName)}</strong> cae por debajo de <strong>${escapeHtml(example.thresholdValue)}</strong>,
-            el monitoreo pasa a estado <strong>${escapeHtml(example.triggerState)}</strong> y ejecuta comunicación.
+            ${
+              isEnglish
+                ? `If in the last 10 minutes at least 10% of points for <strong>${escapeHtml(example.metricName)}</strong> are below <strong>${escapeHtml(example.thresholdValue)}</strong>, monitoring changes to <strong>${escapeHtml(example.triggerState)}</strong> and triggers communication.`
+                : `Si en los últimos 10 minutos al menos el 10% de los puntos de <strong>${escapeHtml(example.metricName)}</strong> cae por debajo de <strong>${escapeHtml(example.thresholdValue)}</strong>, el monitoreo pasa a estado <strong>${escapeHtml(example.triggerState)}</strong> y ejecuta comunicación.`
+            }
           </p>
         </div>
       </div>
@@ -500,7 +602,7 @@ function renderDirective(type, args, body) {
   return marked.parse(parsedBody);
 }
 
-function renderMarkdownWithBlocks(markdownText) {
+function renderMarkdownWithBlocks(markdownText, locale = 'es') {
   const lines = markdownText.split('\n');
   const htmlParts = [];
   const markdownBuffer = [];
@@ -541,7 +643,7 @@ function renderMarkdownWithBlocks(markdownText) {
     }
 
     flushMarkdownBuffer();
-    const blockHtml = renderDirective(type, args, blockLines.join('\n'));
+    const blockHtml = renderDirective(type, args, blockLines.join('\n'), locale);
     htmlParts.push(blockHtml.trim());
     idx = endIdx + 1;
   }
@@ -564,15 +666,19 @@ function extractHeroDescription(content) {
   return paragraph ? paragraph.replace(/\s+/g, ' ') : '';
 }
 
-function parseNavEntry(label, value, groupName, docItems, docPathToSectionId) {
+function parseNavEntry(label, value, groupName, docItems, docPathToSectionId, locale) {
+  const displayLabel = translateLabel(label, locale);
   if (typeof value === 'string') {
-    const docPath = normalizeDocPath(value);
-    const sectionId = slugify(docPath.replace(/\.md$/i, '').replace(/\/index$/i, ''));
+    const sourceDocPath = normalizeDocPath(value);
+    const docPath = resolveDocPathForLocale(sourceDocPath, locale);
+    const sectionId = slugify(
+      `${locale}-${sourceDocPath.replace(/\.md$/i, '').replace(/\/index$/i, '')}`
+    );
 
-    docItems.push({ group: groupName, label, docPath, sectionId });
+    docItems.push({ group: groupName, label: displayLabel, docPath, sectionId });
     docPathToSectionId.set(docPath, sectionId);
 
-    return { type: 'link', label, sectionId };
+    return { type: 'link', label: displayLabel, sectionId };
   }
 
   if (!Array.isArray(value)) {
@@ -591,7 +697,8 @@ function parseNavEntry(label, value, groupName, docItems, docPathToSectionId) {
         childValue,
         groupName,
         docItems,
-        docPathToSectionId
+        docPathToSectionId,
+        locale
       );
       if (parsedChild) {
         children.push(parsedChild);
@@ -603,14 +710,15 @@ function parseNavEntry(label, value, groupName, docItems, docPathToSectionId) {
     return null;
   }
 
-  return { type: 'group', label, children };
+  return { type: 'group', label: displayLabel, children };
 }
 
-function parseNav(nav) {
+function parseNav(nav, locale) {
   const docItems = [];
   const docPathToSectionId = new Map();
   const sidebarGroups = [];
-  const inicioGroup = { groupName: 'Inicio', entries: [] };
+  const inicioGroupName = translateLabel('Inicio', locale);
+  const inicioGroup = { groupName: inicioGroupName, entries: [] };
 
   for (const section of nav || []) {
     if (!section || typeof section !== 'object' || Array.isArray(section)) {
@@ -618,13 +726,15 @@ function parseNav(nav) {
     }
 
     for (const [sectionName, sectionValue] of Object.entries(section)) {
+      const displaySectionName = translateLabel(sectionName, locale);
       if (typeof sectionValue === 'string') {
         const parsedEntry = parseNavEntry(
           sectionName,
           sectionValue,
-          'Inicio',
+          inicioGroupName,
           docItems,
-          docPathToSectionId
+          docPathToSectionId,
+          locale
         );
         if (parsedEntry) {
           inicioGroup.entries.push(parsedEntry);
@@ -646,9 +756,10 @@ function parseNav(nav) {
           const parsedEntry = parseNavEntry(
             entryLabel,
             entryValue,
-            sectionName,
+            displaySectionName,
             docItems,
-            docPathToSectionId
+            docPathToSectionId,
+            locale
           );
           if (parsedEntry) {
             sectionEntries.push(parsedEntry);
@@ -657,7 +768,7 @@ function parseNav(nav) {
       }
 
       if (sectionEntries.length > 0) {
-        sidebarGroups.push({ groupName: sectionName, entries: sectionEntries });
+        sidebarGroups.push({ groupName: displaySectionName, entries: sectionEntries });
       }
     }
   }
@@ -713,16 +824,18 @@ function renderSidebarEntries(entries, activeState, treeState, level = 0) {
     .join('\n      ');
 }
 
-async function build() {
-  const mkdocsRaw = await fs.readFile(MKDOCS_CONFIG, 'utf-8');
-  const mkdocsConfig = yaml.load(mkdocsRaw) || {};
-  const { docItems, docPathToSectionId, sidebarGroups } = parseNav(mkdocsConfig.nav || []);
+async function buildLocaleShell(locale, nav) {
+  const ui = UI_TEXT[locale];
+  const { docItems, docPathToSectionId, sidebarGroups } = parseNav(nav, locale);
   const sectionsHtml = [];
 
-  let heroTitle = 'Manual de uso';
+  let heroTitle = locale === 'es' ? 'Manual de uso' : 'User manual';
   const heroEmphasis = 'Clickie';
   let heroDesc =
-    'Guía completa para operar la plataforma: métricas, gemelos digitales, monitoreos, visor de datos, activos y configuración.';
+    locale === 'es'
+      ? 'Guía completa para operar la plataforma: métricas, gemelos digitales, monitoreos, visor de datos, activos y configuración.'
+      : 'Complete guide to operate the platform: metrics, digital twins, monitoring, data viewer, assets and configuration.';
+  const heroSectionId = `${locale}-inicio`;
 
   for (let idx = 0; idx < docItems.length; idx += 1) {
     const { group, label, docPath, sectionId } = docItems[idx];
@@ -738,7 +851,7 @@ async function build() {
     const parsed = matter(raw);
     const title = String(parsed.data?.title || label);
 
-    if (docPath === 'index.md') {
+    if (docPath === resolveDocPathForLocale('index.md', locale)) {
       const h1 = parsed.content.match(/^#\s+(.+)$/m);
       if (h1?.[1]) {
         heroTitle = h1[1].trim();
@@ -751,7 +864,7 @@ async function build() {
 
     const bodyNoH1 = removeFirstH1(parsed.content);
     const bodyHtml = rewriteInternalDocLinks(
-      renderMarkdownWithBlocks(bodyNoH1),
+      renderMarkdownWithBlocks(bodyNoH1, locale),
       docPath,
       docPathToSectionId
     );
@@ -786,43 +899,67 @@ async function build() {
     })
     .join('');
 
-  const html = `<!-- Generated from /docs by scripts/generate_web_docs.mjs -->
-<header class="topbar">
-  <a class="sb-logo" href="#inicio">
-    <div class="sb-badge">C</div>
-    <div>
-      <div class="sb-title">Clickie</div>
-      <div class="sb-sub">Manual de uso · v4</div>
+  return `
+<section class="manual-shell" data-lang="${locale}" ${locale === 'es' ? '' : 'hidden'}>
+  <header class="topbar">
+    <a class="sb-logo" href="#${heroSectionId}">
+      <div class="sb-badge">C</div>
+      <div>
+        <div class="sb-title">Clickie</div>
+        <div class="sb-sub">${escapeHtml(ui.topSubtitle)}</div>
+      </div>
+    </a>
+
+    <form class="top-search-form" role="search" aria-label="${escapeHtml(ui.searchAria)}">
+      <input class="top-search-input" type="search" placeholder="${escapeHtml(ui.searchPlaceholder)}" autocomplete="off" aria-label="${escapeHtml(ui.searchAria)}" />
+      <button class="top-search-btn" type="submit">${escapeHtml(ui.searchButton)}</button>
+      <div class="top-search-dropdown" hidden>
+        <ul class="top-search-suggestions" role="listbox" aria-label="${escapeHtml(ui.searchSuggestions)}"></ul>
+      </div>
+    </form>
+
+    <div class="topbar-controls">
+      <label class="lang-label" for="lang-select-${locale}">${escapeHtml(ui.languageLabel)}</label>
+      <select id="lang-select-${locale}" class="lang-select" aria-label="${escapeHtml(ui.languageLabel)}">
+        <option value="es">${escapeHtml(ui.languageEs)}</option>
+        <option value="en">${escapeHtml(ui.languageEn)}</option>
+      </select>
+      <div class="top-search-status" aria-live="polite"></div>
     </div>
-  </a>
-
-  <form class="top-search-form" role="search" aria-label="Buscar en el manual">
-    <input class="top-search-input" type="search" placeholder="Buscar contenido del manual..." autocomplete="off" aria-label="Buscar contenido del manual" />
-    <button class="top-search-btn" type="submit">Buscar</button>
-    <div class="top-search-dropdown" hidden>
-      <ul class="top-search-suggestions" role="listbox" aria-label="Sugerencias de búsqueda"></ul>
-    </div>
-  </form>
-
-  <div class="top-search-status" aria-live="polite"></div>
-</header>
-
-<aside class="sidebar">
-  <nav>${navHtml}
-  </nav>
-</aside>
-
-<main class="main">
-  <header class="hero" id="inicio">
-    <div class="hero-tag">◆ Documentación oficial · Plataforma Clickie</div>
-    <h1>${escapeHtml(heroTitle)}<br><em>${escapeHtml(heroEmphasis)}</em></h1>
-    <p class="hero-desc">${escapeHtml(heroDesc)}</p>
-    <div class="hero-version">v4 · Plataforma Clickie</div>
   </header>
 
-  <div class="content">${sectionsHtml.join('')}
-  </div>
-</main>
+  <aside class="sidebar">
+    <nav>${navHtml}
+    </nav>
+  </aside>
+
+  <main class="main">
+    <header class="hero" id="${heroSectionId}">
+      <div class="hero-tag">${escapeHtml(ui.heroTag)}</div>
+      <h1>${escapeHtml(heroTitle)}<br><em>${escapeHtml(heroEmphasis)}</em></h1>
+      <p class="hero-desc">${escapeHtml(heroDesc)}</p>
+      <div class="hero-version">${escapeHtml(ui.heroVersion)}</div>
+    </header>
+
+    <div class="content">${sectionsHtml.join('')}
+    </div>
+  </main>
+</section>`;
+}
+
+async function build() {
+  const mkdocsRaw = await fs.readFile(MKDOCS_CONFIG, 'utf-8');
+  const mkdocsConfig = yaml.load(mkdocsRaw) || {};
+  const nav = mkdocsConfig.nav || [];
+
+  const [shellEs, shellEn] = await Promise.all([
+    buildLocaleShell('es', nav),
+    buildLocaleShell('en', nav),
+  ]);
+
+  const html = `<!-- Generated from /docs by scripts/generate_web_docs.mjs -->
+${shellEs}
+${shellEn}
 `;
 
   await fs.writeFile(OUTPUT_FILE, html, 'utf-8');

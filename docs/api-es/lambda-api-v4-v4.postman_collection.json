@@ -1,0 +1,3910 @@
+{
+  "info": {
+    "_postman_id": "de253153-6312-403f-96df-dc84f1deee68",
+    "name": "Lambda API-V4 Production (/v4)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Auto-generated collection of Lambda API-V4 endpoints"
+  },
+  "item": [
+    {
+      "name": "assets",
+      "item": [
+        {
+          "name": "GET /assets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/assets?skip=0&limit=100&archived=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "assets"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                },
+                {
+                  "key": "archived",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /assets",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/assets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "assets"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_category\": 1,\n  \"asset_name\": \"string\",\n  \"asset_description\": \"string\",\n  \"asset_observations\": \"string\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /assets/{id_asset}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/assets/{id_asset}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "assets",
+                "{id_asset}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /assets/{id_asset}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/assets/{id_asset}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "assets",
+                "{id_asset}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /assets/{id_asset}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/assets/{id_asset}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "assets",
+                "{id_asset}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_category\": 1,\n  \"id_file_picture\": 1,\n  \"id_location\": 1,\n  \"asset_name\": \"string\",\n  \"asset_description\": \"string\",\n  \"asset_observations\": \"string\",\n  \"asset_archived\": true\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "collaborators",
+      "item": [
+        {
+          "name": "GET /collaborators",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/collaborators?skip=0&limit=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "collaborators"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /collaborators",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/collaborators",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "collaborators"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_role\": 3,\n  \"id_language\": 1,\n  \"id_time_zone\": 1,\n  \"user_name\": \"string\",\n  \"user_last_name\": \"string\",\n  \"user_email\": \"user@example.com\",\n  \"user_phone\": \"string\",\n  \"send_invitation\": true\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /collaborators/{id_user}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/collaborators/{id_user}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "collaborators",
+                "{id_user}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /collaborators/{id_user}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/collaborators/{id_user}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "collaborators",
+                "{id_user}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /collaborators/{id_user}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/collaborators/{id_user}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "collaborators",
+                "{id_user}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_role\": 1,\n  \"id_language\": 1,\n  \"id_file_picture\": 1,\n  \"id_time_zone\": 1,\n  \"user_name\": \"string\",\n  \"user_last_name\": \"string\",\n  \"user_email\": \"user@example.com\",\n  \"user_phone\": \"string\",\n  \"user_blocked\": true\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /collaborators/{id_user}/login_history",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/collaborators/{id_user}/login_history?max_results=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "collaborators",
+                "{id_user}",
+                "login_history"
+              ],
+              "query": [
+                {
+                  "key": "max_results",
+                  "value": "20",
+                  "description": "Número máximo de eventos a devolver (default: 20)",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "dashboards",
+      "item": [
+        {
+          "name": "GET /dashboards",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/dashboards?skip=0&limit=100&archived=string",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "dashboards"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                },
+                {
+                  "key": "archived",
+                  "value": "string",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /dashboards",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/dashboards",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "dashboards"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_icon\": 2462,\n  \"id_parent_dashboard\": 1,\n  \"dashboard_name\": \"string\",\n  \"dashboard_description\": \"string\",\n  \"dashboard_color\": \"string\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /dashboards/{id_dashboard}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/dashboards/{id_dashboard}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "dashboards",
+                "{id_dashboard}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /dashboards/{id_dashboard}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/dashboards/{id_dashboard}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "dashboards",
+                "{id_dashboard}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /dashboards/{id_dashboard}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/dashboards/{id_dashboard}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "dashboards",
+                "{id_dashboard}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_icon\": 1,\n  \"id_parent_dashboard\": 1,\n  \"dashboard_name\": \"string\",\n  \"dashboard_description\": \"string\",\n  \"dashboard_color\": \"string\",\n  \"dashboard_archived\": true\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /dashboards/{id_dashboard}/widgets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/dashboards/{id_dashboard}/widgets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "dashboards",
+                "{id_dashboard}",
+                "widgets"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /dashboards/{id_dashboard}/widgets",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/dashboards/{id_dashboard}/widgets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "dashboards",
+                "{id_dashboard}",
+                "widgets"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_widget\": 1,\n  \"widget_width\": 0,\n  \"widget_height\": 0,\n  \"widget_order\": 100\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /dashboards/{id_dashboard}/widgets/{id_dashboard_widget}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/dashboards/{id_dashboard}/widgets/{id_dashboard_widget}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "dashboards",
+                "{id_dashboard}",
+                "widgets",
+                "{id_dashboard_widget}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /dashboards/{id_dashboard}/widgets/{id_dashboard_widget}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "dashboards",
+                "{id_dashboard}",
+                "widgets",
+                "{id_dashboard_widget}"
+              ],
+              "raw": "{{baseUrl}}/v4/dashboards/{id_dashboard}/widgets/{id_dashboard_widget}"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_widget\": 1,\n  \"widget_width\": 0,\n  \"widget_height\": 0,\n  \"widget_order\": 0\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /dashboards/{id_dashboard}/widgets/{id_dashboard_widget}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/dashboards/{id_dashboard}/widgets/{id_dashboard_widget}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "dashboards",
+                "{id_dashboard}",
+                "widgets",
+                "{id_dashboard_widget}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "data",
+      "item": [
+        {
+          "name": "GET /data/formula",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/data/formula?formula=string&from=1&to=1&resolution=string&dimension=mean&interpolation=linear&filters=string&output_format=timestamp&context=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "data",
+                "formula"
+              ],
+              "query": [
+                {
+                  "key": "formula",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "from",
+                  "value": "1",
+                  "description": ""
+                },
+                {
+                  "key": "to",
+                  "value": "1",
+                  "description": ""
+                },
+                {
+                  "key": "resolution",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "dimension",
+                  "value": "mean",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "interpolation",
+                  "value": "linear",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "filters",
+                  "value": "string",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "output_format",
+                  "value": "timestamp",
+                  "description": "Default: timestamp",
+                  "disabled": false
+                },
+                {
+                  "key": "context",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /data/inspect/formula",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/data/inspect/formula?formula=string&details=true&context=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "data",
+                "inspect",
+                "formula"
+              ],
+              "query": [
+                {
+                  "key": "formula",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "details",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "context",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /data/inspect/metric",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/data/inspect/metric?metric=string&details=true&context=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "data",
+                "inspect",
+                "metric"
+              ],
+              "query": [
+                {
+                  "key": "metric",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "details",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "context",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /data/inspect/tags",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/data/inspect/tags?tags=string&merge=string&details=true&context=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "data",
+                "inspect",
+                "tags"
+              ],
+              "query": [
+                {
+                  "key": "tags",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "merge",
+                  "value": "string",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "details",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "context",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /data/metric",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/data/metric?metric=string&from=1&to=1&earliest_recorded=true&latest_recorded=true&resolution=string&dimension=mean&interpolation=linear&filters=string&output_format=timestamp&context=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "data",
+                "metric"
+              ],
+              "query": [
+                {
+                  "key": "metric",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "from",
+                  "value": "1",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "to",
+                  "value": "1",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "earliest_recorded",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "latest_recorded",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "resolution",
+                  "value": "string",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "dimension",
+                  "value": "mean",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "interpolation",
+                  "value": "linear",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "filters",
+                  "value": "string",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "output_format",
+                  "value": "timestamp",
+                  "description": "Default: timestamp",
+                  "disabled": false
+                },
+                {
+                  "key": "context",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /data/snapshots",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/data/snapshots?filters=string&context=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "data",
+                "snapshots"
+              ],
+              "query": [
+                {
+                  "key": "filters",
+                  "value": "string",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "context",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /data/tags",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/data/tags?tags=string&merge=string&from=1&to=1&resolution=string&dimension=mean&interpolation=linear&filters=string&output_format=timestamp&context=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "data",
+                "tags"
+              ],
+              "query": [
+                {
+                  "key": "tags",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "merge",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "from",
+                  "value": "1",
+                  "description": ""
+                },
+                {
+                  "key": "to",
+                  "value": "1",
+                  "description": ""
+                },
+                {
+                  "key": "resolution",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "dimension",
+                  "value": "mean",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "interpolation",
+                  "value": "linear",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "filters",
+                  "value": "string",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "output_format",
+                  "value": "timestamp",
+                  "description": "Default: timestamp",
+                  "disabled": false
+                },
+                {
+                  "key": "context",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE /metrics/{metric_identifier}/datapoints",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/metrics/{metric_identifier}/datapoints?ts_from=string&ts_to=string",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "metrics",
+                "{metric_identifier}",
+                "datapoints"
+              ],
+              "query": [
+                {
+                  "key": "ts_from",
+                  "value": "string",
+                  "description": "Timestamp en segundos (Unix) UTC para 'from'"
+                },
+                {
+                  "key": "ts_to",
+                  "value": "string",
+                  "description": "Timestamp en segundos (Unix) UTC para 'to'"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /metrics/{metric_identifier}/datapoints",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/metrics/{metric_identifier}/datapoints",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "metrics",
+                "{metric_identifier}",
+                "datapoints"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "devices",
+      "item": [
+        {
+          "name": "GET /device_models",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/device_models",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "device_models"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /device_models/{id_device_model}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/device_models/{id_device_model}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "device_models",
+                "{id_device_model}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /device_model_manufacturers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/device_model_manufacturers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "device_model_manufacturers"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /devices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/devices",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "devices"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /devices",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/devices",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "devices"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_device_model\": 1,\n  \"id_inventory\": 1,\n  \"device_custom_id\": \"DEVICE-001\",\n  \"device_observations\": \"Test device\",\n  \"device_archived\": false\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /devices/{id_device}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/devices/{id_device}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "devices",
+                "{id_device}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /devices/{id_device}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/devices/{id_device}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "devices",
+                "{id_device}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_inventory\": 2,\n  \"device_observations\": \"Updated device notes\",\n  \"device_archived\": false\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /devices/{id_device}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/devices/{id_device}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "devices",
+                "{id_device}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /devices/{id_device}/setups",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/devices/{id_device}/setups",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "devices",
+                "{id_device}",
+                "setups"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /inventories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/inventories?skip=0&limit=100&inventory_name=string",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "inventories"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                },
+                {
+                  "key": "inventory_name",
+                  "value": "string",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /inventories",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/inventories",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "inventories"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inventory_name\": \"string\",\n  \"inventory_description\": \"string\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /inventories/{id_inventory}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/inventories/{id_inventory}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "inventories",
+                "{id_inventory}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /inventories/{id_inventory}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/inventories/{id_inventory}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "inventories",
+                "{id_inventory}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inventory_name\": \"string\",\n  \"inventory_description\": \"string\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /inventories/{id_inventory}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/inventories/{id_inventory}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "inventories",
+                "{id_inventory}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "eav",
+      "item": [
+        {
+          "name": "GET /entities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/entities",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "entities"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /entities/{id_entity}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/entities/{id_entity}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "entities",
+                "{id_entity}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "filters",
+      "item": [
+        {
+          "name": "GET /filters",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/filters",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "filters"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "global_resources",
+      "item": [
+        {
+          "name": "GET /icons",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/icons?skip=0&limit=100&icon_name=string",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "icons"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                },
+                {
+                  "key": "icon_name",
+                  "value": "string",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /icons/{id_icon}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/icons/{id_icon}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "icons",
+                "{id_icon}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /languages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/languages",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "languages"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /time_zones",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/time_zones?id_time_zone=1&offsets=false",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "time_zones"
+              ],
+              "query": [
+                {
+                  "key": "id_time_zone",
+                  "value": "1",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "offsets",
+                  "value": "false",
+                  "description": "Default: false",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "search",
+      "item": [
+        {
+          "name": "POST /search/metrics",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/search/metrics",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "search",
+                "metrics"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resource_filter\": {\n    \"resource_type\": \"string\",\n    \"direction\": \"child\",\n    \"operator\": \"in\",\n    \"resource_ids\": [\n      1\n    ]\n  },\n  \"param_filters\": [\n    {\n      \"type\": \"string\",\n      \"operator\": \"eq\"\n    }\n  ],\n  \"return_fields\": [\n    \"string\"\n  ],\n  \"limit\": 100,\n  \"skip\": 0\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "metrics",
+      "item": [
+        {
+          "name": "GET /metrics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/metrics?skip=0&limit=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "metrics"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /metrics",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/metrics",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "metrics"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_metric_source\": 1,\n  \"id_uom\": 1,\n  \"id_aggregation\": 1,\n  \"id_interpolation\": 1,\n  \"metric_name\": \"string\",\n  \"metric_description\": \"string\",\n  \"metric_tags\": \"string\",\n  \"metric_formula\": \"string\",\n  \"metric_resolution\": 1,\n  \"metric_force_availability\": 0,\n  \"metric_impacts_health\": true\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /metrics/{metric_identifier}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/metrics/{metric_identifier}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "metrics",
+                "{metric_identifier}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /metrics/{metric_identifier}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/metrics/{metric_identifier}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "metrics",
+                "{metric_identifier}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /metrics/{metric_identifier}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/metrics/{metric_identifier}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "metrics",
+                "{metric_identifier}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_uom\": 1,\n  \"id_aggregation\": 1,\n  \"id_interpolation\": 1,\n  \"metric_name\": \"string\",\n  \"metric_description\": \"string\",\n  \"metric_tags\": \"string\",\n  \"metric_formula\": \"string\",\n  \"metric_resolution\": 1,\n  \"metric_force_availability\": 0,\n  \"metric_impacts_health\": true\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /metrics/{metric_identifier}/events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/metrics/{metric_identifier}/events?skip=0&limit=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "metrics",
+                "{metric_identifier}",
+                "events"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /metrics/{metric_identifier}/events",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/metrics/{metric_identifier}/events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "metrics",
+                "{metric_identifier}",
+                "events"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_event_type\": 1,\n  \"event_start\": \"2024-01-01T00:00:00Z\",\n  \"event_end\": \"2024-01-01T00:00:00Z\",\n  \"event_description\": \"string\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /metrics/{metric_identifier}/events/{id_metric_event}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/metrics/{metric_identifier}/events/{id_metric_event}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "metrics",
+                "{metric_identifier}",
+                "events",
+                "{id_metric_event}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /metrics/{metric_identifier}/events/{id_metric_event}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/metrics/{metric_identifier}/events/{id_metric_event}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "metrics",
+                "{metric_identifier}",
+                "events",
+                "{id_metric_event}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /metrics/{metric_identifier}/events/{id_metric_event}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/metrics/{metric_identifier}/events/{id_metric_event}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "metrics",
+                "{metric_identifier}",
+                "events",
+                "{id_metric_event}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_event_type\": 1,\n  \"event_start\": \"2024-01-01T00:00:00Z\",\n  \"event_end\": \"2024-01-01T00:00:00Z\",\n  \"event_description\": \"string\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /metrics/{metric_identifier}/setups",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/metrics/{metric_identifier}/setups",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "metrics",
+                "{metric_identifier}",
+                "setups"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "monitoring",
+      "item": [
+        {
+          "name": "GET /ground_monitor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/ground_monitor",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "ground_monitor"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /monitors",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/monitors?skip=0&limit=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "monitors"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /monitors",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/monitors",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "monitors"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_monitor_type\": 6,\n  \"id_monitor_status\": 1,\n  \"monitor_name\": \"string\",\n  \"monitor_description\": \"string\",\n  \"monitor_sampling_window\": 15,\n  \"monitor_sampling_frequency\": 15\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /monitors/{id_monitor}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/monitors/{id_monitor}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "monitors",
+                "{id_monitor}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /monitors/{id_monitor}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/monitors/{id_monitor}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "monitors",
+                "{id_monitor}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /monitors/{id_monitor}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/monitors/{id_monitor}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "monitors",
+                "{id_monitor}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_monitor_type\": 1,\n  \"id_monitor_status\": 1,\n  \"monitor_name\": \"string\",\n  \"monitor_description\": \"string\",\n  \"monitor_sampling_window\": 1,\n  \"monitor_sampling_frequency\": 1\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /monitors/{id_monitor}/history",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/monitors/{id_monitor}/history?from_timestamp=1&to_timestamp=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "monitors",
+                "{id_monitor}",
+                "history"
+              ],
+              "query": [
+                {
+                  "key": "from_timestamp",
+                  "value": "1",
+                  "description": "Inclusive UNIX timestamp for the start of the range",
+                  "disabled": false
+                },
+                {
+                  "key": "to_timestamp",
+                  "value": "1",
+                  "description": "Inclusive UNIX timestamp for the end of the range",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /monitors/{id_monitor}/rules",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/monitors/{id_monitor}/rules?skip=0&limit=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "monitors",
+                "{id_monitor}",
+                "rules"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /monitors/{id_monitor}/rules",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/monitors/{id_monitor}/rules",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "monitors",
+                "{id_monitor}",
+                "rules"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_metric\": 1,\n  \"id_monitor_status\": 1,\n  \"rule_name\": \"string\",\n  \"rule_description\": \"string\",\n  \"rule_method\": 1,\n  \"rule_lower_limit\": 1,\n  \"rule_upper_limit\": 1,\n  \"rule_threshold\": 100\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /monitors/{id_monitor}/rules/{id_monitor_rule}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/monitors/{id_monitor}/rules/{id_monitor_rule}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "monitors",
+                "{id_monitor}",
+                "rules",
+                "{id_monitor_rule}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /monitors/{id_monitor}/rules/{id_monitor_rule}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/monitors/{id_monitor}/rules/{id_monitor_rule}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "monitors",
+                "{id_monitor}",
+                "rules",
+                "{id_monitor_rule}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /monitors/{id_monitor}/rules/{id_monitor_rule}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/monitors/{id_monitor}/rules/{id_monitor_rule}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "monitors",
+                "{id_monitor}",
+                "rules",
+                "{id_monitor_rule}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_metric\": 1,\n  \"id_monitor_status\": 1,\n  \"rule_name\": \"string\",\n  \"rule_description\": \"string\",\n  \"rule_method\": 1,\n  \"rule_lower_limit\": 1,\n  \"rule_upper_limit\": 1,\n  \"rule_threshold\": 1,\n  \"rule_enabled\": true\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /monitors/{id_monitor}/triggers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/monitors/{id_monitor}/triggers?skip=0&limit=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "monitors",
+                "{id_monitor}",
+                "triggers"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /monitors/{id_monitor}/triggers",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/monitors/{id_monitor}/triggers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "monitors",
+                "{id_monitor}",
+                "triggers"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_trigger_type\": 1,\n  \"time_pattern\": \"string\",\n  \"trigger_observations\": \"string\",\n  \"trigger_on\": \"1,3\",\n  \"trigger_enabled\": true,\n  \"trigger_parameters\": {}\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /monitors/{id_monitor}/triggers/{id_monitor_trigger}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/monitors/{id_monitor}/triggers/{id_monitor_trigger}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "monitors",
+                "{id_monitor}",
+                "triggers",
+                "{id_monitor_trigger}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /monitors/{id_monitor}/triggers/{id_monitor_trigger}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/monitors/{id_monitor}/triggers/{id_monitor_trigger}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "monitors",
+                "{id_monitor}",
+                "triggers",
+                "{id_monitor_trigger}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /monitors/{id_monitor}/triggers/{id_monitor_trigger}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/monitors/{id_monitor}/triggers/{id_monitor_trigger}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "monitors",
+                "{id_monitor}",
+                "triggers",
+                "{id_monitor_trigger}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_trigger_type\": 1,\n  \"time_pattern\": \"string\",\n  \"trigger_observations\": \"string\",\n  \"trigger_on\": \"string\",\n  \"trigger_enabled\": true,\n  \"trigger_parameters\": {}\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /monitor_templates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/monitor_templates?skip=0&limit=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "monitor_templates"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "newsletter",
+      "item": [
+        {
+          "name": "GET /templates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/templates?skip=0&limit=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "templates"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /templates",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/templates",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "templates"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_communication_type\": 1,\n  \"template_name\": \"string\",\n  \"template_description\": \"string\",\n  \"template_body\": \"string\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /templates/{id_template}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/templates/{id_template}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "templates",
+                "{id_template}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /templates/{id_template}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/templates/{id_template}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "templates",
+                "{id_template}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /templates/{id_template}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/templates/{id_template}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "templates",
+                "{id_template}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_communication_type\": 1,\n  \"template_name\": \"string\",\n  \"template_description\": \"string\",\n  \"template_body\": \"string\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "scope",
+      "item": [
+        {
+          "name": "GET /accounts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/accounts?skip=0&limit=100&archived=false",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "accounts"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                },
+                {
+                  "key": "archived",
+                  "value": "false",
+                  "description": "Default: false",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "List accounts. Clearance 1 can access every account without being scoped to the Account header."
+          }
+        },
+        {
+          "name": "GET /environments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/environments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "environments"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /accounts",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/accounts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "accounts"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_environment\": 1,\n  \"id_file_picture\": 1,\n  \"account_name\": \"string\",\n  \"account_description\": \"string\",\n  \"ids_time_zone\": \"string\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST /accounts/collaborators",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "description": "Clearance 1 sessions can manage collaborators on any account; other callers must already belong to the account.",
+            "url": {
+              "raw": "{{baseUrl}}/v4/accounts/collaborators",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "accounts",
+                "collaborators"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_email\": \"user@example.com\",\n  \"id_clearance\": 1\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /accounts/collaborators/{collaborator_email}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "description": "Clearance 1 sessions can manage collaborators on any account; other callers must already belong to the account.",
+            "url": {
+              "raw": "{{baseUrl}}/v4/accounts/collaborators/{collaborator_email}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "accounts",
+                "collaborators",
+                "{collaborator_email}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /accounts/collaborators/{collaborator_email}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "description": "Clearance 1 sessions can manage collaborators on any account; other callers must already belong to the account.",
+            "url": {
+              "raw": "{{baseUrl}}/v4/accounts/collaborators/{collaborator_email}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "accounts",
+                "collaborators",
+                "{collaborator_email}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_clearance\": 1\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /accounts/{id_account}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/accounts/{id_account}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "accounts",
+                "{id_account}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /accounts/{id_account}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/accounts/{id_account}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "accounts",
+                "{id_account}"
+              ]
+            },
+            "description": "Get an account by ID. Clearance 1 can open any account regardless of membership or Account header scoping."
+          }
+        },
+        {
+          "name": "PUT /accounts/{id_account}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/accounts/{id_account}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "accounts",
+                "{id_account}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_environment\": 1,\n  \"id_file_picture\": 1,\n  \"account_name\": \"string\",\n  \"account_description\": \"string\",\n  \"ids_time_zone\": \"string\",\n  \"account_archived\": true\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /clearances",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/clearances",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "clearances"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /clearances/me",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/clearances/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "clearances",
+                "me"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /relationships/{entity_name}/{id_resource}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/relationships/{entity_name}/{id_resource}?skip=0&limit=100&direction=child",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "relationships",
+                "{entity_name}",
+                "{id_resource}"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                },
+                {
+                  "key": "direction",
+                  "value": "child",
+                  "description": "Default: child",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE /relationships/{entity_name}/{id_resource}/{child_entity_name}/{child_id_resource}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/relationships/{entity_name}/{id_resource}/{child_entity_name}/{child_id_resource}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "relationships",
+                "{entity_name}",
+                "{id_resource}",
+                "{child_entity_name}",
+                "{child_id_resource}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /relationships/{entity_name}/{id_resource}/{child_entity_name}/{child_id_resource}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/relationships/{entity_name}/{id_resource}/{child_entity_name}/{child_id_resource}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "relationships",
+                "{entity_name}",
+                "{id_resource}",
+                "{child_entity_name}",
+                "{child_id_resource}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /relationships/{entity_name}/{id_resource}/{child_entity_name}/{child_id_resource}",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/relationships/{entity_name}/{id_resource}/{child_entity_name}/{child_id_resource}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "relationships",
+                "{entity_name}",
+                "{id_resource}",
+                "{child_entity_name}",
+                "{child_id_resource}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /relationships/{entity_name}/{id_resource}/{entity_type}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/relationships/{entity_name}/{id_resource}/{entity_type}?skip=0&limit=100&direction=child",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "relationships",
+                "{entity_name}",
+                "{id_resource}",
+                "{entity_type}"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                },
+                {
+                  "key": "direction",
+                  "value": "child",
+                  "description": "Default: child",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /roles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/roles?skip=0&limit=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "roles"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "setups",
+      "item": [
+        {
+          "name": "GET /setups",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/setups?skip=0&limit=100&id_asset=1&id_device_model=1&setup_name=string&include_without_asset=false",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "setups"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                },
+                {
+                  "key": "id_asset",
+                  "value": "1",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "id_device_model",
+                  "value": "1",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "setup_name",
+                  "value": "string",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "include_without_asset",
+                  "value": "false",
+                  "description": "Default: false",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /setups",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/setups",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "setups"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_setup_gateway\": 1,\n  \"id_asset\": 1,\n  \"id_device_model\": 1,\n  \"setup_name\": \"string\",\n  \"setup_description\": \"string\",\n  \"setup_recommended_equipment\": \"string\",\n  \"setup_gateway_order\": 0,\n  \"setup_gateway_port\": \"string\",\n  \"setup_archived\": false\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /setups/{id_setup}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/setups/{id_setup}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "setups",
+                "{id_setup}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /setups/{id_setup}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/setups/{id_setup}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "setups",
+                "{id_setup}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_setup_gateway\": 1,\n  \"id_asset\": 1,\n  \"id_device_model\": 1,\n  \"setup_name\": \"string\",\n  \"setup_description\": \"string\",\n  \"setup_recommended_equipment\": \"string\",\n  \"setup_gateway_order\": 0,\n  \"setup_gateway_port\": \"string\",\n  \"setup_archived\": true\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /setups/{id_setup}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/setups/{id_setup}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "setups",
+                "{id_setup}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /setups/{id_setup}/devices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/setups/{id_setup}/devices",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "setups",
+                "{id_setup}",
+                "devices"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /setups/{id_setup}/metrics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/setups/{id_setup}/metrics",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "setups",
+                "{id_setup}",
+                "metrics"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "types",
+      "item": [
+        {
+          "name": "GET /types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /types/assets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/assets?skip=0&limit=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "assets"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /types/assets",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/assets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "assets"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category_name\": \"string\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /types/device_models",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/device_models?skip=0&limit=100&archived=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "device_models"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                },
+                {
+                  "key": "archived",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE /types/assets/{id_category}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/assets/{id_category}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "assets",
+                "{id_category}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /types/assets/{id_category}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/assets/{id_category}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "assets",
+                "{id_category}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /types/assets/{id_category}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/assets/{id_category}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "assets",
+                "{id_category}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category_name\": \"string\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /types/communications",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/communications",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "communications"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /types/form_inputs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/form_inputs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "form_inputs"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /types/metric_events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/metric_events?skip=0&limit=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "metric_events"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /types/metric_events",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/metric_events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "metric_events"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type_name\": \"string\",\n  \"type_description\": \"string\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /types/metric_events/{id_event_type}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/metric_events/{id_event_type}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "metric_events",
+                "{id_event_type}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /types/metric_events/{id_event_type}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/metric_events/{id_event_type}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "metric_events",
+                "{id_event_type}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /types/metric_events/{id_event_type}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/metric_events/{id_event_type}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "metric_events",
+                "{id_event_type}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type_name\": \"string\",\n  \"type_description\": \"string\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /types/metric_sources",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/metric_sources",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "metric_sources"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /types/monitor_statuses",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/monitor_statuses",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "monitor_statuses"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /types/monitor_triggers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/monitor_triggers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "monitor_triggers"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /types/monitors",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/monitors",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "monitors"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /types/widgets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/types/widgets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "types",
+                "widgets"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "uoms",
+      "item": [
+        {
+          "name": "GET /methods/aggregation",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/methods/aggregation",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "methods",
+                "aggregation"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /methods/interpolation",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/methods/interpolation",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "methods",
+                "interpolation"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /uoms",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/uoms?skip=0&limit=100&owned=false&archived=false",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "uoms"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                },
+                {
+                  "key": "owned",
+                  "value": "false",
+                  "description": "Default: false",
+                  "disabled": false
+                },
+                {
+                  "key": "archived",
+                  "value": "false",
+                  "description": "Default: false",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /uoms",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/uoms",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "uoms"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_aggregation\": 1,\n  \"id_interpolation\": 1,\n  \"uom_name\": \"string\",\n  \"uom_description\": \"string\",\n  \"uom_unit\": \"string\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /uoms/{id_uom}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/uoms/{id_uom}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "uoms",
+                "{id_uom}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /uoms/{id_uom}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/uoms/{id_uom}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "uoms",
+                "{id_uom}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /uoms/{id_uom}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/uoms/{id_uom}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "uoms",
+                "{id_uom}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_aggregation\": 1,\n  \"id_interpolation\": 1,\n  \"uom_name\": \"string\",\n  \"uom_description\": \"string\",\n  \"uom_unit\": \"string\",\n  \"uom_archived\": true\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "widgets",
+      "item": [
+        {
+          "name": "GET /widgets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "widgets"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                },
+                {
+                  "key": "archived",
+                  "value": "false",
+                  "description": "Default: false",
+                  "disabled": false
+                }
+              ],
+              "raw": "{{baseUrl}}/v4/widgets?skip=0&limit=100&archived=false"
+            }
+          }
+        },
+        {
+          "name": "POST /widgets",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "widgets"
+              ],
+              "raw": "{{baseUrl}}/v4/widgets"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_widget_type\": 1,\n  \"widget_name\": \"string\",\n  \"id_form\": 1,\n  \"widget_code\": \"string\",\n  \"widget_description\": \"string\",\n  \"widget_tags\": \"string\",\n  \"widget_order\": 100,\n  \"widget_archived\": false\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /widgets/{id_widget}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "widgets",
+                "{id_widget}"
+              ],
+              "raw": "{{baseUrl}}/v4/widgets/{id_widget}"
+            }
+          }
+        },
+        {
+          "name": "PUT /widgets/{id_widget}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "widgets",
+                "{id_widget}"
+              ],
+              "raw": "{{baseUrl}}/v4/widgets/{id_widget}"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_widget_type\": 1,\n  \"widget_name\": \"string\",\n  \"id_form\": 1,\n  \"widget_code\": \"string\",\n  \"widget_description\": \"string\",\n  \"widget_tags\": \"string\",\n  \"widget_order\": 1,\n  \"widget_archived\": true\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /widgets/{id_widget}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "widgets",
+                "{id_widget}"
+              ],
+              "raw": "{{baseUrl}}/v4/widgets/{id_widget}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "forms",
+      "item": [
+        {
+          "name": "GET /forms",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "forms"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                }
+              ],
+              "raw": "{{baseUrl}}/v4/forms?skip=0&limit=100"
+            }
+          }
+        },
+        {
+          "name": "GET /forms/{id_form}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "forms",
+                "{id_form}"
+              ],
+              "raw": "{{baseUrl}}/v4/forms/{id_form}"
+            }
+          }
+        },
+        {
+          "name": "GET /form_inputs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "form_inputs"
+              ],
+              "query": [
+                {
+                  "key": "id_form",
+                  "value": "1",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                }
+              ],
+              "raw": "{{baseUrl}}/v4/form_inputs?id_form=1&skip=0&limit=100"
+            }
+          }
+        },
+        {
+          "name": "GET /form_inputs/{id_form_input}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "form_inputs",
+                "{id_form_input}"
+              ],
+              "raw": "{{baseUrl}}/v4/form_inputs/{id_form_input}"
+            }
+          }
+        },
+        {
+          "name": "GET /form_input_types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "form_input_types"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                }
+              ],
+              "raw": "{{baseUrl}}/v4/form_input_types?skip=0&limit=100"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.clickie.io",
+      "type": "string",
+      "description": "Base URL for the Clickie API."
+    },
+    {
+      "key": "Authorization",
+      "value": "",
+      "type": "string",
+      "description": "Authorization token copied from the my.clickie.io account configuration panel."
+    },
+    {
+      "key": "Account",
+      "value": "",
+      "type": "string",
+      "description": "Account identifier available in the my.clickie.io account configuration panel."
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "const auth = pm.variables.get('Authorization');",
+          "const account = pm.variables.get('Account');",
+          "if (auth !== undefined) {",
+          "    pm.request.headers.upsert({ key: 'Authorization', value: auth, disabled: false });",
+          "}",
+          "if (account !== undefined) {",
+          "    pm.request.headers.upsert({ key: 'Account', value: account, disabled: false });",
+          "}"
+        ]
+      }
+    }
+  ]
+}

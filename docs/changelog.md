@@ -12,6 +12,11 @@ status: "stable"
 
 - Se incorporó la sección **API v4** en la navegación de `mkdocs.yml`, incluyendo estructura anidada por dominios de endpoint.
 - Se habilitó la visibilidad de `docs/api/**` tanto en MkDocs como en la web pública generada por React/Vite.
+- Se creó versión bilingüe para la web pública:
+  - `docs/api-es/**`: traducción al español de la documentación API sin modificar `docs/api/**` original.
+  - `docs/en/**`: traducción al inglés de la documentación funcional.
+- Se agregó selector de idioma (ES/EN) en la topbar, con idioma por defecto en español y persistencia de preferencia en navegador.
+- Se añadió `scripts/build_bilingual_docs.py` para regenerar automáticamente las carpetas traducidas.
 
 ## 2026-02-26
 

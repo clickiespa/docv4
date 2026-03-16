@@ -3,6 +3,9 @@ site_description: Manual operativo de Clickie generado desde Markdown
 site_url: https://clickiespa.github.io/docv4/
 docs_dir: docs
 site_dir: site
+exclude_docs: |
+  en/**
+  api-es/**
 
 theme:
   name: material

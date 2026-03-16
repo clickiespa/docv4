@@ -8,6 +8,10 @@ Repositorio docs-first para Clickie.
 - **Salida documental**: MkDocs compila la documentación a `/site`.
 - **Salida editorial externa**: `scripts/sync_to_gdocs.py` publica el contenido Markdown en Google Docs.
 - **Sitio público**: GitHub Pages despliega la app React/Vite del repositorio, con contenido generado desde `/docs` mediante `scripts/generate_web_docs.mjs`.
+- **Capa bilingüe web**:
+  - `docs/api/**`: fuente original API en inglés (no se modifica).
+  - `docs/api-es/**`: traducción al español de API.
+  - `docs/en/**`: traducción al inglés de la documentación funcional.
 
 > Google Doc es salida generada: no se edita manualmente como fuente primaria.
 
@@ -33,7 +37,17 @@ Repositorio docs-first para Clickie.
   /configuracion
     cuenta.md
     datos-y-fuentes.md
+  /api
+    README.md
+    ...
+  /api-es
+    README.md
+    ...
+  /en
+    index.md
+    ...
 /scripts
+  build_bilingual_docs.py
   generate_web_docs.mjs
   sync_to_gdocs.py
 .github/workflows
@@ -102,6 +116,24 @@ Notas:
 
 - `scripts/generate_web_docs.mjs` interpreta estas directivas para la web React.
 - `scripts/sync_to_gdocs.py` elimina automáticamente solo los wrappers `:::` y conserva el contenido para Google Docs.
+
+## Sitio bilingüe (ES/EN)
+
+- El selector de idioma está en la topbar del sitio público.
+- Idioma por defecto: **Español**.
+- La preferencia se persiste en `localStorage`.
+- Para regenerar traducciones:
+
+```bash
+python scripts/build_bilingual_docs.py
+```
+
+Opciones:
+
+```bash
+python scripts/build_bilingual_docs.py --only api-es
+python scripts/build_bilingual_docs.py --only en
+```
 
 ## Desarrollo local
 
