@@ -10,7 +10,7 @@ List the Clickiemota devices that belong to the authenticated account. Devices a
 
 ## Request
 ```http
-GET /dev/clickiemottas/devices HTTP/1.1
+GET /v4/gateways/devices HTTP/1.1
 Host: api.clickie.io
 Authorization: <api-key>
 Account: 33
@@ -72,7 +72,7 @@ Retrieve detailed metadata for a single Clickiemota device. Validates that the d
 
 #### Request
 ```http
-GET /dev/clickiemottas/devices/cm-001 HTTP/1.1
+GET /v4/gateways/devices/cm-001 HTTP/1.1
 Host: api.clickie.io
 Authorization: <api-key>
 Account: 33
@@ -204,7 +204,7 @@ Account: 33
 
 Full configuration:
 ```http
-GET /dev/clickiemottas/devices/cm-001/config HTTP/1.1
+GET /v4/gateways/devices/cm-001/config HTTP/1.1
 Host: api.clickie.io
 Authorization: <api-key>
 Account: 33
@@ -212,12 +212,12 @@ Account: 33
 
 With subscription parameter:
 ```http
-GET /dev/clickiemottas/devices/cm-001/config?subscription=core HTTP/1.1
+GET /v4/gateways/devices/cm-001/config?subscription=core HTTP/1.1
 ```
 
 Read a specific nested property (e.g., temperature thresholds):
 ```http
-GET /dev/clickiemottas/devices/cm-001/config?mode=read_specific&route=app/thresholds/temperature HTTP/1.1
+GET /v4/gateways/devices/cm-001/config?mode=read_specific&route=app/thresholds/temperature HTTP/1.1
 Host: api.clickie.io
 Authorization: <api-key>
 Account: 33
@@ -319,7 +319,7 @@ When `mode=read_specific&route=app/thresholds/temperature`:
 
 Full configuration update:
 ```http
-PUT /dev/clickiemottas/devices/cm-001/config?subscription=edge HTTP/1.1
+PUT /v4/gateways/devices/cm-001/config?subscription=edge HTTP/1.1
 Host: api.clickie.io
 Authorization: <api-key>
 Account: 33
@@ -346,7 +346,7 @@ Idempotency-Key: 4b0fd0b0-4ef1-4b61-b7ce-73e1e7afc9be
 
 Update a specific nested property (e.g., temperature thresholds):
 ```http
-PUT /dev/clickiemottas/devices/cm-001/config HTTP/1.1
+PUT /v4/gateways/devices/cm-001/config HTTP/1.1
 Host: api.clickie.io
 Authorization: <api-key>
 Account: 33
@@ -366,7 +366,7 @@ Idempotency-Key: 4b0fd0b0-4ef1-4b61-b7ce-73e1e7afc9be
 
 Create missing intermediate paths during targeted update:
 ```http
-PUT /dev/clickiemottas/devices/cm-001/config HTTP/1.1
+PUT /v4/gateways/devices/cm-001/config HTTP/1.1
 Host: api.clickie.io
 Authorization: <api-key>
 Account: 33
