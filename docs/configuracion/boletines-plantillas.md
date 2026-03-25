@@ -1,7 +1,7 @@
 ---
 title: "Boletines - Plantillas"
 version: "v4"
-last_updated: "2026-02-26"
+last_updated: "2026-03-25"
 owner: "Product"
 status: "stable"
 ---
@@ -14,6 +14,11 @@ Controlan cabeceras, pie de página y contenedor donde se inyectan bloques diná
 :::module-strip
 Una plantilla bien diseñada mantiene identidad de marca, respeta políticas de correo y permite personalizaciones sin romper layout.
 :::
+
+## Captura de la sección
+
+![Listado de plantillas de boletines en Clickie](../assets/screenshots/modules/newsletter_templates.png)
+*Vista de plantillas disponibles para estructurar y estandarizar envíos.*
 
 ## Acceso y listado
 

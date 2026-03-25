@@ -1,7 +1,7 @@
 ---
 title: "Visor de datos"
 version: "v4"
-last_updated: "2026-02-26"
+last_updated: "2026-03-25"
 owner: "Product"
 status: "stable"
 ---
@@ -13,6 +13,11 @@ El **Visor de datos** funciona como una caja de arena para explorar métricas, v
 :::module-strip
 Visor de datos es el entorno recomendado para validar una hipótesis antes de escalarla a paneles, reportes o monitoreos. Primero se contrasta el dato, después se comunica.
 :::
+
+## Captura de la sección
+
+![Pantalla del Visor de datos en Clickie](../assets/screenshots/modules/metrics_viewer.png)
+*Vista del gráfico principal y del área de selección de métricas en el visor.*
 
 ## Valor para usuarios y clientes
 

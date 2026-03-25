@@ -174,6 +174,32 @@ function rewriteInternalDocLinks(html, currentDocPath, docPathToSectionId) {
   });
 }
 
+function rewriteRelativeMediaSources(html, currentDocPath) {
+  const normalizedCurrent = normalizeDocPath(currentDocPath);
+  const currentDir = path.posix.dirname(normalizedCurrent);
+
+  return html.replace(/src="([^"]+)"/g, (fullMatch, rawSrc) => {
+    const src = String(rawSrc || '').trim();
+    if (!src || src.startsWith('#') || src.startsWith('/') || isExternalHref(src)) {
+      return fullMatch;
+    }
+
+    const [srcNoHash] = src.split('#');
+    const [srcPath] = srcNoHash.split('?');
+    if (!srcPath) {
+      return fullMatch;
+    }
+
+    const suffix = src.slice(srcPath.length);
+    const resolvedSrcPath = normalizeDocPath(path.posix.normalize(path.posix.join(currentDir, srcPath)));
+    if (resolvedSrcPath.startsWith('..')) {
+      return fullMatch;
+    }
+
+    return `src="./${resolvedSrcPath}${suffix}"`;
+  });
+}
+
 function parseDirectiveArgs(raw = '') {
   const args = {};
   const argRegex = /([a-zA-Z0-9_-]+)=("([^"]*)"|'([^']*)'|([^\s]+))/g;
@@ -863,11 +889,13 @@ async function buildLocaleShell(locale, nav) {
     }
 
     const bodyNoH1 = removeFirstH1(parsed.content);
-    const bodyHtml = rewriteInternalDocLinks(
-      renderMarkdownWithBlocks(bodyNoH1, locale),
+    const bodyMarkdownHtml = renderMarkdownWithBlocks(bodyNoH1, locale);
+    const bodyWithRewrittenLinks = rewriteInternalDocLinks(
+      bodyMarkdownHtml,
       docPath,
       docPathToSectionId
     );
+    const bodyHtml = rewriteRelativeMediaSources(bodyWithRewrittenLinks, docPath);
     const icon = ICON_BY_GROUP[group] || '◆';
     const dividerHtml = idx < docItems.length - 1 ? '<div class="divider"></div>' : '';
 

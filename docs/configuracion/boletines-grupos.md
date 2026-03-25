@@ -1,7 +1,7 @@
 ---
 title: "Boletines - Grupos de destinatarios"
 version: "v4"
-last_updated: "2026-02-26"
+last_updated: "2026-03-25"
 owner: "Product"
 status: "stable"
 ---
@@ -14,6 +14,11 @@ Funcionan como contenedores reutilizables para segmentar equipos y cohorts de us
 :::module-strip
 Usar grupos aporta consistencia, reduce trabajo manual y mejora gobernanza cuando los boletines forman parte de acuerdos de servicio o reportes regulatorios.
 :::
+
+## Captura de la sección
+
+![Listado de listas de distribución para boletines](../assets/screenshots/modules/newsletter_lists.png)
+*Vista de grupos/listas de destinatarios con búsqueda, filtros y acciones de mantenimiento.*
 
 ## Por qué usar grupos en lugar de destinatarios sueltos
 

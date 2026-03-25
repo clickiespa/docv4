@@ -1,7 +1,7 @@
 ---
 title: "Activos"
 version: "v4"
-last_updated: "2026-02-26"
+last_updated: "2026-03-25"
 owner: "Product"
 status: "stable"
 ---
@@ -9,6 +9,11 @@ status: "stable"
 # Activos
 
 El módulo **Activos** organiza métricas, paneles y gemelos bajo una unidad lógica común para mejorar navegación y contexto operativo.
+
+## Captura de la sección
+
+![Listado de activos en Clickie](../assets/screenshots/modules/assets.png)
+*Vista del listado de activos con categoría, fecha de creación y menú de acciones.*
 
 ## Datos del listado
 

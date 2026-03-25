@@ -1,7 +1,7 @@
 ---
 title: "Boletines"
 version: "v4"
-last_updated: "2026-02-26"
+last_updated: "2026-03-25"
 owner: "Product"
 status: "stable"
 ---
@@ -14,6 +14,11 @@ Cada envío combina contenido dinámico basado en métricas con bloques editoria
 :::module-strip
 Boletines está pensado para automatizar reportes recurrentes, reducir tareas manuales y mantener equipos y stakeholders alineados con la evolución de datos.
 :::
+
+## Captura de la sección
+
+![Listado de boletines en Clickie](../assets/screenshots/modules/newsletters.png)
+*Vista de Boletines con estado de envíos, búsqueda y acciones por boletín.*
 
 Cada boletín coordina tres componentes:
 

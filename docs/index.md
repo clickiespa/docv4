@@ -1,7 +1,7 @@
 ---
 title: "Manual de uso de Clickie"
 version: "v4"
-last_updated: "2026-02-26"
+last_updated: "2026-03-25"
 owner: "Product"
 status: "stable"
 ---
@@ -41,6 +41,14 @@ Ingreso oficial a la plataforma Clickie para comenzar la operación.
 - Idiomas disponibles: Español, Inglés y Portugués
 - Contacto: [contacto@clickie.io](mailto:contacto@clickie.io)
 
+### Capturas de acceso
+
+![Pantalla de autenticación de Clickie en escritorio](./assets/screenshots/clickie-authentication-desktop.png)
+*Pantalla de autenticación de Clickie (vista escritorio).*
+
+![Pantalla de autenticación de Clickie en móvil](./assets/screenshots/clickie-authentication-mobile.png)
+*Pantalla de autenticación de Clickie (vista móvil).*
+
 ## Estructura general de la interfaz
 
 La interfaz principal incluye:
@@ -48,6 +56,9 @@ La interfaz principal incluye:
 1. Menú lateral con módulos funcionales.
 2. Buscador global para métricas, activos, paneles, reportes, monitoreos y gemelos digitales.
 3. Perfil de usuario para configuraciones de cuenta e idioma.
+
+![Vista general de navegación de módulos en Clickie](./assets/screenshots/modules/metrics.png)
+*Ejemplo de interfaz con menú lateral, buscador global y accesos por módulo.*
 
 ## Camino de aprendizaje recomendado
 

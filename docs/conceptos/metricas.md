@@ -1,12 +1,17 @@
 ---
 title: "Métricas y fórmulas"
 version: "v4"
-last_updated: "2026-02-26"
+last_updated: "2026-03-25"
 owner: "Product"
 status: "stable"
 ---
 
 # Métricas y fórmulas
+
+## Captura de la sección
+
+![Listado del módulo Mis métricas en Clickie](../assets/screenshots/modules/metrics.png)
+*Vista del listado de métricas con columnas operativas y acciones de gestión.*
 
 ## Qué es una métrica
 

@@ -1,7 +1,7 @@
 ---
 title: "Paneles y reportes"
 version: "v4"
-last_updated: "2026-02-26"
+last_updated: "2026-03-25"
 owner: "Product"
 status: "stable"
 ---
@@ -9,6 +9,11 @@ status: "stable"
 # Paneles y reportes
 
 El módulo **Paneles y reportes** permite construir visualizaciones persistentes para seguimiento operativo y análisis periódico.
+
+## Captura de la sección
+
+![Listado de paneles y reportes en Clickie](../assets/screenshots/modules/dashboards.png)
+*Vista del listado de paneles con búsqueda, filtros y acciones por registro.*
 
 ## Datos del listado
 

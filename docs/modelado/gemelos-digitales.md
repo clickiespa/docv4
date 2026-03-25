@@ -1,7 +1,7 @@
 ---
 title: "Gemelos digitales"
 version: "v4"
-last_updated: "2026-02-26"
+last_updated: "2026-03-25"
 owner: "Product"
 status: "stable"
 ---
@@ -13,6 +13,11 @@ Los **Gemelos digitales** representan activos en una vista visual con datos en t
 :::module-strip
 Gemelos digitales combina contexto visual y dato operativo para que los equipos interpreten más rápido el estado de una instalación, equipo o proceso.
 :::
+
+## Captura de la sección
+
+![Listado de gemelos digitales en Clickie](../assets/screenshots/modules/avatars.png)
+*Vista de la sección Gemelos digitales con estado de publicación y acciones disponibles.*
 
 ## Para qué sirve este módulo
 

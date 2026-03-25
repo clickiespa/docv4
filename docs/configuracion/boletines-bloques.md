@@ -1,7 +1,7 @@
 ---
 title: "Boletines - Bloques de contenido"
 version: "v4"
-last_updated: "2026-02-26"
+last_updated: "2026-03-25"
 owner: "Product"
 status: "stable"
 ---
@@ -10,6 +10,11 @@ status: "stable"
 
 Los bloques determinan qué información aparece en un boletín y en qué formato se presenta.
 Cada bloque combina una plantilla visual con parámetros de configuración (títulos, métricas, ventanas temporales o HTML) y el orden final define la narrativa del envío.
+
+## Captura de referencia
+
+![Vista general del módulo Boletines](../assets/screenshots/modules/newsletters.png)
+*Desde el detalle de cada boletín se gestionan los bloques de contenido y su orden de presentación.*
 
 ## Cómo funcionan los bloques
 

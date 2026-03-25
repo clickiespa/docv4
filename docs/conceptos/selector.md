@@ -1,7 +1,7 @@
 ---
 title: "Selector de métricas"
 version: "v4"
-last_updated: "2026-02-26"
+last_updated: "2026-03-25"
 owner: "Product"
 status: "stable"
 ---
@@ -13,6 +13,11 @@ El **Selector de métricas** es una herramienta transversal que aparece cada vez
 :::module-strip
 El Selector de métricas es la puerta de entrada para convertir datos disponibles en decisiones consistentes. Se usa en toda la plataforma y evita configuraciones aisladas por módulo.
 :::
+
+## Captura de la sección
+
+![Selector de métricas dentro del Visor de datos](../assets/screenshots/modules/metrics_viewer.png)
+*Pestaña Explorar del selector con categorías para elegir métricas por contexto.*
 
 ## Para qué sirve en términos de negocio
 

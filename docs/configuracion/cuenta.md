@@ -1,7 +1,7 @@
 ---
 title: "Configuración de cuenta"
 version: "v4"
-last_updated: "2026-02-26"
+last_updated: "2026-03-25"
 owner: "Product"
 status: "stable"
 ---
@@ -9,6 +9,11 @@ status: "stable"
 # Configuración de cuenta
 
 La sección de **Configuración de cuenta** centraliza la administración de colaboradores, datos de cuenta y apariencia.
+
+## Captura de la sección
+
+![Pantalla de configuración de cuenta en Clickie](../assets/screenshots/modules/account.png)
+*Vista de los campos generales de cuenta, dashboard por defecto y zona horaria.*
 
 ## Gestión de cuenta
 

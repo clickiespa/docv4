@@ -1,12 +1,26 @@
 ---
 title: "Changelog"
 version: "v4"
-last_updated: "2026-03-16"
+last_updated: "2026-03-25"
 owner: "Product"
 status: "stable"
 ---
 
 # Changelog
+
+## 2026-03-25
+
+- Se incorporaron capturas reales de la plataforma Clickie en las secciones funcionales del manual (`conceptos`, `analisis`, `automatizacion`, `modelado`, `organizacion`, `configuracion`) y en la sección de acceso de `docs/index.md`.
+- Se añadieron assets de screenshots en:
+  - `docs/assets/screenshots/clickie-authentication-desktop.png`
+  - `docs/assets/screenshots/clickie-authentication-mobile.png`
+  - `docs/assets/screenshots/modules/*.png`
+- Se copiaron las capturas a `public/assets/screenshots/` para visualización en la salida HTML del manual web React/Vite:
+  - `public/assets/screenshots/clickie-authentication-desktop.png`
+  - `public/assets/screenshots/clickie-authentication-mobile.png`
+  - `public/assets/screenshots/modules/*.png`
+- Se mejoró el estilo de imágenes en `src/manual.css` para render responsive dentro de contenidos Markdown.
+- Se actualizó `scripts/generate_web_docs.mjs` para reescribir rutas relativas de imágenes y garantizar su visualización correcta en el HTML unificado generado.
 
 ## 2026-03-16
 

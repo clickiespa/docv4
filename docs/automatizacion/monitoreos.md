@@ -1,7 +1,7 @@
 ---
 title: "Monitoreos"
 version: "v4"
-last_updated: "2026-02-26"
+last_updated: "2026-03-25"
 owner: "Product"
 status: "stable"
 ---
@@ -13,6 +13,11 @@ El módulo **Monitoreos** evalúa condiciones sobre métricas y genera estados o
 :::module-strip
 Monitoreos convierte comportamiento de datos en alertas operativas. El objetivo es detectar desvío, priorizar impacto y comunicar al equipo correcto con reglas claras.
 :::
+
+## Captura de la sección
+
+![Listado de monitoreos en Clickie](../assets/screenshots/modules/monitors.png)
+*Vista del módulo Monitoreos con estado operativo, tipo y frecuencia de cada regla.*
 
 ## Qué aporta a la operación
 
