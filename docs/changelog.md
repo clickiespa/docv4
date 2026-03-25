@@ -21,6 +21,7 @@ status: "stable"
   - `public/assets/screenshots/modules/*.png`
 - Se mejoró el estilo de imágenes en `src/manual.css` para render responsive dentro de contenidos Markdown.
 - Se actualizó `scripts/generate_web_docs.mjs` para reescribir rutas relativas de imágenes y garantizar su visualización correcta en el HTML unificado generado.
+- Se retiraron del `index.md` las capturas de login (usuario/password) para evitar desproporción visual en la portada del manual HTML.
 
 ## 2026-03-16
 

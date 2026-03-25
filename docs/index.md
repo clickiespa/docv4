@@ -41,14 +41,6 @@ Ingreso oficial a la plataforma Clickie para comenzar la operación.
 - Idiomas disponibles: Español, Inglés y Portugués
 - Contacto: [contacto@clickie.io](mailto:contacto@clickie.io)
 
-### Capturas de acceso
-
-![Pantalla de autenticación de Clickie en escritorio](./assets/screenshots/clickie-authentication-desktop.png)
-*Pantalla de autenticación de Clickie (vista escritorio).*
-
-![Pantalla de autenticación de Clickie en móvil](./assets/screenshots/clickie-authentication-mobile.png)
-*Pantalla de autenticación de Clickie (vista móvil).*
-
 ## Estructura general de la interfaz
 
 La interfaz principal incluye:
