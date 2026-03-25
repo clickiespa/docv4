@@ -49,8 +49,8 @@ La interfaz principal incluye:
 2. Buscador global para métricas, activos, paneles, reportes, monitoreos y gemelos digitales.
 3. Perfil de usuario para configuraciones de cuenta e idioma.
 
-![Vista general de navegación de módulos en Clickie](./assets/screenshots/modules/metrics.png)
-*Ejemplo de interfaz con menú lateral, buscador global y accesos por módulo.*
+![Vista general de navegación de módulos en Clickie](./assets/screenshots/modules/home.png)
+*Vista de inicio con menú lateral, buscador global y accesos por módulo.*
 
 ## Camino de aprendizaje recomendado
 
