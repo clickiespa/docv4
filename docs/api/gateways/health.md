@@ -8,7 +8,7 @@ Return the operational status of the Clickiemota API and echo the authenticated 
 
 ## Request
 ```http
-GET /dev/clickiemottas/health HTTP/1.1
+GET /v4/gateways/health HTTP/1.1
 Host: api.clickie.io
 Authorization: <api-key>
 Account: 33
