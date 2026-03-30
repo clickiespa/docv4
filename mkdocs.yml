@@ -59,7 +59,7 @@ nav:
           - Metrics and Data:
               - Metrics: api/Metrics_and_data/metrics.md
               - Data Ingestion and Deletion: api/Metrics_and_data/data_ingestion_and_deletion.md
-              - Legacy Data Notes: api/Metrics_and_data/data_no_usar.md
+              - Legacy Data Notes: api/Metrics_and_data/data.md
           - Monitors:
               - Monitors: api/Monitors/monitors.md
               - Ground Monitor: api/Monitors/ground_monitor.md
