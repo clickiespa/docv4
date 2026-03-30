@@ -26,7 +26,7 @@ This page is designed as a client-facing guide so you can quickly find the right
 
 ### `data`
 - [Data ingestion and deletion](Metrics_and_data/data_ingestion_and_deletion.md) — datapoint ingestion and deletion for `/metrics/{metric_identifier}/datapoints`.
-- [Legacy data notes](Metrics_and_data/data_no_usar.md) — historical reference file.
+- [Legacy data notes](Metrics_and_data/data.md) — historical reference file.
 
 ### `devices`
 - [Devices endpoints](Devices/devices.md) — device CRUD and related operations.
