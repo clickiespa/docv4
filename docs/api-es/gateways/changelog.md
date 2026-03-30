@@ -31,11 +31,11 @@ y este proyecto se adhiere a [Versionado semántico](https://semver.org/spec/v2.
 
 ### Directrices para las entradas del registro de cambios
 
-- **Agregado**: nuevas funciones o puntos finales
+- **Agregado**: nuevas funciones o endpoints
 - **Cambiado**: cambios en la funcionalidad existente
 - **Corregido** — Corrección de errores
 - **Obsoleto**: funciones marcadas para eliminación futura
-- **Eliminado**: funciones o puntos finales eliminados
+- **Eliminado**: funciones o endpoints eliminados
 - **Seguridad**: parches de seguridad o correcciones de vulnerabilidades
 
 ### Formato para cada entrada

@@ -1,4 +1,4 @@
-# Puntos finales de trabajos: lineamientos de implementación
+# Endpoints de trabajos: lineamientos de implementación
 
 > El subsistema de empleos ya existe en los servicios compartidos construidos por Mati. Integre con ese almacenamiento en lugar de crear una nueva capa de persistencia. Estas notas describen los contratos esperados por la API de Clickiemota.
 

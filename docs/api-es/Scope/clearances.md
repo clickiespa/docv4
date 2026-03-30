@@ -4,15 +4,15 @@ Las autorizaciones representan el nivel de autorización que determina qué recu
 
 Consulte [Permisos de recursos por matriz de autorización](https://www.google.com) para obtener una referencia cruzada de los recursos API, las operaciones y los niveles de autorización que pueden ejecutarlos.
 
-## Puntos finales
+## Endpoints
 - [Listar autorizaciones](#list-clearances)
 - [Recuperar mi autorización](#retrieve-my-clearance)
 
 ## Listar autorizaciones
 
-Se requiere autorización con permiso de lectura sobre las autorizaciones para utilizar este punto final.
+Se requiere autorización con permiso de lectura sobre las autorizaciones para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /clearances
 ```
@@ -26,7 +26,7 @@ GET /clearances
 
 ### Parámetros de consulta
 
-Este punto final no acepta parámetros de consulta.
+Este endpoint no acepta parámetros de consulta.
 
 ### Solicitud de muestra
 ```bash
@@ -60,15 +60,15 @@ curl -H "Authorization: <API_KEY>" \
 - `400` Solicitud no válida
 - `401` Credenciales de autenticación faltantes o no válidas
 - `403` Permisos insuficientes para enumerar autorizaciones
-- `404` Punto final no encontrado
+- `404` Endpoint no encontrado
 - `500` Error inesperado del servidor
 
 ## Recuperar mi autorización
 
-Debe pertenecer a la cuenta solicitada para utilizar este punto final.
-Se requiere la autorización asociada con su membresía en la cuenta de destino para utilizar este punto final.
+Debe pertenecer a la cuenta solicitada para utilizar este endpoint.
+Se requiere la autorización asociada con su membresía en la cuenta de destino para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /clearances/me
 ```
@@ -82,7 +82,7 @@ GET /clearances/me
 
 ### Parámetros de consulta
 
-Este punto final no acepta parámetros de consulta.
+Este endpoint no acepta parámetros de consulta.
 
 ### Solicitud de muestra
 ```bash
@@ -114,5 +114,5 @@ curl -H "Authorization: <API_KEY>" \
 - `400` Solicitud no válida
 - `401` Credenciales de autenticación faltantes o no válidas
 - `403` La persona que llama no pertenece a la cuenta
-- `404` Punto final no encontrado
+- `404` Endpoint no encontrado
 - `500` Error inesperado del servidor

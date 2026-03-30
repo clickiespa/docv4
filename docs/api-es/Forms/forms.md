@@ -1,6 +1,6 @@
 # formularios
 
-Índice de puntos finales que exponen catálogos de formularios y definiciones de entrada.
+Índice de endpoints que exponen catálogos de formularios y definiciones de entrada.
 
 - [Formularios de lista](#list-forms)
 - [Obtener formulario](#get-form)
@@ -11,7 +11,7 @@
 ## Listar formularios
 Devuelva los formularios paginados disponibles para la cuenta autenticada. Se requiere nivel de autorización 7.
 
-### Punto final
+### Endpoint
 ```
 GET /forms
 ```
@@ -55,7 +55,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: 1" /forms?skip=0&limit=20
 ## Obtener formulario
 Recuperar una única definición de formulario. Se requiere nivel de autorización 7.
 
-### Punto final
+### Endpoint
 ```
 GET /forms/{id_form}
 ```
@@ -96,7 +96,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: 1" /forms/5
 ## Listar entradas del formulario
 Enumere las entradas que pertenecen a un formulario determinado. Se requiere nivel de autorización 7.
 
-### Punto final
+### Endpoint
 ```
 GET /form_inputs
 ```
@@ -152,7 +152,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: 1" \
 ## Obtener entrada del formulario
 Obtenga metadatos para una única entrada de formulario. Se requiere nivel de autorización 7.
 
-### Punto final
+### Endpoint
 ```
 GET /form_inputs/{id_form_input}
 ```
@@ -203,7 +203,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: 1" /form_inputs/14
 ## Listar tipos de entrada de formulario
 Devuelve el catálogo de tipos de entrada disponibles. Se requiere nivel de autorización 7.
 
-### Punto final
+### Endpoint
 ```
 GET /form_input_types
 ```

@@ -1,6 +1,6 @@
 # Métricas
 
-## Puntos finales
+## Endpoints
 - [Listar métricas](#list-metrics)
 - [Crear métrica](#create-metric)
 - [Obtener métrica](#get-metric)
@@ -19,9 +19,9 @@ Las métricas almacenan datos de series temporales.
 
 Recupere todas las métricas configuradas para la cuenta autenticada.
 
-Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre métricas para utilizar este punto final.
+Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre métricas para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 
 ```
 GET /metrics
@@ -63,9 +63,9 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /metrics?skip=0&li
 
 Registre una nueva métrica para la cuenta autenticada.
 
-Se requiere un nivel de autorización 5 o inferior con permiso de creación sobre métricas para utilizar este punto final.
+Se requiere un nivel de autorización 5 o inferior con permiso de creación sobre métricas para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 
 ```
 POST /metrics
@@ -124,9 +124,9 @@ curl -X POST \
 
 Recuperar una métrica por su identificador.
 
-Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre métricas para utilizar este punto final.
+Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre métricas para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /metrics/{metric_identifier}
 ```
@@ -164,9 +164,9 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /metrics/<metric_u
 
 Modificar una métrica existente.
 
-Se requiere un nivel de autorización 5 o inferior con permiso de actualización de métricas para utilizar este punto final.
+Se requiere un nivel de autorización 5 o inferior con permiso de actualización de métricas para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 PUT /metrics/{metric_identifier}
 ```
@@ -224,9 +224,9 @@ curl -X PUT \
 
 Archive una métrica que ya no sea necesaria.
 
-Se requiere un nivel de autorización 2 o inferior con permiso de eliminación de métricas para utilizar este punto final.
+Se requiere un nivel de autorización 2 o inferior con permiso de eliminación de métricas para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 DELETE /metrics/{metric_identifier}
 ```
@@ -268,9 +268,9 @@ Los eventos anotan métricas con información contextual, como ventanas de mante
 
 Recupere todos los eventos configurados para la cuenta autenticada.
 
-Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre eventos de métricas para utilizar este punto final.
+Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre eventos de métricas para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /metrics/{metric_identifier}/events
 ```
@@ -315,9 +315,9 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /metrics/<metric_u
 
 Recupera un único evento por su identificador.
 
-Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre eventos de métricas para utilizar este punto final.
+Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre eventos de métricas para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /metrics/{metric_identifier}/events/{id_metric_event}
 ```
@@ -356,9 +356,9 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /metrics/<metric_u
 
 Registre un nuevo evento asociado con una métrica.
 
-Se requiere un nivel de autorización 5 o inferior con permiso de creación sobre eventos de métricas para utilizar este punto final.
+Se requiere un nivel de autorización 5 o inferior con permiso de creación sobre eventos de métricas para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 POST /metrics/{metric_identifier}/events
 ```
@@ -410,9 +410,9 @@ curl -X POST \
 
 Modificar un evento existente.
 
-Se requiere un nivel de autorización 5 o inferior con permiso de actualización sobre eventos de métricas para utilizar este punto final.
+Se requiere un nivel de autorización 5 o inferior con permiso de actualización sobre eventos de métricas para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 PUT /metrics/{metric_identifier}/events/{id_metric_event}
 ```
@@ -464,9 +464,9 @@ curl -X PUT \
 
 Eliminar un evento del historial de la cuenta.
 
-Se requiere un nivel de autorización 5 o inferior con permiso de eliminación sobre eventos de métricas para utilizar este punto final.
+Se requiere un nivel de autorización 5 o inferior con permiso de eliminación sobre eventos de métricas para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 DELETE /metrics/{metric_identifier}/events/{id_metric_event}
 ```

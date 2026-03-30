@@ -1,6 +1,6 @@
 # tipos
 
-## Puntos finales
+## Endpoints
 - [Listar grupos de tipos disponibles](#list-available-type-groups)
 - [Tipos de monitores](#monitor-types)
 - [Tipos de comunicación](#communication-types)
@@ -10,14 +10,14 @@
 - [Tipos de widgets](#widget-types)
 - [Tipos de entrada de formulario](#form-input-types)
 
-Puntos finales de utilidad que devuelven listas de tipos predefinidos.
+Endpoints de utilidad que devuelven listas de tipos predefinidos.
 
 Un tipo es un tipo particular de entidad, que se utiliza en la creación o modificación de otras entidades para categorizarlas. Existe un tipo de entidad para algunas entidades, la mayoría de ellas siguen el mismo patrón de nomenclatura:
 para la entidad "entidad_a", su tipo de entidad se llama "entidad_a_tipo". Por ejemplo, para los activos, su tipo de entidad se llama active_types y así sucesivamente.
 
 ## Listar grupos de tipos disponibles
 
-### Punto final
+### Endpoint
 ```
 GET /types
 ```
@@ -41,7 +41,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /types
 
 ## Tipos de monitores
 
-### Punto final
+### Endpoint
 ```
 GET /types/monitors
 ```
@@ -65,7 +65,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /types/monitors
 
 ## Tipos de comunicación
 
-### Punto final
+### Endpoint
 ```
 GET /types/communications
 ```
@@ -89,7 +89,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /types/communicati
 
 ## Monitorear tipos de disparadores
 
-### Punto final
+### Endpoint
 ```
 GET /types/monitor_triggers
 ```
@@ -113,7 +113,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /types/monitor_tri
 
 ## Monitorear estados
 
-### Punto final
+### Endpoint
 ```
 GET /types/monitor_statuses
 ```
@@ -137,7 +137,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /types/monitor_sta
 
 ## Fuentes de métricas
 
-### Punto final
+### Endpoint
 ```
 GET /types/metric_sources
 ```
@@ -161,7 +161,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /types/metric_sour
 
 ## Tipos de widgets
 
-### Punto final
+### Endpoint
 ```
 GET /types/widgets
 ```
@@ -185,7 +185,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /types/widgets
 
 ## Tipos de entrada de formulario
 
-### Punto final
+### Endpoint
 ```
 GET /types/form_inputs
 ```

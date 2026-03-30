@@ -2,7 +2,7 @@
 
 Relación histórica entre los dispositivos físicos y las configuraciones que implementan.
 
-## Puntos finales
+## Endpoints
 - [Dispositivos por configuración](#devices-by-setup)
 - [Configuraciones por dispositivo](#setups-by-device)
 
@@ -10,9 +10,9 @@ Relación histórica entre los dispositivos físicos y las configuraciones que i
 
 Enumere cada asignación de un dispositivo a la configuración solicitada.
 
-Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este punto final.
+Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /setups/{id_setup}/devices
 ```
@@ -32,7 +32,7 @@ GET /setups/{id_setup}/devices
 
 ### Parámetros de consulta
 
-Este punto final no acepta parámetros de consulta.
+Este endpoint no acepta parámetros de consulta.
 
 ### Encabezados de muestra
 ```json
@@ -111,9 +111,9 @@ curl -H "Authorization: <API_KEY>" \
 
 Enumere todas las configuraciones que se han asignado al dispositivo solicitado.
 
-Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este punto final.
+Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /devices/{id_device}/setups
 ```
@@ -133,7 +133,7 @@ GET /devices/{id_device}/setups
 
 ### Parámetros de consulta
 
-Este punto final no acepta parámetros de consulta.
+Este endpoint no acepta parámetros de consulta.
 
 ### Encabezados de muestra
 ```json

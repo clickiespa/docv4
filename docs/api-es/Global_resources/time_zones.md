@@ -1,6 +1,6 @@
 # Zonas horarias
 
-## Puntos finales
+## Endpoints
 - [Listar zonas horarias](#list-time-zones)
 
 Recuperar zonas horarias admitidas por la API.
@@ -8,9 +8,9 @@ Recuperar zonas horarias admitidas por la API.
 ## Listar zonas horarias
 Devuelve la lista de zonas horarias admitidas, incluyendo opcionalmente las compensaciones UTC.
 
-Se requiere un nivel de autorización 7 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 7 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /time_zones
 ```

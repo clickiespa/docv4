@@ -1,6 +1,6 @@
 # Datos
 
-Puntos finales para recuperar y gestionar datos métricos.
+Endpoints para recuperar y gestionar datos métricos.
 
 ## Obtener datos de métricas
 
@@ -45,7 +45,7 @@ Campos:
 - **mensaje** – explicación
 - **datos** – mapeo de marca de tiempo/valor
 - **context** – detalles devueltos cuando está habilitado
-- **instancia** – ruta del punto final
+- **instancia** – ruta del endpoint
 
 
 ## Actualizar datos de métricas
@@ -76,7 +76,7 @@ Ejemplo de cuerpo:
 
 `GET /data/formula`
 
-Utilice este punto final para evaluar una expresión métrica calculada bajo demanda.
+Utilice este endpoint para evaluar una expresión métrica calculada bajo demanda.
 
 | Parámetro | Requerido | Tipo | Descripción |
 | --- | --- | --- | --- |

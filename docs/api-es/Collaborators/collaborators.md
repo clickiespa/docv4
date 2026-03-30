@@ -1,6 +1,6 @@
 # Colaboradores
 
-## Puntos finales
+## Endpoints
 - [Listar colaboradores](#list-collaborators)
 - [Crear colaborador](#create-collaborator)
 - [conseguir colaborador](#get-collaborator)
@@ -8,7 +8,7 @@
 - [Eliminar colaborador](#delete-collaborator)
 - [Historial de inicio de sesión del colaborador](#collaborator-login-history)
 
-Puntos finales relacionados con la gestión de usuarios dentro de una cuenta.
+Endpoints relacionados con la gestión de usuarios dentro de una cuenta.
 
 Colaborador es el nombre de pila de un usuario registrado en la plataforma.
 Un colaborador existe en un entorno específico y puede ser [asignado a una cuenta](../Scope/accounts.md#add-collaborator-to-account) para interactuar con él.
@@ -18,7 +18,7 @@ Un colaborador asignado a una cuenta puede interactuar con un conjunto definido 
 
 Recuperar todos los colaboradores vinculados a la cuenta actual.
 
-### Punto final
+### Endpoint
 ```
 GET /collaborators
 ```
@@ -67,7 +67,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" <HOST_NAME>/collab
 
 Crea un nuevo colaborador para la cuenta actual.
 
-### Punto final
+### Endpoint
 ```
 POST /collaborators
 ```
@@ -116,7 +116,7 @@ curl -X POST \
 
 Recuperar detalles de un colaborador específico.
 
-### Punto final
+### Endpoint
 ```
 GET /collaborators/{id_user}
 ```
@@ -154,7 +154,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" <HOST_NAME>/collab
 
 Modificar los datos de un colaborador existente.
 
-### Punto final
+### Endpoint
 ```
 PUT /collaborators/{id_user}
 ```
@@ -211,7 +211,7 @@ curl -X PUT \
 
 Eliminar un colaborador de la cuenta corriente.
 
-### Punto final
+### Endpoint
 ```
 DELETE /collaborators/{id_user}
 ```
@@ -247,7 +247,7 @@ curl -X DELETE -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" <HOST_NA
 
 Recuperar eventos de autenticación para un colaborador.
 
-### Punto final
+### Endpoint
 ```
 GET /collaborators/{id_user}/login_history
 ```

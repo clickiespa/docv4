@@ -1,4 +1,4 @@
-# Puntos finales de acciones: lineamientos de implementación
+# Endpoints de acciones: lineamientos de implementación
 
 ---
 

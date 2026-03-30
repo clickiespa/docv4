@@ -1,6 +1,6 @@
 # Tipos de eventos de métricas
 
-## Puntos finales
+## Endpoints
 - [Listar tipos de eventos](#list-event-types)
 - [Crear tipo de evento](#create-event-type)
 - [Obtener tipo de evento](#get-event-type)
@@ -11,7 +11,7 @@ Catálogo de tipos de eventos que se pueden asociar a métricas.
 
 ## Listar tipos de eventos
 
-### Punto final
+### Endpoint
 ```
 GET /types/metric_events
 ```
@@ -48,7 +48,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" "/types/metric_eve
 
 ## Crear tipo de evento
 
-### Punto final
+### Endpoint
 ```
 POST /types/metric_events
 ```
@@ -91,7 +91,7 @@ curl -X POST \
 
 ## Obtener tipo de evento
 
-### Punto final
+### Endpoint
 ```
 GET /types/metric_events/{id_event_type}
 ```
@@ -127,7 +127,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /types/metric_even
 
 ## Actualizar tipo de evento
 
-### Punto final
+### Endpoint
 ```
 PUT /types/metric_events/{id_event_type}
 ```
@@ -176,7 +176,7 @@ curl -X PUT \
 
 ## Eliminar tipo de evento
 
-### Punto final
+### Endpoint
 ```
 DELETE /types/metric_events/{id_event_type}
 ```

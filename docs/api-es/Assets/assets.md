@@ -1,6 +1,6 @@
 # Activos
 
-## Puntos finales
+## Endpoints
 - [Listar activos](#list-assets)
 - [Crear activo](#create-asset)
 - [Obtener activo](#get-asset)
@@ -11,9 +11,9 @@ Un activo es una entidad física con una ubicación real concreta y se utiliza p
 
 ## Listar activos
 
-Se requiere un nivel de autorización 7 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 7 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /assets
 ```
@@ -51,9 +51,9 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /assets
 
 ## Crear activo
 
-Se requiere un nivel de autorización 5 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 5 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 POST /assets
 ```
@@ -100,9 +100,9 @@ curl -X POST \
 
 ## Obtener activo
 
-Se requiere un nivel de autorización 7 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 7 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /assets/{id_asset}
 ```
@@ -139,9 +139,9 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /assets/2
 
 ## Actualizar activo
 
-Se requiere un nivel de autorización 5 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 5 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 PUT /assets/{id_asset}
 ```
@@ -195,9 +195,9 @@ curl -X PUT \
 
 ## Eliminar activo
 
-Se requiere un nivel de autorización 5 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 5 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 DELETE /assets/{id_asset}
 ```### Encabezados

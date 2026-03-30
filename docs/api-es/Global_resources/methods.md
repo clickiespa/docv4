@@ -1,6 +1,6 @@
 # Métodos
 
-## Puntos finales
+## Endpoints
 - [Métodos de agregación](#aggregation-methods)
 - [Métodos de interpolación](#interpolation-methods)
 
@@ -9,9 +9,9 @@ Datos de referencia para métodos de agregación e interpolación.
 ## Métodos de agregación
 Recupera el catálogo de funciones de agregación que se pueden asignar a métricas y unidades de medida.
 
-Se requiere un nivel de autorización 6 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 6 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /methods/aggregation
 ```
@@ -82,9 +82,9 @@ curl -H "Authorization: <API_KEY>" \
 ## Métodos de interpolación
 Recupera el catálogo de estrategias de interpolación que se pueden aplicar al completar los puntos de datos faltantes.
 
-Se requiere un nivel de autorización 6 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 6 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /methods/interpolation
 ```

@@ -1,6 +1,6 @@
 # Entidades EAV
 
-## Puntos finales
+## Endpoints
 - [Enumerar entidades](#list-entities)
 - [Obtener entidad](#get-entity)
 
@@ -10,9 +10,9 @@ Entidades utilizadas en el modelo atributo-valor. Una entidad representa una tab
 
 Recupere todas las entidades EAV configuradas para la cuenta autenticada.
 
-Se requiere el nivel de autorización 2 (lectura) o cualquier nivel de autorización inferior para utilizar este punto final.
+Se requiere el nivel de autorización 2 (lectura) o cualquier nivel de autorización inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /entities
 ```
@@ -26,11 +26,11 @@ GET /entities
 
 ### Parámetros de consulta
 
-Este punto final no acepta parámetros de consulta.
+Este endpoint no acepta parámetros de consulta.
 
 ### Cuerpo de la solicitud
 
-Este punto final no acepta un cuerpo de solicitud.
+Este endpoint no acepta un cuerpo de solicitud.
 
 ### Encabezados de muestra
 ```json
@@ -132,9 +132,9 @@ curl -X GET \
 
 Recupera una única entidad EAV por su identificador numérico.
 
-Se requiere el nivel de autorización 2 (lectura) o cualquier nivel de autorización inferior para utilizar este punto final.
+Se requiere el nivel de autorización 2 (lectura) o cualquier nivel de autorización inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /entities/{id_entity}
 ```
@@ -154,11 +154,11 @@ GET /entities/{id_entity}
 
 ### Parámetros de consulta
 
-Este punto final no acepta parámetros de consulta.
+Este endpoint no acepta parámetros de consulta.
 
 ### Cuerpo de la solicitud
 
-Este punto final no acepta un cuerpo de solicitud.
+Este endpoint no acepta un cuerpo de solicitud.
 
 ### Encabezados de muestra
 ```json
@@ -202,7 +202,7 @@ curl -X GET \
 
 ### Objeto de entidad
 
-Este punto final devuelve el [Objeto de entidad](#entity-object) descrito en la sección Lista de entidades.
+Este endpoint devuelve el [Objeto de entidad](#entity-object) descrito en la sección Lista de entidades.
 
 ### Códigos de estado| Estado | Descripción |
 | --- | --- |

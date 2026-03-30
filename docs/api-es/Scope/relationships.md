@@ -1,6 +1,6 @@
 # Relaciones de recursos
 
-## Puntos finales
+## Endpoints
 - [Listar relaciones](#list-relationships)
 - [Listar relaciones por tipo](#list-relationships-by-type)
 - [crear relación](#create-relationship)
@@ -11,7 +11,7 @@ Una relación vincula dos recursos en una jerarquía padre-hijo. Las entidades a
 
 ## Listar relaciones
 
-### Punto final
+### Endpoint
 ```
 GET /relationships/{entity}/{id}
 ```
@@ -66,7 +66,7 @@ La respuesta utiliza el sobre JSON estándar.
 
 ## Listar relaciones por tipo
 
-### Punto final
+### Endpoint
 ```
 GET /relationships/{entity}/{id}/{entity_type}
 ```
@@ -122,7 +122,7 @@ La respuesta utiliza el sobre JSON estándar.
 
 ## Crear relación
 
-### Punto final
+### Endpoint
 ```
 POST /relationships/{entity}/{id}/{child_entity}/{child_id}
 ```
@@ -182,7 +182,7 @@ La respuesta utiliza el sobre JSON estándar.
 
 ## Obtener una relación específica
 
-### Punto final
+### Endpoint
 ```
 GET /relationships/{entity}/{id}/{child_entity}/{child_id}
 ```
@@ -240,7 +240,7 @@ La respuesta utiliza el sobre JSON estándar.
 
 ## Eliminar relación
 
-### Punto final
+### Endpoint
 ```
 DELETE /relationships/{entity}/{id}/{child_entity}/{child_id}
 ```

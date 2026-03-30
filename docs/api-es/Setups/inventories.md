@@ -2,7 +2,7 @@
 
 Colecciones de dispositivos agrupados con fines organizativos.
 
-## Puntos finales
+## Endpoints
 - [Listar inventarios](#list-inventories)
 - [Obtener inventario](#get-inventory)
 - [Crear inventario](#create-inventory)
@@ -13,9 +13,9 @@ Colecciones de dispositivos agrupados con fines organizativos.
 
 Recupere todos los inventarios visibles para la cuenta autenticada. Opcionalmente, puede filtrar los resultados por nombre.
 
-Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este punto final.
+Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /inventories
 ```
@@ -105,9 +105,9 @@ curl -H "Authorization: <API_KEY>" \
 
 Recupera los detalles de un único inventario por su identificador numérico.
 
-Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este punto final.
+Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /inventories/{id_inventory}
 ```
@@ -127,7 +127,7 @@ GET /inventories/{id_inventory}
 
 ### Parámetros de consulta
 
-Este punto final no acepta parámetros de consulta.
+Este endpoint no acepta parámetros de consulta.
 
 ### Encabezados de muestra
 ```json
@@ -198,9 +198,9 @@ curl -H "Authorization: <API_KEY>" \
 
 Cree un nuevo inventario disponible para la cuenta autenticada.
 
-Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este punto final.
+Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 POST /inventories
 ```
@@ -289,9 +289,9 @@ curl -X POST -H "Authorization: <API_KEY>" \
 
 Modificar un inventario existente. Los campos omitidos mantienen su valor actual.
 
-Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este punto final.
+Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 PUT /inventories/{id_inventory}
 ```
@@ -390,9 +390,9 @@ curl -X PUT -H "Authorization: <API_KEY>" \
 
 Eliminar un inventario de la cuenta autenticada.
 
-Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este punto final.
+Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 DELETE /inventories/{id_inventory}
 ```

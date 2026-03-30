@@ -1,6 +1,6 @@
 # Modelos de dispositivos
 
-## Puntos finales
+## Endpoints
 - [Listar modelos de dispositivos](#list-device-models)
 - [Obtener modelo de dispositivo](#get-device-model)
 - [Listar tipos de modelos de dispositivos](#list-device-model-types)
@@ -14,9 +14,9 @@ Descripciones de modelos de dispositivos compatibles que se pueden asignar a dis
 
 Recupere modelos de dispositivos visibles para la cuenta autenticada, con filtros opcionales para estado de archivo, tipo de modelo, fabricante y nombre.
 
-Se requiere un nivel de autorización 4 o inferior para leer los modelos de dispositivos a través de este punto final.
+Se requiere un nivel de autorización 4 o inferior para leer los modelos de dispositivos a través de este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /device_models
 ```
@@ -99,7 +99,7 @@ curl -H "Authorization: <API_KEY>" \
 
 ### Catálogos relacionados
 
-Utilice los siguientes puntos finales para obtener identificadores a los que hacen referencia los modelos de dispositivos:
+Utilice los siguientes endpoints para obtener identificadores a los que hacen referencia los modelos de dispositivos:
 
 - [`GET /types/device_models`](#list-device-model-types) devuelve los tipos de modelos disponibles.
 - [`GET /device_model_manufacturers`](#list-device-model-manufacturers) enumera los fabricantes registrados.
@@ -112,7 +112,7 @@ Utilice los siguientes puntos finales para obtener identificadores a los que hac
 | `400` | Error de paginación o validación de filtro. |
 | `401` | La autenticación falló. |
 | `403` | El usuario autenticado no está autorizado a enumerar modelos de dispositivos. |
-| `404` | No se utiliza para este punto final de recopilación. |
+| `404` | No se utiliza para este endpoint de recopilación. |
 | `500` | Error inesperado del servidor. |
 
 ### Respuesta de error (403)
@@ -134,9 +134,9 @@ Utilice los siguientes puntos finales para obtener identificadores a los que hac
 
 Recuperar detalles de un solo modelo de dispositivo.
 
-Se requiere un nivel de autorización 4 o inferior para leer los modelos de dispositivos a través de este punto final.
+Se requiere un nivel de autorización 4 o inferior para leer los modelos de dispositivos a través de este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /device_models/{id_device_model}
 ```
@@ -154,7 +154,7 @@ GET /device_models/{id_device_model}
 
 ### Parámetros de consulta
 
-Este punto final no acepta parámetros de consulta.
+Este endpoint no acepta parámetros de consulta.
 
 ### Encabezados de muestra
 ```json
@@ -242,9 +242,9 @@ curl -H "Authorization: <API_KEY>" \
 
 Recupere los tipos de modelo de dispositivo configurados para la cuenta autenticada.
 
-Se requiere un nivel de autorización 4 o inferior para acceder a este punto final.
+Se requiere un nivel de autorización 4 o inferior para acceder a este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /types/device_models
 ```
@@ -314,7 +314,7 @@ curl -H "Authorization: <API_KEY>" \
 | `400` | Error de paginación o validación de filtro. |
 | `401` | La autenticación falló. |
 | `403` | El usuario autenticado no está autorizado a enumerar tipos de modelos. |
-| `404` | No se utiliza para este punto final de recopilación. |
+| `404` | No se utiliza para este endpoint de recopilación. |
 | `500` | Error inesperado del servidor. |
 
 ### Respuesta de error (403)
@@ -334,9 +334,9 @@ curl -H "Authorization: <API_KEY>" \
 
 Recupere los fabricantes del modelo de dispositivo configurados para la cuenta autenticada.
 
-Se requiere un nivel de autorización 4 o inferior para acceder a este punto final.
+Se requiere un nivel de autorización 4 o inferior para acceder a este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /device_model_manufacturers
 ```
@@ -410,7 +410,7 @@ curl -H "Authorization: <API_KEY>" \
 | `400` | Error de paginación o validación de filtro. |
 | `401` | La autenticación falló. |
 | `403` | El usuario autenticado no está autorizado a enumerar los fabricantes de modelos. |
-| `404` | No se utiliza para este punto final de recopilación. |
+| `404` | No se utiliza para este endpoint de recopilación. |
 | `500` | Error inesperado del servidor. |
 
 ### Respuesta de error (403)

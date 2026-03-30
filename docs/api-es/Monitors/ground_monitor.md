@@ -1,14 +1,14 @@
 # Monitor de tierra
 
-## Puntos finales
+## Endpoints
 - [Obtener datos](#fetch-data)
 
-Punto final que devuelve datos sobre el proceso de monitoreo terrestre.
+Endpoint que devuelve datos sobre el proceso de monitoreo terrestre.
 
 ## Obtener datos
 Recuperar el estado actual del monitoreo terrestre.
 
-### Punto final
+### Endpoint
 ```
 GET /ground_monitor
 ```

@@ -1,6 +1,6 @@
 # Monitores
 
-## Puntos finales
+## Endpoints
 - [Listar monitores](#list-monitors)
 - [Crear monitor](#create-monitor)
 - [Obtener monitor](#get-monitor)
@@ -17,9 +17,9 @@ Un monitor observa una o más métricas con una determinada frecuencia, compara 
 
 Recupere los monitores configurados para la cuenta actual.
 
-Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /monitors
 ```
@@ -58,9 +58,9 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /monitors?skip=0&l
 
 Cree un nuevo monitor para observar las métricas dentro de la cuenta.
 
-Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 POST /monitors
 ```
@@ -79,7 +79,7 @@ POST /monitors
 | --- | --- | --- | --- | --- |
 | `monitor_name` | si | cadena | No | Nombre para mostrar |
 | `id_monitor_type` | no | entero | 6 | Tipo de monitor. Los valores disponibles se pueden recuperar con [OBTENER /tipos/monitores](../Types/types.md#monitor-types) |
-| `id_monitor_status` | no | entero | 1 | Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el punto final [OBTENER /tipos/monitor_statuses](../Types/types.md#monitor-statuses) |
+| `id_monitor_status` | no | entero | 1 | Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el endpoint [OBTENER /tipos/monitor_statuses](../Types/types.md#monitor-statuses) |
 | `monitor_description` | no | cadena | nulo | Descripción |
 | `monitor_sampling_window` | no | entero | 15 | Minutos para promediar |
 | `monitor_sampling_frequency` | no | entero | 15 | Consultar frecuencia |
@@ -109,9 +109,9 @@ curl -X POST \
 
 Recuperar los detalles de un monitor específico.
 
-Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /monitors/{id_monitor}
 ```
@@ -149,9 +149,9 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /monitors/2
 
 Actualice la configuración de un monitor existente.
 
-Se requiere un nivel de autorización 6 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 6 o cualquier autorización inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 PUT /monitors/{id_monitor}
 ```
@@ -173,7 +173,7 @@ PUT /monitors/{id_monitor}
 ### Cuerpo de la solicitud| Campo | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
 | `id_monitor_type` | no | entero | nulo | Tipo de monitor. Los valores disponibles se pueden recuperar con [OBTENER /tipos/monitores](../Types/types.md#monitor-types) |
-| `id_monitor_status` | no | entero | nulo | Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el punto final [OBTENER /tipos/monitor_statuses](../Types/types.md#monitor-statuses) |
+| `id_monitor_status` | no | entero | nulo | Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el endpoint [OBTENER /tipos/monitor_statuses](../Types/types.md#monitor-statuses) |
 | `monitor_name` | no | cadena | nulo | Nombre para mostrar |
 | `monitor_description` | no | cadena | nulo | Descripción |
 | `monitor_sampling_window` | no | entero | nulo | Minutos para promediar |
@@ -204,9 +204,9 @@ curl -X PUT \
 
 Elimine un monitor que ya no sea necesario.
 
-Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 DELETE /monitors/{id_monitor}
 ```
@@ -259,7 +259,7 @@ Los desencadenantes del monitor definen cómo reacciona un monitor cuando una de
 
 Recupere los activadores configurados en un monitor específico.
 
-Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este endpoint.
 
 
 ### Encabezados de muestra
@@ -270,7 +270,7 @@ Se requiere un nivel de autorización 7 o cualquier autorización inferior para 
 }
 ```
 
-### Punto final
+### Endpoint
 ```
 GET /monitors/{id_monitor}/triggers
 ```
@@ -368,7 +368,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /monitors/1/trigge
 
 Obtenga detalles para un único activador que pertenece al monitor seleccionado.
 
-Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este endpoint.
 
 
 ### Encabezados de muestra
@@ -379,7 +379,7 @@ Se requiere un nivel de autorización 7 o cualquier autorización inferior para 
 }
 ```
 
-### Punto final
+### Endpoint
 ```
 GET /monitors/{id_monitor}/triggers/{id_monitor_trigger}
 ```
@@ -463,7 +463,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /monitors/1/trigge
 
 Cree un nuevo activador para que el monitor entregue notificaciones o automatice acciones de seguimiento.
 
-Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este endpoint.
 
 
 ### Encabezados de muestra
@@ -475,7 +475,7 @@ Se requiere un nivel de autorización 5 o cualquier autorización inferior para 
 }
 ```
 
-### Punto final
+### Endpoint
 ```
 POST /monitors/{id_monitor}/triggers
 ```
@@ -501,7 +501,7 @@ POST /monitors/{id_monitor}/triggers
 | `id_trigger_type` | si | entero | No | Identificador del tipo de disparador. Los valores disponibles se pueden recuperar con [OBTENER /tipos/monitor_triggers](../Types/types.md#monitor-trigger-types) |
 | `time_pattern` | no | cadena | nulo | Patrón de tiempo para la ejecución programada. Utilice `{hours}|{dayweek}|{daymonth}|{months}` donde cada segmento acepta `*`, un valor único o valores separados por comas dentro de los rangos horas `00-59`, día semana `1-7`, díames `1-31`, meses `1-12`. Ejemplo: `00,12|1,3|*|*` funciona a las 00:00 y 12:00 los lunes y miércoles. |
 | `trigger_observations` | no | cadena | nulo | Observaciones desencadenantes |
-| `trigger_on` | no | cadena | '1,3' | Valores de identificación del estado que se comunicará. Los ID de estado disponibles se pueden recuperar mediante el punto final [OBTENER /tipos/monitor_statuses](../Types/types.md#monitor-statuses) |
+| `trigger_on` | no | cadena | '1,3' | Valores de identificación del estado que se comunicará. Los ID de estado disponibles se pueden recuperar mediante el endpoint [OBTENER /tipos/monitor_statuses](../Types/types.md#monitor-statuses) |
 | `trigger_enabled` | no | booleano | verdadero | Si el disparador está habilitado |
 | `trigger_parameters` | no | objeto | nulo | Configuración adicional para el disparador. Consulte [Parámetros de activación](#trigger-parameters) para conocer las claves admitidas. `id_users` debe ser una matriz de cadenas. |
 
@@ -597,7 +597,7 @@ curl -X POST \
 
 Actualice la configuración de un activador existente.
 
-Se requiere un nivel de autorización 6 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 6 o cualquier autorización inferior para utilizar este endpoint.
 
 
 ### Encabezados de muestra
@@ -609,7 +609,7 @@ Se requiere un nivel de autorización 6 o cualquier autorización inferior para 
 }
 ```
 
-### Punto final
+### Endpoint
 ```
 PUT /monitors/{id_monitor}/triggers/{id_monitor_trigger}
 ```
@@ -696,7 +696,7 @@ curl -X PUT \
 
 Elimine un disparador para que ya no se ejecute en el monitor.
 
-Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este endpoint.
 
 
 ### Encabezados de muestra
@@ -707,7 +707,7 @@ Se requiere un nivel de autorización 5 o cualquier autorización inferior para 
 }
 ```
 
-### Punto final
+### Endpoint
 ```
 DELETE /monitors/{id_monitor}/triggers/{id_monitor_trigger}
 ```
@@ -777,10 +777,10 @@ curl -X DELETE -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /monitor
 
 Las plantillas de monitor proporcionan una copia predefinida que se puede reutilizar al configurar las notificaciones del monitor.
 
-Se requiere un nivel de autorización 2 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 2 o cualquier autorización inferior para utilizar este endpoint.
 
 
-### Punto final
+### Endpoint
 ```
 GET /monitor_templates
 ```
@@ -865,9 +865,9 @@ Las reglas de monitor evalúan los datos de métricas entrantes y determinan el 
 
 Recupera las reglas configuradas en el monitor seleccionado.
 
-Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este endpoint.
 
-#### Punto final
+#### Endpoint
 ```
 GET /monitors/{id_monitor}/rules
 ```
@@ -912,9 +912,9 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /monitors/1/rules?
 
 Obtenga la configuración de una regla de monitor único.
 
-Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este endpoint.
 
-#### Punto final
+#### Endpoint
 ```
 GET /monitors/{id_monitor}/rules/{id_monitor_rule}
 ```
@@ -953,9 +953,9 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /monitors/1/rules/
 
 Cree una nueva regla para evaluar los datos de métricas para el monitor.
 
-Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este endpoint.
 
-#### Punto final
+#### Endpoint
 ```
 POST /monitors/{id_monitor}/rules
 ```
@@ -977,7 +977,7 @@ POST /monitors/{id_monitor}/rules
 #### Cuerpo de la solicitud| Campo | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
 | `id_metric` | si | entero | No | Identificador de métrica |
-| `id_monitor_status` | no | entero | 1 | Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el punto final [OBTENER /tipos/monitor_statuses](../Types/types.md#monitor-statuses) |
+| `id_monitor_status` | no | entero | 1 | Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el endpoint [OBTENER /tipos/monitor_statuses](../Types/types.md#monitor-statuses) |
 | `rule_name` | si | cadena | No | Nombre de la regla |
 | `rule_description` | no | cadena | nulo | Descripción |
 | `rule_method` | si | entero | No | Método para detectar valores que cumplen la regla. Identificadores válidos: `1` mayor que, `2` menor que, `3` dentro del rango, `4` fuera del rango |
@@ -1010,9 +1010,9 @@ curl -X POST \
 
 Actualice una regla de supervisión existente para ajustar umbrales o asignaciones de estado.
 
-Se requiere un nivel de autorización 6 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 6 o cualquier autorización inferior para utilizar este endpoint.
 
-#### Punto final
+#### Endpoint
 ```
 PUT /monitors/{id_monitor}/rules/{id_monitor_rule}
 ```
@@ -1037,7 +1037,7 @@ PUT /monitors/{id_monitor}/rules/{id_monitor_rule}
 | Campo | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
 | `id_metric` | no | entero | nulo | Identificador de métrica |
-| `id_monitor_status` | no | entero | nulo | Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el punto final [OBTENER /tipos/monitor_statuses](../Types/types.md#monitor-statuses) |
+| `id_monitor_status` | no | entero | nulo | Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el endpoint [OBTENER /tipos/monitor_statuses](../Types/types.md#monitor-statuses) |
 | `rule_name` | no | cadena | nulo | Nombre de la regla |
 | `rule_description` | no | cadena | nulo | Descripción |
 | `rule_method` | no | entero | nulo | Método para detectar valores que cumplen la regla. Identificadores válidos: `1` mayor que, `2` menor que, `3` dentro del rango, `4` fuera del rango |
@@ -1071,9 +1071,9 @@ curl -X PUT \
 
 Elimine una regla para que ya no afecte el estado del monitor.
 
-Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este endpoint.
 
-#### Punto final
+#### Endpoint
 ```
 DELETE /monitors/{id_monitor}/rules/{id_monitor_rule}
 ```
@@ -1112,13 +1112,13 @@ curl -X DELETE -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /monitor
 
 Recuperar los cambios de estado históricos de un monitor.
 
-Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este endpoint.
 
 Las entradas del historial del monitor son de sólo lectura; no se pueden crear, actualizar ni eliminar a través de la API.
 
 Si no se proporcionan marcas de tiempo, la API devuelve los últimos siete días de actividad de forma predeterminada. Cuando `from_timestamp` es mayor que `to_timestamp`, el servicio los intercambia automáticamente para crear un rango válido.
 
-### Punto final
+### Endpoint
 ```
 GET /monitors/{id_monitor}/history
 ```

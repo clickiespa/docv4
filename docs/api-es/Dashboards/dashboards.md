@@ -2,7 +2,7 @@
 
 Colecciones visuales de paneles y sus instancias de widgets.
 
-## Puntos finales
+## Endpoints
 - [Listar paneles](#list-dashboards)
 - [Crear panel](#create-dashboard)
 - [Obtener panel](#get-dashboard)
@@ -17,7 +17,7 @@ Colecciones visuales de paneles y sus instancias de widgets.
 ## Listar paneles de control
 Recuperar una lista de paneles. Se requiere nivel de autorización 8. Los usuarios con niveles de autorización 1 o 2 pueden elegir cualquier valor de filtro `archived` (`true`, `false` u omitido). Otras autorizaciones filtran los paneles archivados según la marca proporcionada y, de forma predeterminada, `false` se omite.
 
-### Punto final
+### Endpoint
 ```
 GET /dashboards
 ```
@@ -62,7 +62,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: 1" /dashboards?skip=0&limit=20
 ## Crear panel
 Crea un nuevo panel. Se requiere autorización de nivel 2.
 
-### Punto final
+### Endpoint
 ```
 POST /dashboards
 ```
@@ -109,7 +109,7 @@ curl -X POST \
 ## Obtener panel
 Recupere un único panel por ID. Se requiere nivel de autorización 8.
 
-### Punto final
+### Endpoint
 ```
 GET /dashboards/{id_dashboard}
 ```
@@ -146,7 +146,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: 1" /dashboards/2
 ## Actualizar panel
 Actualizar un panel existente. Se requiere nivel de autorización 5.
 
-### Punto final
+### Endpoint
 ```
 PUT /dashboards/{id_dashboard}
 ```
@@ -199,7 +199,7 @@ curl -X PUT \
 ## Eliminar panel
 Eliminar un panel existente. Se requiere autorización de nivel 2.
 
-### Punto final
+### Endpoint
 ```
 DELETE /dashboards/{id_dashboard}
 ```
@@ -232,9 +232,9 @@ curl -X DELETE -H "Authorization: <API_KEY>" -H "Account: 1" /dashboards/2
 ```
 
 ## Lista de widgets del panel
-Enumera los widgets adjuntos a un panel (se omiten los datos de configuración). Se requiere autorización 7 para utilizar este punto final.
+Enumera los widgets adjuntos a un panel (se omiten los datos de configuración). Se requiere autorización 7 para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /dashboards/{id_dashboard}/widgets
 ```
@@ -278,9 +278,9 @@ curl -H "Authorization: <API_KEY>" -H "Account: 1" /dashboards/2/widgets
 ```
 
 ## Crear widget de panel
-Adjunte un widget a un panel. La configuración es opcional porque la API genera los valores predeterminados, incluidos los valores predeterminados del subformulario. Se requiere autorización 6 para utilizar este punto final.
+Adjunte un widget a un panel. La configuración es opcional porque la API genera los valores predeterminados, incluidos los valores predeterminados del subformulario. Se requiere autorización 6 para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 POST /dashboards/{id_dashboard}/widgets
 ```
@@ -360,9 +360,9 @@ curl -X POST \
 ```
 
 ## Obtener el widget del panel
-Recupera una instancia de widget específica con su configuración. Se requiere autorización 7 para utilizar este punto final.
+Recupera una instancia de widget específica con su configuración. Se requiere autorización 7 para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /dashboards/{id_dashboard}/widgets/{id_dashboard_widget}
 ```
@@ -417,9 +417,9 @@ curl -H "Authorization: <API_KEY>" -H "Account: 1" /dashboards/2/widgets/3
 ```
 
 ## Actualizar el widget del panel
-Actualice la ubicación o configuración del widget. Cuando se proporciona `config_data`, las claves `form_data` no especificadas conservan sus valores anteriores y las entradas del subformulario se pueden crear, actualizar o eliminar. Se requiere autorización 7 para utilizar este punto final.
+Actualice la ubicación o configuración del widget. Cuando se proporciona `config_data`, las claves `form_data` no especificadas conservan sus valores anteriores y las entradas del subformulario se pueden crear, actualizar o eliminar. Se requiere autorización 7 para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 PUT /dashboards/{id_dashboard}/widgets/{id_dashboard_widget}
 ```
@@ -494,9 +494,9 @@ curl -X PUT \
 ```
 
 ## Eliminar el widget del panel
-Eliminar una instancia de widget de un panel. Se requiere autorización 6 para utilizar este punto final.
+Eliminar una instancia de widget de un panel. Se requiere autorización 6 para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 DELETE /dashboards/{id_dashboard}/widgets/{id_dashboard_widget}
 ```

@@ -2,7 +2,7 @@
 
 / tabla de contenidos
 
-## Puntos finales
+## Endpoints
 - [Enumerar entornos](#list-environments)
 
 Los entornos definen la agrupación de inquilinos de nivel superior para cuentas y recursos relacionados.
@@ -10,9 +10,9 @@ Los entornos definen la agrupación de inquilinos de nivel superior para cuentas
 ## Entornos de lista
 Recupera los entornos disponibles para la sesión autenticada.
 
-Se requiere un nivel de autorización 5 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 5 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /environments
 ```
@@ -28,13 +28,13 @@ GET /environments
 
 | Parámetro | Descripción | Tipo |
 | --- | --- | --- |
-| Ninguno | Este punto final no utiliza parámetros de ruta. | - |
+| Ninguno | Este endpoint no utiliza parámetros de ruta. | - |
 
 ### Parámetros de consulta
 
 | Parámetro | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
-| Ninguno | No | - | - | Este punto final no acepta parámetros de consulta. |
+| Ninguno | No | - | - | Este endpoint no acepta parámetros de consulta. |
 
 ### Sobre de respuesta
 ```json

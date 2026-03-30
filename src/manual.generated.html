@@ -1907,7 +1907,7 @@ Controlan cabeceras, pie de página y contenedor donde se inyectan bloques diná
         </div>
       </div>
       <div class="prose"><p>Bienvenido al centro de documentación de API v4.</p>
-<p>Esta página está diseñada como una guía orientada al cliente para que pueda encontrar rápidamente el archivo de documentación correcto, comprender dónde está documentado cada grupo de terminales y navegar por la plataforma con confianza.</p>
+<p>Esta página está diseñada como una guía orientada al cliente para que pueda encontrar rápidamente el archivo de documentación correcto, comprender dónde está documentado cada grupo de endpoints y navegar por la plataforma con confianza.</p>
 <h2>Referencias rápidas</h2>
 <ul>
 <li><a href="lambda-api-v4-v4.postman_collection.json">Colección cartero (producción v4)</a>: ejemplos de solicitudes ejecutables alineados con la superficie API <code>/v4</code>.</li>
@@ -1915,22 +1915,22 @@ Controlan cabeceras, pie de página y contenedor donde se inyectan bloques diná
 <h2>Orden de lectura recomendado</h2>
 <ol>
 <li>Comience aquí: <a href="#es-api-getting-started-with-v4-getting-started">Comenzando con v4</a></li>
-<li>Continúe con los grupos de puntos finales a continuación según su caso de uso.</li>
+<li>Continúe con los grupos de endpoints a continuación según su caso de uso.</li>
 <li>Consulte las últimas actualizaciones en <a href="#es-api-changelog">Registro de cambios</a>.</li>
 </ol>
-<h2>Documentación de punto final por etiqueta de ruta</h2>
+<h2>Documentación de endpoint por etiqueta de ruta</h2>
 <h3><code>assets</code></h3>
 <ul>
-<li><a href="#es-api-assets-assets">Puntos finales de activos</a> — <code>GET /assets</code>, <code>POST /assets</code>, <code>GET /assets/{id_asset}</code>, <code>PUT /assets/{id_asset}</code>, <code>DELETE /assets/{id_asset}</code>.</li>
+<li><a href="#es-api-assets-assets">Endpoints de activos</a> — <code>GET /assets</code>, <code>POST /assets</code>, <code>GET /assets/{id_asset}</code>, <code>PUT /assets/{id_asset}</code>, <code>DELETE /assets/{id_asset}</code>.</li>
 </ul>
 <h3><code>collaborators</code></h3>
 <ul>
-<li><a href="#es-api-collaborators-collaborators">Puntos finales de colaboradores</a> — <code>GET /collaborators</code>, <code>POST /collaborators</code>, <code>GET /collaborators/{id_user}</code>, <code>PUT /collaborators/{id_user}</code>, <code>DELETE /collaborators/{id_user}</code>.</li>
+<li><a href="#es-api-collaborators-collaborators">Endpoints de colaboradores</a> — <code>GET /collaborators</code>, <code>POST /collaborators</code>, <code>GET /collaborators/{id_user}</code>, <code>PUT /collaborators/{id_user}</code>, <code>DELETE /collaborators/{id_user}</code>.</li>
 </ul>
 <h3><code>dashboards</code></h3>
 <ul>
-<li><a href="#es-api-dashboards-dashboards">Puntos finales de paneles</a>: paneles de control, widgets de panel, tipos de widgets y operaciones relacionadas.</li>
-<li><a href="#es-api-dashboards-widgets">Puntos finales de widgets</a>: catálogo de widgets y operaciones de widgets del panel.</li>
+<li><a href="#es-api-dashboards-dashboards">Endpoints de paneles</a>: paneles de control, widgets de panel, tipos de widgets y operaciones relacionadas.</li>
+<li><a href="#es-api-dashboards-widgets">Endpoints de widgets</a>: catálogo de widgets y operaciones de widgets del panel.</li>
 </ul>
 <h3><code>data</code></h3>
 <ul>
@@ -1939,81 +1939,81 @@ Controlan cabeceras, pie de página y contenedor donde se inyectan bloques diná
 </ul>
 <h3><code>devices</code></h3>
 <ul>
-<li><a href="#es-api-devices-devices">Puntos finales de dispositivos</a> — dispositivo CRUD y operaciones relacionadas.</li>
-<li><a href="#es-api-devices-device-models">Puntos finales de modelos de dispositivos</a>: modelos de dispositivos, tipos de modelos y fabricantes.</li>
-<li><a href="#es-api-setups-device-setups">Puntos finales de configuración de dispositivos</a>: puntos finales de configuración/vinculación de dispositivos.</li>
-<li><a href="#es-api-setups-inventories">Puntos finales de inventarios</a> — operaciones de inventario.</li>
+<li><a href="#es-api-devices-devices">Endpoints de dispositivos</a> — dispositivo CRUD y operaciones relacionadas.</li>
+<li><a href="#es-api-devices-device-models">Endpoints de modelos de dispositivos</a>: modelos de dispositivos, tipos de modelos y fabricantes.</li>
+<li><a href="#es-api-setups-device-setups">Endpoints de configuración de dispositivos</a>: endpoints de configuración/vinculación de dispositivos.</li>
+<li><a href="#es-api-setups-inventories">Endpoints de inventarios</a> — operaciones de inventario.</li>
 </ul>
 <h3><code>eav</code></h3>
 <ul>
-<li><a href="#es-api-entities-eav-entities">Puntos finales de entidades</a>: puntos finales del catálogo de entidades EAV.</li>
+<li><a href="#es-api-entities-eav-entities">Endpoints de entidades</a>: endpoints del catálogo de entidades EAV.</li>
 </ul>
 <h3><code>filters</code></h3>
 <ul>
-<li><a href="#es-api-filters-filters">Filtra puntos finales</a> — <code>GET /filters</code>.</li>
+<li><a href="#es-api-filters-filters">Filtra endpoints</a> — <code>GET /filters</code>.</li>
 </ul>
 <h3><code>forms</code></h3>
 <ul>
-<li><a href="#es-api-forms-forms">Puntos finales de formularios</a>: formularios, entradas de formularios y tipos de entradas de formularios.</li>
+<li><a href="#es-api-forms-forms">Endpoints de formularios</a>: formularios, entradas de formularios y tipos de entradas de formularios.</li>
 </ul>
 <h3><code>global_resources</code></h3>
 <ul>
-<li><a href="#es-api-global-resources-languages">Puntos finales de idiomas</a></li>
-<li><a href="#es-api-global-resources-time-zones">Puntos finales de zonas horarias</a></li>
-<li><a href="#es-api-global-resources-icons">Puntos finales de iconos</a></li>
-<li><a href="#es-api-global-resources-time-patterns">Puntos finales de patrones de tiempo</a></li>
+<li><a href="#es-api-global-resources-languages">Endpoints de idiomas</a></li>
+<li><a href="#es-api-global-resources-time-zones">Endpoints de zonas horarias</a></li>
+<li><a href="#es-api-global-resources-icons">Endpoints de iconos</a></li>
+<li><a href="#es-api-global-resources-time-patterns">Endpoints de patrones de tiempo</a></li>
 </ul>
 <h3><code>metrics</code></h3>
 <ul>
-<li><a href="#es-api-metrics-and-data-metrics">Puntos finales de métricas</a> — métricas CRUD y operaciones métricas relacionadas.</li>
-<li><a href="#es-api-setups-setup-metrics">Configurar puntos finales de métricas</a>: puntos finales de relación de configuración/métrica.</li>
+<li><a href="#es-api-metrics-and-data-metrics">Endpoints de métricas</a> — métricas CRUD y operaciones métricas relacionadas.</li>
+<li><a href="#es-api-setups-setup-metrics">Configurar endpoints de métricas</a>: endpoints de relación de configuración/métrica.</li>
 </ul>
 <h3><code>monitoring</code></h3>
 <ul>
-<li><a href="#es-api-monitors-monitors">Monitorea puntos finales</a>: monitorea y monitorea las operaciones de activación.</li>
-<li><a href="#es-api-monitors-monitors">Supervisar el punto final de las plantillas</a> — <code>GET /monitor_templates</code>.</li>
-<li><a href="#es-api-monitors-ground-monitor">Punto final del monitor de tierra</a> — <code>GET /ground_monitor</code>.</li>
+<li><a href="#es-api-monitors-monitors">Monitorea endpoints</a>: monitorea y monitorea las operaciones de activación.</li>
+<li><a href="#es-api-monitors-monitors">Supervisar el endpoint de las plantillas</a> — <code>GET /monitor_templates</code>.</li>
+<li><a href="#es-api-monitors-ground-monitor">Endpoint del monitor de tierra</a> — <code>GET /ground_monitor</code>.</li>
 </ul>
 <h3><code>newsletter</code></h3>
 <ul>
-<li><a href="#es-api-global-resources-templates">Puntos finales de plantillas</a> — operaciones CRUD de plantilla.</li>
+<li><a href="#es-api-global-resources-templates">Endpoints de plantillas</a> — operaciones CRUD de plantilla.</li>
 </ul>
 <h3><code>scope</code></h3>
 <ul>
-<li><a href="#es-api-scope-accounts">Puntos finales de cuentas</a></li>
-<li><a href="#es-api-scope-environments">Puntos finales de entornos</a></li>
-<li><a href="#es-api-scope-roles">Puntos finales de roles</a></li>
-<li><a href="#es-api-scope-clearances">Puntos finales de autorización</a></li>
-<li><a href="#es-api-scope-relationships">Puntos finales de relaciones</a></li>
+<li><a href="#es-api-scope-accounts">Endpoints de cuentas</a></li>
+<li><a href="#es-api-scope-environments">Endpoints de entornos</a></li>
+<li><a href="#es-api-scope-roles">Endpoints de roles</a></li>
+<li><a href="#es-api-scope-clearances">Endpoints de autorización</a></li>
+<li><a href="#es-api-scope-relationships">Endpoints de relaciones</a></li>
 </ul>
 <h3><code>search</code></h3>
 <ul>
-<li><a href="#es-api-search-metrics">Punto final de búsqueda de métricas</a> — <code>POST /search/metrics</code>.</li>
+<li><a href="#es-api-search-metrics">Endpoint de búsqueda de métricas</a> — <code>POST /search/metrics</code>.</li>
 </ul>
 <h3><code>setups</code></h3>
 <ul>
-<li><a href="#es-api-setups-setups">Configura puntos finales</a></li>
-<li><a href="#es-api-setups-setup-metrics">Configurar puntos finales de métricas</a></li>
-<li><a href="#es-api-setups-device-setups">Puntos finales de configuración de dispositivos</a></li>
+<li><a href="#es-api-setups-setups">Configura endpoints</a></li>
+<li><a href="#es-api-setups-setup-metrics">Configurar endpoints de métricas</a></li>
+<li><a href="#es-api-setups-device-setups">Endpoints de configuración de dispositivos</a></li>
 </ul>
 <h3><code>types</code></h3>
 <ul>
-<li><a href="#es-api-types-types">Tipos de puntos finales</a></li>
-<li><a href="#es-api-types-asset-categories">Puntos finales de categorías de activos</a></li>
-<li><a href="#es-api-types-metric-events">Puntos finales de eventos de métricas</a></li>
+<li><a href="#es-api-types-types">Tipos de endpoints</a></li>
+<li><a href="#es-api-types-asset-categories">Endpoints de categorías de activos</a></li>
+<li><a href="#es-api-types-metric-events">Endpoints de eventos de métricas</a></li>
 </ul>
 <h3><code>uoms</code></h3>
 <ul>
-<li><a href="#es-api-uoms-uoms">Puntos finales de UOM</a></li>
-<li><a href="#es-api-global-resources-methods">Puntos finales de métodos</a> — métodos de agregación e interpolación.</li>
+<li><a href="#es-api-uoms-uoms">Endpoints de UOM</a></li>
+<li><a href="#es-api-global-resources-methods">Endpoints de métodos</a> — métodos de agregación e interpolación.</li>
 </ul>
-<h2>Guías de terminales específicas de la puerta de enlace</h2>
+<h2>Guías de endpoints específicas de la puerta de enlace</h2>
 <ul>
-<li><a href="#es-api-gateways-health">Punto final de estado de la puerta de enlace</a> — <code>GET /health</code>.</li>
-<li><a href="#es-api-gateways-devices">Punto final de dispositivos de puerta de enlace</a> — <code>GET /devices</code> con notas de contrato de solicitud/respuesta centradas en la puerta de enlace.</li>
-<li><a href="#es-api-gateways-actions">Puntos finales de acciones de puerta de enlace</a> — <code>GET /devices/{identifier}/actions</code>, <code>POST /devices/{identifier}/actions</code>.</li>
-<li><a href="#es-api-gateways-jobs">Puntos finales de trabajos de puerta de enlace</a> — <code>GET /jobs/{job_id}</code>, <code>POST /jobs/{job_id}/cancel</code>, <code>GET /devices/{identifier}/jobs</code>.</li>
-<li><a href="#es-api-gateways-logs">Puntos finales de registros de puerta de enlace</a> — <code>GET /devices/{identifier}/logs</code>, <code>GET /devices/{identifier}/disk</code>, <code>GET /devices/{identifier}/backup/coverage</code>.</li>
+<li><a href="#es-api-gateways-health">Endpoint de estado de la puerta de enlace</a> — <code>GET /health</code>.</li>
+<li><a href="#es-api-gateways-devices">Endpoint de dispositivos de puerta de enlace</a> — <code>GET /devices</code> con notas de contrato de solicitud/respuesta centradas en la puerta de enlace.</li>
+<li><a href="#es-api-gateways-actions">Endpoints de acciones de puerta de enlace</a> — <code>GET /devices/{identifier}/actions</code>, <code>POST /devices/{identifier}/actions</code>.</li>
+<li><a href="#es-api-gateways-jobs">Endpoints de trabajos de puerta de enlace</a> — <code>GET /jobs/{job_id}</code>, <code>POST /jobs/{job_id}/cancel</code>, <code>GET /devices/{identifier}/jobs</code>.</li>
+<li><a href="#es-api-gateways-logs">Endpoints de registros de puerta de enlace</a> — <code>GET /devices/{identifier}/logs</code>, <code>GET /devices/{identifier}/disk</code>, <code>GET /devices/{identifier}/backup/coverage</code>.</li>
 </ul>
 <h2>Referencias adicionales</h2>
 <ul>
@@ -2066,7 +2066,7 @@ Todos los ejemplos de <code>curl</code> omiten el host, así que anteponga esta 
 <h3>Encabezado de autorización</h3>
 <p>Utilice una clave API en el encabezado <code>Authorization</code>. Las claves se pueden generar desde su perfil: <a href="https://my.clickie.io/profile/api-keys">https://my.clickie.io/profile/api-keys</a></p>
 <h3>Encabezado de cuenta</h3>
-<p>La mayoría de los puntos finales, incluido el punto final <code>/accounts</code>, requieren un encabezado <code>Account</code> con el ID de la cuenta en la que desea operar. Si no conoce el ID de su cuenta, puede encontrarlo en la aplicación web de Clickie: <a href="https://my.clickie.io/home">https://my.clickie.io/home</a>.</p>
+<p>La mayoría de los endpoints, incluido el endpoint <code>/accounts</code>, requieren un encabezado <code>Account</code> con el ID de la cuenta en la que desea operar. Si no conoce el ID de su cuenta, puede encontrarlo en la aplicación web de Clickie: <a href="https://my.clickie.io/home">https://my.clickie.io/home</a>.</p>
 <p>Una vez que conozca su ID de cuenta, puede enumerar sus cuentas usando:</p>
 <pre><code>GET /accounts
 </code></pre>
@@ -2187,7 +2187,7 @@ Todos los ejemplos de <code>curl</code> omiten el host, así que anteponga esta 
 </tr>
 </tbody></table>
 <h2>Herramientas API</h2>
-<h3>Punto final de Documentos</h3>
+<h3>Endpoint de Documentos</h3>
 <p>La documentación interactiva está disponible en:</p>
 <pre><code>/docs
 </code></pre>
@@ -2195,7 +2195,7 @@ Todos los ejemplos de <code>curl</code> omiten el host, así que anteponga esta 
 <ol>
 <li>Haga clic en <a href="https://api.clickie.io/v4/docs#">aquí</a>.</li>
 <li>Haga clic en el botón Autorizar en la parte superior derecha de la página y agregue manualmente los encabezados Cuenta y Autorización.</li>
-<li>Haga clic en el punto final que desea utilizar, complete los campos obligatorios y haga clic en el botón &quot;Pruébelo&quot; para realizar la solicitud.</li>
+<li>Haga clic en el endpoint que desea utilizar, complete los campos obligatorios y haga clic en el botón &quot;Pruébelo&quot; para realizar la solicitud.</li>
 <li>La respuesta del servidor se mostrará a continuación.</li>
 </ol>
 </div>
@@ -2210,7 +2210,7 @@ Todos los ejemplos de <code>curl</code> omiten el host, así que anteponga esta 
           <div class="sec-desc">Assets</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#list-assets">Listar activos</a></li>
 <li><a href="#create-asset">Crear activo</a></li>
@@ -2220,8 +2220,8 @@ Todos los ejemplos de <code>curl</code> omiten el host, así que anteponga esta 
 </ul>
 <p>Un activo es una entidad física con una ubicación real concreta y se utiliza principalmente como nodo central sobre el que se asocian otras entidades como métricas o cuadros de mando. Cada activo existe sólo dentro de una cuenta específica y tiene un tipo de activo que se utiliza para diferenciar entre activos y su función designada en una o más cuentas.</p>
 <h2>Listar activos</h2>
-<p>Se requiere un nivel de autorización 7 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 7 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /assets
 </code></pre>
 <h3>Encabezados</h3>
@@ -2289,8 +2289,8 @@ Todos los ejemplos de <code>curl</code> omiten el host, así que anteponga esta 
 }
 </code></pre>
 <h2>Crear activo</h2>
-<p>Se requiere un nivel de autorización 5 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 5 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>POST /assets
 </code></pre>
 <h3>Encabezados</h3>
@@ -2383,8 +2383,8 @@ Todos los ejemplos de <code>curl</code> omiten el host, así que anteponga esta 
 }
 </code></pre>
 <h2>Obtener activo</h2>
-<p>Se requiere un nivel de autorización 7 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 7 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /assets/{id_asset}
 </code></pre>
 <h3>Encabezados</h3>
@@ -2438,8 +2438,8 @@ Todos los ejemplos de <code>curl</code> omiten el host, así que anteponga esta 
 }
 </code></pre>
 <h2>Actualizar activo</h2>
-<p>Se requiere un nivel de autorización 5 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 5 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>PUT /assets/{id_asset}
 </code></pre>
 <h3>Encabezados</h3>
@@ -2565,8 +2565,8 @@ Todos los ejemplos de <code>curl</code> omiten el host, así que anteponga esta 
 }
 </code></pre>
 <h2>Eliminar activo</h2>
-<p>Se requiere un nivel de autorización 5 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 5 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>DELETE /assets/{id_asset}
 ```### Encabezados
 
@@ -2606,7 +2606,7 @@ curl -X DELETE -H &quot;Authorization: &lt;API_KEY&gt;&quot; -H &quot;Account: &
           <div class="sec-desc">Collaborators</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#list-collaborators">Listar colaboradores</a></li>
 <li><a href="#create-collaborator">Crear colaborador</a></li>
@@ -2615,13 +2615,13 @@ curl -X DELETE -H &quot;Authorization: &lt;API_KEY&gt;&quot; -H &quot;Account: &
 <li><a href="#delete-collaborator">Eliminar colaborador</a></li>
 <li><a href="#collaborator-login-history">Historial de inicio de sesión del colaborador</a></li>
 </ul>
-<p>Puntos finales relacionados con la gestión de usuarios dentro de una cuenta.</p>
+<p>Endpoints relacionados con la gestión de usuarios dentro de una cuenta.</p>
 <p>Colaborador es el nombre de pila de un usuario registrado en la plataforma.
 Un colaborador existe en un entorno específico y puede ser <a href="#es-api-scope-accounts">asignado a una cuenta</a> para interactuar con él.
 Un colaborador asignado a una cuenta puede interactuar con un conjunto definido de recursos según el nivel de autorización del colaborador en la cuenta.</p>
 <h2>Listar colaboradores</h2>
 <p>Recuperar todos los colaboradores vinculados a la cuenta actual.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /collaborators
 </code></pre>
 <h3>Encabezados</h3>
@@ -2690,7 +2690,7 @@ Un colaborador asignado a una cuenta puede interactuar con un conjunto definido 
 </code></pre>
 <h2>Crear colaborador</h2>
 <p>Crea un nuevo colaborador para la cuenta actual.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>POST /collaborators
 </code></pre>
 <h3>Encabezados</h3>
@@ -2788,7 +2788,7 @@ Un colaborador asignado a una cuenta puede interactuar con un conjunto definido 
 </code></pre>
 <h2>Consigue colaborador</h2>
 <p>Recuperar detalles de un colaborador específico.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /collaborators/{id_user}
 </code></pre>
 <h3>Encabezados</h3>
@@ -2843,7 +2843,7 @@ Un colaborador asignado a una cuenta puede interactuar con un conjunto definido 
 </code></pre>
 <h2>Actualizar colaborador</h2>
 <p>Modificar los datos de un colaborador existente.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>PUT /collaborators/{id_user}
 </code></pre>
 <h3>Encabezados</h3>
@@ -2957,7 +2957,7 @@ Un colaborador asignado a una cuenta puede interactuar con un conjunto definido 
 </code></pre>
 <h2>Eliminar colaborador</h2>
 <p>Eliminar un colaborador de la cuenta corriente.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>DELETE /collaborators/{id_user}
 </code></pre>
 <h3>Encabezados</h3>
@@ -3000,7 +3000,7 @@ Un colaborador asignado a una cuenta puede interactuar con un conjunto definido 
 </code></pre>
 <h2>Historial de inicio de sesión del colaborador</h2>
 <p>Recuperar eventos de autenticación para un colaborador.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /collaborators/{id_user}/login_history
 </code></pre>
 <h3>Encabezados</h3>
@@ -3062,7 +3062,7 @@ Un colaborador asignado a una cuenta puede interactuar con un conjunto definido 
         </div>
       </div>
       <div class="prose"><p>Colecciones visuales de paneles y sus instancias de widgets.</p>
-<h2>Puntos finales</h2>
+<h2>Endpoints</h2>
 <ul>
 <li><a href="#list-dashboards">Listar paneles</a></li>
 <li><a href="#create-dashboard">Crear panel</a></li>
@@ -3077,7 +3077,7 @@ Un colaborador asignado a una cuenta puede interactuar con un conjunto definido 
 </ul>
 <h2>Listar paneles de control</h2>
 <p>Recuperar una lista de paneles. Se requiere nivel de autorización 8. Los usuarios con niveles de autorización 1 o 2 pueden elegir cualquier valor de filtro <code>archived</code> (<code>true</code>, <code>false</code> u omitido). Otras autorizaciones filtran los paneles archivados según la marca proporcionada y, de forma predeterminada, <code>false</code> se omite.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /dashboards
 </code></pre>
 <h3>Encabezados</h3>
@@ -3152,7 +3152,7 @@ Un colaborador asignado a una cuenta puede interactuar con un conjunto definido 
 </code></pre>
 <h2>Crear panel</h2>
 <p>Crea un nuevo panel. Se requiere autorización de nivel 2.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>POST /dashboards
 </code></pre>
 <h3>Encabezados</h3>
@@ -3250,7 +3250,7 @@ Un colaborador asignado a una cuenta puede interactuar con un conjunto definido 
 </code></pre>
 <h2>Obtener panel</h2>
 <p>Recupere un único panel por ID. Se requiere nivel de autorización 8.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /dashboards/{id_dashboard}
 </code></pre>
 <h3>Encabezados</h3>
@@ -3305,7 +3305,7 @@ Un colaborador asignado a una cuenta puede interactuar con un conjunto definido 
 </code></pre>
 <h2>Actualizar panel</h2>
 <p>Actualizar un panel existente. Se requiere nivel de autorización 5.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>PUT /dashboards/{id_dashboard}
 </code></pre>
 <h3>Encabezados</h3>
@@ -3425,7 +3425,7 @@ Un colaborador asignado a una cuenta puede interactuar con un conjunto definido 
 </code></pre>
 <h2>Eliminar panel</h2>
 <p>Eliminar un panel existente. Se requiere autorización de nivel 2.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>DELETE /dashboards/{id_dashboard}
 </code></pre>
 <h3>Encabezados| Encabezado | Requerido | Descripción | Tipo |</h3>
@@ -3460,8 +3460,8 @@ Un colaborador asignado a una cuenta puede interactuar con un conjunto definido 
 }
 </code></pre>
 <h2>Lista de widgets del panel</h2>
-<p>Enumera los widgets adjuntos a un panel (se omiten los datos de configuración). Se requiere autorización 7 para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Enumera los widgets adjuntos a un panel (se omiten los datos de configuración). Se requiere autorización 7 para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /dashboards/{id_dashboard}/widgets
 </code></pre>
 <h3>Encabezados</h3>
@@ -3524,8 +3524,8 @@ Un colaborador asignado a una cuenta puede interactuar con un conjunto definido 
 }
 </code></pre>
 <h2>Crear widget de panel</h2>
-<p>Adjunte un widget a un panel. La configuración es opcional porque la API genera los valores predeterminados, incluidos los valores predeterminados del subformulario. Se requiere autorización 6 para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Adjunte un widget a un panel. La configuración es opcional porque la API genera los valores predeterminados, incluidos los valores predeterminados del subformulario. Se requiere autorización 6 para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>POST /dashboards/{id_dashboard}/widgets
 </code></pre>
 <h3>Encabezados</h3>
@@ -3665,8 +3665,8 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 }
 </code></pre>
 <h2>Obtener el widget del panel</h2>
-<p>Recupera una instancia de widget específica con su configuración. Se requiere autorización 7 para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Recupera una instancia de widget específica con su configuración. Se requiere autorización 7 para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /dashboards/{id_dashboard}/widgets/{id_dashboard_widget}
 </code></pre>
 <h3>Encabezados</h3>
@@ -3744,8 +3744,8 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 }
 </code></pre>
 <h2>Actualizar el widget del panel</h2>
-<p>Actualice la ubicación o configuración del widget. Cuando se proporciona <code>config_data</code>, las claves <code>form_data</code> no especificadas conservan sus valores anteriores y las entradas del subformulario se pueden crear, actualizar o eliminar. Se requiere autorización 7 para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Actualice la ubicación o configuración del widget. Cuando se proporciona <code>config_data</code>, las claves <code>form_data</code> no especificadas conservan sus valores anteriores y las entradas del subformulario se pueden crear, actualizar o eliminar. Se requiere autorización 7 para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>PUT /dashboards/{id_dashboard}/widgets/{id_dashboard_widget}
 </code></pre>
 <h3>Encabezados</h3>
@@ -3846,8 +3846,8 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 }
 </code></pre>
 <h2>Eliminar el widget del panel</h2>
-<p>Eliminar una instancia de widget de un panel. Se requiere autorización 6 para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Eliminar una instancia de widget de un panel. Se requiere autorización 6 para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>DELETE /dashboards/{id_dashboard}/widgets/{id_dashboard_widget}
 </code></pre>
 <h3>Encabezados</h3>
@@ -3917,8 +3917,8 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
           <div class="sec-desc">Widgets</div>
         </div>
       </div>
-      <div class="prose"><p>Puntos finales del catálogo para widgets reutilizables. Estos puntos finales están expuestos bajo la etiqueta <code>dashboards</code> y administran solo el catálogo de widgets, no las instancias de widgets del panel.</p>
-<h2>Puntos finales</h2>
+      <div class="prose"><p>Endpoints del catálogo para widgets reutilizables. Estos endpoints están expuestos bajo la etiqueta <code>dashboards</code> y administran solo el catálogo de widgets, no las instancias de widgets del panel.</p>
+<h2>Endpoints</h2>
 <ul>
 <li><a href="#list-widgets">Lista de widgets</a></li>
 <li><a href="#create-widget">Crear widget</a></li>
@@ -3928,7 +3928,7 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 </ul>
 <h2>Lista de widgets</h2>
 <p>Recuperar entradas del catálogo de widgets. Se requiere nivel de autorización 7.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /widgets
 </code></pre>
 <h3>Encabezados</h3>
@@ -4009,7 +4009,7 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 </code></pre>
 <h2>Crear widget</h2>
 <p>Cree una entrada de catálogo de widgets. Se requiere autorización de nivel 1.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>POST /widgets
 </code></pre>
 <h3>Encabezados</h3>
@@ -4144,7 +4144,7 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 </code></pre>
 <h2>Obtener widget</h2>
 <p>Recuperar un widget por ID. Se requiere nivel de autorización 7.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /widgets/{id_widget}
 </code></pre>
 <h3>Encabezados</h3>
@@ -4211,7 +4211,7 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 </code></pre>
 <h2>Actualizar widget</h2>
 <p>Actualizar un widget existente. Se requiere autorización de nivel 2.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>PUT /widgets/{id_widget}
 </code></pre>
 <h3>Encabezados</h3>
@@ -4360,7 +4360,7 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 </code></pre>
 <h2>Eliminar widget</h2>
 <p>Eliminar un widget. Se requiere autorización de nivel 1. Los widgets archivados no se pueden modificar.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>DELETE /widgets/{id_widget}
 </code></pre>
 <h3>Encabezados| Encabezado | Requerido | Descripción | Tipo |</h3>
@@ -4408,7 +4408,7 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
           <div class="sec-desc">Devices</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#list-devices">Listar dispositivos</a></li>
 <li><a href="#get-device">Obtener dispositivo</a></li>
@@ -4420,8 +4420,8 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 <p><strong>Requisitos de autorización:</strong> crear requiere un nivel de autorización 2 o inferior, leer requiere un nivel de autorización 5 o inferior, actualizar requiere un nivel de autorización 2 o inferior y eliminar requiere un nivel de autorización 2 o inferior.</p>
 <h2>Listar dispositivos</h2>
 <p>Recupere todos los dispositivos visibles para la cuenta autenticada, opcionalmente filtrándolos por inventario, modelo, estado operativo o identificador personalizado.</p>
-<p>Se requiere un nivel de autorización 5 o inferior para leer dispositivos a través de este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 5 o inferior para leer dispositivos a través de este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /devices
 </code></pre>
 <h3>Encabezados</h3>
@@ -4625,7 +4625,7 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 </tr>
 <tr>
 <td><code>404</code></td>
-<td>No se utiliza para este punto final de recopilación.</td>
+<td>No se utiliza para este endpoint de recopilación.</td>
 </tr>
 <tr>
 <td><code>500</code></td>
@@ -4647,8 +4647,8 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 </code></pre>
 <h2>Obtener dispositivo</h2>
 <p>Recupera un dispositivo por su identificador numérico.</p>
-<p>Se requiere un nivel de autorización 5 o inferior para leer dispositivos a través de este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 5 o inferior para leer dispositivos a través de este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /devices/{id_device}
 </code></pre>
 <h3>Encabezados</h3>
@@ -4692,7 +4692,7 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 </tr>
 </tbody></table>
 <h3>Parámetros de consulta</h3>
-<p>Este punto final no acepta parámetros de consulta.</p>
+<p>Este endpoint no acepta parámetros de consulta.</p>
 <h3>Encabezados de muestra</h3>
 <pre><code class="language-json">{
   &quot;Authorization&quot;: &quot;&lt;API_KEY&gt;&quot;,
@@ -4763,8 +4763,8 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 </code></pre>
 <h2>Crear dispositivo</h2>
 <p>Registre un nuevo dispositivo dentro de la cuenta autenticada.</p>
-<p>Se requiere un nivel de autorización 2 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 2 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>POST /devices
 </code></pre>
 <h3>Encabezados</h3>
@@ -4944,8 +4944,8 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 </code></pre>
 <h2>Actualizar dispositivo</h2>
 <p>Modificar un dispositivo existente. Los campos omitidos mantienen su valor actual.</p>
-<p>Se requiere un nivel de autorización 2 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 2 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>PUT /devices/{id_device}
 </code></pre>
 <h3>Encabezados</h3>
@@ -5088,8 +5088,8 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 </code></pre>
 <h2>Eliminar dispositivo</h2>
 <p>Eliminar un dispositivo de la cuenta autenticada.</p>
-<p>Se requiere un nivel de autorización 2 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 2 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>DELETE /devices/{id_device}
 </code></pre>
 <h3>Encabezados</h3>
@@ -5210,7 +5210,7 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
           <div class="sec-desc">Device Models</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#list-device-models">Listar modelos de dispositivos</a></li>
 <li><a href="#get-device-model">Obtener modelo de dispositivo</a></li>
@@ -5221,8 +5221,8 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 <p><strong>Requisitos de autorización:</strong> crear requiere un nivel de autorización 2 o inferior, leer requiere un nivel de autorización 4 o inferior, actualizar requiere un nivel de autorización 2 o inferior y eliminar requiere un nivel de autorización 2 o inferior.</p>
 <h2>Listar modelos de dispositivos</h2>
 <p>Recupere modelos de dispositivos visibles para la cuenta autenticada, con filtros opcionales para estado de archivo, tipo de modelo, fabricante y nombre.</p>
-<p>Se requiere un nivel de autorización 4 o inferior para leer los modelos de dispositivos a través de este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 4 o inferior para leer los modelos de dispositivos a través de este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /device_models
 </code></pre>
 <h3>Encabezados</h3>
@@ -5408,7 +5408,7 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 </tr>
 </tbody></table>
 <h3>Catálogos relacionados</h3>
-<p>Utilice los siguientes puntos finales para obtener identificadores a los que hacen referencia los modelos de dispositivos:</p>
+<p>Utilice los siguientes endpoints para obtener identificadores a los que hacen referencia los modelos de dispositivos:</p>
 <ul>
 <li><a href="#list-device-model-types"><code>GET /types/device_models</code></a> devuelve los tipos de modelos disponibles.</li>
 <li><a href="#list-device-model-manufacturers"><code>GET /device_model_manufacturers</code></a> enumera los fabricantes registrados.</li>
@@ -5439,7 +5439,7 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 </tr>
 <tr>
 <td><code>404</code></td>
-<td>No se utiliza para este punto final de recopilación.</td>
+<td>No se utiliza para este endpoint de recopilación.</td>
 </tr>
 <tr>
 <td><code>500</code></td>
@@ -5461,8 +5461,8 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 </code></pre>
 <h2>Obtener modelo de dispositivo</h2>
 <p>Recuperar detalles de un solo modelo de dispositivo.</p>
-<p>Se requiere un nivel de autorización 4 o inferior para leer los modelos de dispositivos a través de este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 4 o inferior para leer los modelos de dispositivos a través de este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /device_models/{id_device_model}
 </code></pre>
 <h3>Encabezados| Encabezado | Requerido | Descripción | Tipo |</h3>
@@ -5487,7 +5487,7 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 </tr>
 </tbody></table>
 <h3>Parámetros de consulta</h3>
-<p>Este punto final no acepta parámetros de consulta.</p>
+<p>Este endpoint no acepta parámetros de consulta.</p>
 <h3>Encabezados de muestra</h3>
 <pre><code class="language-json">{
   &quot;Authorization&quot;: &quot;&lt;API_KEY&gt;&quot;,
@@ -5639,8 +5639,8 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 </code></pre>
 <h2>Listar tipos de modelos de dispositivos</h2>
 <p>Recupere los tipos de modelo de dispositivo configurados para la cuenta autenticada.</p>
-<p>Se requiere un nivel de autorización 4 o inferior para acceder a este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 4 o inferior para acceder a este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /types/device_models
 </code></pre>
 <h3>Encabezados</h3>
@@ -5782,7 +5782,7 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 </tr>
 <tr>
 <td><code>404</code></td>
-<td>No se utiliza para este punto final de recopilación.</td>
+<td>No se utiliza para este endpoint de recopilación.</td>
 </tr>
 <tr>
 <td><code>500</code></td>
@@ -5805,9 +5805,9 @@ Los campos no definidos en las entradas del formulario del widget se rechazan co
 
 Recupere los fabricantes del modelo de dispositivo configurados para la cuenta autenticada.
 
-Se requiere un nivel de autorización 4 o inferior para acceder a este punto final.
+Se requiere un nivel de autorización 4 o inferior para acceder a este endpoint.
 
-### Punto final
+### Endpoint
 </code></pre>
 <p>GET /device_model_manufacturers</p>
 <pre><code>
@@ -5922,7 +5922,7 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </tr>
 <tr>
 <td><code>404</code></td>
-<td>No se utiliza para este punto final de recopilación.</td>
+<td>No se utiliza para este endpoint de recopilación.</td>
 </tr>
 <tr>
 <td><code>500</code></td>
@@ -5954,7 +5954,7 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
           <div class="sec-desc">Entities</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#list-entities">Enumerar entidades</a></li>
 <li><a href="#get-entity">Obtener entidad</a></li>
@@ -5962,8 +5962,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 <p>Entidades utilizadas en el modelo atributo-valor. Una entidad representa una tabla o modelo específico de una cuenta al que se puede hacer referencia desde formularios y relaciones dinámicas.</p>
 <h2>Listar entidades</h2>
 <p>Recupere todas las entidades EAV configuradas para la cuenta autenticada.</p>
-<p>Se requiere el nivel de autorización 2 (lectura) o cualquier nivel de autorización inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere el nivel de autorización 2 (lectura) o cualquier nivel de autorización inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /entities
 </code></pre>
 <h3>Encabezados</h3>
@@ -5990,9 +5990,9 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </tr>
 </tbody></table>
 <h3>Parámetros de consulta</h3>
-<p>Este punto final no acepta parámetros de consulta.</p>
+<p>Este endpoint no acepta parámetros de consulta.</p>
 <h3>Cuerpo de la solicitud</h3>
-<p>Este punto final no acepta un cuerpo de solicitud.</p>
+<p>Este endpoint no acepta un cuerpo de solicitud.</p>
 <h3>Encabezados de muestra</h3>
 <pre><code class="language-json">{
   &quot;Authorization&quot;: &quot;&lt;API_KEY&gt;&quot;,
@@ -6139,8 +6139,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </code></pre>
 <h2>Obtener entidad</h2>
 <p>Recupera una única entidad EAV por su identificador numérico.</p>
-<p>Se requiere el nivel de autorización 2 (lectura) o cualquier nivel de autorización inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere el nivel de autorización 2 (lectura) o cualquier nivel de autorización inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /entities/{id_entity}
 </code></pre>
 <h3>Encabezados</h3>
@@ -6184,9 +6184,9 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </tr>
 </tbody></table>
 <h3>Parámetros de consulta</h3>
-<p>Este punto final no acepta parámetros de consulta.</p>
+<p>Este endpoint no acepta parámetros de consulta.</p>
 <h3>Cuerpo de la solicitud</h3>
-<p>Este punto final no acepta un cuerpo de solicitud.</p>
+<p>Este endpoint no acepta un cuerpo de solicitud.</p>
 <h3>Encabezados de muestra</h3>
 <pre><code class="language-json">{
   &quot;Authorization&quot;: &quot;&lt;API_KEY&gt;&quot;,
@@ -6247,7 +6247,7 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </tr>
 </tbody></table>
 <h3>Objeto de entidad</h3>
-<p>Este punto final devuelve el <a href="#entity-object">Objeto de entidad</a> descrito en la sección Lista de entidades.</p>
+<p>Este endpoint devuelve el <a href="#entity-object">Objeto de entidad</a> descrito en la sección Lista de entidades.</p>
 <h3>Códigos de estado| Estado | Descripción |</h3>
 <p>| --- | --- |
 | <code>200</code> | Entidad recuperada exitosamente. |
@@ -6313,14 +6313,14 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
         </div>
       </div>
       <div class="prose"><p>/ tabla de contenidos</p>
-<h2>Puntos finales</h2>
+<h2>Endpoints</h2>
 <ul>
 <li><a href="#list-filters">Listar filtros</a></li>
 </ul>
 <h2>Lista de filtros</h2>
 <p>Recupere todos los filtros disponibles para la cuenta y el entorno autenticados.</p>
-<p>Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre filtros para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre filtros para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code class="language-http">GET /filters
 </code></pre>
 <h3>Encabezados</h3>
@@ -6411,7 +6411,7 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
           <div class="sec-desc">Forms</div>
         </div>
       </div>
-      <div class="prose"><p>Índice de puntos finales que exponen catálogos de formularios y definiciones de entrada.</p>
+      <div class="prose"><p>Índice de endpoints que exponen catálogos de formularios y definiciones de entrada.</p>
 <ul>
 <li><a href="#list-forms">Formularios de lista</a></li>
 <li><a href="#get-form">Obtener formulario</a></li>
@@ -6421,7 +6421,7 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </ul>
 <h2>Listar formularios</h2>
 <p>Devuelva los formularios paginados disponibles para la cuenta autenticada. Se requiere nivel de autorización 7.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /forms
 </code></pre>
 <h3>Encabezados</h3>
@@ -6492,7 +6492,7 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </code></pre>
 <h2>Obtener formulario</h2>
 <p>Recuperar una única definición de formulario. Se requiere nivel de autorización 7.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /forms/{id_form}
 </code></pre>
 <h3>Encabezados</h3>
@@ -6553,7 +6553,7 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </code></pre>
 <h2>Listar entradas del formulario</h2>
 <p>Enumere las entradas que pertenecen a un formulario determinado. Se requiere nivel de autorización 7.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /form_inputs
 </code></pre>
 <h3>Encabezados</h3>
@@ -6641,7 +6641,7 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </code></pre>
 <h2>Obtener entrada del formulario</h2>
 <p>Obtenga metadatos para una única entrada de formulario. Se requiere nivel de autorización 7.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /form_inputs/{id_form_input}
 </code></pre>
 <h3>Encabezados</h3>
@@ -6712,7 +6712,7 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </code></pre>
 <h2>Listar tipos de entrada de formulario</h2>
 <p>Devuelve el catálogo de tipos de entrada disponibles. Se requiere nivel de autorización 7.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /form_input_types
 </code></pre>
 <h3>Encabezados</h3>
@@ -7794,7 +7794,7 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
           <div class="sec-desc">Icons</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#list-icons">Iconos de lista</a></li>
 <li><a href="#get-icon">Obtener icono</a></li>
@@ -7802,8 +7802,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 <p>Lista de iconos disponibles para paneles y activos.</p>
 <h2>Iconos de lista</h2>
 <p>Recupera el catálogo de definiciones de iconos que se pueden utilizar en paneles y activos.</p>
-<p>Este punto final no está disponible actualmente para todos los niveles de autorización.</p>
-<h3>Punto final</h3>
+<p>Este endpoint no está disponible actualmente para todos los niveles de autorización.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /icons
 </code></pre>
 <h3>Encabezados</h3>
@@ -7912,8 +7912,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </ul>
 <h2>Obtener icono</h2>
 <p>Recupera los metadatos de un icono específico por su identificador.</p>
-<p>Este punto final no está disponible actualmente para todos los niveles de autorización.</p>
-<h3>Punto final</h3>
+<p>Este endpoint no está disponible actualmente para todos los niveles de autorización.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /icons/{id_icon}
 </code></pre>
 <h3>Encabezados</h3>
@@ -8014,15 +8014,15 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
           <div class="sec-desc">Languages</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#list-languages">Listar idiomas</a></li>
 </ul>
 <p>Idiomas disponibles para perfiles de colaboradores.</p>
 <h2>Listar idiomas</h2>
 <p>Recupera el catálogo de idiomas que los colaboradores pueden seleccionar en sus perfiles.</p>
-<p>Se requiere un nivel de autorización 7 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 7 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /languages
 </code></pre>
 <h3>Encabezados</h3>
@@ -8108,7 +8108,7 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
           <div class="sec-desc">Methods</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#aggregation-methods">Métodos de agregación</a></li>
 <li><a href="#interpolation-methods">Métodos de interpolación</a></li>
@@ -8116,8 +8116,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 <p>Datos de referencia para métodos de agregación e interpolación.</p>
 <h2>Métodos de agregación</h2>
 <p>Recupera el catálogo de funciones de agregación que se pueden asignar a métricas y unidades de medida.</p>
-<p>Se requiere un nivel de autorización 6 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 6 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /methods/aggregation
 </code></pre>
 <h3>Encabezados</h3>
@@ -8194,8 +8194,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </ul>
 <h2>Métodos de interpolación</h2>
 <p>Recupera el catálogo de estrategias de interpolación que se pueden aplicar al completar los puntos de datos faltantes.</p>
-<p>Se requiere un nivel de autorización 6 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 6 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /methods/interpolation
 </code></pre>
 <h3>Encabezados</h3>
@@ -8282,7 +8282,7 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
           <div class="sec-desc">Templates</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#list-templates">Plantillas de lista</a></li>
 <li><a href="#create-template">Crear plantilla</a></li>
@@ -8293,8 +8293,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 <p>Plantillas para comunicaciones como correos electrónicos o notificaciones.</p>
 <h2>Plantillas de lista</h2>
 <p>Recupera las plantillas disponibles para la cuenta actual.</p>
-<p>Se requiere un nivel de autorización 7 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 7 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /templates
 </code></pre>
 <h3>Encabezados</h3>
@@ -8399,8 +8399,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </ul>
 <h2>Crear plantilla</h2>
 <p>Crea una nueva plantilla de comunicación para la cuenta.</p>
-<p>Se requiere un nivel de autorización 1 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 1 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>POST /templates
 </code></pre>
 <h3>Encabezados</h3>
@@ -8531,8 +8531,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </ul>
 <h2>Obtener plantilla</h2>
 <p>Recupera una plantilla por su identificador.</p>
-<p>Se requiere un nivel de autorización 7 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 7 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /templates/{id_template}
 </code></pre>
 <h3>Encabezados</h3>
@@ -8626,8 +8626,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </ul>
 <h2>Actualizar plantilla</h2>
 <p>Actualiza una plantilla con nuevos metadatos o contenido del cuerpo.</p>
-<p>Se requiere un nivel de autorización 2 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 2 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>PUT /templates/{id_template}
 </code></pre>
 <h3>Encabezados| Encabezado | Requerido | Descripción | Tipo |</h3>
@@ -8749,8 +8749,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </ul>
 <h2>Eliminar plantilla</h2>
 <p>Elimina una plantilla existente.</p>
-<p>Se requiere un nivel de autorización 1 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 1 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>DELETE /templates/{id_template}
 </code></pre>
 <h3>Encabezados</h3>
@@ -8848,7 +8848,7 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
           <div class="sec-desc">Time Patterns</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#create-or-get-pattern">Crear u obtener patrón</a></li>
 <li><a href="#get-pattern-by-id">Obtener patrón por ID</a></li>
@@ -8856,8 +8856,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 <p>Programaciones reutilizables para activadores de monitores.</p>
 <h2>Crear u obtener patrón</h2>
 <p>Crea un patrón de tiempo si no existe y devuelve su representación normalizada.</p>
-<p>Se requiere un nivel de autorización 7 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 7 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /time_patterns
 </code></pre>
 <h3>Encabezados</h3>
@@ -8975,8 +8975,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </ul>
 <h2>Obtener patrón por ID</h2>
 <p>Recupera un patrón único por su identificador.</p>
-<p>Se requiere un nivel de autorización 7 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 7 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /time_patterns/{id_time_pattern}
 </code></pre>
 <h3>Encabezados</h3>
@@ -9080,15 +9080,15 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
           <div class="sec-desc">Time Zones</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#list-time-zones">Listar zonas horarias</a></li>
 </ul>
 <p>Recuperar zonas horarias admitidas por la API.</p>
 <h2>Listar zonas horarias</h2>
 <p>Devuelve la lista de zonas horarias admitidas, incluyendo opcionalmente las compensaciones UTC.</p>
-<p>Se requiere un nivel de autorización 7 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 7 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /time_zones
 </code></pre>
 <h3>Encabezados</h3>
@@ -9209,7 +9209,7 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
           <div class="sec-desc">Metrics</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#list-metrics">Listar métricas</a></li>
 <li><a href="#create-metric">Crear métrica</a></li>
@@ -9228,8 +9228,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 <p>Las métricas almacenan datos de series temporales.</p>
 <h2>Listar métricas</h2>
 <p>Recupere todas las métricas configuradas para la cuenta autenticada.</p>
-<p>Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre métricas para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre métricas para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /metrics
 </code></pre>
 <h3>Encabezados</h3>
@@ -9292,8 +9292,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </code></pre>
 <h2>Crear métrica</h2>
 <p>Registre una nueva métrica para la cuenta autenticada.</p>
-<p>Se requiere un nivel de autorización 5 o inferior con permiso de creación sobre métricas para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 5 o inferior con permiso de creación sobre métricas para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>POST /metrics
 </code></pre>
 <h3>Encabezados</h3>
@@ -9433,8 +9433,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </code></pre>
 <h2>Obtener métrica</h2>
 <p>Recuperar una métrica por su identificador.</p>
-<p>Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre métricas para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre métricas para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /metrics/{metric_identifier}
 </code></pre>
 <h3>Encabezados</h3>
@@ -9489,8 +9489,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </code></pre>
 <h2>Actualizar métrica</h2>
 <p>Modificar una métrica existente.</p>
-<p>Se requiere un nivel de autorización 5 o inferior con permiso de actualización de métricas para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 5 o inferior con permiso de actualización de métricas para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>PUT /metrics/{metric_identifier}
 </code></pre>
 <h3>Encabezados</h3>
@@ -9568,8 +9568,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </code></pre>
 <h2>Eliminar métrica</h2>
 <p>Archive una métrica que ya no sea necesaria.</p>
-<p>Se requiere un nivel de autorización 2 o inferior con permiso de eliminación de métricas para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 2 o inferior con permiso de eliminación de métricas para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>DELETE /metrics/{metric_identifier}
 </code></pre>
 <h3>Encabezados</h3>
@@ -9626,8 +9626,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 <p>Los eventos anotan métricas con información contextual, como ventanas de mantenimiento o anomalías de datos.</p>
 <h2>Listar eventos</h2>
 <p>Recupere todos los eventos configurados para la cuenta autenticada.</p>
-<p>Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre eventos de métricas para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre eventos de métricas para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /metrics/{metric_identifier}/events
 </code></pre>
 <h3>Encabezados</h3>
@@ -9705,8 +9705,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </code></pre>
 <h2>Obtener evento</h2>
 <p>Recupera un único evento por su identificador.</p>
-<p>Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre eventos de métricas para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre eventos de métricas para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /metrics/{metric_identifier}/events/{id_metric_event}
 </code></pre>
 <h3>Encabezados</h3>
@@ -9766,8 +9766,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </code></pre>
 <h2>Crear evento</h2>
 <p>Registre un nuevo evento asociado con una métrica.</p>
-<p>Se requiere un nivel de autorización 5 o inferior con permiso de creación sobre eventos de métricas para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 5 o inferior con permiso de creación sobre eventos de métricas para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>POST /metrics/{metric_identifier}/events
 </code></pre>
 <h3>Encabezados</h3>
@@ -9861,8 +9861,8 @@ Se requiere un nivel de autorización 4 o inferior para acceder a este punto fin
 </code></pre>
 <h2>Evento de actualización</h2>
 <p>Modificar un evento existente.</p>
-<p>Se requiere un nivel de autorización 5 o inferior con permiso de actualización sobre eventos de métricas para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 5 o inferior con permiso de actualización sobre eventos de métricas para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>PUT /metrics/{metric_identifier}/events/{id_metric_event}
 </code></pre>
 <h3>Encabezados</h3>
@@ -9939,8 +9939,8 @@ Mismas reglas que crear: el tipo de evento debe existir y <code>event_end</code>
 </code></pre>
 <h2>Eliminar evento</h2>
 <p>Eliminar un evento del historial de la cuenta.</p>
-<p>Se requiere un nivel de autorización 5 o inferior con permiso de eliminación sobre eventos de métricas para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 5 o inferior con permiso de eliminación sobre eventos de métricas para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>DELETE /metrics/{metric_identifier}/events/{id_metric_event}
 </code></pre>
 <h3>Encabezados</h3>
@@ -10010,13 +10010,13 @@ Mismas reglas que crear: el tipo de evento debe existir y <code>event_end</code>
           <div class="sec-desc">Data Ingestion and Deletion</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#insert-datapoints">Insertar puntos de datos</a></li>
 <li><a href="#delete-datapoints">Eliminar puntos de datos</a></li>
 </ul>
 <h2>Insertar puntos de datos</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>POST /metrics/{metric_identifier}/datapoints
 </code></pre>
 <p>Solo las métricas creadas con una fuente <strong>API</strong> pueden almacenar lecturas. Las métricas calculadas son de solo lectura.</p>
@@ -10105,7 +10105,7 @@ Mismas reglas que crear: el tipo de evento debe existir y <code>event_end</code>
 }
 </code></pre>
 <h2>Eliminar puntos de datos</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>DELETE /metrics/{metric_identifier}/datapoints
 </code></pre>
 <h3>Encabezados</h3>
@@ -10193,7 +10193,7 @@ Mismas reglas que crear: el tipo de evento debe existir y <code>event_end</code>
           <div class="sec-desc">Monitors</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#list-monitors">Listar monitores</a></li>
 <li><a href="#create-monitor">Crear monitor</a></li>
@@ -10208,8 +10208,8 @@ Mismas reglas que crear: el tipo de evento debe existir y <code>event_end</code>
 <p>Un monitor observa una o más métricas con una determinada frecuencia, compara valores con límites o rangos configurados por reglas y detecta aquellos valores que cumplen con las reglas. El seguimiento se puede definir como un estado que cambia según el estado de sus reglas. Cada monitor existe sólo dentro de una cuenta específica.</p>
 <h2>Listar monitores</h2>
 <p>Recupere los monitores configurados para la cuenta actual.</p>
-<p>Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /monitors
 </code></pre>
 <h3>Encabezados</h3>
@@ -10272,8 +10272,8 @@ Mismas reglas que crear: el tipo de evento debe existir y <code>event_end</code>
 </code></pre>
 <h2>Crear monitor</h2>
 <p>Cree un nuevo monitor para observar las métricas dentro de la cuenta.</p>
-<p>Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>POST /monitors
 </code></pre>
 <h3>Encabezados</h3>
@@ -10335,7 +10335,7 @@ Mismas reglas que crear: el tipo de evento debe existir y <code>event_end</code>
 <td>no</td>
 <td>entero</td>
 <td>1</td>
-<td>Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el punto final <a href="#es-api-types-types">OBTENER /tipos/monitor_statuses</a></td>
+<td>Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el endpoint <a href="#es-api-types-types">OBTENER /tipos/monitor_statuses</a></td>
 </tr>
 <tr>
 <td><code>monitor_description</code></td>
@@ -10378,8 +10378,8 @@ Mismas reglas que crear: el tipo de evento debe existir y <code>event_end</code>
 </code></pre>
 <h2>Obtener monitor</h2>
 <p>Recuperar los detalles de un monitor específico.</p>
-<p>Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /monitors/{id_monitor}
 </code></pre>
 <h3>Encabezados</h3>
@@ -10434,8 +10434,8 @@ Mismas reglas que crear: el tipo de evento debe existir y <code>event_end</code>
 </code></pre>
 <h2>Actualizar monitor</h2>
 <p>Actualice la configuración de un monitor existente.</p>
-<p>Se requiere un nivel de autorización 6 o cualquier autorización inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 6 o cualquier autorización inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>PUT /monitors/{id_monitor}
 </code></pre>
 <h3>Encabezados</h3>
@@ -10485,7 +10485,7 @@ Mismas reglas que crear: el tipo de evento debe existir y <code>event_end</code>
 <h3>Cuerpo de la solicitud| Campo | Requerido | Tipo | Predeterminado | Descripción |</h3>
 <p>| --- | --- | --- | --- | --- |
 | <code>id_monitor_type</code> | no | entero | nulo | Tipo de monitor. Los valores disponibles se pueden recuperar con <a href="#es-api-types-types">OBTENER /tipos/monitores</a> |
-| <code>id_monitor_status</code> | no | entero | nulo | Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el punto final <a href="#es-api-types-types">OBTENER /tipos/monitor_statuses</a> |
+| <code>id_monitor_status</code> | no | entero | nulo | Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el endpoint <a href="#es-api-types-types">OBTENER /tipos/monitor_statuses</a> |
 | <code>monitor_name</code> | no | cadena | nulo | Nombre para mostrar |
 | <code>monitor_description</code> | no | cadena | nulo | Descripción |
 | <code>monitor_sampling_window</code> | no | entero | nulo | Minutos para promediar |
@@ -10509,8 +10509,8 @@ Mismas reglas que crear: el tipo de evento debe existir y <code>event_end</code>
 </code></pre>
 <h2>Eliminar monitor</h2>
 <p>Elimine un monitor que ya no sea necesario.</p>
-<p>Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>DELETE /monitors/{id_monitor}
 </code></pre>
 <h3>Encabezados</h3>
@@ -10576,14 +10576,14 @@ Mismas reglas que crear: el tipo de evento debe existir y <code>event_end</code>
 </code></pre>
 <h3>Lista de activadores</h3>
 <p>Recupere los activadores configurados en un monitor específico.</p>
-<p>Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este punto final.</p>
+<p>Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este endpoint.</p>
 <h3>Encabezados de muestra</h3>
 <pre><code class="language-json">{
   &quot;Authorization&quot;: &quot;&lt;API_KEY&gt;&quot;,
   &quot;Account&quot;: &quot;&lt;ID_ACCOUNT&gt;&quot;
 }
 </code></pre>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /monitors/{id_monitor}/triggers
 </code></pre>
 <h3>Encabezados</h3>
@@ -10718,14 +10718,14 @@ Mismas reglas que crear: el tipo de evento debe existir y <code>event_end</code>
 </code></pre>
 <h3>Obtener disparador</h3>
 <p>Obtenga detalles para un único activador que pertenece al monitor seleccionado.</p>
-<p>Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este punto final.</p>
+<p>Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este endpoint.</p>
 <h3>Encabezados de muestra</h3>
 <pre><code class="language-json">{
   &quot;Authorization&quot;: &quot;&lt;API_KEY&gt;&quot;,
   &quot;Account&quot;: &quot;&lt;ID_ACCOUNT&gt;&quot;
 }
 </code></pre>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /monitors/{id_monitor}/triggers/{id_monitor_trigger}
 </code></pre>
 <h3>Encabezados</h3>
@@ -10829,7 +10829,7 @@ Mismas reglas que crear: el tipo de evento debe existir y <code>event_end</code>
 
 Cree un nuevo activador para que el monitor entregue notificaciones o automatice acciones de seguimiento.
 
-Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este endpoint.
 
 
 ### Encabezados de muestra
@@ -10840,7 +10840,7 @@ Se requiere un nivel de autorización 5 o cualquier autorización inferior para 
   &quot;Content-Type&quot;: &quot;application/json&quot;
 }
 </code></pre>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>POST /monitors/{id_monitor}/triggers
 </code></pre>
 <h3>Encabezados</h3>
@@ -10924,7 +10924,7 @@ Se requiere un nivel de autorización 5 o cualquier autorización inferior para 
 <td>no</td>
 <td>cadena</td>
 <td>&#39;1,3&#39;</td>
-<td>Valores de identificación del estado que se comunicará. Los ID de estado disponibles se pueden recuperar mediante el punto final <a href="#es-api-types-types">OBTENER /tipos/monitor_statuses</a></td>
+<td>Valores de identificación del estado que se comunicará. Los ID de estado disponibles se pueden recuperar mediante el endpoint <a href="#es-api-types-types">OBTENER /tipos/monitor_statuses</a></td>
 </tr>
 <tr>
 <td><code>trigger_enabled</code></td>
@@ -11059,7 +11059,7 @@ Se requiere un nivel de autorización 5 o cualquier autorización inferior para 
 
 Actualice la configuración de un activador existente.
 
-Se requiere un nivel de autorización 6 o cualquier autorización inferior para utilizar este punto final.
+Se requiere un nivel de autorización 6 o cualquier autorización inferior para utilizar este endpoint.
 
 
 ### Encabezados de muestra
@@ -11070,7 +11070,7 @@ Se requiere un nivel de autorización 6 o cualquier autorización inferior para 
   &quot;Content-Type&quot;: &quot;application/json&quot;
 }
 </code></pre>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>PUT /monitors/{id_monitor}/triggers/{id_monitor_trigger}
 </code></pre>
 <h3>Encabezados</h3>
@@ -11223,14 +11223,14 @@ Se requiere un nivel de autorización 6 o cualquier autorización inferior para 
 </ul>
 <h3>Eliminar disparador</h3>
 <p>Elimine un disparador para que ya no se ejecute en el monitor.</p>
-<p>Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este punto final.</p>
+<p>Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este endpoint.</p>
 <h3>Encabezados de muestra</h3>
 <pre><code class="language-json">{
   &quot;Authorization&quot;: &quot;&lt;API_KEY&gt;&quot;,
   &quot;Account&quot;: &quot;&lt;ID_ACCOUNT&gt;&quot;
 }
 </code></pre>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>DELETE /monitors/{id_monitor}/triggers/{id_monitor_trigger}
 </code></pre>
 <h3>Encabezados</h3>
@@ -11318,8 +11318,8 @@ Se requiere un nivel de autorización 6 o cualquier autorización inferior para 
 </ul>
 <h2>Plantillas de monitor</h2>
 <p>Las plantillas de monitor proporcionan una copia predefinida que se puede reutilizar al configurar las notificaciones del monitor.</p>
-<p>Se requiere un nivel de autorización 2 o cualquier autorización inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 2 o cualquier autorización inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /monitor_templates
 </code></pre>
 <h3>Encabezados| Encabezado | Requerido | Descripción | Tipo |</h3>
@@ -11404,8 +11404,8 @@ Se requiere un nivel de autorización 6 o cualquier autorización inferior para 
 <p>Las reglas de monitor evalúan los datos de métricas entrantes y determinan el estado del monitor. Cada regla apunta a una métrica, compara valores con umbrales y emite un estado que puede desencadenar acciones posteriores.</p>
 <h3>Listar reglas</h3>
 <p>Recupera las reglas configuradas en el monitor seleccionado.</p>
-<p>Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este punto final.</p>
-<h4>Punto final</h4>
+<p>Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este endpoint.</p>
+<h4>Endpoint</h4>
 <pre><code>GET /monitors/{id_monitor}/rules
 </code></pre>
 <h4>Encabezados</h4>
@@ -11483,8 +11483,8 @@ Se requiere un nivel de autorización 6 o cualquier autorización inferior para 
 </code></pre>
 <h3>Obtener regla</h3>
 <p>Obtenga la configuración de una regla de monitor único.</p>
-<p>Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este punto final.</p>
-<h4>Punto final</h4>
+<p>Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este endpoint.</p>
+<h4>Endpoint</h4>
 <pre><code>GET /monitors/{id_monitor}/rules/{id_monitor_rule}
 </code></pre>
 <h4>Encabezados</h4>
@@ -11544,8 +11544,8 @@ Se requiere un nivel de autorización 6 o cualquier autorización inferior para 
 </code></pre>
 <h3>Crear regla</h3>
 <p>Cree una nueva regla para evaluar los datos de métricas para el monitor.</p>
-<p>Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este punto final.</p>
-<h4>Punto final</h4>
+<p>Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este endpoint.</p>
+<h4>Endpoint</h4>
 <pre><code>POST /monitors/{id_monitor}/rules
 </code></pre>
 <h4>Encabezados</h4>
@@ -11595,7 +11595,7 @@ Se requiere un nivel de autorización 6 o cualquier autorización inferior para 
 <h4>Cuerpo de la solicitud| Campo | Requerido | Tipo | Predeterminado | Descripción |</h4>
 <p>| --- | --- | --- | --- | --- |
 | <code>id_metric</code> | si | entero | No | Identificador de métrica |
-| <code>id_monitor_status</code> | no | entero | 1 | Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el punto final <a href="#es-api-types-types">OBTENER /tipos/monitor_statuses</a> |
+| <code>id_monitor_status</code> | no | entero | 1 | Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el endpoint <a href="#es-api-types-types">OBTENER /tipos/monitor_statuses</a> |
 | <code>rule_name</code> | si | cadena | No | Nombre de la regla |
 | <code>rule_description</code> | no | cadena | nulo | Descripción |
 | <code>rule_method</code> | si | entero | No | Método para detectar valores que cumplen la regla. Identificadores válidos: <code>1</code> mayor que, <code>2</code> menor que, <code>3</code> dentro del rango, <code>4</code> fuera del rango |
@@ -11621,8 +11621,8 @@ Se requiere un nivel de autorización 6 o cualquier autorización inferior para 
 </code></pre>
 <h3>Actualizar regla</h3>
 <p>Actualice una regla de supervisión existente para ajustar umbrales o asignaciones de estado.</p>
-<p>Se requiere un nivel de autorización 6 o cualquier autorización inferior para utilizar este punto final.</p>
-<h4>Punto final</h4>
+<p>Se requiere un nivel de autorización 6 o cualquier autorización inferior para utilizar este endpoint.</p>
+<h4>Endpoint</h4>
 <pre><code>PUT /monitors/{id_monitor}/rules/{id_monitor_rule}
 </code></pre>
 <h4>Encabezados</h4>
@@ -11697,7 +11697,7 @@ Se requiere un nivel de autorización 6 o cualquier autorización inferior para 
 <td>no</td>
 <td>entero</td>
 <td>nulo</td>
-<td>Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el punto final <a href="#es-api-types-types">OBTENER /tipos/monitor_statuses</a></td>
+<td>Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el endpoint <a href="#es-api-types-types">OBTENER /tipos/monitor_statuses</a></td>
 </tr>
 <tr>
 <td><code>rule_name</code></td>
@@ -11768,8 +11768,8 @@ Se requiere un nivel de autorización 6 o cualquier autorización inferior para 
 </code></pre>
 <h3>Eliminar regla</h3>
 <p>Elimine una regla para que ya no afecte el estado del monitor.</p>
-<p>Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este punto final.</p>
-<h4>Punto final</h4>
+<p>Se requiere un nivel de autorización 5 o cualquier autorización inferior para utilizar este endpoint.</p>
+<h4>Endpoint</h4>
 <pre><code>DELETE /monitors/{id_monitor}/rules/{id_monitor_rule}
 </code></pre>
 <h4>Encabezados</h4>
@@ -11829,10 +11829,10 @@ Se requiere un nivel de autorización 6 o cualquier autorización inferior para 
 </code></pre>
 <h2>Monitorear el historial</h2>
 <p>Recuperar los cambios de estado históricos de un monitor.</p>
-<p>Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este punto final.</p>
+<p>Se requiere un nivel de autorización 7 o cualquier autorización inferior para utilizar este endpoint.</p>
 <p>Las entradas del historial del monitor son de sólo lectura; no se pueden crear, actualizar ni eliminar a través de la API.</p>
 <p>Si no se proporcionan marcas de tiempo, la API devuelve los últimos siete días de actividad de forma predeterminada. Cuando <code>from_timestamp</code> es mayor que <code>to_timestamp</code>, el servicio los intercambia automáticamente para crear un rango válido.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /monitors/{id_monitor}/history
 </code></pre>
 <h3>Encabezados</h3>
@@ -11963,14 +11963,14 @@ Se requiere un nivel de autorización 6 o cualquier autorización inferior para 
           <div class="sec-desc">Ground Monitor</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#fetch-data">Obtener datos</a></li>
 </ul>
-<p>Punto final que devuelve datos sobre el proceso de monitoreo terrestre.</p>
+<p>Endpoint que devuelve datos sobre el proceso de monitoreo terrestre.</p>
 <h2>Obtener datos</h2>
 <p>Recuperar el estado actual del monitoreo terrestre.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /ground_monitor
 </code></pre>
 <h3>Encabezados</h3>
@@ -12072,7 +12072,7 @@ Se requiere un nivel de autorización 6 o cualquier autorización inferior para 
           <div class="sec-desc">Accounts</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#list-accounts">Listar cuentas</a></li>
 <li><a href="#create-account">Crear una cuenta</a></li>
@@ -12088,7 +12088,7 @@ Se requiere un nivel de autorización 6 o cualquier autorización inferior para 
 <h2>Listar cuentas</h2>
 <p>Se requiere un nivel de autorización 5 o inferior para listar cuentas.
 Los usuarios con nivel de autorización 1 no están restringidos a la cuenta actual y pueden recuperar todas las cuentas del entorno.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /accounts
 </code></pre>
 <h3>Encabezados</h3>
@@ -12170,7 +12170,7 @@ Los usuarios con nivel de autorización 1 no están restringidos a la cuenta act
 <h2>Crear cuenta</h2>
 <p>Se requiere un nivel de autorización 3 o inferior para crear una cuenta.
 Se requiere autorización A1 para configurar <code>id_environment</code> al crear una cuenta.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>POST /accounts
 </code></pre>
 <h3>Encabezados</h3>
@@ -12274,7 +12274,7 @@ Se requiere autorización A1 para configurar <code>id_environment</code> al crea
 <h2>Obtener cuenta</h2>
 <p>Se requiere un nivel de autorización 5 o inferior para obtener una cuenta por ID.
 Los usuarios con nivel de autorización 1 pueden recuperar cualquier cuenta, incluso si no está vinculada al encabezado de cuenta que están utilizando.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /accounts/{id_account}
 </code></pre>
 <h3>Encabezados</h3>
@@ -12340,7 +12340,7 @@ Los usuarios con nivel de autorización 1 pueden recuperar cualquier cuenta, inc
 <h2>Actualizar cuenta</h2>
 <p>Se requiere un nivel de autorización 4 o inferior para actualizar una cuenta.
 Se requiere autorización A1 para configurar <code>id_environment</code> al actualizar una cuenta.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>PUT /accounts/{id_account}
 </code></pre>
 <h3>Encabezados</h3>
@@ -12451,7 +12451,7 @@ Se requiere autorización A1 para configurar <code>id_environment</code> al actu
 </code></pre>
 <h2>Eliminar cuenta</h2>
 <p>Se requiere un nivel de autorización 3 o inferior para eliminar una cuenta.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>DELETE /accounts/{id_account}
 </code></pre>
 <h3>Encabezados</h3>
@@ -12504,11 +12504,11 @@ Se requiere autorización A1 para configurar <code>id_environment</code> al actu
   &quot;instance&quot;: &quot;/accounts/1&quot;
 }
 </code></pre>
-<p>Los terminales <code>/accounts/collaborators</code> administran los colaboradores asignados directamente a una cuenta. Si necesita una vista agregada de cada colaborador de una cuenta, consulte <a href="#es-api-collaborators-collaborators"><code>/collaborators</code> puntos finales</a>. Para recuperar colaboradores vinculados a un activo específico, utilice el <a href="#es-api-scope-relationships"><code>/relationships</code> puntos finales</a> documentado para ese recurso.</p>
+<p>Los endpoints <code>/accounts/collaborators</code> administran los colaboradores asignados directamente a una cuenta. Si necesita una vista agregada de cada colaborador de una cuenta, consulte <a href="#es-api-collaborators-collaborators"><code>/collaborators</code> endpoints</a>. Para recuperar colaboradores vinculados a un activo específico, utilice el <a href="#es-api-scope-relationships"><code>/relationships</code> endpoints</a> documentado para ese recurso.</p>
 <h2>Agregar colaborador a la cuenta</h2>
 <p>Se requiere un nivel de autorización 4 o inferior para agregar colaboradores a una cuenta.</p>
 <p>El usuario solicitante ya debe ser colaborador de la cuenta de destino, a menos que el nivel de autorización de la sesión sea <code>1</code>, en cuyo caso la persona que llama puede administrar colaboradores para cualquier cuenta. Cuando otras personas que llaman no son parte de la cuenta, la API devuelve <code>400</code> con el mensaje <code>You must be a collaborator of the account to manage its collaborators.</code>. Si la persona que llama no tiene suficiente autorización para asignar el nivel solicitado, la API responde con <code>400</code> y el mensaje <code>Your clearance level is not high enough to assign id clearance &lt;id_clearance&gt;</code>.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>POST /accounts/collaborators
 </code></pre>
 <h3>Encabezados</h3>
@@ -12541,7 +12541,7 @@ Se requiere autorización A1 para configurar <code>id_environment</code> al actu
 </tr>
 </tbody></table>
 <h3>Parámetros de consulta</h3>
-<p>Este punto final no acepta parámetros de consulta.</p>
+<p>Este endpoint no acepta parámetros de consulta.</p>
 <h3>Cuerpo de la solicitud</h3>
 <table>
 <thead>
@@ -12618,7 +12618,7 @@ Se requiere autorización A1 para configurar <code>id_environment</code> al actu
 <h2>Actualizar colaborador en cuenta</h2>
 <p>Se requiere un nivel de autorización 5 o inferior para actualizar a los colaboradores.</p>
 <p>Las personas que llaman con nivel de autorización <code>1</code> pueden actualizar los colaboradores de cualquier cuenta sin pertenecer ya a ella. Otras personas que llaman deben ser colaboradores de la cuenta.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>PUT /accounts/collaborators/{collaborator_email}
 </code></pre>
 <h3>Encabezados</h3>
@@ -12705,7 +12705,7 @@ Se requiere autorización A1 para configurar <code>id_environment</code> al actu
 </code></pre>
 <h2>Eliminar colaborador de la cuenta</h2>
 <p>Se requiere un nivel de autorización 4 o inferior para eliminar colaboradores de una cuenta.Las personas que llaman con nivel de autorización <code>1</code> pueden eliminar colaboradores de cualquier cuenta, incluso si no están asignados actualmente a ella. Otras personas que llaman deben ser colaboradores de la cuenta.</p>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>DELETE /accounts/collaborators/{collaborator_email}
 </code></pre>
 <h3>Encabezados</h3>
@@ -12779,14 +12779,14 @@ Se requiere autorización A1 para configurar <code>id_environment</code> al actu
       </div>
       <div class="prose"><p>Las autorizaciones representan el nivel de autorización que determina qué recursos puede administrar un colaborador dentro de una cuenta. El nivel <code>1</code> es el más restrictivo y el nivel <code>7</code> otorga el acceso más amplio.</p>
 <p>Consulte <a href="https://www.google.com">Permisos de recursos por matriz de autorización</a> para obtener una referencia cruzada de los recursos API, las operaciones y los niveles de autorización que pueden ejecutarlos.</p>
-<h2>Puntos finales</h2>
+<h2>Endpoints</h2>
 <ul>
 <li><a href="#list-clearances">Listar autorizaciones</a></li>
 <li><a href="#retrieve-my-clearance">Recuperar mi autorización</a></li>
 </ul>
 <h2>Listar autorizaciones</h2>
-<p>Se requiere autorización con permiso de lectura sobre las autorizaciones para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere autorización con permiso de lectura sobre las autorizaciones para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /clearances
 </code></pre>
 <h3>Encabezados</h3>
@@ -12813,7 +12813,7 @@ Se requiere autorización A1 para configurar <code>id_environment</code> al actu
 </tr>
 </tbody></table>
 <h3>Parámetros de consulta</h3>
-<p>Este punto final no acepta parámetros de consulta.</p>
+<p>Este endpoint no acepta parámetros de consulta.</p>
 <h3>Solicitud de muestra</h3>
 <pre><code class="language-bash">curl -H &quot;Authorization: &lt;API_KEY&gt;&quot; \
      -H &quot;Account: &lt;ID_ACCOUNT&gt;&quot; \
@@ -12840,13 +12840,13 @@ Se requiere autorización A1 para configurar <code>id_environment</code> al actu
 <li><code>400</code> Solicitud no válida</li>
 <li><code>401</code> Credenciales de autenticación faltantes o no válidas</li>
 <li><code>403</code> Permisos insuficientes para enumerar autorizaciones</li>
-<li><code>404</code> Punto final no encontrado</li>
+<li><code>404</code> Endpoint no encontrado</li>
 <li><code>500</code> Error inesperado del servidor</li>
 </ul>
 <h2>Recuperar mi autorización</h2>
-<p>Debe pertenecer a la cuenta solicitada para utilizar este punto final.
-Se requiere la autorización asociada con su membresía en la cuenta de destino para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Debe pertenecer a la cuenta solicitada para utilizar este endpoint.
+Se requiere la autorización asociada con su membresía en la cuenta de destino para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /clearances/me
 </code></pre>
 <h3>Encabezados</h3>
@@ -12873,7 +12873,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </tr>
 </tbody></table>
 <h3>Parámetros de consulta</h3>
-<p>Este punto final no acepta parámetros de consulta.</p>
+<p>Este endpoint no acepta parámetros de consulta.</p>
 <h3>Solicitud de muestra</h3>
 <pre><code class="language-bash">curl -H &quot;Authorization: &lt;API_KEY&gt;&quot; \
      -H &quot;Account: &lt;ID_ACCOUNT&gt;&quot; \
@@ -12898,7 +12898,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 <li><code>400</code> Solicitud no válida</li>
 <li><code>401</code> Credenciales de autenticación faltantes o no válidas</li>
 <li><code>403</code> La persona que llama no pertenece a la cuenta</li>
-<li><code>404</code> Punto final no encontrado</li>
+<li><code>404</code> Endpoint no encontrado</li>
 <li><code>500</code> Error inesperado del servidor</li>
 </ul>
 </div>
@@ -12914,15 +12914,15 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
         </div>
       </div>
       <div class="prose"><p>/ tabla de contenidos</p>
-<h2>Puntos finales</h2>
+<h2>Endpoints</h2>
 <ul>
 <li><a href="#list-environments">Enumerar entornos</a></li>
 </ul>
 <p>Los entornos definen la agrupación de inquilinos de nivel superior para cuentas y recursos relacionados.</p>
 <h2>Entornos de lista</h2>
 <p>Recupera los entornos disponibles para la sesión autenticada.</p>
-<p>Se requiere un nivel de autorización 5 o inferior para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 5 o inferior para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /environments
 </code></pre>
 <h3>Encabezados</h3>
@@ -12959,7 +12959,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </thead>
 <tbody><tr>
 <td>Ninguno</td>
-<td>Este punto final no utiliza parámetros de ruta.</td>
+<td>Este endpoint no utiliza parámetros de ruta.</td>
 <td>-</td>
 </tr>
 </tbody></table>
@@ -12979,7 +12979,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 <td>No</td>
 <td>-</td>
 <td>-</td>
-<td>Este punto final no acepta parámetros de consulta.</td>
+<td>Este endpoint no acepta parámetros de consulta.</td>
 </tr>
 </tbody></table>
 <h3>Sobre de respuesta</h3>
@@ -13056,7 +13056,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
           <div class="sec-desc">Relationships</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#list-relationships">Listar relaciones</a></li>
 <li><a href="#list-relationships-by-type">Listar relaciones por tipo</a></li>
@@ -13066,7 +13066,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </ul>
 <p>Una relación vincula dos recursos en una jerarquía padre-hijo. Las entidades admitidas son colaboradores, activos, paneles y métricas.</p>
 <h2>Listar relaciones</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /relationships/{entity}/{id}
 </code></pre>
 <h3>Encabezados</h3>
@@ -13174,7 +13174,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 <li><code>500</code> Error interno del servidor</li>
 </ul>
 <h2>Listar relaciones por tipo</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /relationships/{entity}/{id}/{entity_type}
 </code></pre>
 <h3>Encabezados</h3>
@@ -13289,7 +13289,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 <li><code>500</code> Error interno del servidor</li>
 </ul>
 <h2>Crear relación</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>POST /relationships/{entity}/{id}/{child_entity}/{child_id}
 </code></pre>
 <h3>Encabezados</h3>
@@ -13387,7 +13387,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 }
 </code></pre>
 <h2>Obtener una relación específica</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /relationships/{entity}/{id}/{child_entity}/{child_id}
 </code></pre>
 <h3>Encabezados| Encabezado | Requerido | Descripción | Tipo |</h3>
@@ -13466,7 +13466,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 }
 </code></pre>
 <h2>Eliminar relación</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>DELETE /relationships/{entity}/{id}/{child_entity}/{child_id}
 </code></pre>
 <h3>Encabezados</h3>
@@ -13567,13 +13567,13 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
         </div>
       </div>
       <div class="prose"><p>Los roles definen el nivel de acceso otorgado a los colaboradores a los recursos que pertenecen a una cuenta.</p>
-<h2>Puntos finales</h2>
+<h2>Endpoints</h2>
 <ul>
 <li><a href="#list-roles">Listar roles</a></li>
 </ul>
 <h2>Listar roles</h2>
-<p>Se requiere autorización con permiso de lectura sobre roles para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere autorización con permiso de lectura sobre roles para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /roles
 </code></pre>
 <h3>Encabezados</h3>
@@ -13651,7 +13651,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 <li><code>400</code> Parámetros de consulta no válidos</li>
 <li><code>401</code> Credenciales de autenticación faltantes o no válidas</li>
 <li><code>403</code> Permisos insuficientes para enumerar roles</li>
-<li><code>404</code> Punto final no encontrado</li>
+<li><code>404</code> Endpoint no encontrado</li>
 <li><code>500</code> Error inesperado del servidor</li>
 </ul>
 </div>
@@ -13668,8 +13668,8 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
       </div>
       <div class="prose"><h2>Métricas de búsqueda</h2>
 <p>Filtre métricas por activos vinculados o metadatos intrínsecos mediante un cuerpo POST flexible.</p>
-<p>Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre métricas para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre métricas para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>POST /search/metrics
 </code></pre>
 <h3>Encabezados</h3>
@@ -13900,7 +13900,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
         </div>
       </div>
       <div class="prose"><p>Paquetes de configuración que definen cómo interactúan los dispositivos con activos y puertas de enlace.</p>
-<h2>Puntos finales</h2>
+<h2>Endpoints</h2>
 <ul>
 <li><a href="#list-setups">Configuraciones de lista</a></li>
 <li><a href="#get-setup">Obtener configuración</a></li>
@@ -13910,8 +13910,8 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </ul>
 <h2>Configuraciones de lista</h2>
 <p>Recupere todas las configuraciones visibles para la cuenta autenticada. Opcionalmente, filtre por activo, modelo de dispositivo o nombre e incluya configuraciones que no estén adjuntas a un activo.</p>
-<p>Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /setups
 </code></pre>
 <h3>Encabezados</h3>
@@ -14131,9 +14131,9 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 }
 </code></pre>
 <h2>Obtener configuración</h2>
-<p>Recupera una configuración única por su identificador numérico. Utilice este punto final para inspeccionar la configuración de un emparejamiento de activo-dispositivo específico.</p>
-<p>Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Recupera una configuración única por su identificador numérico. Utilice este endpoint para inspeccionar la configuración de un emparejamiento de activo-dispositivo específico.</p>
+<p>Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /setups/{id_setup}
 </code></pre>
 <h3>Encabezados</h3>
@@ -14177,7 +14177,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </tr>
 </tbody></table>
 <h3>Parámetros de consulta</h3>
-<p>Este punto final no acepta parámetros de consulta.</p>
+<p>Este endpoint no acepta parámetros de consulta.</p>
 <h3>Encabezados de muestra</h3>
 <pre><code class="language-json">{
   &quot;Authorization&quot;: &quot;&lt;API_KEY&gt;&quot;,
@@ -14256,8 +14256,8 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </code></pre>
 <h2>Crear configuración</h2>
 <p>Cree una configuración asociada con la cuenta autenticada. Proporcione el modelo del dispositivo y las referencias de activos y puertas de enlace opcionales.</p>
-<p>Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>POST /setups
 </code></pre>
 <h3>Encabezados</h3>
@@ -14457,7 +14457,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </code></pre>
 <h2>Configuración de actualización</h2>
 <p>Modificar una configuración existente. Sólo se actualizan los atributos proporcionados; Los campos omitidos mantienen sus valores actuales.</p>
-<p>Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este punto final.### Punto final</p>
+<p>Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este endpoint.### Endpoint</p>
 <pre><code>PUT /setups/{id_setup}
 </code></pre>
 <h3>Encabezados</h3>
@@ -14673,8 +14673,8 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </code></pre>
 <h2>Eliminar configuración</h2>
 <p>Elimine una configuración de la cuenta autenticada.</p>
-<p>Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>DELETE /setups/{id_setup}
 </code></pre>
 <h3>Encabezados</h3>
@@ -14796,15 +14796,15 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
         </div>
       </div>
       <div class="prose"><p>Asociaciones entre configuraciones y las métricas que exponen.</p>
-<h2>Puntos finales</h2>
+<h2>Endpoints</h2>
 <ul>
 <li><a href="#metrics-by-setup">Métricas por configuración</a></li>
 <li><a href="#setups-by-metric">Configuraciones por métrica</a></li>
 </ul>
 <h2>Métricas por configuración</h2>
 <p>Enumere todas las métricas adjuntas a la configuración solicitada.</p>
-<p>Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /setups/{id_setup}/metrics
 </code></pre>
 <h3>Encabezados</h3>
@@ -14848,7 +14848,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </tr>
 </tbody></table>
 <h3>Parámetros de consulta</h3>
-<p>Este punto final no acepta parámetros de consulta.</p>
+<p>Este endpoint no acepta parámetros de consulta.</p>
 <h3>Encabezados de muestra</h3>
 <pre><code class="language-json">{
   &quot;Authorization&quot;: &quot;&lt;API_KEY&gt;&quot;,
@@ -14950,8 +14950,8 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </code></pre>
 <h2>Configuraciones por métrica</h2>
 <p>Enumere cada configuración que utilice la métrica solicitada.</p>
-<p>Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /metrics/{metric_identifier}/setups
 </code></pre>
 <h3>Encabezados</h3>
@@ -14995,7 +14995,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </tr>
 </tbody></table>
 <h3>Parámetros de consulta</h3>
-<p>Este punto final no acepta parámetros de consulta.</p>
+<p>Este endpoint no acepta parámetros de consulta.</p>
 <h3>Encabezados de muestra</h3>
 <pre><code class="language-json">{
   &quot;Authorization&quot;: &quot;&lt;API_KEY&gt;&quot;,
@@ -15108,15 +15108,15 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
         </div>
       </div>
       <div class="prose"><p>Relación histórica entre los dispositivos físicos y las configuraciones que implementan.</p>
-<h2>Puntos finales</h2>
+<h2>Endpoints</h2>
 <ul>
 <li><a href="#devices-by-setup">Dispositivos por configuración</a></li>
 <li><a href="#setups-by-device">Configuraciones por dispositivo</a></li>
 </ul>
 <h2>Dispositivos por configuración</h2>
 <p>Enumere cada asignación de un dispositivo a la configuración solicitada.</p>
-<p>Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /setups/{id_setup}/devices
 </code></pre>
 <h3>Encabezados</h3>
@@ -15160,7 +15160,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </tr>
 </tbody></table>
 <h3>Parámetros de consulta</h3>
-<p>Este punto final no acepta parámetros de consulta.</p>
+<p>Este endpoint no acepta parámetros de consulta.</p>
 <h3>Encabezados de muestra</h3>
 <pre><code class="language-json">{
   &quot;Authorization&quot;: &quot;&lt;API_KEY&gt;&quot;,
@@ -15280,8 +15280,8 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </code></pre>
 <h2>Configuraciones por dispositivo</h2>
 <p>Enumere todas las configuraciones que se han asignado al dispositivo solicitado.</p>
-<p>Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /devices/{id_device}/setups
 </code></pre>
 <h3>Encabezados</h3>
@@ -15325,7 +15325,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </tr>
 </tbody></table>
 <h3>Parámetros de consulta</h3>
-<p>Este punto final no acepta parámetros de consulta.</p>
+<p>Este endpoint no acepta parámetros de consulta.</p>
 <h3>Encabezados de muestra</h3>
 <pre><code class="language-json">{
   &quot;Authorization&quot;: &quot;&lt;API_KEY&gt;&quot;,
@@ -15434,7 +15434,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
         </div>
       </div>
       <div class="prose"><p>Colecciones de dispositivos agrupados con fines organizativos.</p>
-<h2>Puntos finales</h2>
+<h2>Endpoints</h2>
 <ul>
 <li><a href="#list-inventories">Listar inventarios</a></li>
 <li><a href="#get-inventory">Obtener inventario</a></li>
@@ -15444,8 +15444,8 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </ul>
 <h2>Listar inventarios</h2>
 <p>Recupere todos los inventarios visibles para la cuenta autenticada. Opcionalmente, puede filtrar los resultados por nombre.</p>
-<p>Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /inventories
 </code></pre>
 <h3>Encabezados</h3>
@@ -15597,8 +15597,8 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </code></pre>
 <h2>Obtener inventario</h2>
 <p>Recupera los detalles de un único inventario por su identificador numérico.</p>
-<p>Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>GET /inventories/{id_inventory}
 </code></pre>
 <h3>Encabezados</h3>
@@ -15642,7 +15642,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </tr>
 </tbody></table>
 <h3>Parámetros de consulta</h3>
-<p>Este punto final no acepta parámetros de consulta.</p>
+<p>Este endpoint no acepta parámetros de consulta.</p>
 <h3>Encabezados de muestra</h3>
 <pre><code class="language-json">{
   &quot;Authorization&quot;: &quot;&lt;API_KEY&gt;&quot;,
@@ -15742,8 +15742,8 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </code></pre>
 <h2>Crear inventario</h2>
 <p>Cree un nuevo inventario disponible para la cuenta autenticada.</p>
-<p>Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>POST /inventories
 </code></pre>
 <h3>Encabezados</h3>
@@ -15853,8 +15853,8 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </code></pre>
 <h2>Actualizar inventario</h2>
 <p>Modificar un inventario existente. Los campos omitidos mantienen su valor actual.</p>
-<p>Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>PUT /inventories/{id_inventory}
 </code></pre>
 <h3>Encabezados</h3>
@@ -16008,8 +16008,8 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 </code></pre>
 <h2>Eliminar inventario</h2>
 <p>Eliminar un inventario de la cuenta autenticada.</p>
-<p>Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este punto final.</p>
-<h3>Punto final</h3>
+<p>Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este endpoint.</p>
+<h3>Endpoint</h3>
 <pre><code>DELETE /inventories/{id_inventory}
 </code></pre>
 <h3>Encabezados</h3>
@@ -16130,7 +16130,7 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
           <div class="sec-desc">Types</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#list-available-type-groups">Listar grupos de tipos disponibles</a></li>
 <li><a href="#monitor-types">Tipos de monitores</a></li>
@@ -16141,11 +16141,11 @@ Se requiere la autorización asociada con su membresía en la cuenta de destino 
 <li><a href="#widget-types">Tipos de widgets</a></li>
 <li><a href="#form-input-types">Tipos de entrada de formulario</a></li>
 </ul>
-<p>Puntos finales de utilidad que devuelven listas de tipos predefinidos.</p>
+<p>Endpoints de utilidad que devuelven listas de tipos predefinidos.</p>
 <p>Un tipo es un tipo particular de entidad, que se utiliza en la creación o modificación de otras entidades para categorizarlas. Existe un tipo de entidad para algunas entidades, la mayoría de ellas siguen el mismo patrón de nomenclatura:
 para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad_a_tipo&quot;. Por ejemplo, para los activos, su tipo de entidad se llama active_types y así sucesivamente.</p>
 <h2>Listar grupos de tipos disponibles</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /types
 </code></pre>
 <h3>Encabezados</h3>
@@ -16178,7 +16178,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 <pre><code class="language-json">[&quot;monitors&quot;,&quot;communications&quot;,&quot;monitor_triggers&quot;,&quot;monitor_statuses&quot;,&quot;metric_sources&quot;,&quot;widgets&quot;,&quot;form_inputs&quot;,&quot;metric_events&quot;,&quot;assets&quot;]
 </code></pre>
 <h2>Tipos de monitores</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /types/monitors
 </code></pre>
 <h3>Encabezados</h3>
@@ -16211,7 +16211,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 <pre><code class="language-json">[&quot;status&quot;,&quot;threshold&quot;,&quot;anomaly&quot;]
 </code></pre>
 <h2>Tipos de comunicación</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /types/communications
 </code></pre>
 <h3>Encabezados</h3>
@@ -16244,7 +16244,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 <pre><code class="language-json">[&quot;email&quot;,&quot;webhook&quot;,&quot;sms&quot;]
 </code></pre>
 <h2>Monitorear tipos de disparadores</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /types/monitor_triggers
 </code></pre>
 <h3>Encabezados</h3>
@@ -16277,7 +16277,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 <pre><code class="language-json">[&quot;above&quot;,&quot;below&quot;,&quot;deadman&quot;]
 </code></pre>
 <h2>Monitorear estados</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /types/monitor_statuses
 </code></pre>
 <h3>Encabezados</h3>
@@ -16310,7 +16310,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 <pre><code class="language-json">[&quot;enabled&quot;,&quot;disabled&quot;,&quot;snoozed&quot;]
 </code></pre>
 <h2>Fuentes de métricas</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /types/metric_sources
 </code></pre>
 <h3>Encabezados</h3>
@@ -16343,7 +16343,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 <pre><code class="language-json">[&quot;device&quot;,&quot;asset&quot;]
 </code></pre>
 <h2>Tipos de widgets</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /types/widgets
 </code></pre>
 <h3>Encabezados</h3>
@@ -16376,7 +16376,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 <pre><code class="language-json">[&quot;chart&quot;,&quot;number&quot;,&quot;table&quot;]
 </code></pre>
 <h2>Tipos de entrada de formulario</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /types/form_inputs
 </code></pre>
 <h3>Encabezados</h3>
@@ -16420,7 +16420,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
           <div class="sec-desc">Asset Categories</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#list-categories">Listar categorías</a></li>
 <li><a href="#create-category">Crear categoría</a></li>
@@ -16430,7 +16430,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 </ul>
 <p>Categorías utilizadas para agrupar activos.</p>
 <h2>Listar categorías</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /types/assets
 </code></pre>
 <h3>Encabezados</h3>
@@ -16495,7 +16495,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 }
 </code></pre>
 <h2>Crear categoría</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>POST /types/assets
 </code></pre>
 <h3>Encabezados</h3>
@@ -16564,7 +16564,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 }
 </code></pre>
 <h2>Obtener categoría</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /types/assets/{id_category}
 </code></pre>
 <h3>Encabezados</h3>
@@ -16618,7 +16618,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 }
 </code></pre>
 <h2>Actualizar categoría</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>PUT /types/assets/{id_category}
 </code></pre>
 <h3>Encabezados</h3>
@@ -16702,7 +16702,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 }
 </code></pre>
 <h2>Eliminar categoría</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>DELETE /types/assets/{id_category}
 </code></pre>
 <h3>Encabezados</h3>
@@ -16767,7 +16767,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
           <div class="sec-desc">Metric Events</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#list-event-types">Listar tipos de eventos</a></li>
 <li><a href="#create-event-type">Crear tipo de evento</a></li>
@@ -16777,7 +16777,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 </ul>
 <p>Catálogo de tipos de eventos que se pueden asociar a métricas.</p>
 <h2>Listar tipos de eventos</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /types/metric_events
 </code></pre>
 <h3>Encabezados</h3>
@@ -16842,7 +16842,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 }
 </code></pre>
 <h2>Crear tipo de evento</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>POST /types/metric_events
 </code></pre>
 <h3>Encabezados</h3>
@@ -16918,7 +16918,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 }
 </code></pre>
 <h2>Obtener tipo de evento</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /types/metric_events/{id_event_type}
 </code></pre>
 <h3>Encabezados</h3>
@@ -16972,7 +16972,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 }
 </code></pre>
 <h2>Actualizar tipo de evento</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>PUT /types/metric_events/{id_event_type}
 </code></pre>
 <h3>Encabezados</h3>
@@ -17063,7 +17063,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 }
 </code></pre>
 <h2>Eliminar tipo de evento</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>DELETE /types/metric_events/{id_event_type}
 </code></pre>
 <h3>Encabezados</h3>
@@ -17128,7 +17128,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
           <div class="sec-desc">UOMs</div>
         </div>
       </div>
-      <div class="prose"><h2>Puntos finales</h2>
+      <div class="prose"><h2>Endpoints</h2>
 <ul>
 <li><a href="#list-uoms">Listar UOM</a></li>
 <li><a href="#create-uom">Crear unidad de medida</a></li>
@@ -17138,7 +17138,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 </ul>
 <p>Una uom es una unidad de medida y se utiliza para definir la magnitud de una cantidad en una métrica. Hay uoms globales que se utilizan entre todas las cuentas y uoms locales que pertenecen a una cuenta.</p>
 <h2>Listar UOM</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /uoms
 </code></pre>
 <h3>Encabezados</h3>
@@ -17212,7 +17212,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 }
 </code></pre>
 <h2>Crear unidad de medida</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>POST /uoms
 </code></pre>
 <h3>Encabezados</h3>
@@ -17303,7 +17303,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 }
 </code></pre>
 <h2>Obtener unidad de medida</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>GET /uoms/{id_uom}
 </code></pre>
 <h3>Encabezados</h3>
@@ -17357,7 +17357,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 }
 </code></pre>
 <h2>Actualizar unidad de medida</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>PUT /uoms/{id_uom}
 </code></pre>
 <h3>Encabezados</h3>
@@ -17424,7 +17424,7 @@ para la entidad &quot;entidad_a&quot;, su tipo de entidad se llama &quot;entidad
 }
 </code></pre>
 <h2>Eliminar unidad de medida</h2>
-<h3>Punto final</h3>
+<h3>Endpoint</h3>
 <pre><code>DELETE /uoms/{id_uom}
 </code></pre>
 <h3>Encabezados</h3>
@@ -17584,7 +17584,7 @@ Account: 33
   }
 }
 </code></pre>
-<p><em><code>identifier</code> corresponde a la columna <code>device_custom_id</code> y es el valor que se va a reutilizar en todos los puntos finales <code>/devices/{identifier}</code>.</em></p>
+<p><em><code>identifier</code> corresponde a la columna <code>device_custom_id</code> y es el valor que se va a reutilizar en todos los endpoints <code>/devices/{identifier}</code>.</em></p>
 <h3>Configuración</h3>
 <ul>
 <li>Modelos Clickiemota predeterminados: <code>381, 389, 500001, 500002, 500003, 294, 318, 330, 362</code>.</li>
@@ -17614,7 +17614,7 @@ Account: 33
 </tbody></table>
 <hr>
 <h2>Pautas de implementación para próximos dispositivos endpoints <em>(lineamientos)</em></h2>
-<p>Las siguientes secciones documentan los contratos que se deben cumplir cuando se implementen los puntos finales de dispositivo restantes. Se consideran características de <strong>modo real</strong>: las llamadas de configuración interactúan con el puente MQTT existente, por lo que no se necesitan stubs.</p>
+<p>Las siguientes secciones documentan los contratos que se deben cumplir cuando se implementen los endpoints de dispositivo restantes. Se consideran características de <strong>modo real</strong>: las llamadas de configuración interactúan con el puente MQTT existente, por lo que no se necesitan stubs.</p>
 <h3>OBTENER /dispositivos/{identificador}</h3>
 <h4>Objetivo</h4>
 <p>Recupere metadatos detallados para un único dispositivo Clickiemota. Valida que el dispositivo pertenece a la cuenta autenticada y está instalado en una configuración activa. Devuelve información completa del dispositivo, incluidos detalles del modelo, estado de conectividad y asociación de configuración.</p>
@@ -18119,11 +18119,11 @@ Content-Type: application/json
 </tr>
 </tbody></table>
 <hr>
-<h2>Puntos finales de dispositivos planificados</h2>
+<h2>Endpoints de dispositivos planificados</h2>
 <table>
 <thead>
 <tr>
-<th>Punto final</th>
+<th>Endpoint</th>
 <th>Modo</th>
 <th>Estado</th>
 <th>Notas</th>
@@ -18172,7 +18172,7 @@ Content-Type: application/json
 <td>Comportamiento final pendiente con el equipo de Jobs; devolver <code>501 feature_not_ready</code> hasta que se ratifique el contrato de almacenamiento</td>
 </tr>
 </tbody></table>
-<p>Todos los puntos finales planificados deben mantener las respuestas alineadas con el sobre estándar documentado en <code>README.md</code>.</p>
+<p>Todos los endpoints planificados deben mantener las respuestas alineadas con el sobre estándar documentado en <code>README.md</code>.</p>
 </div>
     </section>
     <div class="divider"></div>
@@ -18984,7 +18984,7 @@ Content-Type: application/json
         </div>
       </div>
       <div class="prose"><blockquote>
-<p>Estos puntos finales permanecen en <strong>modo stub</strong> para la Fase A. Proporcionar respuestas deterministas generadas desde accesorios para desbloquear integraciones de clientes mientras se prepara el proceso de telemetría real.</p>
+<p>Estos endpoints permanecen en <strong>modo stub</strong> para la Fase A. Proporcionar respuestas deterministas generadas desde accesorios para desbloquear integraciones de clientes mientras se prepara el proceso de telemetría real.</p>
 </blockquote>
 <hr>
 <h2>OBTENER /dispositivos/{identificador}/logs</h2>
@@ -19160,11 +19160,11 @@ y este proyecto se adhiere a <a href="https://semver.org/spec/v2.0.0.html">Versi
 <hr>
 <h3>Directrices para las entradas del registro de cambios</h3>
 <ul>
-<li><strong>Agregado</strong>: nuevas funciones o puntos finales</li>
+<li><strong>Agregado</strong>: nuevas funciones o endpoints</li>
 <li><strong>Cambiado</strong>: cambios en la funcionalidad existente</li>
 <li><strong>Corregido</strong> — Corrección de errores</li>
 <li><strong>Obsoleto</strong>: funciones marcadas para eliminación futura</li>
-<li><strong>Eliminado</strong>: funciones o puntos finales eliminados</li>
+<li><strong>Eliminado</strong>: funciones o endpoints eliminados</li>
 <li><strong>Seguridad</strong>: parches de seguridad o correcciones de vulnerabilidades</li>
 </ul>
 <h3>Formato para cada entrada</h3>
@@ -19205,9 +19205,9 @@ y este proyecto se adhiere a <a href="https://semver.org/spec/v2.0.0.html">Versi
 <h3>documentos</h3>
 <ul>
 <li>Navegación de documentación refinada para clientes, incluido un punto de entrada a la bandeja de entrada de documentos y métricas/referencias de búsqueda actualizadas, además de alineación de la hoja de ruta.</li>
-<li>Se agregaron filtros para la documentación del punto final, colecciones de Postman actualizadas, cobertura de la hoja de ruta actualizada y páginas de inicio de documentación sincronizadas.</li>
+<li>Se agregaron filtros para la documentación del endpoint, colecciones de Postman actualizadas, cobertura de la hoja de ruta actualizada y páginas de inicio de documentación sincronizadas.</li>
 <li>Se actualizó <code>docs/README.md</code> para alinear el índice de etiquetas de ruta con la superficie API actual, incluida la cobertura explícita para <code>GET /monitor_templates</code>.</li>
-<li>Se agregó una sección de guías de puntos finales de puerta de enlace en <code>docs/README.md</code> que enumera la documentación de estado, dispositivos, acciones, trabajos y registros.</li>
+<li>Se agregó una sección de guías de endpoints de puerta de enlace en <code>docs/README.md</code> que enumera la documentación de estado, dispositivos, acciones, trabajos y registros.</li>
 <li>Se movió el enlace de la colección Postman de producción v4 al comienzo de <code>docs/README.md</code> como referencia rápida.</li>
 <li>Sincronicé la página de inicio raíz <code>README.md</code> con enlaces de índice de documentación para que ambos puntos de entrada apunten a las mismas guías principales y de puerta de enlace.</li>
 </ul>
@@ -19262,13 +19262,13 @@ y este proyecto se adhiere a <a href="https://semver.org/spec/v2.0.0.html">Versi
 </ul>
 <h3>documentos</h3>
 <ul>
-<li>Documenté el nuevo punto final de búsqueda de métricas, actualicé la colección Postman y actualicé la cobertura de la hoja de ruta para el filtrado de métricas.</li>
+<li>Documenté el nuevo endpoint de búsqueda de métricas, actualicé la colección Postman y actualicé la cobertura de la hoja de ruta para el filtrado de métricas.</li>
 </ul>
 <h2>Versión 4.2.0 (2025-12-15)</h2>
 <p>Esta versión consolida los cambios incluidos en la última combinación <code>development</code> → <code>main</code> (comenzando con la confirmación de combinación <code>a09eb62</code>). Utilice la lista de confirmación de esa fusión como fuente de verdad para cualquier nota de versión de seguimiento o ajustes del registro de cambios. Para las actualizaciones de la documentación 4.2.x, consulte la solicitud de extracción de fusión principal de desarrollo consolidado → para la versión de destino en lugar de los PR de características individuales para que las herramientas puedan recopilar mediante programación las confirmaciones relevantes desde un único punto de entrada.</p>
 <h3>formularios</h3>
 <ul>
-<li>Expone puntos finales del catálogo para enumerar formularios y recuperar definiciones individuales (autorización 7 para operaciones de lectura).</li>
+<li>Expone endpoints del catálogo para enumerar formularios y recuperar definiciones individuales (autorización 7 para operaciones de lectura).</li>
 <li>Los registros de formulario incluyen metadatos de alcance de cuenta/entorno además de nombres descriptivos y descripciones opcionales.</li>
 </ul>
 <h3>formulario_entradas</h3>
@@ -19290,7 +19290,7 @@ y este proyecto se adhiere a <a href="https://semver.org/spec/v2.0.0.html">Versi
 </ul>
 <h3>widgets</h3>
 <ul>
-<li>Puntos finales del catálogo para widgets: creación/eliminación con autorización 1, actualizaciones con autorización 2, lecturas con autorización 7.</li>
+<li>Endpoints del catálogo para widgets: creación/eliminación con autorización 1, actualizaciones con autorización 2, lecturas con autorización 7.</li>
 <li>Los widgets se vinculan a tipos de widgets y formularios opcionales utilizados para generar cargas útiles de configuración de widgets del panel.</li>
 </ul>
 <h3>tipos de widgets</h3>

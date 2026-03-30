@@ -2,7 +2,7 @@
 
 Asociaciones entre configuraciones y las métricas que exponen.
 
-## Puntos finales
+## Endpoints
 - [Métricas por configuración](#metrics-by-setup)
 - [Configuraciones por métrica](#setups-by-metric)
 
@@ -10,9 +10,9 @@ Asociaciones entre configuraciones y las métricas que exponen.
 
 Enumere todas las métricas adjuntas a la configuración solicitada.
 
-Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este punto final.
+Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /setups/{id_setup}/metrics
 ```
@@ -32,7 +32,7 @@ GET /setups/{id_setup}/metrics
 
 ### Parámetros de consulta
 
-Este punto final no acepta parámetros de consulta.
+Este endpoint no acepta parámetros de consulta.
 
 ### Encabezados de muestra
 ```json
@@ -105,9 +105,9 @@ curl -H "Authorization: <API_KEY>" \
 
 Enumere cada configuración que utilice la métrica solicitada.
 
-Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este punto final.
+Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /metrics/{metric_identifier}/setups
 ```
@@ -127,7 +127,7 @@ GET /metrics/{metric_identifier}/setups
 
 ### Parámetros de consulta
 
-Este punto final no acepta parámetros de consulta.
+Este endpoint no acepta parámetros de consulta.
 
 ### Encabezados de muestra
 ```json

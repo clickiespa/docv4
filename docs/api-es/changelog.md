@@ -21,9 +21,9 @@ Las notas de la versión están organizadas por etiqueta FastAPI para cada versi
 
 ### documentos
 - Navegación de documentación refinada para clientes, incluido un punto de entrada a la bandeja de entrada de documentos y métricas/referencias de búsqueda actualizadas, además de alineación de la hoja de ruta.
-- Se agregaron filtros para la documentación del punto final, colecciones de Postman actualizadas, cobertura de la hoja de ruta actualizada y páginas de inicio de documentación sincronizadas.
+- Se agregaron filtros para la documentación del endpoint, colecciones de Postman actualizadas, cobertura de la hoja de ruta actualizada y páginas de inicio de documentación sincronizadas.
 - Se actualizó `docs/README.md` para alinear el índice de etiquetas de ruta con la superficie API actual, incluida la cobertura explícita para `GET /monitor_templates`.
-- Se agregó una sección de guías de puntos finales de puerta de enlace en `docs/README.md` que enumera la documentación de estado, dispositivos, acciones, trabajos y registros.
+- Se agregó una sección de guías de endpoints de puerta de enlace en `docs/README.md` que enumera la documentación de estado, dispositivos, acciones, trabajos y registros.
 - Se movió el enlace de la colección Postman de producción v4 al comienzo de `docs/README.md` como referencia rápida.
 - Sincronicé la página de inicio raíz `README.md` con enlaces de índice de documentación para que ambos puntos de entrada apunten a las mismas guías principales y de puerta de enlace.
 
@@ -73,7 +73,7 @@ Las notas de la versión están organizadas por etiqueta FastAPI para cada versi
 - El identificador de entidad de métricas se fija en `7` durante el filtrado de relaciones para evitar búsquedas redundantes al evaluar consultas con ámbito de recursos.
 
 ### documentos
-- Documenté el nuevo punto final de búsqueda de métricas, actualicé la colección Postman y actualicé la cobertura de la hoja de ruta para el filtrado de métricas.
+- Documenté el nuevo endpoint de búsqueda de métricas, actualicé la colección Postman y actualicé la cobertura de la hoja de ruta para el filtrado de métricas.
 
 ## Versión 4.2.0 (2025-12-15)
 
@@ -81,7 +81,7 @@ Las notas de la versión están organizadas por etiqueta FastAPI para cada versi
 Esta versión consolida los cambios incluidos en la última combinación `development` → `main` (comenzando con la confirmación de combinación `a09eb62`). Utilice la lista de confirmación de esa fusión como fuente de verdad para cualquier nota de versión de seguimiento o ajustes del registro de cambios. Para las actualizaciones de la documentación 4.2.x, consulte la solicitud de extracción de fusión principal de desarrollo consolidado → para la versión de destino en lugar de los PR de características individuales para que las herramientas puedan recopilar mediante programación las confirmaciones relevantes desde un único punto de entrada.
 
 ### formularios
-- Expone puntos finales del catálogo para enumerar formularios y recuperar definiciones individuales (autorización 7 para operaciones de lectura).
+- Expone endpoints del catálogo para enumerar formularios y recuperar definiciones individuales (autorización 7 para operaciones de lectura).
 - Los registros de formulario incluyen metadatos de alcance de cuenta/entorno además de nombres descriptivos y descripciones opcionales.
 
 ### formulario_entradas
@@ -99,7 +99,7 @@ Esta versión consolida los cambios incluidos en la última combinación `develo
 - Las actualizaciones parciales de `config_data` se fusionan con los valores existentes para que las claves no especificadas permanezcan intactas.
 
 ### widgets
-- Puntos finales del catálogo para widgets: creación/eliminación con autorización 1, actualizaciones con autorización 2, lecturas con autorización 7.
+- Endpoints del catálogo para widgets: creación/eliminación con autorización 1, actualizaciones con autorización 2, lecturas con autorización 7.
 - Los widgets se vinculan a tipos de widgets y formularios opcionales utilizados para generar cargas útiles de configuración de widgets del panel.
 
 ### tipos de widgets

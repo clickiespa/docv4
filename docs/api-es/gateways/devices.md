@@ -1,4 +1,4 @@
-# Puntos finales de dispositivos
+# Endpoints de dispositivos
 
 ## OBTENER /dispositivos
 
@@ -41,7 +41,7 @@ Account: 33
 }
 ```
 
-*`identifier` corresponde a la columna `device_custom_id` y es el valor que se va a reutilizar en todos los puntos finales `/devices/{identifier}`.*
+*`identifier` corresponde a la columna `device_custom_id` y es el valor que se va a reutilizar en todos los endpoints `/devices/{identifier}`.*
 
 ### Configuración
 * Modelos Clickiemota predeterminados: `381, 389, 500001, 500002, 500003, 294, 318, 330, 362`.
@@ -60,7 +60,7 @@ Account: 33
 
 ## Pautas de implementación para próximos dispositivos endpoints *(lineamientos)*
 
-Las siguientes secciones documentan los contratos que se deben cumplir cuando se implementen los puntos finales de dispositivo restantes. Se consideran características de **modo real**: las llamadas de configuración interactúan con el puente MQTT existente, por lo que no se necesitan stubs.
+Las siguientes secciones documentan los contratos que se deben cumplir cuando se implementen los endpoints de dispositivo restantes. Se consideran características de **modo real**: las llamadas de configuración interactúan con el puente MQTT existente, por lo que no se necesitan stubs.
 
 ### OBTENER /dispositivos/{identificador}
 
@@ -526,9 +526,9 @@ El dispositivo pone en cola el cambio para el procesamiento asincrónico:
 
 ---
 
-## Puntos finales de dispositivos planificados
+## Endpoints de dispositivos planificados
 
-| Punto final | Modo | Estado | Notas |
+| Endpoint | Modo | Estado | Notas |
 | ------------------------------------ | -------------------- | ------ | --------------------------------------------------------------------------------------------------------------- |
 | `GET /devices/{identifier}` | **Real** | ✅ En vivo | Devuelve metadatos del dispositivo con modelo, estado y asociación de configuración |
 | `GET /devices/{identifier}/config` | **Real** | ✅ En vivo | Lee la configuración a través del puente MQTT; devuelve 503 si el dispositivo no está disponible |
@@ -538,4 +538,4 @@ El dispositivo pone en cola el cambio para el procesamiento asincrónico:
 | `POST /devices/{identifier}/actions` | **Talón** | ☐ Planificado | Acepta solicitudes y devuelve resultados de trabajos predefinidos. El marcador de posición debe hacer eco del trabajo cortado con `status: succeeded` |
 | `GET /devices/{identifier}/jobs` | **Stub/Híbrido real** | ☐ Planificado | Comportamiento final pendiente con el equipo de Jobs; devolver `501 feature_not_ready` hasta que se ratifique el contrato de almacenamiento |
 
-Todos los puntos finales planificados deben mantener las respuestas alineadas con el sobre estándar documentado en `README.md`.
+Todos los endpoints planificados deben mantener las respuestas alineadas con el sobre estándar documentado en `README.md`.

@@ -1,6 +1,6 @@
 # Idiomas
 
-## Puntos finales
+## Endpoints
 - [Listar idiomas](#list-languages)
 
 Idiomas disponibles para perfiles de colaboradores.
@@ -8,9 +8,9 @@ Idiomas disponibles para perfiles de colaboradores.
 ## Listar idiomas
 Recupera el catálogo de idiomas que los colaboradores pueden seleccionar en sus perfiles.
 
-Se requiere un nivel de autorización 7 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 7 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /languages
 ```

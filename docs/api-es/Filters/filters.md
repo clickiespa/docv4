@@ -2,16 +2,16 @@
 
 / tabla de contenidos
 
-## Puntos finales
+## Endpoints
 - [Listar filtros](#list-filters)
 
 ## Lista de filtros
 
 Recupere todos los filtros disponibles para la cuenta y el entorno autenticados.
 
-Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre filtros para utilizar este punto final.
+Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre filtros para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 
 ```http
 GET /filters

@@ -1,6 +1,6 @@
 # Patrones de tiempo
 
-## Puntos finales
+## Endpoints
 - [Crear u obtener patrón](#create-or-get-pattern)
 - [Obtener patrón por ID](#get-pattern-by-id)
 
@@ -9,9 +9,9 @@ Programaciones reutilizables para activadores de monitores.
 ## Crear u obtener patrón
 Crea un patrón de tiempo si no existe y devuelve su representación normalizada.
 
-Se requiere un nivel de autorización 7 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 7 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /time_patterns
 ```
@@ -92,9 +92,9 @@ curl -H "Authorization: <API_KEY>" \
 ## Obtener patrón por ID
 Recupera un patrón único por su identificador.
 
-Se requiere un nivel de autorización 7 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 7 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /time_patterns/{id_time_pattern}
 ```

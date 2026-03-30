@@ -1,6 +1,6 @@
 # Cuentas
 
-## Puntos finales
+## Endpoints
 - [Listar cuentas](#list-accounts)
 - [Crear una cuenta](#create-account)
 - [Obtener cuenta](#get-account)
@@ -19,7 +19,7 @@ Una cuenta puede poseer unidades de usuario, métricas, monitores, activos y pan
 Se requiere un nivel de autorización 5 o inferior para listar cuentas.
 Los usuarios con nivel de autorización 1 no están restringidos a la cuenta actual y pueden recuperar todas las cuentas del entorno.
 
-### Punto final
+### Endpoint
 ```
 GET /accounts
 ```
@@ -72,7 +72,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /accounts?skip=0&l
 Se requiere un nivel de autorización 3 o inferior para crear una cuenta.
 Se requiere autorización A1 para configurar `id_environment` al crear una cuenta.
 
-### Punto final
+### Endpoint
 ```
 POST /accounts
 ```
@@ -126,7 +126,7 @@ curl -X POST   -H "Authorization: <API_KEY>"   -H "Account: <ID_ACCOUNT>"   -H "
 Se requiere un nivel de autorización 5 o inferior para obtener una cuenta por ID.
 Los usuarios con nivel de autorización 1 pueden recuperar cualquier cuenta, incluso si no está vinculada al encabezado de cuenta que están utilizando.
 
-### Punto final
+### Endpoint
 ```
 GET /accounts/{id_account}
 ```
@@ -175,7 +175,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /accounts/1
 Se requiere un nivel de autorización 4 o inferior para actualizar una cuenta.
 Se requiere autorización A1 para configurar `id_environment` al actualizar una cuenta.
 
-### Punto final
+### Endpoint
 ```
 PUT /accounts/{id_account}
 ```
@@ -232,7 +232,7 @@ curl -X PUT   -H "Authorization: <API_KEY>"   -H "Account: <ID_ACCOUNT>"   -H "C
 
 Se requiere un nivel de autorización 3 o inferior para eliminar una cuenta.
 
-### Punto final
+### Endpoint
 ```
 DELETE /accounts/{id_account}
 ```
@@ -266,7 +266,7 @@ curl -X DELETE -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /account
 }
 ```
 
-Los terminales `/accounts/collaborators` administran los colaboradores asignados directamente a una cuenta. Si necesita una vista agregada de cada colaborador de una cuenta, consulte [`/collaborators` puntos finales](../Collaborators/collaborators.md). Para recuperar colaboradores vinculados a un activo específico, utilice el [`/relationships` puntos finales](relationships.md) documentado para ese recurso.
+Los endpoints `/accounts/collaborators` administran los colaboradores asignados directamente a una cuenta. Si necesita una vista agregada de cada colaborador de una cuenta, consulte [`/collaborators` endpoints](../Collaborators/collaborators.md). Para recuperar colaboradores vinculados a un activo específico, utilice el [`/relationships` endpoints](relationships.md) documentado para ese recurso.
 
 ## Agregar colaborador a la cuenta
 
@@ -274,7 +274,7 @@ Se requiere un nivel de autorización 4 o inferior para agregar colaboradores a 
 
 El usuario solicitante ya debe ser colaborador de la cuenta de destino, a menos que el nivel de autorización de la sesión sea `1`, en cuyo caso la persona que llama puede administrar colaboradores para cualquier cuenta. Cuando otras personas que llaman no son parte de la cuenta, la API devuelve `400` con el mensaje `You must be a collaborator of the account to manage its collaborators.`. Si la persona que llama no tiene suficiente autorización para asignar el nivel solicitado, la API responde con `400` y el mensaje `Your clearance level is not high enough to assign id clearance <id_clearance>`.
 
-### Punto final
+### Endpoint
 ```
 POST /accounts/collaborators
 ```
@@ -289,7 +289,7 @@ POST /accounts/collaborators
 
 ### Parámetros de consulta
 
-Este punto final no acepta parámetros de consulta.
+Este endpoint no acepta parámetros de consulta.
 
 ### Cuerpo de la solicitud
 
@@ -359,7 +359,7 @@ Se requiere un nivel de autorización 5 o inferior para actualizar a los colabor
 
 Las personas que llaman con nivel de autorización `1` pueden actualizar los colaboradores de cualquier cuenta sin pertenecer ya a ella. Otras personas que llaman deben ser colaboradores de la cuenta.
 
-### Punto final
+### Endpoint
 ```
 PUT /accounts/collaborators/{collaborator_email}
 ```
@@ -411,7 +411,7 @@ curl -X PUT   -H "Authorization: <API_KEY>"   -H "Account: <ID_ACCOUNT>"   -H "C
 
 Se requiere un nivel de autorización 4 o inferior para eliminar colaboradores de una cuenta.Las personas que llaman con nivel de autorización `1` pueden eliminar colaboradores de cualquier cuenta, incluso si no están asignados actualmente a ella. Otras personas que llaman deben ser colaboradores de la cuenta.
 
-### Punto final
+### Endpoint
 ```
 DELETE /accounts/collaborators/{collaborator_email}
 ```

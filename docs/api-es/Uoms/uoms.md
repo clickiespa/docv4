@@ -1,6 +1,6 @@
 # Unidades de medida (UOM)
 
-## Puntos finales
+## Endpoints
 - [Listar UOM](#list-uoms)
 - [Crear unidad de medida](#create-uom)
 - [Obtener unidad de medida](#get-uom)
@@ -11,7 +11,7 @@ Una uom es una unidad de medida y se utiliza para definir la magnitud de una can
 
 ## Listar UOM
 
-### Punto final
+### Endpoint
 ```
 GET /uoms
 ```
@@ -50,7 +50,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: 1" /uoms?skip=0&limit=10
 
 ## Crear unidad de medida
 
-### Punto final
+### Endpoint
 ```
 POST /uoms
 ```
@@ -96,7 +96,7 @@ curl -X POST \
 
 ## Obtener unidad de medida
 
-### Punto final
+### Endpoint
 ```
 GET /uoms/{id_uom}
 ```
@@ -132,7 +132,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: 1" /uoms/2
 
 ## Actualizar unidad de medida
 
-### Punto final
+### Endpoint
 ```
 PUT /uoms/{id_uom}
 ```
@@ -177,7 +177,7 @@ curl -X PUT \
 
 ## Eliminar unidad de medida
 
-### Punto final
+### Endpoint
 ```
 DELETE /uoms/{id_uom}
 ```

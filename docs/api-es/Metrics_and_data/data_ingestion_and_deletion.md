@@ -1,12 +1,12 @@
 # Ingestión y eliminación de datos
 
-## Puntos finales
+## Endpoints
 - [Insertar puntos de datos](#insert-datapoints)
 - [Eliminar puntos de datos](#delete-datapoints)
 
 ## Insertar puntos de datos
 
-### Punto final
+### Endpoint
 ```
 POST /metrics/{metric_identifier}/datapoints
 ```
@@ -63,7 +63,7 @@ curl -X POST \
 
 ## Eliminar puntos de datos
 
-### Punto final
+### Endpoint
 ```
 DELETE /metrics/{metric_identifier}/datapoints
 ```

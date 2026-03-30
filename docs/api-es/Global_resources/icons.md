@@ -1,6 +1,6 @@
 # Iconos
 
-## Puntos finales
+## Endpoints
 - [Iconos de lista](#list-icons)
 - [Obtener icono](#get-icon)
 
@@ -9,9 +9,9 @@ Lista de iconos disponibles para paneles y activos.
 ## Iconos de lista
 Recupera el catálogo de definiciones de iconos que se pueden utilizar en paneles y activos.
 
-Este punto final no está disponible actualmente para todos los niveles de autorización.
+Este endpoint no está disponible actualmente para todos los niveles de autorización.
 
-### Punto final
+### Endpoint
 ```
 GET /icons
 ```
@@ -89,9 +89,9 @@ curl -H "Authorization: <API_KEY>" \
 ## Obtener icono
 Recupera los metadatos de un icono específico por su identificador.
 
-Este punto final no está disponible actualmente para todos los niveles de autorización.
+Este endpoint no está disponible actualmente para todos los niveles de autorización.
 
-### Punto final
+### Endpoint
 ```
 GET /icons/{id_icon}
 ```

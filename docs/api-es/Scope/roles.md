@@ -2,14 +2,14 @@
 
 Los roles definen el nivel de acceso otorgado a los colaboradores a los recursos que pertenecen a una cuenta.
 
-## Puntos finales
+## Endpoints
 - [Listar roles](#list-roles)
 
 ## Listar roles
 
-Se requiere autorización con permiso de lectura sobre roles para utilizar este punto final.
+Se requiere autorización con permiso de lectura sobre roles para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /roles
 ```
@@ -60,5 +60,5 @@ curl -H "Authorization: <API_KEY>" \
 - `400` Parámetros de consulta no válidos
 - `401` Credenciales de autenticación faltantes o no válidas
 - `403` Permisos insuficientes para enumerar roles
-- `404` Punto final no encontrado
+- `404` Endpoint no encontrado
 - `500` Error inesperado del servidor

@@ -1,6 +1,6 @@
-# Registros y puntos finales de observabilidad: pautas de implementación (lineamientos)
+# Registros y endpoints de observabilidad: pautas de implementación (lineamientos)
 
-> Estos puntos finales permanecen en **modo stub** para la Fase A. Proporcionar respuestas deterministas generadas desde accesorios para desbloquear integraciones de clientes mientras se prepara el proceso de telemetría real.
+> Estos endpoints permanecen en **modo stub** para la Fase A. Proporcionar respuestas deterministas generadas desde accesorios para desbloquear integraciones de clientes mientras se prepara el proceso de telemetría real.
 
 ---
 

@@ -28,7 +28,7 @@ Utilice una clave API en el encabezado `Authorization`. Las claves se pueden gen
 
 ### Encabezado de cuenta
 
-La mayoría de los puntos finales, incluido el punto final `/accounts`, requieren un encabezado `Account` con el ID de la cuenta en la que desea operar. Si no conoce el ID de su cuenta, puede encontrarlo en la aplicación web de Clickie: https://my.clickie.io/home.
+La mayoría de los endpoints, incluido el endpoint `/accounts`, requieren un encabezado `Account` con el ID de la cuenta en la que desea operar. Si no conoce el ID de su cuenta, puede encontrarlo en la aplicación web de Clickie: https://my.clickie.io/home.
 
 Una vez que conozca su ID de cuenta, puede enumerar sus cuentas usando:
 
@@ -116,7 +116,7 @@ Las respuestas siguen una estructura JSON común:
 
 ## Herramientas API
 
-### Punto final de Documentos
+### Endpoint de Documentos
 
 La documentación interactiva está disponible en:
 
@@ -128,5 +128,5 @@ Para usarlo, sigue los siguientes pasos:
 
 1. Haga clic en [aquí](https://api.clickie.io/v4/docs#).
 2. Haga clic en el botón Autorizar en la parte superior derecha de la página y agregue manualmente los encabezados Cuenta y Autorización.
-3. Haga clic en el punto final que desea utilizar, complete los campos obligatorios y haga clic en el botón "Pruébelo" para realizar la solicitud.
+3. Haga clic en el endpoint que desea utilizar, complete los campos obligatorios y haga clic en el botón "Pruébelo" para realizar la solicitud.
 4. La respuesta del servidor se mostrará a continuación.

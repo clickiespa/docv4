@@ -1,6 +1,6 @@
 # Categorías de activos
 
-## Puntos finales
+## Endpoints
 - [Listar categorías](#list-categories)
 - [Crear categoría](#create-category)
 - [Obtener categoría](#get-category)
@@ -11,7 +11,7 @@ Categorías utilizadas para agrupar activos.
 
 ## Listar categorías
 
-### Punto final
+### Endpoint
 ```
 GET /types/assets
 ```
@@ -48,7 +48,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" "/types/assets?ski
 
 ## Crear categoría
 
-### Punto final
+### Endpoint
 ```
 POST /types/assets
 ```
@@ -90,7 +90,7 @@ curl -X POST \
 
 ## Obtener categoría
 
-### Punto final
+### Endpoint
 ```
 GET /types/assets/{id_category}
 ```
@@ -126,7 +126,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /types/assets/2
 
 ## Actualizar categoría
 
-### Punto final
+### Endpoint
 ```
 PUT /types/assets/{id_category}
 ```
@@ -174,7 +174,7 @@ curl -X PUT \
 
 ## Eliminar categoría
 
-### Punto final
+### Endpoint
 ```
 DELETE /types/assets/{id_category}
 ```

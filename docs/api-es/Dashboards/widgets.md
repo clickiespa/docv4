@@ -1,8 +1,8 @@
 # Aparatos
 
-Puntos finales del catálogo para widgets reutilizables. Estos puntos finales están expuestos bajo la etiqueta `dashboards` y administran solo el catálogo de widgets, no las instancias de widgets del panel.
+Endpoints del catálogo para widgets reutilizables. Estos endpoints están expuestos bajo la etiqueta `dashboards` y administran solo el catálogo de widgets, no las instancias de widgets del panel.
 
-## Puntos finales
+## Endpoints
 - [Lista de widgets](#list-widgets)
 - [Crear widget](#create-widget)
 - [Obtener widget](#get-widget)
@@ -12,7 +12,7 @@ Puntos finales del catálogo para widgets reutilizables. Estos puntos finales es
 ## Lista de widgets
 Recuperar entradas del catálogo de widgets. Se requiere nivel de autorización 7.
 
-### Punto final
+### Endpoint
 ```
 GET /widgets
 ```
@@ -63,7 +63,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /widgets?skip=0&li
 ## Crear widget
 Cree una entrada de catálogo de widgets. Se requiere autorización de nivel 1.
 
-### Punto final
+### Endpoint
 ```
 POST /widgets
 ```
@@ -129,7 +129,7 @@ curl -X POST \
 ## Obtener widget
 Recuperar un widget por ID. Se requiere nivel de autorización 7.
 
-### Punto final
+### Endpoint
 ```
 GET /widgets/{id_widget}
 ```
@@ -176,7 +176,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /widgets/5
 ## Actualizar widget
 Actualizar un widget existente. Se requiere autorización de nivel 2.
 
-### Punto final
+### Endpoint
 ```
 PUT /widgets/{id_widget}
 ```
@@ -245,7 +245,7 @@ curl -X PUT \
 ## Eliminar widget
 Eliminar un widget. Se requiere autorización de nivel 1. Los widgets archivados no se pueden modificar.
 
-### Punto final
+### Endpoint
 ```
 DELETE /widgets/{id_widget}
 ```

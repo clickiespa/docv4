@@ -1,6 +1,6 @@
 # Dispositivos
 
-## Puntos finales
+## Endpoints
 - [Listar dispositivos](#list-devices)
 - [Obtener dispositivo](#get-device)
 - [Crear dispositivo](#create-device)
@@ -15,9 +15,9 @@ Dispositivos de hardware registrados disponibles para la cuenta autenticada.
 
 Recupere todos los dispositivos visibles para la cuenta autenticada, opcionalmente filtrándolos por inventario, modelo, estado operativo o identificador personalizado.
 
-Se requiere un nivel de autorización 5 o inferior para leer dispositivos a través de este punto final.
+Se requiere un nivel de autorización 5 o inferior para leer dispositivos a través de este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /devices
 ```
@@ -111,7 +111,7 @@ curl -H "Authorization: <API_KEY>" \
 | `400` | Error de paginación o validación de filtro. |
 | `401` | La autenticación falló. |
 | `403` | El usuario autenticado no está autorizado a enumerar dispositivos. |
-| `404` | No se utiliza para este punto final de recopilación. |
+| `404` | No se utiliza para este endpoint de recopilación. |
 | `500` | Error inesperado del servidor. |
 
 ### Respuesta de error (403)
@@ -133,9 +133,9 @@ curl -H "Authorization: <API_KEY>" \
 
 Recupera un dispositivo por su identificador numérico.
 
-Se requiere un nivel de autorización 5 o inferior para leer dispositivos a través de este punto final.
+Se requiere un nivel de autorización 5 o inferior para leer dispositivos a través de este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /devices/{id_device}
 ```
@@ -155,7 +155,7 @@ GET /devices/{id_device}
 
 ### Parámetros de consulta
 
-Este punto final no acepta parámetros de consulta.
+Este endpoint no acepta parámetros de consulta.
 
 ### Encabezados de muestra
 ```json
@@ -235,9 +235,9 @@ curl -H "Authorization: <API_KEY>" \
 
 Registre un nuevo dispositivo dentro de la cuenta autenticada.
 
-Se requiere un nivel de autorización 2 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 2 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 POST /devices
 ```
@@ -342,9 +342,9 @@ curl -X POST -H "Authorization: <API_KEY>" \
 
 Modificar un dispositivo existente. Los campos omitidos mantienen su valor actual.
 
-Se requiere un nivel de autorización 2 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 2 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 PUT /devices/{id_device}
 ```
@@ -451,9 +451,9 @@ curl -X PUT -H "Authorization: <API_KEY>" \
 
 Eliminar un dispositivo de la cuenta autenticada.
 
-Se requiere un nivel de autorización 2 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 2 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 DELETE /devices/{id_device}
 ```

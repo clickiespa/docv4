@@ -2,7 +2,7 @@
 
 Paquetes de configuración que definen cómo interactúan los dispositivos con activos y puertas de enlace.
 
-## Puntos finales
+## Endpoints
 - [Configuraciones de lista](#list-setups)
 - [Obtener configuración](#get-setup)
 - [Crear configuración](#create-setup)
@@ -13,9 +13,9 @@ Paquetes de configuración que definen cómo interactúan los dispositivos con a
 
 Recupere todas las configuraciones visibles para la cuenta autenticada. Opcionalmente, filtre por activo, modelo de dispositivo o nombre e incluya configuraciones que no estén adjuntas a un activo.
 
-Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este punto final.
+Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /setups
 ```
@@ -125,11 +125,11 @@ curl -H "Authorization: <API_KEY>" \
 
 ## Obtener configuración
 
-Recupera una configuración única por su identificador numérico. Utilice este punto final para inspeccionar la configuración de un emparejamiento de activo-dispositivo específico.
+Recupera una configuración única por su identificador numérico. Utilice este endpoint para inspeccionar la configuración de un emparejamiento de activo-dispositivo específico.
 
-Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este punto final.
+Se requiere un nivel de autorización 6 o inferior (el nivel 1 es administrador) para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /setups/{id_setup}
 ```
@@ -149,7 +149,7 @@ GET /setups/{id_setup}
 
 ### Parámetros de consulta
 
-Este punto final no acepta parámetros de consulta.
+Este endpoint no acepta parámetros de consulta.
 
 ### Encabezados de muestra
 ```json
@@ -237,9 +237,9 @@ curl -H "Authorization: <API_KEY>" \
 
 Cree una configuración asociada con la cuenta autenticada. Proporcione el modelo del dispositivo y las referencias de activos y puertas de enlace opcionales.
 
-Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este punto final.
+Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 POST /setups
 ```
@@ -353,7 +353,7 @@ curl -X POST -H "Authorization: <API_KEY>" \
 
 Modificar una configuración existente. Sólo se actualizan los atributos proporcionados; Los campos omitidos mantienen sus valores actuales.
 
-Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este punto final.### Punto final
+Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este endpoint.### Endpoint
 ```
 PUT /setups/{id_setup}
 ```
@@ -473,9 +473,9 @@ curl -X PUT -H "Authorization: <API_KEY>" \
 
 Elimine una configuración de la cuenta autenticada.
 
-Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este punto final.
+Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 DELETE /setups/{id_setup}
 ```

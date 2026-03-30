@@ -1,6 +1,6 @@
 # Plantillas
 
-## Puntos finales
+## Endpoints
 - [Plantillas de lista](#list-templates)
 - [Crear plantilla](#create-template)
 - [Obtener plantilla](#get-template)
@@ -12,9 +12,9 @@ Plantillas para comunicaciones como correos electrónicos o notificaciones.
 ## Plantillas de lista
 Recupera las plantillas disponibles para la cuenta actual.
 
-Se requiere un nivel de autorización 7 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 7 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /templates
 ```
@@ -94,9 +94,9 @@ curl -H "Authorization: <API_KEY>" \
 ## Crear plantilla
 Crea una nueva plantilla de comunicación para la cuenta.
 
-Se requiere un nivel de autorización 1 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 1 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 POST /templates
 ```
@@ -185,9 +185,9 @@ curl -X POST \
 ## Obtener plantilla
 Recupera una plantilla por su identificador.
 
-Se requiere un nivel de autorización 7 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 7 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 GET /templates/{id_template}
 ```
@@ -264,9 +264,9 @@ curl -H "Authorization: <API_KEY>" \
 ## Actualizar plantilla
 Actualiza una plantilla con nuevos metadatos o contenido del cuerpo.
 
-Se requiere un nivel de autorización 2 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 2 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 PUT /templates/{id_template}
 ```
@@ -357,9 +357,9 @@ curl -X PUT \
 ## Eliminar plantilla
 Elimina una plantilla existente.
 
-Se requiere un nivel de autorización 1 o inferior para utilizar este punto final.
+Se requiere un nivel de autorización 1 o inferior para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 DELETE /templates/{id_template}
 ```

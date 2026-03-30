@@ -2,9 +2,9 @@
 
 Filtre métricas por activos vinculados o metadatos intrínsecos mediante un cuerpo POST flexible.
 
-Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre métricas para utilizar este punto final.
+Se requiere un nivel de autorización 7 o inferior con permiso de lectura sobre métricas para utilizar este endpoint.
 
-### Punto final
+### Endpoint
 ```
 POST /search/metrics
 ```
