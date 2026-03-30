@@ -49,6 +49,9 @@ nav:
           - Entities: api/Entities/eav_entities.md
           - Filters: api/Filters/filters.md
           - Forms: api/Forms/forms.md
+          - AI:
+              - Analysis: api/ai/analysis.md
+              - Assistants: api/ai/assistants.md
           - Global Resources:
               - Icons: api/Global_resources/icons.md
               - Languages: api/Global_resources/languages.md
