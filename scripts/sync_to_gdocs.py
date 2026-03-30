@@ -11,6 +11,7 @@ Features:
 from __future__ import annotations
 
 import argparse
+import base64
 import json
 import os
 import sys
@@ -21,6 +22,7 @@ from typing import Any, Dict, Iterable, List, Optional
 import yaml
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 from markdown_it import MarkdownIt
 from markdown_it.token import Token
 
@@ -341,18 +343,34 @@ def load_service_account_credentials():
     raw_json = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON", "").strip()
     file_path = os.getenv("GOOGLE_SERVICE_ACCOUNT_FILE", "").strip()
 
+    def from_json_text(text: str, source_label: str):
+        try:
+            info = json.loads(text)
+        except json.JSONDecodeError as exc:
+            raise RuntimeError(f"{source_label} no contiene JSON valido") from exc
+        return service_account.Credentials.from_service_account_info(info, scopes=SCOPES)
+
     if raw_json:
         try:
-            info = json.loads(raw_json)
-        except json.JSONDecodeError as exc:
-            raise RuntimeError("GOOGLE_SERVICE_ACCOUNT_JSON no contiene JSON valido") from exc
-        return service_account.Credentials.from_service_account_info(info, scopes=SCOPES)
+            return from_json_text(raw_json, "GOOGLE_SERVICE_ACCOUNT_JSON")
+        except RuntimeError as raw_exc:
+            # Allow Base64-encoded JSON for CI secrets that store one-line credentials.
+            try:
+                decoded = base64.b64decode(raw_json, validate=True).decode("utf-8")
+            except Exception:
+                raise RuntimeError(
+                    "GOOGLE_SERVICE_ACCOUNT_JSON no contiene JSON valido (ni Base64 JSON valido)"
+                ) from raw_exc
+            return from_json_text(decoded, "GOOGLE_SERVICE_ACCOUNT_JSON (Base64)")
 
     if file_path:
         service_file = Path(file_path)
         if not service_file.exists():
             raise RuntimeError(f"No existe GOOGLE_SERVICE_ACCOUNT_FILE: {service_file}")
-        return service_account.Credentials.from_service_account_file(str(service_file), scopes=SCOPES)
+        file_content = service_file.read_text(encoding="utf-8").strip()
+        if not file_content:
+            raise RuntimeError(f"GOOGLE_SERVICE_ACCOUNT_FILE esta vacio: {service_file}")
+        return from_json_text(file_content, "GOOGLE_SERVICE_ACCOUNT_FILE")
 
     raise RuntimeError(
         "Falta autenticacion. Define GOOGLE_SERVICE_ACCOUNT_JSON o GOOGLE_SERVICE_ACCOUNT_FILE."
@@ -460,10 +478,31 @@ def main() -> int:
         print(f"Generated style requests: {len(style_requests)}")
         return 0
 
-    credentials = load_service_account_credentials()
-    service = build("docs", "v1", credentials=credentials)
-
-    replace_google_doc_content(service=service, doc_id=args.doc_id, text=text, style_requests=style_requests)
+    try:
+        credentials = load_service_account_credentials()
+        service = build("docs", "v1", credentials=credentials)
+        replace_google_doc_content(service=service, doc_id=args.doc_id, text=text, style_requests=style_requests)
+    except RuntimeError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
+    except HttpError as exc:
+        status = getattr(exc.resp, "status", "unknown")
+        print(f"ERROR: Google Docs API devolvio HTTP {status}. {exc}", file=sys.stderr)
+        if status == 403:
+            print(
+                "Sugerencia: comparte el documento con el service account "
+                "(permiso Editor) y verifica que la API de Google Docs este habilitada.",
+                file=sys.stderr,
+            )
+        elif status == 404:
+            print(
+                "Sugerencia: verifica GOOGLE_DOC_ID. Debe ser el ID del documento (sin URL completa).",
+                file=sys.stderr,
+            )
+        return 1
+    except Exception as exc:
+        print(f"ERROR: fallo inesperado durante el sync a Google Docs: {exc}", file=sys.stderr)
+        return 1
 
     print(f"Synced {len(markdown_files)} markdown files into Google Doc {args.doc_id}")
     return 0
