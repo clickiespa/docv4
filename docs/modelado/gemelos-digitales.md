@@ -1,7 +1,7 @@
 ---
 title: "Gemelos digitales"
 version: "v4"
-last_updated: "2026-03-25"
+last_updated: "2026-04-01"
 owner: "Product"
 status: "stable"
 ---
@@ -70,6 +70,10 @@ Tipos principales:
 - Puntero
 - Control PLC
 
+## Guías específicas de diseño
+
+- [Variables dinámicas en superposiciones](./variables-dinamicas-en-superposiciones.md)
+
 ## Criterios de calidad recomendados
 
 - Priorizar legibilidad: menos elementos, mejor jerarquía.
@@ -82,3 +86,4 @@ Tipos principales:
 - [Activos](../organizacion/activos.md)
 - [Métricas y fórmulas](../conceptos/metricas.md)
 - [Selector de métricas](../conceptos/selector.md)
+- [Variables dinámicas en superposiciones](./variables-dinamicas-en-superposiciones.md)

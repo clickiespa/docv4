@@ -24,6 +24,7 @@ nav:
       - Monitoreos: automatizacion/monitoreos.md
   - Modelado:
       - Gemelos digitales: modelado/gemelos-digitales.md
+      - Variables dinámicas en superposiciones: modelado/variables-dinamicas-en-superposiciones.md
   - Organización:
       - Activos: organizacion/activos.md
   - Configuración:

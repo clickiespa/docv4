@@ -1,7 +1,7 @@
 ---
 title: "Digital twins"
 version: "v4"
-last_updated: "2026-02-26"
+last_updated: "2026-04-01"
 owner: "Product"
 status: "stable"
 ---
@@ -64,6 +64,10 @@ Main types:
 - Pointer
 - PLC control
 
+## Specific design guides
+
+- [Dynamic overlay variables](./variables-dinamicas-en-superposiciones.md)
+
 ## Recommended quality criteria
 
 - Prioritize readability: fewer elements, better hierarchy.
@@ -76,3 +80,4 @@ Main types:
 - [Assets](../organizacion/activos.md)
 - [Metrics and formulas](../conceptos/metricas.md)
 - [Metric Selector](../conceptos/selector.md)
+- [Dynamic overlay variables](./variables-dinamicas-en-superposiciones.md)

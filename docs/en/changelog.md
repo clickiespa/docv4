@@ -1,11 +1,18 @@
 ---
 title: "Changelog"
 version: "v4"
-last_updated: "2026-03-16"
+last_updated: "2026-04-01"
 owner: "Product"
 status: "stable"
 ---
 # Changelog
+
+## 2026-04-01
+
+- Added `modelado/variables-dinamicas-en-superposiciones.md` as a dedicated guide for `{{...}}` variables, dynamic `[...]` blocks, conditional rules, comparisons against other variables, copy-and-paste examples and the recommended parsing contract for Digital Twin overlays.
+- Linked the new guide from `modelado/gemelos-digitales.md` and updated that page's `last_updated`.
+- Added the new entry to `mkdocs.yml` and its navigation translation to `scripts/generate_web_docs.mjs` so the bilingual web output stays aligned.
+- Mirrored the equivalent content in `docs/en/modelado/variables-dinamicas-en-superposiciones.md` and `docs/en/modelado/gemelos-digitales.md`.
 
 ## 2026-03-16
 
