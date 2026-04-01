@@ -1,12 +1,19 @@
 ---
 title: "Changelog"
 version: "v4"
-last_updated: "2026-03-25"
+last_updated: "2026-04-01"
 owner: "Product"
 status: "stable"
 ---
 
 # Changelog
+
+## 2026-04-01
+
+- Se añadió la guía `modelado/variables-dinamicas-en-superposiciones.md` con la sintaxis de variables `{{...}}`, bloques dinámicos `[...]`, reglas condicionales, comparaciones contra otras variables, ejemplos de copy-paste y contrato recomendado de parsing para overlays de Gemelos digitales.
+- Se enlazó la nueva guía desde `modelado/gemelos-digitales.md` y se actualizó su `last_updated`.
+- Se incorporó la nueva entrada en `mkdocs.yml` y se agregó su traducción de navegación en `scripts/generate_web_docs.mjs` para la salida web bilingüe.
+- Se reflejó el contenido equivalente en `docs/en/modelado/variables-dinamicas-en-superposiciones.md` y en `docs/en/modelado/gemelos-digitales.md`.
 
 ## 2026-03-25
 

@@ -69,6 +69,7 @@ const LABEL_TRANSLATIONS = {
     Monitoreos: 'Monitoring',
     Modelado: 'Modeling',
     'Gemelos digitales': 'Digital twins',
+    'Variables dinámicas en superposiciones': 'Dynamic overlay variables',
     Organización: 'Organization',
     Activos: 'Assets',
     Configuración: 'Configuration',
