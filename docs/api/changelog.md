@@ -2,6 +2,16 @@
 
 Release notes are organized by FastAPI tag for each API version exposed in `/docs`.
 
+## Version 4.3.5 (2026-04-01)
+
+### api
+- Standardized API response envelopes for `2xx`, `4xx`, and `5xx` flows so responses consistently include `status`, `message`, `data`, `context`, and `instance`.
+- Added explicit handling for `HTTPException` in the custom route layer to avoid raw FastAPI `detail` payloads leaking without the standard envelope.
+- Added a default internal error envelope for uncaught exceptions to normalize `500` responses.
+
+### docs
+- Updated the Getting Started guide to explicitly state that the standard response envelope applies to success and error responses (`2xx`, `4xx`, and `5xx`).
+
 ## Version 4.3.4 (2026-03-12)
 
 ### monitoring
