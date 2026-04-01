@@ -93,6 +93,8 @@ Responses follow a common JSON structure:
 }
 ```
 
+This envelope is used consistently across `2xx`, `4xx`, and `5xx` responses. The top-level keys are always `status`, `message`, `data`, `context`, and `instance`.
+
 ### Status Codes
 
 | Code | Description |
