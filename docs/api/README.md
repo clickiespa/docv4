@@ -14,6 +14,10 @@ This page is designed as a client-facing guide so you can quickly find the right
 
 ## Endpoint documentation by route tag
 
+### `ai`
+- [AI analysis endpoints](ai/analysis.md)
+- [AI assistants endpoints](ai/assistants.md)
+
 ### `assets`
 - [Assets endpoints](Assets/assets.md) — `GET /assets`, `POST /assets`, `GET /assets/{id_asset}`, `PUT /assets/{id_asset}`, `DELETE /assets/{id_asset}`.
 
@@ -43,10 +47,20 @@ This page is designed as a client-facing guide so you can quickly find the right
 ### `forms`
 - [Forms endpoints](Forms/forms.md) — forms, form inputs, and form input types.
 
+### `gateways`
+- [Gateway health endpoint](gateways/health.md) — `GET /health`.
+- [Gateway devices endpoint](gateways/devices.md) — `GET /devices` with gateway-focused request/response contract notes.
+- [Gateway actions endpoints](gateways/actions.md) — `GET /devices/{identifier}/actions`, `POST /devices/{identifier}/actions`.
+- [Gateway jobs endpoints](gateways/jobs.md) — `GET /jobs/{job_id}`, `POST /jobs/{job_id}/cancel`, `GET /devices/{identifier}/jobs`.
+- [Gateway logs endpoints](gateways/logs.md) — `GET /devices/{identifier}/logs`, `GET /devices/{identifier}/disk`, `GET /devices/{identifier}/backup/coverage`.
+- [Gateway changelog](gateways/changelog.md) — gateway-specific release notes and documentation history.
+
 ### `global_resources`
 - [Languages endpoints](Global_resources/languages.md)
 - [Time zones endpoints](Global_resources/time_zones.md)
 - [Icons endpoints](Global_resources/icons.md)
+- [Methods endpoints](Global_resources/methods.md) — aggregation and interpolation methods.
+- [Templates endpoints](Global_resources/templates.md)
 - [Time patterns endpoints](Global_resources/time_patterns.md)
 
 ### `metrics`
@@ -83,15 +97,6 @@ This page is designed as a client-facing guide so you can quickly find the right
 
 ### `uoms`
 - [UOMs endpoints](Uoms/uoms.md)
-- [Methods endpoints](Global_resources/methods.md) — aggregation and interpolation methods.
-
-## Gateway-specific endpoint guides
-
-- [Gateway health endpoint](gateways/health.md) — `GET /health`.
-- [Gateway devices endpoint](gateways/devices.md) — `GET /devices` with gateway-focused request/response contract notes.
-- [Gateway actions endpoints](gateways/actions.md) — `GET /devices/{identifier}/actions`, `POST /devices/{identifier}/actions`.
-- [Gateway jobs endpoints](gateways/jobs.md) — `GET /jobs/{job_id}`, `POST /jobs/{job_id}/cancel`, `GET /devices/{identifier}/jobs`.
-- [Gateway logs endpoints](gateways/logs.md) — `GET /devices/{identifier}/logs`, `GET /devices/{identifier}/disk`, `GET /devices/{identifier}/backup/coverage`.
 
 ## Additional references
 - [Changelog](changelog.md)
