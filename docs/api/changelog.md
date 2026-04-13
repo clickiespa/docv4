@@ -2,6 +2,13 @@
 
 Release notes are organized by FastAPI tag for each API version exposed in `/docs`.
 
+## Version 4.3.6 (2026-04-07)
+
+### docs
+- Audited `docs/` coverage in `docs/README.md` and added missing references for AI and gateway changelog guides.
+- Normalized the route-tag index format so `gateways` is documented as a standard route-tag heading instead of a custom section heading, matching the rest of the endpoint groups.
+- Reordered route-tag sections alphabetically to keep navigation consistent across documentation landing pages.
+
 ## Version 4.3.5 (2026-04-01)
 
 ### api
