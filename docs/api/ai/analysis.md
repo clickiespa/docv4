@@ -33,7 +33,7 @@ POST /ai/analysis
 | `format` | no | `week` \| `month` | `month` | Periodicidad del analisis. |
 | `input` | no | object | `{"prompt":"Centrate en oportunidades de mayor impacto."}` | Payload arbitrario consumido por el worker. |
 | `scope` | no | `account` | `account` | Alcance del analisis. Actualmente solo se acepta `account`. |
-| `report_format` | no | `dashboard` \| `markdown` | `dashboard` | Formato de salida esperado para `insight`. |
+| `report_format` | no | `dashboard` \| `markdown` \| `email` | `dashboard` | Formato de salida esperado para `insight`. |
 | `comparison.mode` | no | `none` \| `explicit` \| `auto` | `none` | Estrategia de comparacion entre periodos. |
 | `comparison.previous_analysis_id` | condicional | string | `null` | Requerido cuando `comparison.mode` es `explicit`. |
 
@@ -211,6 +211,14 @@ La respuesta depende del `report_format` con el que fue creado el analisis.
 {
   "report_format": "markdown",
   "markdown": "# Executive summary\n\nThe building reduced peak demand by 6%..."
+}
+```
+
+#### Email response
+```json
+{
+  "report_format": "email",
+  "email": "<div style=\"font-family:Arial,sans-serif\"><h1>Resumen ejecutivo</h1><p>La demanda de enfriamiento disminuyo tras corregir horarios nocturnos.</p><h2>Hallazgos principales</h2><ul><li>El consumo nocturno bajo respecto al periodo anterior.</li></ul><h2>Oportunidades de mejora</h2><ul><li>Reducir simultaneidad entre calefaccion y enfriamiento.</li></ul><h2>Acciones recomendadas</h2><p>Validar programaciones y monitorear el impacto durante la proxima semana.</p></div>"
 }
 ```
 
