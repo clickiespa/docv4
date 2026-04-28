@@ -4,10 +4,23 @@ Release notes are organized by FastAPI tag for each API version exposed in `/doc
 
 ## Version 4.3.6 (2026-04-07)
 
+### devices
+- Replaced direct `device_model_settings` access with `GET /device_models/{id_device_model}/settings`.
+- Kept `GET /devices/{id_device}/history` with `from`, `to`, `skip`, and `limit` query filters.
+- Temporarily removed `GET /devices/history` while the route conflict (`id_device` parsing) is reviewed.
+
+### setups
+- `GET /setups/{id_setup}/metrics` now includes `dms_attribute_name`, sourced from `device_model_settings` through `setup_metrics.id_device_model_setting`.
+
+### auth
+- Enforced account membership checks by clearance (`id_clearance`) instead of role fallbacks: users with clearance above `A1` must belong to the requested `Account` header account.
+- Removed role-based clearance inference for contexts that omit `id_clearance`.
+
 ### docs
 - Audited `docs/` coverage in `docs/README.md` and added missing references for AI and gateway changelog guides.
 - Normalized the route-tag index format so `gateways` is documented as a standard route-tag heading instead of a custom section heading, matching the rest of the endpoint groups.
 - Reordered route-tag sections alphabetically to keep navigation consistent across documentation landing pages.
+- Updated device and device model documentation, Postman collections, and roadmap coverage for the current API surface.
 
 ## Version 4.3.5 (2026-04-01)
 

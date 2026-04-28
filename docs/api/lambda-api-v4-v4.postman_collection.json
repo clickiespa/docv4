@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "de253153-6312-403f-96df-dc84f1deee68",
+    "_postman_id": "7e889a8b-c3a0-4684-8685-dda46986bb67",
     "name": "Lambda API-V4 Production (/v4)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": "Auto-generated collection of Lambda API-V4 endpoints"
@@ -1030,6 +1030,25 @@
           }
         },
         {
+          "name": "GET /device_models/{id_device_model}/settings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/device_models/{id_device_model}/settings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "device_models",
+                "{id_device_model}",
+                "settings"
+              ]
+            }
+          }
+        },
+        {
           "name": "GET /device_model_manufacturers",
           "request": {
             "method": "GET",
@@ -1106,6 +1125,49 @@
               ]
             }
           }
+        },
+        {
+          "name": "GET /devices/{id_device}/history",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/devices/:id_device/history?from=1&to=1&skip=0&limit=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "devices",
+                ":id_device",
+                "history"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "1",
+                  "description": ""
+                },
+                {
+                  "key": "to",
+                  "value": "1",
+                  "description": ""
+                },
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": ""
+                },
+                {
+                  "key": "limit",
+                  "value": "1",
+                  "description": ""
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
         },
         {
           "name": "PUT /devices/{id_device}",
