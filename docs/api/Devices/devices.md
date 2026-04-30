@@ -2,6 +2,7 @@
 
 ## Endpoints
 - [List devices](#list-devices)
+- [Get device history](#get-device-history)
 - [Get device](#get-device)
 - [Create device](#create-device)
 - [Update device](#update-device)
@@ -126,6 +127,70 @@ curl -H "Authorization: <API_KEY>" \
     }
   },
   "instance": "/devices"
+}
+```
+
+## Get device history
+
+Retrieve status change events for a single device. The device identifier must belong to the account provided in the `Account` header.
+
+Clearance 5 is required to use this endpoint.
+
+### Endpoint
+```
+GET /devices/{id_device}/history
+```
+
+### Headers
+
+| Header | Required | Description | Type |
+| --- | --- | --- | --- |
+| `Authorization` | Yes | API key generated from your profile | string |
+| `Account` | Yes | Target account ID | int |
+
+### Path parameters
+
+| Parameter | Required | Type | Description |
+| --- | --- | --- | --- |
+| `id_device` | Yes | int | Device identifier returned by [List devices](#list-devices). |
+
+### Query parameters
+
+| Parameter | Required | Type | Default | Description |
+| --- | --- | --- | --- | --- |
+| `from` | No | int | `now - 7 days` | UNIX timestamp in seconds for the start of the time window (inclusive). |
+| `to` | No | int | `now` | UNIX timestamp in seconds for the end of the time window (inclusive). |
+| `skip` | No | int | `0` | Pagination offset. |
+| `limit` | No | int | `100` | Maximum number of events to return. |
+
+### Sample request
+```bash
+curl -H "Authorization: <API_KEY>" \
+  -H "Account: <ID_ACCOUNT>" \
+  "/devices/500010/history?from=1711929600&to=1712016000&skip=0&limit=20"
+```
+
+### Sample response (200)
+```json
+{
+  "status": "success",
+  "message": "Elements obtained successfully",
+  "data": [
+    {
+      "id_event": 6050,
+      "id_device": 500010,
+      "status_change_timestamp": "2024-04-01T09:15:00Z",
+      "id_device_status": 1
+    },
+    {
+      "id_event": 6042,
+      "id_device": 500010,
+      "status_change_timestamp": "2024-03-31T23:05:00Z",
+      "id_device_status": 2
+    }
+  ],
+  "context": {},
+  "instance": "/devices/500010/history"
 }
 ```
 

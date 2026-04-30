@@ -3,6 +3,7 @@
 ## Endpoints
 - [List device models](#list-device-models)
 - [Get device model](#get-device-model)
+- [List settings for a device model](#list-settings-for-a-device-model)
 - [List device model types](#list-device-model-types)
 - [List device model manufacturers](#list-device-model-manufacturers)
 
@@ -237,6 +238,66 @@ curl -H "Authorization: <API_KEY>" \
     }
   },
   "instance": "/device_models/99999"
+}
+```
+
+## List settings for a device model
+
+Retrieve settings definitions for a specific device model. This endpoint replaces direct access to `device_model_settings`.
+
+Clearance 4 or lower is required to use this endpoint.
+
+### Endpoint
+```
+GET /device_models/{id_device_model}/settings
+```
+
+### Headers
+
+| Header | Required | Description | Type |
+| --- | --- | --- | --- |
+| `Authorization` | Yes | API key generated from your profile | string |
+| `Account` | Yes | Target account ID | int |
+
+### Path parameters
+
+| Parameter | Required | Type | Description |
+| --- | --- | --- | --- |
+| `id_device_model` | Yes | int | Device model identifier returned by [List device models](#list-device-models). |
+
+### Query parameters
+
+| Parameter | Required | Type | Default | Description |
+| --- | --- | --- | --- | --- |
+| `skip` | No | int | `0` | Pagination offset. |
+| `limit` | No | int | `100` | Maximum number of records to return. |
+
+### Sample request
+```bash
+curl -H "Authorization: <API_KEY>" \
+  -H "Account: <ID_ACCOUNT>" \
+  "/device_models/3/settings?skip=0&limit=20"
+```
+
+### Sample response (200)
+```json
+{
+  "status": "success",
+  "message": "Elements obtained successfully",
+  "data": [
+    {
+      "id_device_model_setting": 500101,
+      "id_uom": 12,
+      "id_device_model": 3,
+      "id_function": null,
+      "dms_attribute_name": "temperature",
+      "dms_observations": null,
+      "dms_payload_length": 2,
+      "dms_payload_transform": "raw"
+    }
+  ],
+  "context": {},
+  "instance": "/device_models/3/settings"
 }
 ```
 
