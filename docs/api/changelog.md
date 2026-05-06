@@ -2,6 +2,12 @@
 
 Release notes are organized by FastAPI tag for each API version exposed in `/docs`.
 
+## Version 4.3.7 (2026-05-05)
+
+### events
+- Updated `ClickieEventsLogger` to store `event_changes` with plain field keys, removing translation placeholders and dotted nesting from change names.
+- Restored the `[API]` prefix, fixed `id_entity` mapping for plural/normalized model names, and aligned generated clickie event descriptions with the legacy PHP event helper, including affected-resource labels and custom-form parent context.
+
 ## Version 4.3.6 (2026-04-07)
 
 ### devices
