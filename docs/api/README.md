@@ -22,7 +22,7 @@ This page is designed as a client-facing guide so you can quickly find the right
 - [Assets endpoints](Assets/assets.md) — `GET /assets`, `POST /assets`, `GET /assets/{id_asset}`, `PUT /assets/{id_asset}`, `DELETE /assets/{id_asset}`.
 
 ### `collaborators`
-- [Collaborators endpoints](Collaborators/collaborators.md) — `GET /collaborators`, `POST /collaborators`, `GET /collaborators/{id_user}`, `PUT /collaborators/{id_user}`, `DELETE /collaborators/{id_user}`.
+- [Collaborators endpoints](Collaborators/collaborators.md) — `GET /collaborators`, `POST /collaborators`, `GET /collaborators/{id_user}`, `PUT /collaborators/{id_user}`, `DELETE /collaborators/{id_user}`, `GET /collaborators/{id_user}/history`.
 
 ### `dashboards`
 - [Dashboards endpoints](Dashboards/dashboards.md) — dashboards, dashboard widgets, widget types, and related operations.

@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "7e889a8b-c3a0-4684-8685-dda46986bb67",
+    "_postman_id": "af73015e-64d8-4c90-8f97-3c5fae818f52",
     "name": "Lambda API-V4 Production (/v4)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": "Auto-generated collection of Lambda API-V4 endpoints"
@@ -261,12 +261,12 @@
           }
         },
         {
-          "name": "GET /collaborators/{id_user}/login_history",
+          "name": "GET /collaborators/{id_user}/history",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/v4/collaborators/{id_user}/login_history?max_results=20",
+              "raw": "{{baseUrl}}/v4/collaborators/{id_user}/history?skip=0&limit=100&id_event_type=1",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -274,13 +274,25 @@
                 "v4",
                 "collaborators",
                 "{id_user}",
-                "login_history"
+                "history"
               ],
               "query": [
                 {
-                  "key": "max_results",
-                  "value": "20",
-                  "description": "Número máximo de eventos a devolver (default: 20)",
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                },
+                {
+                  "key": "id_event_type",
+                  "value": "1",
+                  "description": "Filter history rows by event type: 1 login, 2 creation, 3 modification, 4 deletion",
                   "disabled": false
                 }
               ]
