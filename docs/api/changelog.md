@@ -4,6 +4,9 @@ Release notes are organized by FastAPI tag for each API version exposed in `/doc
 
 ## Version 4.3.7 (2026-05-05)
 
+### global_resources
+- Added a Python transcription of the Spanish language catalog and helper lookup functions under `API-V4/langs.py` so Lambda code can reuse the existing labels when needed.
+
 ### events
 - Updated `ClickieEventsLogger` to store `event_changes` with plain field keys, removing translation placeholders and dotted nesting from change names.
 - Restored the `[API]` prefix, fixed `id_entity` mapping for plural/normalized model names, and aligned generated clickie event descriptions with the legacy PHP event helper, including affected-resource labels and custom-form parent context.
