@@ -4,6 +4,12 @@ Release notes are organized by FastAPI tag for each API version exposed in `/doc
 
 ## Version 4.3.7 (2026-05-05)
 
+### collaborators
+- Added `GET /collaborators/{id_user}/history` to return account-scoped `clickie_events` rows with `skip`/`limit` pagination and an `id_event_type` filter (`1` login, `2` creation, `3` modification, `4` deletion), language-formatted event descriptions, event type descriptions, entity names, and the admin-user history lookup exception; removed the redundant `GET /collaborators/{id_user}/login_history` endpoint.
+
+### docs
+- Documented the collaborator event history endpoint, refreshed Postman collections, and aligned the roadmap and documentation index with the new collaborator history surface.
+
 ### global_resources
 - Added a Python transcription of the Spanish language catalog and helper lookup functions under `API-V4/langs.py` so Lambda code can reuse the existing labels when needed.
 

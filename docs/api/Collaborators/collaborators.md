@@ -6,7 +6,7 @@
 - [Get collaborator](#get-collaborator)
 - [Update collaborator](#update-collaborator)
 - [Delete collaborator](#delete-collaborator)
-- [Collaborator login history](#collaborator-login-history)
+- [Collaborator event history](#collaborator-event-history)
 
 Endpoints related to user management within an account.
 
@@ -245,13 +245,14 @@ curl -X DELETE -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" <HOST_NA
 }
 ```
 
-## Collaborator login history
 
-Retrieve authentication events for a collaborator.
+## Collaborator event history
+
+Retrieve clickie event history for a collaborator in the current account. Event descriptions are formatted with the shared language catalog from `API-V4/langs.py`, and event type/entity identifiers are returned as readable descriptions. The consulted user must belong to the requested account. Exception: when the consulted user has `id_role = 1`, the history can be queried without validating `user_account` membership; users with `id_role > 1` are validated through their `user_account` membership in the requested account. Clearance 7 is required to use this endpoint.
 
 ### Endpoint
 ```
-GET /collaborators/{id_user}/login_history
+GET /collaborators/{id_user}/history
 ```
 
 ### Headers
@@ -259,22 +260,80 @@ GET /collaborators/{id_user}/login_history
 | Header | Required | Description | Type |
 | --- | --- | --- | --- |
 | `Authorization` | yes | API key generated from your profile | string |
-| `Account` | yes | Target account ID | int |
+| `Account` | yes | Target account identifier. Use `Account: <ID_ACCOUNT>` | int |
 
 ### Path parameter
 
-| Parameter | Description | Type |
-| --- | --- | --- |
-| `{id_user}` | Collaborator numeric identifier | int |
+| Parameter | Required | Description | Type |
+| --- | --- | --- | --- |
+| `{id_user}` | yes | Collaborator numeric identifier from [Get collaborator](#get-collaborator) | int |
+
+### Query parameters
+
+| Parameter | Required | Description | Type |
+| --- | --- | --- | --- |
+| `skip` | no | Offset for pagination. Defaults to `0` | int |
+| `limit` | no | Maximum number of event rows to return. Defaults to `100` | int |
+| `id_event_type` | no | Filter results by event type: `1` login, `2` creation, `3` modification, `4` deletion | int |
+
+### Request headers example
+```json
+{
+  "Authorization": "<API_KEY>",
+  "Account": "<ID_ACCOUNT>"
+}
+```
 
 ### Sample request
 ```bash
-curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" <HOST_NAME>/collaborators/<ID_USER>/login_history
+curl -H "Authorization: <API_KEY>" \
+  -H "Account: <ID_ACCOUNT>" \
+  "<HOST_NAME>/collaborators/<ID_USER>/history?skip=0&limit=100&id_event_type=3"
 ```
 
 ### Sample response
 ```json
-[
-  {"event": "SignIn", "timestamp": "2023-09-01T00:00:00Z"}
-]
+{
+  "status": "success",
+  "message": "Elements obtained successfully",
+  "data": [
+    {
+      "id_event": 1250,
+      "id_resource": 42,
+      "event_description": "API actualización de activo Main compressor",
+      "event_changes": "{\"asset_name\":{\"before\":\"Old\",\"after\":\"Main compressor\"}}",
+      "created_at": "2026-05-06T12:00:00Z",
+      "event_type_description": "Modification",
+      "entity_name": "assets"
+    }
+  ],
+  "context": {},
+  "instance": "/collaborators/<ID_USER>/history"
+}
 ```
+
+### Error responses
+```json
+{
+  "status": "error",
+  "message": "Element not found",
+  "data": null,
+  "context": {},
+  "instance": "/collaborators/<ID_USER>/history"
+}
+```
+
+### Status codes
+
+| Status code | Description |
+| --- | --- |
+| `200` | Collaborator event history returned successfully |
+| `400` | Invalid pagination parameters |
+| `401` | Missing or invalid API key |
+| `403` | The authenticated collaborator does not have access to the requested account |
+| `404` | Collaborator was not found in the current account |
+| `500` | Unexpected server error |
+
+### Pydantic models
+
+Response items use `CollaboratorEventHistoryItem` from `schemas.users.history`. The standard JSON response envelope contains `status`, `message`, `data`, `context`, and `instance` as described in the [Getting Started guide](../Getting_started_with_v4/getting_started.md).
