@@ -298,11 +298,12 @@ When `mode=read_specific&route=app/thresholds/temperature`:
 
 #### Query parameters
 
-| Parameter     | Default | Description                                           |
-| ------------- | ------- | ----------------------------------------------------- |
-| `subscription` | "edge"  | Target subscription: "edge-dev", "edge", or "core"   |
-| `mode`        | null    | Set to "read_specific" to read a nested property      |
-| `route`       | null    | JSON path to specific property (required if mode="read_specific"); format: `key/nested/path` |
+| Parameter      | Default  | Description                                                                                   |
+| -------------- | -------- | --------------------------------------------------------------------------------------------- |
+| `subscription` | `"edge"` | Target subscription: `"edge-dev"`, `"edge"`, or `"core"`                                     |
+| `device_read`  | `false`  | Set to `"true"` to skip the DynamoDB cache and read the configuration directly from the device via MQTT |
+| `mode`         | null     | Set to `"read_specific"` to read a nested property                                            |
+| `route`        | null     | JSON path to specific property (required if `mode="read_specific"`); format: `key/nested/path` |
 
 ### PUT /devices/{identifier}/config *(real via MQTT)*
 * Accept a JSON payload matching the device capabilities and publish the change through MQTT.
