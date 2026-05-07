@@ -248,7 +248,7 @@ curl -X DELETE -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" <HOST_NA
 
 ## Collaborator event history
 
-Retrieve clickie event history for a collaborator in the current account. Event descriptions are formatted with the shared language catalog from `API-V4/langs.py`, and event type/entity identifiers are returned as readable descriptions. The consulted user must belong to the requested account. Exception: when the consulted user has `id_role = 1`, the history can be queried without validating `user_account` membership; users with `id_role > 1` are validated through their `user_account` membership in the requested account. Clearance 7 is required to use this endpoint.
+Retrieve clickie event history for a collaborator in the current account. Clearance 7 is required to use this endpoint.
 
 ### Endpoint
 ```
