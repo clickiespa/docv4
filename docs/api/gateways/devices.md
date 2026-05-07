@@ -58,19 +58,15 @@ Account: 33
 
 ---
 
-## Implementation guidelines for upcoming device endpoints *(lineamientos)*
+## GET /devices/{identifier}
 
-The following sections document the contracts that must be honoured when the remaining device endpoints are implemented. They are considered **real mode** features: configuration calls interact with the existing MQTT bridge so no stubs are necessary.
-
-### GET /devices/{identifier}
-
-#### Objective
+### Objective
 Retrieve detailed metadata for a single Clickiemota device. Validates that the device belongs to the authenticated account and is installed in an active setup. Returns comprehensive device information including model details, connectivity status, and setup association.
 
-#### Authentication
+### Authentication
 * **Required** — Clickie API key and account headers.
 
-#### Request
+### Request
 ```http
 GET /v4/gateways/devices/cm-001 HTTP/1.1
 Host: api.clickie.io
@@ -78,7 +74,7 @@ Authorization: <api-key>
 Account: 33
 ```
 
-#### Successful Response (200 OK)
+### Successful Response (200 OK)
 ```json
 {
   "status": "success",
@@ -102,7 +98,7 @@ Account: 33
 }
 ```
 
-#### Error Responses
+### Error Responses
 
 **400 Bad Request** — Missing device identifier
 ```json
@@ -159,7 +155,7 @@ Account: 33
 }
 ```
 
-#### Response Fields
+### Response Fields
 
 | Field               | Type          | Description                                     |
 | ------------------- | ------------- | ----------------------------------------------- |
@@ -178,7 +174,7 @@ Account: 33
 | `model_id`          | number        | Device model ID from device_models table        |
 | `model_description` | string        | Model description from device_models table      |
 
-#### Status Values
+### Status Values
 
 | Value          | Description                                     |
 | -------------- | ----------------------------------------------- |
@@ -186,21 +182,24 @@ Account: 33
 | `disconnected` | Device is not responding to connectivity checks |
 | `unknown`      | Device status cannot be determined              |
 
-#### Implementation Notes
+### Implementation Notes
 * Validates device ownership using account_id from authentication context
 * Requires active setup (no `setup_uninstall_date`)
 * Only returns Clickiemota models (configurable via `CLICKIEMOTA_MODEL_IDS`)
 * Structured logging for successful retrievals and errors
 * Parses `device_configuration` JSON field for custom labels
 
-### GET /devices/{identifier}/config *(real via MQTT)*
-* Retrieve the latest configuration snapshot by querying the MQTT-backed device shadow. The existing MQTT pipeline already supports both read and write operations.
-* When the config cannot be fetched, return `503 service_unavailable` with `code: mqtt_bridge_unavailable`.
-* **Example response uses a trimmed JSON**. The real payload is a large nested document; keep the structure but expand with the full fields exposed by the firmware when implementing.
-* Subscription can be optionally specified via query parameter (default: "edge").
+---
+
+## GET /devices/{identifier}/config
+
+Retrieve the latest configuration snapshot saved or tries to obtain it from the device via MQTT.
+
+* When the config cannot be fetched, returns `503 service_unavailable` with `code: mqtt_bridge_unavailable`.
+* Subscription can be optionally specified via query parameter (default: `"edge"`).
 * Supports reading a specific nested property using `mode=read_specific` with a `route` parameter.
 
-#### Request examples
+### Request examples
 
 Full configuration:
 ```http
@@ -223,7 +222,7 @@ Authorization: <api-key>
 Account: 33
 ```
 
-#### Successful Response (200 OK) — Full configuration
+### Successful Response (200 OK) — Full configuration
 
 ```json
 {
@@ -244,7 +243,7 @@ Account: 33
 }
 ```
 
-#### Successful Response (200 OK) — Specific nested property
+### Successful Response (200 OK) — Specific nested property
 
 When `mode=read_specific&route=app/thresholds/temperature`:
 ```json
@@ -261,7 +260,7 @@ When `mode=read_specific&route=app/thresholds/temperature`:
 }
 ```
 
-#### Error Responses
+### Error Responses
 
 **400 Bad Request** — Invalid subscription
 ```json
@@ -296,7 +295,7 @@ When `mode=read_specific&route=app/thresholds/temperature`:
 }
 ```
 
-#### Query parameters
+### Query parameters
 
 | Parameter      | Default  | Description                                                                                   |
 | -------------- | -------- | --------------------------------------------------------------------------------------------- |
@@ -305,18 +304,22 @@ When `mode=read_specific&route=app/thresholds/temperature`:
 | `mode`         | null     | Set to `"read_specific"` to read a nested property                                            |
 | `route`        | null     | JSON path to specific property (required if `mode="read_specific"`); format: `key/nested/path` |
 
-### PUT /devices/{identifier}/config *(real via MQTT)*
-* Accept a JSON payload matching the device capabilities and publish the change through MQTT.
-* Honour the `Idempotency-Key` header for request tracking and audit purposes. In Phase A, this is logged but not enforced; full idempotency will be implemented in Phase B.
-* Subscription can be optionally specified via query parameter (default: "edge").
-* Support two modes of operation:
-  - **Full replacement** (default): Replace the entire device configuration with the provided payload. Requires `database`, `id`, and `lambda_functions` keys in the config.
-  - **Targeted update** (`mode=write_specific`): Update a specific nested property using a JSON path (`route`). The device is queried for its current configuration, and the update is merged at the specified route.
-* Return `200 OK` when the device confirms the configuration was applied immediately via MQTT.
-* Return `202 Accepted` when the device queues the change for asynchronous processing.
-* Return `503 Service Unavailable` when the MQTT bridge or device is not reachable.
+---
 
-#### Request examples — Full replacement
+## PUT /devices/{identifier}/config
+
+Publish a configuration change to the device via MQTT.
+
+* Accepts a JSON payload matching the device capabilities.
+* Subscription can be optionally specified via query parameter (default: `"edge"`).
+* Supports two modes:
+  - **Full replacement** (default): Replace the entire device configuration. Requires `database`, `id`, and `lambda_functions` keys in the config.
+  - **Targeted update** (`mode=write_specific`): Update a specific nested property using a JSON path (`route`).
+* Returns `200 OK` when the device confirms the configuration was applied immediately.
+* Returns `202 Accepted` when the device queues the change for asynchronous processing.
+* Returns `503 Service Unavailable` when the MQTT bridge or device is not reachable.
+
+### Request examples — Full replacement
 
 Full configuration update:
 ```http
@@ -343,7 +346,7 @@ Idempotency-Key: 4b0fd0b0-4ef1-4b61-b7ce-73e1e7afc9be
 }
 ```
 
-#### Request examples — Targeted update
+### Request examples — Targeted update
 
 Update a specific nested property (e.g., temperature thresholds):
 ```http
@@ -383,7 +386,7 @@ Content-Type: application/json
 }
 ```
 
-#### Response: 200 OK — Immediate acknowledgement
+### Response: 200 OK — Immediate acknowledgement
 
 Device replies on the same MQTT roundtrip:
 
@@ -399,7 +402,7 @@ Device replies on the same MQTT roundtrip:
 }
 ```
 
-#### Response: 202 Accepted — Queued update
+### Response: 202 Accepted — Queued update
 
 Device queues the change for asynchronous processing:
 
@@ -416,7 +419,7 @@ Device queues the change for asynchronous processing:
 }
 ```
 
-#### Error Responses
+### Error Responses
 
 **400 Bad Request** — Invalid subscription
 ```json
@@ -473,7 +476,7 @@ Device queues the change for asynchronous processing:
 }
 ```
 
-#### Request body parameters
+### Request body parameters
 
 | Parameter            | Type    | Required | Mode              | Description                                           |
 | -------------------- | ------- | -------- | ----------------- | ----------------------------------------------------- |
@@ -482,19 +485,19 @@ Device queues the change for asynchronous processing:
 | `route`              | string  | Yes*     | write_specific    | JSON path to target property; format: `key/nested/path` (*required when mode="write_specific") |
 | `create_missing_path` | boolean | No       | write_specific    | If true, create intermediate paths that don't exist; default: false |
 
-#### Request headers
+### Request headers
 
 | Header           | Required | Description                                                                |
 | ---------------- | -------- | -------------------------------------------------------------------------- |
 | `Idempotency-Key` | No       | UUID for tracking. Logged for audit; full idempotency coming in Phase B.   |
 
-#### Query parameters
+### Query parameters
 
 | Parameter     | Default | Description                                           |
 | ------------- | ------- | ----------------------------------------------------- |
 | `subscription` | "edge"  | Target subscription: "edge-dev", "edge", or "core"   |
 
-#### Response fields
+### Response fields
 
 | Field          | Type    | Description                                                    |
 | -------------- | ------- | -------------------------------------------------------------- |
@@ -505,45 +508,9 @@ Device queues the change for asynchronous processing:
 | `job_id`       | string  | Job ID for tracking asynchronous updates (when `applied: false`) |
 | `queued_at`    | string  | ISO timestamp of when update was queued (when `applied: false`) |
 
-### GET /devices/{identifier}/health *(stub until agent mode)*
-* Returns a placeholder health document per device so integrators can wire dashboards before telemetry hooks are live.
-* Include `execution_mode: "stub"` until the device agent provides real-time data.
-* When telemetry becomes available, populate connectivity checks, last heartbeat, and backlog counters accordingly.
-
-```json
-{
-  "status": "success",
-  "data": {
-    "identifier": "cm-001",
-    "execution_mode": "stub",
-    "generated_at": "2025-09-29T09:05:03Z",
-    "checks": {
-      "connectivity": {"reachable": false, "note": "Awaiting agent integration"},
-      "last_seen_at": null,
-      "pending_jobs": 0
-    }
-  }
-}
-```
-
 ## Error catalogue
+
 | HTTP | code                  | When                    |
 | ---- | --------------------- | ----------------------- |
 | 500  | internal_server_error | Any unexpected failure. |
-
----
-
-## Planned device endpoints
-
-| Endpoint                             | Mode                 | Status | Notes                                                                                                                 |
-| ------------------------------------ | -------------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
-| `GET /devices/{identifier}`          | **Real**             | ✅ Live | Returns device metadata with model, status, and setup association                                                    |
-| `GET /devices/{identifier}/config`   | **Real**             | ✅ Live | Reads configuration via MQTT bridge; returns 503 if device unavailable                                               |
-| `PUT /devices/{identifier}/config`   | **Real**             | ✅ Live | Publishes config updates via MQTT; returns 200 (immediate) or 202 (queued)                                           |
-| `GET /devices/{identifier}/health`   | **Stub → Real**      | ☐ Planned | Return stub payload above until telemetry is wired. Replace with live data once agents ship.                          |
-| `GET /devices/{identifier}/actions`  | **Stub**             | ☐ Planned | Returns static catalog from fixtures per Phase A scope. Placeholder response should be the deterministic stub payload |
-| `POST /devices/{identifier}/actions` | **Stub**             | ☐ Planned | Accepts requests and returns canned job results. Placeholder should echo stubbed job with `status: succeeded`         |
-| `GET /devices/{identifier}/jobs`     | **Stub/Real hybrid** | ☐ Planned | Final behaviour pending with Jobs team; return `501 feature_not_ready` until storage contract is ratified            |
-
-All planned endpoints must keep responses aligned with the standard envelope documented in `README.md`.
 
