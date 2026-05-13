@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `GET /v4/gateways/devices/{identifier}/config` — Added `device_read` query parameter; when set to `true`, bypasses the DynamoDB history cache and reads the configuration directly from the device via MQTT
 
 ### Changed
+- Endpoints related to configurations now filter *CMWS* from the device identifier to not use it on MQTT interactions nor saving the config on the database.
+- `PUT /v4/gateways/devices/{identifier}/config` - Changed query param `subscription` to a body field.
 - `GET /v4/gateways/devices/{identifier}/config` — Configuration reads now serve from DynamoDB (`cm-config-history`) instead of the SQL `devices.device_configuration` column; falls back to MQTT if no history entry exists
 - `PUT /v4/gateways/devices/{identifier}/config` — Configuration writes now persist to DynamoDB (`cm-config-history`) via `save_cm_config` instead of updating the SQL `devices` table
 - `GET /v4/gateways/devices` — Updated route prefix from `/dev/clickiemottas/` to `/v4/gateways/`
