@@ -200,7 +200,8 @@ Se requiere un nivel de autorización 5 o inferior para utilizar este endpoint.
 ### Endpoint
 ```
 DELETE /assets/{id_asset}
-```### Encabezados
+```
+### Encabezados
 
 | Encabezado | Requerido | Descripción | Tipo |
 | --- | --- | --- | --- |

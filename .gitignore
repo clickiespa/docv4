@@ -8,3 +8,5 @@ __pycache__/
 site/*
 !site/.gitkeep
 playwright/.auth/
+public/api/
+public/api-es/

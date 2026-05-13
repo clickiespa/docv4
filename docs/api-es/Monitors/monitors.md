@@ -451,7 +451,8 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /monitors/1/trigge
   },
   "instance": "/monitors/1/triggers/999"
 }
-```### Códigos de estado
+```
+### Códigos de estado
 - `200`: activador recuperado correctamente.
 - `400`: parámetros de ruta no válidos.
 - `401`: credenciales faltantes o no válidas.
@@ -585,7 +586,8 @@ curl -X POST \
   },
   "instance": "/monitors/1/triggers"
 }
-```### Códigos de estado
+```
+### Códigos de estado
 - `201`: activador creado correctamente.
 - `400`: carga útil o parámetros de activación no válidos.
 - `401`: credenciales faltantes o no válidas.

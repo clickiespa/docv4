@@ -191,7 +191,8 @@ curl -H "Authorization: <API_KEY>" \
   "context": {},
   "instance": "/devices/1"
 }
-```### Atributos de datos de respuesta
+```
+### Atributos de datos de respuesta
 
 | Campo | Tipo | Descripción |
 | --- | --- | --- |

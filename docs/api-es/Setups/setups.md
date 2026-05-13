@@ -191,7 +191,8 @@ curl -H "Authorization: <API_KEY>" \
   "context": {},
   "instance": "/setups/12"
 }
-```### Atributos de datos de respuesta
+```
+### Atributos de datos de respuesta
 
 | Campo | Tipo | Descripción |
 | --- | --- | --- |

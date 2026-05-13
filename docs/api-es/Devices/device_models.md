@@ -330,7 +330,8 @@ curl -H "Authorization: <API_KEY>" \
   },
   "instance": "/types/device_models"
 }
-```## Listar fabricantes de modelos de dispositivos
+```
+## Listar fabricantes de modelos de dispositivos
 
 Recupere los fabricantes del modelo de dispositivo configurados para la cuenta autenticada.
 

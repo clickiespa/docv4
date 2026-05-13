@@ -26,7 +26,7 @@ Esta página está diseñada como una guía orientada al cliente para que pueda 
 
 ### `data`
 - [Ingestión y eliminación de datos](Metrics_and_data/data_ingestion_and_deletion.md): ingesta y eliminación de puntos de datos para `/metrics/{metric_identifier}/datapoints`.
-- [Notas de datos heredados](Metrics_and_data/data_no_usar.md) — archivo de referencia histórica.
+- [Notas de datos heredados](Metrics_and_data/data.md) — archivo de referencia histórica.
 
 ### `devices`
 - [Endpoints de dispositivos](Devices/devices.md) — dispositivo CRUD y operaciones relacionadas.

@@ -84,6 +84,11 @@ def _restore_tokens(text: str, stash: list[str]) -> str:
     return restored
 
 
+def _normalize_markdown_artifacts(text: str) -> str:
+    """Fix small formatting artifacts introduced by machine translation."""
+    return re.sub(r"(?m)^(```+|~~~+)(#{1,6}\s+)", r"\1\n\2", text)
+
+
 def _translate_in_chunks(text: str, cache: TranslatorCache, max_chunk: int = 3500) -> str:
     if not text.strip():
         return text
@@ -125,7 +130,7 @@ def _translate_markdown_text(body: str, cache: TranslatorCache) -> str:
     text = re.sub(r"(?m)^(#+)([^\s#])", r"\1 \2", text)
     text = re.sub(r"(?m)^(\s*[-*+])\[(\S)", r"\1 [\2", text)
     text = re.sub(r"(?m)^(\s*\d+\.)\[(\S)", r"\1 [\2", text)
-    return text
+    return _normalize_markdown_artifacts(text)
 
 
 def translate_markdown_file(src_path: Path, dst_path: Path, cache: TranslatorCache) -> None:

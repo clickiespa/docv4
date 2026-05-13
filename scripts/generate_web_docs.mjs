@@ -6,8 +6,10 @@ import yaml from 'js-yaml';
 
 const ROOT = process.cwd();
 const DOCS_DIR = path.join(ROOT, 'docs');
+const PUBLIC_DIR = path.join(ROOT, 'public');
 const MKDOCS_CONFIG = path.join(ROOT, 'mkdocs.yml');
 const OUTPUT_FILE = path.join(ROOT, 'src', 'manual.generated.html');
+const referencedStaticAssets = new Set();
 
 const ICON_BY_GROUP = {
   Inicio: '◆',
@@ -88,6 +90,8 @@ const LABEL_TRANSLATIONS = {
 
 const slugify = (value) =>
   value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
     .trim()
     .replace(/[^a-z0-9]+/g, '-')
@@ -102,6 +106,21 @@ const escapeHtml = (value = '') =>
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
 
+const stripHtml = (value = '') => value.replace(/<[^>]*>/g, '');
+
+const stripMarkdownSyntax = (value = '') =>
+  value
+    .replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/[`*_~]/g, '')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+
+const slugifyAnchor = (value = '') => slugify(stripMarkdownSyntax(stripHtml(String(value))));
+
 function removeFirstH1(markdownText) {
   const lines = markdownText.split('\n');
   const idx = lines.findIndex((line) => line.startsWith('# '));
@@ -109,6 +128,10 @@ function removeFirstH1(markdownText) {
     return markdownText;
   }
   return [...lines.slice(0, idx), ...lines.slice(idx + 1)].join('\n').replace(/^\s+/, '');
+}
+
+function normalizeMarkdownForRendering(markdownText = '') {
+  return markdownText.replace(/^(```+|~~~+)(#{1,6}\s+)/gm, '$1\n$2');
 }
 
 function normalizeDocPath(docPath = '') {
@@ -139,20 +162,219 @@ function isExternalHref(href = '') {
   return /^(https?:|mailto:|tel:|data:|javascript:)/i.test(href);
 }
 
-function rewriteInternalDocLinks(html, currentDocPath, docPathToSectionId) {
+function splitHref(href = '') {
+  const hashIndex = href.indexOf('#');
+  const hrefWithoutHash = hashIndex >= 0 ? href.slice(0, hashIndex) : href;
+  const hash = hashIndex >= 0 ? href.slice(hashIndex + 1) : '';
+  const queryIndex = hrefWithoutHash.indexOf('?');
+
+  return {
+    path: queryIndex >= 0 ? hrefWithoutHash.slice(0, queryIndex) : hrefWithoutHash,
+    query: queryIndex >= 0 ? hrefWithoutHash.slice(queryIndex) : '',
+    hash,
+  };
+}
+
+function normalizeHashAnchor(hash = '') {
+  if (!hash) {
+    return '';
+  }
+
+  try {
+    return slugifyAnchor(decodeURIComponent(hash));
+  } catch {
+    return slugifyAnchor(hash);
+  }
+}
+
+function getCounterpartDocPathForAnchors(docPath = '') {
+  const normalized = normalizeDocPath(docPath);
+
+  if (normalized.startsWith('api-es/')) {
+    return `api/${normalized.slice('api-es/'.length)}`;
+  }
+
+  if (normalized.startsWith('en/')) {
+    return normalized.slice('en/'.length);
+  }
+
+  return normalized;
+}
+
+function extractMarkdownHeadings(markdownText = '') {
+  const headings = [];
+  const lines = markdownText.split('\n');
+  let fenced = false;
+  let fenceMarker = '';
+
+  for (const line of lines) {
+    const fenceMatch = line.match(/^\s*(```+|~~~+)/);
+    if (fenceMatch) {
+      const marker = fenceMatch[1][0];
+      if (!fenced) {
+        fenced = true;
+        fenceMarker = marker;
+      } else if (marker === fenceMarker) {
+        fenced = false;
+        fenceMarker = '';
+      }
+      continue;
+    }
+
+    if (fenced) {
+      continue;
+    }
+
+    const headingMatch = line.match(/^\s{0,3}(#{1,6})\s+(.+?)\s*#*\s*$/);
+    if (!headingMatch) {
+      continue;
+    }
+
+    headings.push({
+      depth: headingMatch[1].length,
+      text: headingMatch[2].trim(),
+    });
+  }
+
+  return headings;
+}
+
+function extractHashLinkAliases(markdownText = '') {
+  const aliasesByLabelSlug = new Map();
+  const withoutCodeBlocks = markdownText.replace(/```[\s\S]*?```|~~~[\s\S]*?~~~/g, '');
+  const linkRegex = /\[([^\]]+)\]\(#([^)]+)\)/g;
+  let match = linkRegex.exec(withoutCodeBlocks);
+
+  while (match) {
+    const labelSlug = slugifyAnchor(match[1]);
+    const targetSlug = normalizeHashAnchor(match[2]);
+
+    if (labelSlug && targetSlug) {
+      const aliases = aliasesByLabelSlug.get(labelSlug) || new Set();
+      aliases.add(targetSlug);
+      aliasesByLabelSlug.set(labelSlug, aliases);
+    }
+
+    match = linkRegex.exec(withoutCodeBlocks);
+  }
+
+  return aliasesByLabelSlug;
+}
+
+async function readDocBodyWithoutH1(docPath) {
+  const absolutePath = path.join(DOCS_DIR, docPath);
+
+  try {
+    const raw = await fs.readFile(absolutePath, 'utf-8');
+    return normalizeMarkdownForRendering(removeFirstH1(matter(raw).content));
+  } catch {
+    return '';
+  }
+}
+
+async function buildHeadingTargets(docPath, markdownText, sectionId) {
+  const currentHeadings = extractMarkdownHeadings(markdownText);
+  const hashAliasesByLabelSlug = extractHashLinkAliases(markdownText);
+  const counterpartDocPath = getCounterpartDocPathForAnchors(docPath);
+  const counterpartBody =
+    counterpartDocPath !== normalizeDocPath(docPath)
+      ? await readDocBodyWithoutH1(counterpartDocPath)
+      : '';
+  const counterpartHeadings = counterpartBody ? extractMarkdownHeadings(counterpartBody) : [];
+  const usedIds = new Map();
+
+  const toUniqueId = (slug) => {
+    const baseId = `${sectionId}-${slug || 'section'}`;
+    const count = usedIds.get(baseId) || 0;
+    usedIds.set(baseId, count + 1);
+    return count === 0 ? baseId : `${baseId}-${count + 1}`;
+  };
+
+  return currentHeadings.map((heading, index) => {
+    const primarySlug = slugifyAnchor(counterpartHeadings[index]?.text || heading.text);
+    const currentSlug = slugifyAnchor(heading.text);
+    const primaryId = toUniqueId(primarySlug);
+    const aliasIds = [];
+    const extraAliasSlugs = new Set([
+      ...(hashAliasesByLabelSlug.get(currentSlug) || []),
+      ...(hashAliasesByLabelSlug.get(primarySlug) || []),
+    ]);
+
+    if (currentSlug && currentSlug !== primarySlug) {
+      aliasIds.push(toUniqueId(currentSlug));
+    }
+
+    extraAliasSlugs.forEach((aliasSlug) => {
+      if (aliasSlug && aliasSlug !== primarySlug && aliasSlug !== currentSlug) {
+        aliasIds.push(toUniqueId(aliasSlug));
+      }
+    });
+
+    return { primaryId, aliasIds };
+  });
+}
+
+function createMarkdownRenderer(headingTargets) {
+  const renderer = new marked.Renderer();
+  let headingIndex = 0;
+
+  renderer.heading = function heading({ tokens, depth }) {
+    const html = this.parser.parseInline(tokens);
+    const target = headingTargets[headingIndex] || {};
+    const fallbackId = `heading-${headingIndex + 1}`;
+    const primaryId = target.primaryId || fallbackId;
+    const aliasHtml = (target.aliasIds || [])
+      .map((id) => `<span class="heading-anchor-alias" id="${escapeHtml(id)}"></span>`)
+      .join('');
+
+    headingIndex += 1;
+    return `${aliasHtml}<h${depth} id="${escapeHtml(primaryId)}">${html}</h${depth}>\n`;
+  };
+
+  return {
+    parse: (markdownText) => marked.parse(markdownText, { renderer }),
+    parseInline: (markdownText) => marked.parseInline(markdownText),
+  };
+}
+
+function resolveRelativeDocAsset(currentDocPath, hrefPath) {
+  const normalizedCurrent = normalizeDocPath(currentDocPath);
+  const currentDir = path.posix.dirname(normalizedCurrent);
+  const resolvedPath = hrefPath.startsWith('/')
+    ? normalizeDocPath(hrefPath)
+    : normalizeDocPath(path.posix.normalize(path.posix.join(currentDir, hrefPath)));
+
+  return resolvedPath.startsWith('..') ? '' : resolvedPath;
+}
+
+function rewriteInternalDocLinks(html, currentDocPath, currentSectionId, docPathToSectionId) {
   const normalizedCurrent = normalizeDocPath(currentDocPath);
   const currentDir = path.posix.dirname(normalizedCurrent);
 
   return html.replace(/href="([^"]+)"/g, (fullMatch, rawHref) => {
     const href = String(rawHref || '').trim();
-    if (!href || href.startsWith('#') || isExternalHref(href)) {
+    if (!href || isExternalHref(href)) {
       return fullMatch;
     }
 
-    const [hrefNoHash] = href.split('#');
-    const [hrefPath] = hrefNoHash.split('?');
-    if (!/\.md$/i.test(hrefPath)) {
+    if (href.startsWith('#')) {
+      const targetAnchor = normalizeHashAnchor(href.slice(1));
+      return targetAnchor ? `href="#${currentSectionId}-${targetAnchor}"` : fullMatch;
+    }
+
+    const { path: hrefPath, query, hash } = splitHref(href);
+    if (!hrefPath) {
       return fullMatch;
+    }
+
+    if (!/\.md$/i.test(hrefPath)) {
+      const resolvedAssetPath = resolveRelativeDocAsset(currentDocPath, hrefPath);
+      if (!resolvedAssetPath) {
+        return fullMatch;
+      }
+
+      referencedStaticAssets.add(resolvedAssetPath);
+      return `href="./${resolvedAssetPath}${query}${hash ? `#${hash}` : ''}"`;
     }
 
     let resolvedDocPath = '';
@@ -171,7 +393,8 @@ function rewriteInternalDocLinks(html, currentDocPath, docPathToSectionId) {
       return fullMatch;
     }
 
-    return `href="#${targetSectionId}"`;
+    const targetAnchor = normalizeHashAnchor(hash);
+    return `href="#${targetSectionId}${targetAnchor ? `-${targetAnchor}` : ''}"`;
   });
 }
 
@@ -200,6 +423,32 @@ function rewriteRelativeMediaSources(html, currentDocPath) {
     return `src="./${resolvedSrcPath}${suffix}"`;
   });
 }
+
+async function copyReferencedStaticAssets() {
+  await Promise.all(
+    Array.from(referencedStaticAssets).map(async (assetPath) => {
+      const src = path.join(DOCS_DIR, assetPath);
+      const dst = path.join(PUBLIC_DIR, assetPath);
+
+      try {
+        const stat = await fs.stat(src);
+        if (!stat.isFile()) {
+          return;
+        }
+      } catch {
+        return;
+      }
+
+      await fs.mkdir(path.dirname(dst), { recursive: true });
+      await fs.copyFile(src, dst);
+    })
+  );
+}
+
+const DEFAULT_MARKDOWN_RENDERER = {
+  parse: (markdownText) => marked.parse(markdownText),
+  parseInline: (markdownText) => marked.parseInline(markdownText),
+};
 
 function parseDirectiveArgs(raw = '') {
   const args = {};
@@ -407,21 +656,21 @@ function getMonitoringFpotExample(locale = 'es') {
   };
 }
 
-function renderDirective(type, args, body, locale = 'es') {
+function renderDirective(type, args, body, locale = 'es', markdownRenderer = DEFAULT_MARKDOWN_RENDERER) {
   const isEnglish = locale === 'en';
   const normalizedType = type.toLowerCase();
   const parsedBody = body.trim();
 
   if (normalizedType === 'module-strip') {
-    return `<div class="module-strip">${marked.parse(parsedBody)}</div>`;
+    return `<div class="module-strip">${markdownRenderer.parse(parsedBody)}</div>`;
   }
 
   if (normalizedType === 'info') {
-    return `<div class="infobox">${marked.parse(parsedBody)}</div>`;
+    return `<div class="infobox">${markdownRenderer.parse(parsedBody)}</div>`;
   }
 
   if (normalizedType === 'info-yellow') {
-    return `<div class="infobox yellow">${marked.parse(parsedBody)}</div>`;
+    return `<div class="infobox yellow">${markdownRenderer.parse(parsedBody)}</div>`;
   }
 
   if (normalizedType === 'intro-principle') {
@@ -429,7 +678,7 @@ function renderDirective(type, args, body, locale = 'es') {
     return `
       <div class="intro-principle">
         <div class="intro-principle-icon">${escapeHtml(icon)}</div>
-        <div class="intro-principle-text">${marked.parse(parsedBody)}</div>
+        <div class="intro-principle-text">${markdownRenderer.parse(parsedBody)}</div>
       </div>
     `;
   }
@@ -457,14 +706,14 @@ function renderDirective(type, args, body, locale = 'es') {
   if (normalizedType === 'steps') {
     const items = parseOrderedItems(parsedBody);
     if (items.length === 0) {
-      return marked.parse(parsedBody);
+      return markdownRenderer.parse(parsedBody);
     }
 
     const stepHtml = items
       .map((item, index) => {
         const parsedItem = parseTitleBody(item);
         const title = escapeHtml(parsedItem.title);
-        const bodyHtml = parsedItem.body ? marked.parseInline(parsedItem.body) : '';
+        const bodyHtml = parsedItem.body ? markdownRenderer.parseInline(parsedItem.body) : '';
         const connector = index < items.length - 1 ? '<div class="step-line"></div>' : '';
 
         return `
@@ -491,14 +740,14 @@ function renderDirective(type, args, body, locale = 'es') {
     const items = parseBulletItems(parsedBody);
 
     if (items.length === 0) {
-      return marked.parse(parsedBody);
+      return markdownRenderer.parse(parsedBody);
     }
 
     const cardsHtml = items
       .map((item) => {
         const parsedItem = parseTitleBody(item);
         const title = escapeHtml(parsedItem.title);
-        const bodyHtml = parsedItem.body ? marked.parseInline(parsedItem.body) : '';
+        const bodyHtml = parsedItem.body ? markdownRenderer.parseInline(parsedItem.body) : '';
 
         return `
           <article class="card">
@@ -517,14 +766,14 @@ function renderDirective(type, args, body, locale = 'es') {
     const items = parseOrderedItems(parsedBody);
 
     if (items.length === 0) {
-      return marked.parse(parsedBody);
+      return markdownRenderer.parse(parsedBody);
     }
 
     const stepsHtml = items
       .map((item, index) => {
         const parsedItem = parseTitleBody(item);
         const itemTitle = escapeHtml(parsedItem.title);
-        const itemBody = parsedItem.body ? marked.parseInline(parsedItem.body) : '';
+        const itemBody = parsedItem.body ? markdownRenderer.parseInline(parsedItem.body) : '';
         const arrow = index < items.length - 1 ? '<div class="lp-arrow">→</div>' : '';
 
         return `
@@ -626,10 +875,14 @@ function renderDirective(type, args, body, locale = 'es') {
     `;
   }
 
-  return marked.parse(parsedBody);
+  return markdownRenderer.parse(parsedBody);
 }
 
-function renderMarkdownWithBlocks(markdownText, locale = 'es') {
+function renderMarkdownWithBlocks(
+  markdownText,
+  locale = 'es',
+  markdownRenderer = DEFAULT_MARKDOWN_RENDERER
+) {
   const lines = markdownText.split('\n');
   const htmlParts = [];
   const markdownBuffer = [];
@@ -639,7 +892,7 @@ function renderMarkdownWithBlocks(markdownText, locale = 'es') {
     if (markdownBuffer.length === 0) {
       return;
     }
-    htmlParts.push(marked.parse(markdownBuffer.join('\n')));
+    htmlParts.push(markdownRenderer.parse(markdownBuffer.join('\n')));
     markdownBuffer.length = 0;
   };
 
@@ -670,7 +923,13 @@ function renderMarkdownWithBlocks(markdownText, locale = 'es') {
     }
 
     flushMarkdownBuffer();
-    const blockHtml = renderDirective(type, args, blockLines.join('\n'), locale);
+    const blockHtml = renderDirective(
+      type,
+      args,
+      blockLines.join('\n'),
+      locale,
+      markdownRenderer
+    );
     htmlParts.push(blockHtml.trim());
     idx = endIdx + 1;
   }
@@ -889,11 +1148,14 @@ async function buildLocaleShell(locale, nav) {
       }
     }
 
-    const bodyNoH1 = removeFirstH1(parsed.content);
-    const bodyMarkdownHtml = renderMarkdownWithBlocks(bodyNoH1, locale);
+    const bodyNoH1 = normalizeMarkdownForRendering(removeFirstH1(parsed.content));
+    const headingTargets = await buildHeadingTargets(docPath, bodyNoH1, sectionId);
+    const markdownRenderer = createMarkdownRenderer(headingTargets);
+    const bodyMarkdownHtml = renderMarkdownWithBlocks(bodyNoH1, locale, markdownRenderer);
     const bodyWithRewrittenLinks = rewriteInternalDocLinks(
       bodyMarkdownHtml,
       docPath,
+      sectionId,
       docPathToSectionId
     );
     const bodyHtml = rewriteRelativeMediaSources(bodyWithRewrittenLinks, docPath);
@@ -991,6 +1253,7 @@ ${shellEs}
 ${shellEn}
 `;
 
+  await copyReferencedStaticAssets();
   await fs.writeFile(OUTPUT_FILE, html, 'utf-8');
   console.log(`Generated ${OUTPUT_FILE}`);
 }
