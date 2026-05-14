@@ -201,7 +201,8 @@ Envíe operaciones de lectura/escritura a dispositivos IoT a través de MQTT. Ad
 | ------------ | ------ | -------- | -------------------------------------- |
 | `identifier` | cadena | Sí | Identificador único del dispositivo de destino |
 
-### Encabezados| Encabezado | Valor | Requerido |
+### Encabezados
+| Encabezado | Valor | Requerido |
 | --------------- | ------------------ | -------- |
 | `Authorization` | Ficha al portador | Sí |
 | `Account` | Identificador de cuenta | Sí |
@@ -335,7 +336,8 @@ Envíe operaciones de lectura/escritura a dispositivos IoT a través de MQTT. Ad
 | --------------- | ------ | -------- | --------------------------------------------------------------------------------------------------- |
 | `read_function` | cadena | Sí | Función de lectura: read_single_coil, read_discrete_inputs, read_holding_registers, read_input_registers |
 
-#### Campos de solo escritura| Campo | Tipo | Requerido | Descripción |
+#### Campos de solo escritura
+| Campo | Tipo | Requerido | Descripción |
 | ---------------- | ------ | -------- | ------------------------------------------------------------------------ |
 | `write_function` | cadena | Sí | Función de escritura: write_register, write_registers, write_coil, write_coils |
 | `value` | número | Sí | Valor a escribir (debe ser numérico) |

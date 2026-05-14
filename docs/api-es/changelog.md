@@ -2,16 +2,60 @@
 
 Las notas de la versión están organizadas por etiqueta FastAPI para cada versión de API expuesta en `/docs`.
 
+## Versión 4.3.7 (2026-05-05)
+
+### colaboradores
+- Se agregó `GET /collaborators/{id_user}/history` para devolver filas `clickie_events` con ámbito de cuenta con `skip`/`limit` y un filtro `id_event_type` (`1` inicio de sesión, `2` creación, `3` modificación, `4` eliminación), descripciones de eventos con formato de idioma, descripciones de tipos de eventos, nombres de entidades y la excepción de búsqueda del historial de usuario administrador; eliminó el endpoint `GET /collaborators/{id_user}/login_history` redundante.
+
+### documentos
+- Documenté el endpoint del historial de eventos del colaborador, actualicé las colecciones de Postman y alineé la hoja de ruta y el índice de documentación con la nueva superficie del historial del colaborador.
+
+### recursos_globales
+- Se agregó una transcripción Python del catálogo en español y funciones de búsqueda auxiliar en `API-V4/langs.py` para que el código Lambda pueda reutilizar las etiquetas existentes cuando sea necesario.
+
+### eventos
+- Se actualizó `ClickieEventsLogger` para almacenar `event_changes` con claves de campo simples, eliminando marcadores de posición de traducción y anidamiento de puntos de los nombres de cambios.
+- Se restauró el prefijo `[API]`, se corrigió el mapeo `id_entity` para nombres de modelos plurales/normalizados y se alinearon las descripciones de eventos de clic generados con el asistente de eventos PHP heredado, incluidas las etiquetas de recursos afectados y el contexto principal de formulario personalizado.
+
+## Versión 4.3.6 (2026-04-07)
+
+### dispositivos
+- Se reemplazó el acceso directo `device_model_settings` con `GET /device_models/{id_device_model}/settings`.
+- Se mantuvo `GET /devices/{id_device}/history` con filtros de consulta `from`, `to`, `skip` y `limit`.
+- Se eliminó temporalmente `GET /devices/history` mientras se revisa el conflicto de ruta (`id_device` análisis).
+
+### configuraciones
+- `GET /setups/{id_setup}/metrics` ahora incluye `dms_attribute_name`, procedente de `device_model_settings` hasta `setup_metrics.id_device_model_setting`.
+
+### autenticación
+- Verificaciones de membresía de cuentas obligatorias mediante autorización (`id_clearance`) en lugar de funciones alternativas: los usuarios con autorización superior a `A1` deben pertenecer a la cuenta de encabezado `Account` solicitada.
+- Se eliminó la inferencia de autorización basada en roles para contextos que omiten `id_clearance`.
+
+### documentos
+- Cobertura auditada de `docs/` en `docs/README.md` y agregadas referencias faltantes para guías de registro de cambios de IA y puerta de enlace.
+- Se normalizó el formato del índice de etiquetas de ruta para que `gateways` esté documentado como un encabezado de etiqueta de ruta estándar en lugar de un encabezado de sección personalizado, que coincida con el resto de los grupos de endpoints.
+- Se reordenaron alfabéticamente las secciones de etiquetas de ruta para mantener la navegación coherente en las páginas de inicio de la documentación.
+- Documentación actualizada de dispositivos y modelos de dispositivos, colecciones de Postman y cobertura de hoja de ruta para la superficie API actual.
+
+## Versión 4.3.5 (2026-04-01)
+
+### API
+- Sobres de respuesta API estandarizados para flujos `2xx`, `4xx` y `5xx` para que las respuestas incluyan consistentemente `status`, `message`, `data`, `context` y `instance`.
+- Se agregó manejo explícito para `HTTPException` en la capa de ruta personalizada para evitar que las cargas útiles FastAPI `detail` sin procesar se filtren sin el sobre estándar.
+- Se agregó un sobre de error interno predeterminado para excepciones no detectadas para normalizar las respuestas `500`.
+
+### documentos
+- Se actualizó la guía de introducción para indicar explícitamente que el sobre de respuesta estándar se aplica a las respuestas de éxito y error (`2xx`, `4xx` y `5xx`).
+
 ## Versión 4.3.4 (2026-03-12)
 
 ### seguimiento
 - Se actualizó la validación del activador del monitor, por lo que `trigger_parameters.id_users` debe ser una matriz de cadenas al crear o actualizar `/monitors/{id_monitor}/triggers`. Las cadenas separadas por comas ahora se rechazan con una respuesta `400`.
 
 ### documentos
-- Se actualizaron ejemplos de documentación del activador del monitor para mostrar `id_users` como `array[string]`, cargas útiles de Postman del activador del monitor actualizadas y notas de cobertura de la hoja de ruta alineadas para la validación del activador.
+- Se actualizaron los ejemplos de documentación del activador del monitor para mostrar `id_users` como `array[string]`, cargas útiles de Postman del activador del monitor actualizadas y notas de cobertura de la hoja de ruta alineadas para la validación del activador.
 
 ## Versión 4.3.3 (2026-02-17)
-
 ### filtros
 - Se agregó `GET /filters` para enumerar los registros con alcance de cuenta/entorno de la tabla `filters`.
 
@@ -56,8 +100,9 @@ Las notas de la versión están organizadas por etiqueta FastAPI para cada versi
 - Las respuestas de la cuenta ahora incluyen metadatos del entorno junto con `id_environment`.
 
 ### entornos
-- Se agregó `GET /environments` para enumerar los entornos disponibles para la sesión autenticada.### buscar
-- `/search/metrics` ahora traduce cargas útiles de filtro no válidas en respuestas `400` en lugar de errores `500` no detectados, lo que muestra comentarios de validación cuando se utilizan incorrectamente las relaciones u operadores.
+- Se agregó `GET /environments` para enumerar los entornos disponibles para la sesión autenticada.
+### buscar
+- `/search/metrics` ahora traduce cargas útiles de filtro no válidas en respuestas `400` en lugar de errores `500` no detectados, lo que muestra comentarios de validación cuando las relaciones u operadores se utilizan incorrectamente.
 - `/search/metrics` ahora trata las cargas útiles `resource_filter` faltantes o vacías como solicitudes de solo metadatos, omitiendo uniones de relaciones y cláusulas `DISTINCT` a menos que se proporcione explícitamente el alcance de los recursos.
 - `/search/metrics` ahora enruta solicitudes de solo metadatos a través de una ruta de consulta dedicada mientras que las búsquedas con alcance de recursos se unen a `resource_relationships`, evitando errores cuando se omite `resource_filter`.
 - `/search/metrics` ahora encapsula el filtrado `resource_relationships` dentro de la ruta de consulta con ámbito de recursos, dejando a `get_metrics_with_filters` centrado en la validación y el envío compartidos.
@@ -67,8 +112,8 @@ Las notas de la versión están organizadas por etiqueta FastAPI para cada versi
 - `/search/metrics` ahora siempre incluye `id_resource` cuando se proporciona `resource_filter`, independientemente de `return_fields`, mientras que las consultas de solo metadatos lo omiten por completo.
 
 ### buscar
-- Se agregó `POST /search/metrics` bajo la etiqueta `search` para filtrar métricas por activos vinculados o metadatos de métricas con paginación y campos de retorno personalizables. El cruce de relaciones se aplica solo cuando `resource_type` es `asset`.
-- La búsqueda de métricas ahora puede atravesar `resource_relationships` en cualquier dirección usando un indicador `direction` explícito que resuelve los valores `resource_type` de `eav_entities` y devuelve valores `id_resource` que reflejan el `resource_ids` solicitado, de manera predeterminada en la dirección `child` cuando se omite.
+- Se agregó `POST /search/metrics` bajo la etiqueta `search` para filtrar métricas por activos vinculados o metadatos de métricas con campos de retorno y paginación personalizables. El cruce de relaciones se aplica solo cuando `resource_type` es `asset`.
+- La búsqueda de métricas ahora puede atravesar `resource_relationships` en cualquier dirección usando un indicador `direction` explícito que resuelve los valores `resource_type` de `eav_entities` y devuelve valores `id_resource` que reflejan el `resource_ids` solicitado, de forma predeterminada en la dirección `child` cuando se omite.
 - Los filtros de recursos aplican los operadores `in` o `not_in`, mientras que los filtros de parámetros se validan con el conjunto completo de operadores admitidos para evitar que las comparaciones no admitidas lleguen al generador de consultas.
 - El identificador de entidad de métricas se fija en `7` durante el filtrado de relaciones para evitar búsquedas redundantes al evaluar consultas con ámbito de recursos.
 
@@ -89,7 +134,8 @@ Esta versión consolida los cambios incluidos en la última combinación `develo
 - Los metadatos de entrada cubren etiquetas, valores predeterminados, marcadores de posición, opciones de selección, indicadores de multiplicidad, requisitos de validación y metadatos de atributos utilizados por la representación de formularios personalizados.
 
 ### tipos_de_entrada_de_formulario
-- Proporciona el catálogo de representadores de entrada (lea la autorización 7), como texto, selección, área de texto, selectores de recursos, formularios anidados y otras primitivas de la interfaz de usuario.### paneles de control
+- Proporciona el catálogo de representadores de entrada (lea la autorización 7), como texto, selección, área de texto, selectores de recursos, formularios anidados y otras primitivas de la interfaz de usuario.
+### paneles de control
 - Admite la creación y eliminación con autorización 2, actualizaciones con autorización 5 y lecturas con autorización 8.
 - Los paneles almacenan relaciones principales opcionales (`id_parent_dashboard`) y metadatos de color; El filtrado archivado es opcional para autorizaciones 1 y 2 y el valor predeterminado es no archivado para autorizaciones superiores.
 

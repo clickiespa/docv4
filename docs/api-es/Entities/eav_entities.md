@@ -204,7 +204,8 @@ curl -X GET \
 
 Este endpoint devuelve el [Objeto de entidad](#entity-object) descrito en la sección Lista de entidades.
 
-### Códigos de estado| Estado | Descripción |
+### Códigos de estado
+| Estado | Descripción |
 | --- | --- |
 | `200` | Entidad recuperada exitosamente. |
 | `400` | La solicitud no se pudo procesar debido a encabezados o metadatos de cuenta no válidos. |

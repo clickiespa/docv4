@@ -14,11 +14,15 @@ Esta página está diseñada como una guía orientada al cliente para que pueda 
 
 ## Documentación de endpoint por etiqueta de ruta
 
+### `ai`
+- [Endpoints de análisis de IA](ai/analysis.md)
+- [Endpoints de asistentes de IA](ai/assistants.md)
+
 ### `assets`
 - [Endpoints de activos](Assets/assets.md) — `GET /assets`, `POST /assets`, `GET /assets/{id_asset}`, `PUT /assets/{id_asset}`, `DELETE /assets/{id_asset}`.
 
 ### `collaborators`
-- [Endpoints de colaboradores](Collaborators/collaborators.md) — `GET /collaborators`, `POST /collaborators`, `GET /collaborators/{id_user}`, `PUT /collaborators/{id_user}`, `DELETE /collaborators/{id_user}`.
+- [Endpoints de colaboradores](Collaborators/collaborators.md) — `GET /collaborators`, `POST /collaborators`, `GET /collaborators/{id_user}`, `PUT /collaborators/{id_user}`, `DELETE /collaborators/{id_user}`, `GET /collaborators/{id_user}/history`.
 
 ### `dashboards`
 - [Endpoints de paneles](Dashboards/dashboards.md): paneles de control, widgets de panel, tipos de widgets y operaciones relacionadas.
@@ -43,10 +47,20 @@ Esta página está diseñada como una guía orientada al cliente para que pueda 
 ### `forms`
 - [Endpoints de formularios](Forms/forms.md): formularios, entradas de formularios y tipos de entradas de formularios.
 
+### `gateways`
+- [Endpoint de estado de la puerta de enlace](gateways/health.md) — `GET /health`.
+- [Endpoint de dispositivos de puerta de enlace](gateways/devices.md) — `GET /devices` con notas de contrato de solicitud/respuesta centradas en la puerta de enlace.
+- [Endpoints de acciones de puerta de enlace](gateways/actions.md) — `GET /devices/{identifier}/actions`, `POST /devices/{identifier}/actions`.
+- [Endpoints de trabajos de puerta de enlace](gateways/jobs.md) — `GET /jobs/{job_id}`, `POST /jobs/{job_id}/cancel`, `GET /devices/{identifier}/jobs`.
+- [Endpoints de registros de puerta de enlace](gateways/logs.md) — `GET /devices/{identifier}/logs`, `GET /devices/{identifier}/disk`, `GET /devices/{identifier}/backup/coverage`.
+- [Registro de cambios de puerta de enlace](gateways/changelog.md): notas de la versión específicas de la puerta de enlace e historial de documentación.
+
 ### `global_resources`
 - [Endpoints de idiomas](Global_resources/languages.md)
 - [Endpoints de zonas horarias](Global_resources/time_zones.md)
 - [Endpoints de iconos](Global_resources/icons.md)
+- [Endpoints de métodos](Global_resources/methods.md) — métodos de agregación e interpolación.
+- [Endpoints de plantillas](Global_resources/templates.md)
 - [Endpoints de patrones de tiempo](Global_resources/time_patterns.md)
 
 ### `metrics`
@@ -83,15 +97,6 @@ Esta página está diseñada como una guía orientada al cliente para que pueda 
 
 ### `uoms`
 - [Endpoints de UOM](Uoms/uoms.md)
-- [Endpoints de métodos](Global_resources/methods.md) — métodos de agregación e interpolación.
-
-## Guías de endpoints específicas de la puerta de enlace
-
-- [Endpoint de estado de la puerta de enlace](gateways/health.md) — `GET /health`.
-- [Endpoint de dispositivos de puerta de enlace](gateways/devices.md) — `GET /devices` con notas de contrato de solicitud/respuesta centradas en la puerta de enlace.
-- [Endpoints de acciones de puerta de enlace](gateways/actions.md) — `GET /devices/{identifier}/actions`, `POST /devices/{identifier}/actions`.
-- [Endpoints de trabajos de puerta de enlace](gateways/jobs.md) — `GET /jobs/{job_id}`, `POST /jobs/{job_id}/cancel`, `GET /devices/{identifier}/jobs`.
-- [Endpoints de registros de puerta de enlace](gateways/logs.md) — `GET /devices/{identifier}/logs`, `GET /devices/{identifier}/disk`, `GET /devices/{identifier}/backup/coverage`.
 
 ## Referencias adicionales
 - [Registro de cambios](changelog.md)

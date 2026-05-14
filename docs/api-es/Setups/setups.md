@@ -354,7 +354,8 @@ curl -X POST -H "Authorization: <API_KEY>" \
 
 Modificar una configuración existente. Sólo se actualizan los atributos proporcionados; Los campos omitidos mantienen sus valores actuales.
 
-Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este endpoint.### Endpoint
+Se requiere un nivel de autorización 2 o inferior (el nivel 1 es administrador) para utilizar este endpoint.
+### Endpoint
 ```
 PUT /setups/{id_setup}
 ```

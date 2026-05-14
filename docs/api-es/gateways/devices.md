@@ -10,7 +10,7 @@ Enumere los dispositivos Clickiemota que pertenecen a la cuenta autenticada. Los
 
 ## Solicitud
 ```http
-GET /dev/clickiemottas/devices HTTP/1.1
+GET /v4/gateways/devices HTTP/1.1
 Host: api.clickie.io
 Authorization: <api-key>
 Account: 33
@@ -58,27 +58,23 @@ Account: 33
 
 ---
 
-## Pautas de implementación para próximos dispositivos endpoints *(lineamientos)*
+## OBTENER /dispositivos/{identificador}
 
-Las siguientes secciones documentan los contratos que se deben cumplir cuando se implementen los endpoints de dispositivo restantes. Se consideran características de **modo real**: las llamadas de configuración interactúan con el puente MQTT existente, por lo que no se necesitan stubs.
-
-### OBTENER /dispositivos/{identificador}
-
-#### Objetivo
+### Objetivo
 Recupere metadatos detallados para un único dispositivo Clickiemota. Valida que el dispositivo pertenece a la cuenta autenticada y está instalado en una configuración activa. Devuelve información completa del dispositivo, incluidos detalles del modelo, estado de conectividad y asociación de configuración.
 
-#### Autenticación
+### Autenticación
 * **Obligatorio**: clave API de Clickie y encabezados de cuenta.
 
-#### Solicitud
+### Solicitud
 ```http
-GET /dev/clickiemottas/devices/cm-001 HTTP/1.1
+GET /v4/gateways/devices/cm-001 HTTP/1.1
 Host: api.clickie.io
 Authorization: <api-key>
 Account: 33
 ```
 
-#### Respuesta exitosa (200 OK)
+### Respuesta exitosa (200 OK)
 ```json
 {
   "status": "success",
@@ -102,7 +98,7 @@ Account: 33
 }
 ```
 
-#### Respuestas de error
+### Respuestas de error
 
 **400 Solicitud incorrecta**: falta el identificador del dispositivo
 ```json
@@ -159,7 +155,9 @@ Account: 33
 }
 ```
 
-#### Campos de respuesta| Campo | Tipo | Descripción |
+### Campos de respuesta
+
+| Campo | Tipo | Descripción |
 | ------------------- | ------------- | ----------------------------------------- |
 | `identifier` | cadena | Identificador personalizado del dispositivo (device_custom_id) |
 | `model` | cadena | Nombre del modelo de dispositivo de la tabla device_models |
@@ -176,33 +174,35 @@ Account: 33
 | `model_id` | número | ID del modelo de dispositivo de la tabla device_models |
 | `model_description` | cadena | Descripción del modelo de la tabla device_models |
 
-#### Valores de estado
-
+### Valores de estado
 | Valor | Descripción |
 | -------------- | ----------------------------------------- |
 | `connected` | El dispositivo está actualmente accesible y activo |
 | `disconnected` | El dispositivo no responde a las comprobaciones de conectividad |
 | `unknown` | No se puede determinar el estado del dispositivo |
 
-#### Notas de implementación
+### Notas de implementación
 * Valida la propiedad del dispositivo usando account_id desde el contexto de autenticación
 * Requiere configuración activa (no `setup_uninstall_date`)
 *Solo devuelve modelos Clickiemota (configurable vía `CLICKIEMOTA_MODEL_IDS`)
 * Registro estructurado para recuperaciones exitosas y errores
 * Analiza el campo JSON `device_configuration` para etiquetas personalizadas
 
-### GET /devices/{identifier}/config *(real a través de MQTT)*
-* Recupere la última instantánea de configuración consultando la sombra del dispositivo respaldado por MQTT. La canalización MQTT existente ya admite operaciones de lectura y escritura.
-* Cuando no se pueda recuperar la configuración, devuelva `503 service_unavailable` con `code: mqtt_bridge_unavailable`.
-* **La respuesta de ejemplo utiliza un JSON recortado**. La carga útil real es un documento anidado de gran tamaño; mantenga la estructura pero amplíela con los campos completos expuestos por el firmware al implementar.
-* La suscripción se puede especificar opcionalmente mediante el parámetro de consulta (predeterminado: "edge").
+---
+
+## OBTENER /dispositivos/{identificador}/config
+
+Recupere la última instantánea de configuración guardada o intente obtenerla del dispositivo a través de MQTT.
+
+* Cuando no se puede recuperar la configuración, devuelve `503 service_unavailable` con `code: mqtt_bridge_unavailable`.
+* La suscripción se puede especificar opcionalmente mediante el parámetro de consulta (predeterminado: `"edge"`).
 * Admite la lectura de una propiedad anidada específica usando `mode=read_specific` con un parámetro `route`.
 
-#### Solicitar ejemplos
+### Solicitar ejemplos
 
 Configuración completa:
 ```http
-GET /dev/clickiemottas/devices/cm-001/config HTTP/1.1
+GET /v4/gateways/devices/cm-001/config HTTP/1.1
 Host: api.clickie.io
 Authorization: <api-key>
 Account: 33
@@ -210,18 +210,18 @@ Account: 33
 
 Con parámetro de suscripción:
 ```http
-GET /dev/clickiemottas/devices/cm-001/config?subscription=core HTTP/1.1
+GET /v4/gateways/devices/cm-001/config?subscription=core HTTP/1.1
 ```
 
 Lea una propiedad anidada específica (por ejemplo, umbrales de temperatura):
 ```http
-GET /dev/clickiemottas/devices/cm-001/config?mode=read_specific&route=app/thresholds/temperature HTTP/1.1
+GET /v4/gateways/devices/cm-001/config?mode=read_specific&route=app/thresholds/temperature HTTP/1.1
 Host: api.clickie.io
 Authorization: <api-key>
 Account: 33
 ```
 
-#### Respuesta exitosa (200 OK): configuración completa
+### Respuesta exitosa (200 OK): configuración completa
 
 ```json
 {
@@ -242,7 +242,7 @@ Account: 33
 }
 ```
 
-#### Respuesta exitosa (200 OK): propiedad anidada específica
+### Respuesta exitosa (200 OK): propiedad anidada específica
 
 Cuando `mode=read_specific&route=app/thresholds/temperature`:
 ```json
@@ -259,7 +259,7 @@ Cuando `mode=read_specific&route=app/thresholds/temperature`:
 }
 ```
 
-#### Respuestas de error
+### Respuestas de error
 
 **400 Solicitud incorrecta** — Suscripción no válida
 ```json
@@ -294,28 +294,35 @@ Cuando `mode=read_specific&route=app/thresholds/temperature`:
 }
 ```
 
-#### Parámetros de consulta| Parámetro | Predeterminado | Descripción |
-| ------------- | ------- | ----------------------------------------------- |
-| `subscription` | "borde" | Suscripción de destino: "edge-dev", "edge" o "core" |
-| `mode` | nulo | Establezca en "read_specific" para leer una propiedad anidada |
-| `route` | nulo | Ruta JSON a una propiedad específica (obligatoria si mode="read_specific"); formato: `key/nested/path` |
+### Parámetros de consulta
 
-### PUT /devices/{identifier}/config *(real vía MQTT)*
-* Acepte una carga útil JSON que coincida con las capacidades del dispositivo y publique el cambio a través de MQTT.
-* Respete el encabezado `Idempotency-Key` para fines de seguimiento y auditoría de solicitudes. En la Fase A, esto se registra pero no se aplica; La idempotencia total se implementará en la Fase B.
-* La suscripción se puede especificar opcionalmente mediante el parámetro de consulta (predeterminado: "edge").
-* Admite dos modos de operación:
-  - **Reemplazo completo** (predeterminado): reemplaza toda la configuración del dispositivo con la carga útil proporcionada. Requiere las claves `database`, `id` y `lambda_functions` en la configuración.
-  - **Actualización dirigida** (`mode=write_specific`): actualice una propiedad anidada específica utilizando una ruta JSON (`route`). Se consulta el dispositivo para conocer su configuración actual y la actualización se fusiona en la ruta especificada.
-* Devuelve `200 OK` cuando el dispositivo confirma que la configuración se aplicó inmediatamente a través de MQTT.
+| Parámetro | Predeterminado | Descripción |
+| -------------- | -------- | --------------------------------------------------------------------------------------- |
+| `subscription` | `"edge"` | Suscripción de destino: `"edge-dev"`, `"edge"` o `"core"` |
+| `device_read` | `false` | Establezca en `"true"` para omitir el caché de DynamoDB y leer la configuración directamente desde el dispositivo a través de MQTT |
+| `mode` | nulo | Establezca en `"read_specific"` para leer una propiedad anidada |
+| `route` | nulo | Ruta JSON a una propiedad específica (obligatoria si `mode="read_specific"`); formato: `key/nested/path` |
+
+---
+
+## PUT /dispositivos/{identificador}/config
+
+Publique un cambio de configuración en el dispositivo a través de MQTT.
+
+* Acepta una carga útil JSON que coincida con las capacidades del dispositivo.
+* La suscripción se puede especificar opcionalmente mediante el parámetro de consulta (predeterminado: `"edge"`).
+* Admite dos modos:
+  - **Reemplazo completo** (predeterminado): reemplaza toda la configuración del dispositivo. Requiere las claves `database`, `id` y `lambda_functions` en la configuración.
+  - **Actualización dirigida** (`mode=write_specific`): actualice una propiedad anidada específica utilizando una ruta JSON (`route`).
+* Devuelve `200 OK` cuando el dispositivo confirma que la configuración se aplicó inmediatamente.
 * Devuelve `202 Accepted` cuando el dispositivo pone en cola el cambio para el procesamiento asincrónico.
 * Devuelve `503 Service Unavailable` cuando no se puede acceder al puente o dispositivo MQTT.
 
-#### Ejemplos de solicitud: reemplazo completo
+### Ejemplos de solicitud: reemplazo completo
 
 Actualización de configuración completa:
 ```http
-PUT /dev/clickiemottas/devices/cm-001/config?subscription=edge HTTP/1.1
+PUT /v4/gateways/devices/cm-001/config?subscription=edge HTTP/1.1
 Host: api.clickie.io
 Authorization: <api-key>
 Account: 33
@@ -338,11 +345,11 @@ Idempotency-Key: 4b0fd0b0-4ef1-4b61-b7ce-73e1e7afc9be
 }
 ```
 
-#### Ejemplos de solicitud: actualización específica
+### Ejemplos de solicitud: actualización específica
 
 Actualizar una propiedad anidada específica (por ejemplo, umbrales de temperatura):
 ```http
-PUT /dev/clickiemottas/devices/cm-001/config HTTP/1.1
+PUT /v4/gateways/devices/cm-001/config HTTP/1.1
 Host: api.clickie.io
 Authorization: <api-key>
 Account: 33
@@ -362,7 +369,7 @@ Idempotency-Key: 4b0fd0b0-4ef1-4b61-b7ce-73e1e7afc9be
 
 Cree rutas intermedias faltantes durante la actualización dirigida:
 ```http
-PUT /dev/clickiemottas/devices/cm-001/config HTTP/1.1
+PUT /v4/gateways/devices/cm-001/config HTTP/1.1
 Host: api.clickie.io
 Authorization: <api-key>
 Account: 33
@@ -378,7 +385,7 @@ Content-Type: application/json
 }
 ```
 
-#### Respuesta: 200 OK — Reconocimiento inmediato
+### Respuesta: 200 OK — Reconocimiento inmediato
 
 El dispositivo responde en el mismo viaje de ida y vuelta MQTT:
 
@@ -394,11 +401,9 @@ El dispositivo responde en el mismo viaje de ida y vuelta MQTT:
 }
 ```
 
-#### Respuesta: 202 Aceptada: actualización en cola
+### Respuesta: 202 Aceptada: actualización en cola
 
-El dispositivo pone en cola el cambio para el procesamiento asincrónico:
-
-```json
+El dispositivo pone en cola el cambio para el procesamiento asincrónico:```json
 {
   "status": "success",
   "data": {
@@ -411,7 +416,7 @@ El dispositivo pone en cola el cambio para el procesamiento asincrónico:
 }
 ```
 
-#### Respuestas de error
+### Respuestas de error
 
 **400 Solicitud incorrecta** — Suscripción no válida
 ```json
@@ -468,7 +473,7 @@ El dispositivo pone en cola el cambio para el procesamiento asincrónico:
 }
 ```
 
-#### Solicitar parámetros del cuerpo
+### Solicitar parámetros del cuerpo
 
 | Parámetro | Tipo | Requerido | Modo | Descripción |
 | -------------------- | ------- | -------- | ----------------- | ----------------------------------------------- |
@@ -477,17 +482,19 @@ El dispositivo pone en cola el cambio para el procesamiento asincrónico:
 | `route` | cadena | Sí* | escribir_específico | Ruta JSON a la propiedad de destino; formato: `key/nested/path` (*obligatorio cuando mode="write_specific") |
 | `create_missing_path` | booleano | No | escribir_específico | Si es verdadero, cree rutas intermedias que no existen; predeterminado: falso |
 
-#### Solicitar encabezados
+### Solicitar encabezados
 
 | Encabezado | Requerido | Descripción |
 | ---------------- | -------- | -------------------------------------------------------------------------- |
-| `Idempotency-Key` | No | UUID para seguimiento. Registrado para auditoría; idempotencia total llega en la Fase B. |#### Parámetros de consulta
+| `Idempotency-Key` | No | UUID para seguimiento. Registrado para auditoría; idempotencia total llega en la Fase B. |
+
+### Parámetros de consulta
 
 | Parámetro | Predeterminado | Descripción |
 | ------------- | ------- | ----------------------------------------------- |
 | `subscription` | "borde" | Suscripción de destino: "edge-dev", "edge" o "core" |
 
-#### Campos de respuesta
+### Campos de respuesta
 
 | Campo | Tipo | Descripción |
 | -------------- | ------- | -------------------------------------------------------------- |
@@ -498,44 +505,8 @@ El dispositivo pone en cola el cambio para el procesamiento asincrónico:
 | `job_id` | cadena | ID de trabajo para rastrear actualizaciones asincrónicas (cuando `applied: false`) |
 | `queued_at` | cadena | Marca de tiempo ISO de cuándo se puso en cola la actualización (cuando `applied: false`) |
 
-### GET /devices/{identifier}/health *(stub hasta el modo agente)*
-* Devuelve un documento de estado de marcador de posición por dispositivo para que los integradores puedan conectar los paneles antes de que los enlaces de telemetría estén activos.
-* Incluya `execution_mode: "stub"` hasta que el agente del dispositivo proporcione datos en tiempo real.
-* Cuando la telemetría esté disponible, complete las comprobaciones de conectividad, el último latido y los contadores de trabajo pendiente en consecuencia.
-
-```json
-{
-  "status": "success",
-  "data": {
-    "identifier": "cm-001",
-    "execution_mode": "stub",
-    "generated_at": "2025-09-29T09:05:03Z",
-    "checks": {
-      "connectivity": {"reachable": false, "note": "Awaiting agent integration"},
-      "last_seen_at": null,
-      "pending_jobs": 0
-    }
-  }
-}
-```
-
 ## Catálogo de errores
+
 | HTTP | código | Cuando |
 | ---- | --------------------- | ----------------------- |
 | 500 | error_servidor_interno | Cualquier fallo inesperado. |
-
----
-
-## Endpoints de dispositivos planificados
-
-| Endpoint | Modo | Estado | Notas |
-| ------------------------------------ | -------------------- | ------ | --------------------------------------------------------------------------------------------------------------- |
-| `GET /devices/{identifier}` | **Real** | ✅ En vivo | Devuelve metadatos del dispositivo con modelo, estado y asociación de configuración |
-| `GET /devices/{identifier}/config` | **Real** | ✅ En vivo | Lee la configuración a través del puente MQTT; devuelve 503 si el dispositivo no está disponible |
-| `PUT /devices/{identifier}/config` | **Real** | ✅ En vivo | Publica actualizaciones de configuración a través de MQTT; devuelve 200 (inmediato) o 202 (en cola) |
-| `GET /devices/{identifier}/health` | **Talón → Real** | ☐ Planificado | Devuelva la carga útil del código auxiliar anterior hasta que se conecte la telemetría. Reemplácelo con datos en vivo una vez que se envíen los agentes.                          |
-| `GET /devices/{identifier}/actions` | **Talón** | ☐ Planificado | Devuelve el catálogo estático de accesorios según el alcance de la Fase A. La respuesta del marcador de posición debe ser la carga útil del código auxiliar determinista |
-| `POST /devices/{identifier}/actions` | **Talón** | ☐ Planificado | Acepta solicitudes y devuelve resultados de trabajos predefinidos. El marcador de posición debe hacer eco del trabajo cortado con `status: succeeded` |
-| `GET /devices/{identifier}/jobs` | **Stub/Híbrido real** | ☐ Planificado | Comportamiento final pendiente con el equipo de Jobs; devolver `501 feature_not_ready` hasta que se ratifique el contrato de almacenamiento |
-
-Todos los endpoints planificados deben mantener las respuestas alineadas con el sobre estándar documentado en `README.md`.

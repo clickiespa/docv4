@@ -2,6 +2,7 @@
 
 ## Endpoints
 - [Listar dispositivos](#list-devices)
+- [Obtener el historial del dispositivo](#get-device-history)
 - [Obtener dispositivo](#get-device)
 - [Crear dispositivo](#create-device)
 - [Actualizar dispositivo](#update-device)
@@ -129,6 +130,69 @@ curl -H "Authorization: <API_KEY>" \
 }
 ```
 
+## Obtener el historial del dispositivo
+
+Recupera eventos de cambio de estado para un solo dispositivo. El identificador del dispositivo debe pertenecer a la cuenta proporcionada en el encabezado `Account`.
+
+Se requiere autorización 5 para utilizar este endpoint.
+
+### Endpoint
+```
+GET /devices/{id_device}/history
+```
+
+### Encabezados
+
+| Encabezado | Requerido | Descripción | Tipo |
+| --- | --- | --- | --- |
+| `Authorization` | Sí | Clave API generada desde su perfil | cadena |
+| `Account` | Sí | ID de cuenta de destino | entero |
+
+### Parámetros de ruta
+
+| Parámetro | Requerido | Tipo | Descripción |
+| --- | --- | --- | --- |
+| `id_device` | Sí | entero | Identificador de dispositivo devuelto por [Listar dispositivos](#list-devices). |
+
+### Parámetros de consulta
+| Parámetro | Requerido | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- | --- |
+| `from` | No | entero | `now - 7 days` | Marca de tiempo UNIX en segundos para el inicio de la ventana de tiempo (inclusive). |
+| `to` | No | entero | `now` | Marca de tiempo UNIX en segundos para el final de la ventana de tiempo (inclusive). |
+| `skip` | No | entero | `0` | Desplazamiento de paginación. |
+| `limit` | No | entero | `100` | Número máximo de eventos para devolver. |
+
+### Solicitud de muestra
+```bash
+curl -H "Authorization: <API_KEY>" \
+  -H "Account: <ID_ACCOUNT>" \
+  "/devices/500010/history?from=1711929600&to=1712016000&skip=0&limit=20"
+```
+
+### Respuesta de muestra (200)
+```json
+{
+  "status": "success",
+  "message": "Elements obtained successfully",
+  "data": [
+    {
+      "id_event": 6050,
+      "id_device": 500010,
+      "status_change_timestamp": "2024-04-01T09:15:00Z",
+      "id_device_status": 1
+    },
+    {
+      "id_event": 6042,
+      "id_device": 500010,
+      "status_change_timestamp": "2024-03-31T23:05:00Z",
+      "id_device_status": 2
+    }
+  ],
+  "context": {},
+  "instance": "/devices/500010/history"
+}
+```
+
 ## Obtener dispositivo
 
 Recupera un dispositivo por su identificador numérico.
@@ -192,6 +256,7 @@ curl -H "Authorization: <API_KEY>" \
   "instance": "/devices/1"
 }
 ```
+
 ### Atributos de datos de respuesta
 
 | Campo | Tipo | Descripción |
@@ -251,7 +316,6 @@ POST /devices
 | `Account` | Sí | ID de cuenta de destino | entero |
 
 ### Cuerpo de la solicitud
-
 | Campo | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
 | `id_inventory` | No | entero | No | Inventario donde se almacena el dispositivo. Recupérelo de [Listar inventarios](../Setups/inventories.md#list-inventories). |
@@ -363,7 +427,9 @@ PUT /devices/{id_device}
 | --- | --- | --- | --- |
 | `id_device` | Sí | entero | Identificador numérico del dispositivo a actualizar. |
 
-### Cuerpo de la solicitud| Campo | Requerido | Tipo | Predeterminado | Descripción |
+### Cuerpo de la solicitud
+
+| Campo | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
 | `id_inventory` | No | entero | No | Inventario donde se almacena el dispositivo. |
 | `id_device_model` | No | entero | No | Modelo de dispositivo asignado al hardware. |
@@ -486,7 +552,6 @@ curl -X DELETE -H "Authorization: <API_KEY>" \
   -H "Account: <ID_ACCOUNT>" \
   /devices/120
 ```
-
 ### Respuesta de muestra (200)
 ```json
 {

@@ -8,7 +8,7 @@ Devuelve el estado operativo de la API de Clickiemota y repite la identidad aute
 
 ## Solicitud
 ```http
-GET /dev/clickiemottas/health HTTP/1.1
+GET /v4/gateways/health HTTP/1.1
 Host: api.clickie.io
 Authorization: <api-key>
 Account: 33

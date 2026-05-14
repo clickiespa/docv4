@@ -212,7 +212,8 @@ POST /inventories
 | `Authorization` | Sí | Clave API generada desde su perfil | cadena |
 | `Account` | Sí | ID de cuenta de destino | entero |
 
-### Cuerpo de la solicitud| Campo | Requerido | Tipo | Predeterminado | Descripción |
+### Cuerpo de la solicitud
+| Campo | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
 | `inventory_name` | Sí | cadena | No | Nombre de inventario legible por humanos. |
 | `inventory_description` | No | cadena | No | Descripción opcional para el inventario. |

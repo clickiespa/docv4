@@ -170,7 +170,8 @@ PUT /monitors/{id_monitor}
 | --- | --- | --- |
 | `{id_monitor}` | Monitorear identificador numérico | entero |
 
-### Cuerpo de la solicitud| Campo | Requerido | Tipo | Predeterminado | Descripción |
+### Cuerpo de la solicitud
+| Campo | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
 | `id_monitor_type` | no | entero | nulo | Tipo de monitor. Los valores disponibles se pueden recuperar con [OBTENER /tipos/monitores](../Types/types.md#monitor-types) |
 | `id_monitor_status` | no | entero | nulo | Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el endpoint [OBTENER /tipos/monitor_statuses](../Types/types.md#monitor-statuses) |
@@ -787,7 +788,8 @@ Se requiere un nivel de autorización 2 o cualquier autorización inferior para 
 GET /monitor_templates
 ```
 
-### Encabezados| Encabezado | Requerido | Descripción | Tipo |
+### Encabezados
+| Encabezado | Requerido | Descripción | Tipo |
 | --- | --- | --- | --- |
 | `Authorization` | si | Clave API de tu perfil | cadena |
 | `Account` | si | ID de cuenta de destino | entero |
@@ -976,7 +978,8 @@ POST /monitors/{id_monitor}/rules
 | --- | --- | --- |
 | `{id_monitor}` | Monitorear identificador numérico | entero |
 
-#### Cuerpo de la solicitud| Campo | Requerido | Tipo | Predeterminado | Descripción |
+#### Cuerpo de la solicitud
+| Campo | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
 | `id_metric` | si | entero | No | Identificador de métrica |
 | `id_monitor_status` | no | entero | 1 | Valor de identificación del estado que se comunicará. Los identificadores de estado disponibles se pueden recuperar mediante el endpoint [OBTENER /tipos/monitor_statuses](../Types/types.md#monitor-statuses) |
@@ -1130,7 +1133,8 @@ GET /monitors/{id_monitor}/history
 | Encabezado | Requerido | Descripción | Tipo |
 | --- | --- | --- | --- |
 | `Authorization` | si | Clave API de tu perfil | cadena |
-| `Account` | si | ID de cuenta de destino | entero |### Parámetro de ruta
+| `Account` | si | ID de cuenta de destino | entero |
+### Parámetro de ruta
 
 | Parámetro | Descripción | Tipo |
 | --- | --- | --- |

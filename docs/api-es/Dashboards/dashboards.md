@@ -204,7 +204,8 @@ Eliminar un panel existente. Se requiere autorización de nivel 2.
 DELETE /dashboards/{id_dashboard}
 ```
 
-### Encabezados| Encabezado | Requerido | Descripción | Tipo |
+### Encabezados
+| Encabezado | Requerido | Descripción | Tipo |
 | --- | --- | --- | --- |
 | `Authorization` | si | Clave API de tu perfil | cadena |
 | `Account` | si | ID de cuenta de destino | entero |
@@ -439,7 +440,8 @@ PUT /dashboards/{id_dashboard}/widgets/{id_dashboard_widget}
 | `{id_dashboard}` | Identificador del panel | entero |
 | `{id_dashboard_widget}` | Identificador del widget del panel | entero |
 
-### Cuerpo de la solicitud| Campo | Requerido | Tipo | Predeterminado | Descripción |
+### Cuerpo de la solicitud
+| Campo | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
 | `id_widget` | no | entero | No | Identificador del catálogo de widgets |
 | `widget_width` | no | entero | No | Asignación de ancho |

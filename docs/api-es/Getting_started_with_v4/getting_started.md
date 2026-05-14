@@ -93,6 +93,8 @@ Las respuestas siguen una estructura JSON común:
 }
 ```
 
+Este sobre se utiliza de forma coherente en las respuestas `2xx`, `4xx` y `5xx`. Las claves de nivel superior son siempre `status`, `message`, `data`, `context` y `instance`.
+
 ### Códigos de estado
 
 | Código | Descripción |

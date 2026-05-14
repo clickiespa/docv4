@@ -192,7 +192,8 @@ PUT /accounts/{id_account}
 
 | Parámetro | Descripción | Tipo |
 | --- | --- | --- |
-| `{id_account}` | Identificador numérico de cuenta | entero |### Cuerpo de la solicitud
+| `{id_account}` | Identificador numérico de cuenta | entero |
+### Cuerpo de la solicitud
 | Campo | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
 | `id_environment` | no | entero | nulo | Nuevo ID de entorno (solo autorización A1) |

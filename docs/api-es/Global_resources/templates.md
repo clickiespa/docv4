@@ -261,7 +261,7 @@ curl -H "Authorization: <API_KEY>" \
 - `404`: no se encontró la plantilla.
 - `500` — Error interno del servidor.
 
-## Actualizar plantilla
+## Plantilla de actualización
 Actualiza una plantilla con nuevos metadatos o contenido del cuerpo.
 
 Se requiere un nivel de autorización 2 o inferior para utilizar este endpoint.
@@ -271,7 +271,8 @@ Se requiere un nivel de autorización 2 o inferior para utilizar este endpoint.
 PUT /templates/{id_template}
 ```
 
-### Encabezados| Encabezado | Requerido | Descripción | Tipo |
+### Encabezados
+| Encabezado | Requerido | Descripción | Tipo |
 | --- | --- | --- | --- |
 | `Authorization` | Sí | Clave API generada desde su perfil | cadena |
 | `Account` | Sí | ID de cuenta de destino | entero |

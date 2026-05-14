@@ -183,7 +183,8 @@ curl -H "Authorization: <API_KEY>" \
 | `setup_uninstall_date` | cadena | Fecha y hora en que se eliminó el dispositivo de la configuración. `null` mientras está instalado. |
 | `setup_uninstall_observations` | cadena | Notas opcionales registradas durante la eliminación. |
 
-### Códigos de estado| Estado | Descripción |
+### Códigos de estado
+| Estado | Descripción |
 | --- | --- |
 | `200` | Historial de configuración recuperado exitosamente. |
 | `401` | La autenticación falló. |

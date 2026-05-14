@@ -86,7 +86,31 @@ def _restore_tokens(text: str, stash: list[str]) -> str:
 
 def _normalize_markdown_artifacts(text: str) -> str:
     """Fix small formatting artifacts introduced by machine translation."""
-    return re.sub(r"(?m)^(```+|~~~+)(#{1,6}\s+)", r"\1\n\2", text)
+    normalized = re.sub(r"(?m)^(```+|~~~+)(#{1,6}\s+)", r"\1\n\2", text)
+    normalized = re.sub(r"(?m)([^#\n])(?=#{1,6}\s+)", r"\1\n", normalized)
+    normalized = re.sub(r"(?m)^(#{1,6}\s+[^|\n]+)\|", r"\1\n|", normalized)
+    normalized = re.sub(
+        r"(?m)^(#{1,6}\s+[^`\n]+?)(Cuando\s+`|When\s+`)",
+        r"\1\n\n\2",
+        normalized,
+    )
+    return normalized
+
+
+def _normalize_api_terms(text: str) -> str:
+    replacements = {
+        "Puntos finales": "Endpoints",
+        "puntos finales": "endpoints",
+        "Punto final": "Endpoint",
+        "punto final": "endpoint",
+        "Terminales": "Endpoints",
+        "terminales": "endpoints",
+    }
+
+    normalized = text
+    for source, target in replacements.items():
+        normalized = normalized.replace(source, target)
+    return normalized
 
 
 def _translate_in_chunks(text: str, cache: TranslatorCache, max_chunk: int = 3500) -> str:
@@ -130,7 +154,7 @@ def _translate_markdown_text(body: str, cache: TranslatorCache) -> str:
     text = re.sub(r"(?m)^(#+)([^\s#])", r"\1 \2", text)
     text = re.sub(r"(?m)^(\s*[-*+])\[(\S)", r"\1 [\2", text)
     text = re.sub(r"(?m)^(\s*\d+\.)\[(\S)", r"\1 [\2", text)
-    return _normalize_markdown_artifacts(text)
+    return _normalize_api_terms(_normalize_markdown_artifacts(text))
 
 
 def translate_markdown_file(src_path: Path, dst_path: Path, cache: TranslatorCache) -> None:

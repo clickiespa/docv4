@@ -185,7 +185,8 @@ PUT /metrics/{metric_identifier}
 | --- | --- | --- |
 | `{metric_identifier}` | UUID de métrica que identifica la métrica | cadena |
 
-### Cuerpo de la solicitud| Campo | Requerido | Tipo | Predeterminado | Descripción |
+### Cuerpo de la solicitud
+| Campo | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
 | `id_uom` | no | entero | nulo | Identificador de unidad de medida devuelto por [`GET /uoms`](../Uoms/uoms.md#list-uoms). |
 | `id_aggregation` | no | entero | nulo | Identificador de agregación obtenido de [`GET /methods/aggregation`](../Global_resources/methods.md#aggregation-methods). |
@@ -371,7 +372,8 @@ POST /metrics/{metric_identifier}/events
 | `Account` | si | ID de cuenta de destino | entero |
 | `Content-Type` | si | `application/json` | cadena |
 
-### Parámetro de ruta| Parámetro | Descripción | Tipo |
+### Parámetro de ruta
+| Parámetro | Descripción | Tipo |
 | --- | --- | --- |
 | `{metric_identifier}` | UUID de métrica que identifica la métrica | cadena |
 

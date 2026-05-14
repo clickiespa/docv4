@@ -1,38 +1,38 @@
-# Assistants
+# Asistentes
 
 ## Endpoints
-- [Create thread](#create-thread)
-- [List threads](#list-threads)
-- [Get thread messages](#get-thread-messages)
-- [Queue thread prompt](#queue-thread-prompt)
-- [Update thread title](#update-thread-title)
-- [Delete thread](#delete-thread)
-- [Get execution](#get-execution)
-- [Retry execution](#retry-execution)
+- [Crear hilo](#create-thread)
+- [Listar hilos](#list-threads)
+- [Recibir mensajes del hilo](#get-thread-messages)
+- [Aviso de hilo de cola](#queue-thread-prompt)
+- [Actualizar título del hilo](#update-thread-title)
+- [Eliminar hilo](#delete-thread)
+- [Obtener ejecución](#get-execution)
+- [Reintentar la ejecución](#retry-execution)
 
 Los endpoints `assistants` administran conversaciones, mensajes y ejecuciones asincronas del asistente.
 
-## Headers
+## encabezados
 
-Todos los endpoints de esta pagina requieren:
+Todos los endpoints de esta página requieren:
 
-| Header | Requerido | Tipo | Descripcion |
+| Encabezado | Requerido | Tipo | Descripción |
 | --- | --- | --- | --- |
-| `Authorization` | si | string | Credencial validada por el authorizer |
-| `Account` | si | string | Cuenta asociada a la solicitud |
+| `Authorization` | si | cadena | Credencial validada por el autorizador |
+| `Account` | si | cadena | Cuenta asociada a la solicitud |
 
-## Create thread
+## Crear hilo
 
 ### Endpoint
 ```http
 POST /ai/assistants/threads
 ```
 
-### Body
+### Cuerpo
 
-No requiere body.
+No requiere cuerpo.
 
-### Sample request
+### Solicitud de muestra
 ```bash
 curl -X POST \
   -H "Authorization: <TOKEN>" \
@@ -40,7 +40,7 @@ curl -X POST \
   /ai/assistants/threads
 ```
 
-### Sample response
+### Respuesta de muestra
 ```json
 {
   "thread_id": "01JQ8Y2NQ0QJ8S2R3A7R5JYV4N",
@@ -49,21 +49,21 @@ curl -X POST \
 }
 ```
 
-## List threads
+## Listar hilos
 
 ### Endpoint
 ```http
 GET /ai/assistants/threads
 ```
 
-### Query parameters
+### Parámetros de consulta
 
-| Parametro | Requerido | Tipo | Default | Descripcion |
+| Parámetro | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
-| `limit` | no | int | `20` | Maximo de threads a retornar. Debe ser `>= 1`. |
-| `next_thread_id` | no | string | `null` | Cursor para continuar la paginacion. |
+| `limit` | no | entero | `20` | Máximo de hilos a retonar. Debe ser `>= 1`. |
+| `next_thread_id` | no | cadena | `null` | Cursor para continuar la paginación. |
 
-### Sample request
+### Solicitud de muestra
 ```bash
 curl \
   -H "Authorization: <TOKEN>" \
@@ -71,7 +71,7 @@ curl \
   "/ai/assistants/threads?limit=20"
 ```
 
-### Sample response
+### Respuesta de muestra
 ```json
 {
   "threads": [
@@ -86,27 +86,27 @@ curl \
 }
 ```
 
-## Get thread messages
+## Recibir mensajes del hilo
 
 ### Endpoint
 ```http
 GET /ai/assistants/threads/{thread_id}
 ```
 
-### Path parameter
+### Parámetro de ruta
 
-| Parametro | Tipo | Descripcion |
+| Parámetro | Tipo | Descripción |
 | --- | --- | --- |
-| `{thread_id}` | string | Identificador ULID del thread. |
+| `{thread_id}` | cadena | Identificador ULID del hilo. |
 
-### Query parameters
+### Parámetros de consulta
 
-| Parametro | Requerido | Tipo | Default | Descripcion |
+| Parámetro | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
-| `limit` | no | int | `20` | Maximo de mensajes a retornar. Debe ser `>= 1`. |
-| `before_message_id` | no | string | `null` | Retorna mensajes anteriores a ese `message_id`. |
+| `limit` | no | entero | `20` | Máximo de mensajes a regresar. Debe ser `>= 1`. |
+| `before_message_id` | no | cadena | `null` | Retorna mensajes anteriores a ese `message_id`. |
 
-### Sample request
+### Solicitud de muestra
 ```bash
 curl \
   -H "Authorization: <TOKEN>" \
@@ -114,7 +114,7 @@ curl \
   "/ai/assistants/threads/01JQ8Y2NQ0QJ8S2R3A7R5JYV4N?limit=20"
 ```
 
-### Sample response
+### Respuesta de muestra
 ```json
 {
   "thread_id": "01JQ8Y2NQ0QJ8S2R3A7R5JYV4N",
@@ -140,35 +140,35 @@ curl \
 }
 ```
 
-## Queue thread prompt
+## Mensaje de hilo de cola
 
 ### Endpoint
 ```http
 POST /ai/assistants/threads/{thread_id}
 ```
 
-### Path parameter
+### Parámetro de ruta
 
-| Parametro | Tipo | Descripcion |
+| Parámetro | Tipo | Descripción |
 | --- | --- | --- |
-| `{thread_id}` | string | Thread donde se agregara el prompt humano. |
+| `{thread_id}` | cadena | Hilo donde se agregara el rapid humano. |
 
-### Request body
+### Cuerpo de la solicitud
 
-| Campo | Requerido | Tipo | Default | Descripcion |
+| Campo | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
-| `prompt` | si | string | No | Texto del mensaje del usuario. |
-| `config.history_limit` | no | int | `20` | Cantidad de mensajes previos a incluir en la ejecucion. |
-| `config.tools_enabled.mcp_clickie_api` | no | bool | `false` | Habilita la herramienta MCP de Clickie API. |
-| `config.tools_enabled.mcp_soporte` | no | bool | `false` | Habilita la herramienta MCP de soporte. |
-| `config.llm_provider` | no | `openai` | `null` | Provider persistido para la ejecucion. |
+| `prompt` | si | cadena | No | Texto del mensaje del usuario. |
+| `config.history_limit` | no | entero | `20` | Cantidad de mensajes previos a incluir en la ejecución. |
+| `config.tools_enabled.mcp_clickie_api` | no | booleano | `false` | Habilita la herramienta MCP de Clickie API. |
+| `config.tools_enabled.mcp_soporte` | no | booleano | `false` | Habilite la herramienta de soporte MCP. |
+| `config.llm_provider` | no | `openai` | `null` | Proveedor persistido para la ejecucion. |
 | `config.llm_model` | no | `gpt-4o-mini` | `null` | Modelo persistido para la ejecucion. |
 
-### Notes
-- Solo puede existir una ejecucion activa (`QUEUE` o `IN_PROGRESS`) por thread.
+### Notas
+- Solo puede existir una ejecución activa (`QUEUE` o `IN_PROGRESS`) por hilo.
 - La ejecucion se procesa de forma asincrona por Lambda.
 
-### Sample request
+### Solicitud de muestra
 ```bash
 curl -X POST \
   -H "Authorization: <TOKEN>" \
@@ -189,7 +189,7 @@ curl -X POST \
   /ai/assistants/threads/01JQ8Y2NQ0QJ8S2R3A7R5JYV4N
 ```
 
-### Sample response
+### Respuesta de muestra
 ```json
 {
   "execution_id": "84bc5e7e-2b9b-4c58-9ef7-6d6fd8bc7f74",
@@ -198,14 +198,14 @@ curl -X POST \
 }
 ```
 
-### Error catalogue
+### Catálogo de errores
 
 | HTTP | `detail.error` | Cuando aplica |
 | --- | --- | --- |
-| `404` | n/a | El thread no existe o no pertenece al usuario autenticado. |
-| `409` | `EXECUTION_IN_PROGRESS` | Ya existe una ejecucion activa para el thread. |
+| `404` | n/a | El hilo no existe o no pertenece al usuario autenticado. |
+| `409` | `EXECUTION_IN_PROGRESS` | Ya existe una ejecución activa para el hilo. |
 
-### Conflict example
+### Ejemplo de conflicto
 ```json
 {
   "detail": {
@@ -216,26 +216,26 @@ curl -X POST \
 }
 ```
 
-## Update thread title
+## Actualizar título del hilo
 
 ### Endpoint
 ```http
 PATCH /ai/assistants/threads/{thread_id}
 ```
 
-### Path parameter
+### Parámetro de ruta
 
-| Parametro | Tipo | Descripcion |
+| Parámetro | Tipo | Descripción |
 | --- | --- | --- |
-| `{thread_id}` | string | Thread a actualizar. |
+| `{thread_id}` | cadena | Hilo para actualizar. |
 
-### Request body
+### Cuerpo de la solicitud
 
-| Campo | Requerido | Tipo | Restricciones | Descripcion |
+| Campo | Requerido | Tipo | Restricciones | Descripción |
 | --- | --- | --- | --- | --- |
-| `title` | si | string | largo entre `1` y `255` | Nuevo titulo del thread. |
+| `title` | si | cadena | largo entre `1` y `255` | Nuevo título del hilo. |
 
-### Sample request
+### Solicitud de muestra
 ```bash
 curl -X PATCH \
   -H "Authorization: <TOKEN>" \
@@ -245,7 +245,7 @@ curl -X PATCH \
   /ai/assistants/threads/01JQ8Y2NQ0QJ8S2R3A7R5JYV4N
 ```
 
-### Sample response
+### Respuesta de muestra
 ```json
 {
   "thread_id": "01JQ8Y2NQ0QJ8S2R3A7R5JYV4N",
@@ -254,20 +254,20 @@ curl -X PATCH \
 }
 ```
 
-## Delete thread
+## Eliminar hilo
 
 ### Endpoint
 ```http
 DELETE /ai/assistants/threads/{thread_id}
 ```
 
-### Path parameter
+### Parámetro de ruta
 
-| Parametro | Tipo | Descripcion |
+| Parámetro | Tipo | Descripción |
 | --- | --- | --- |
-| `{thread_id}` | string | Thread a eliminar. |
+| `{thread_id}` | cadena | Hilo y eliminación. |
 
-### Sample request
+### Solicitud de muestra
 ```bash
 curl -X DELETE \
   -H "Authorization: <TOKEN>" \
@@ -275,7 +275,7 @@ curl -X DELETE \
   /ai/assistants/threads/01JQ8Y2NQ0QJ8S2R3A7R5JYV4N
 ```
 
-### Sample response
+### Respuesta de muestra
 ```json
 {
   "deleted": true,
@@ -283,21 +283,20 @@ curl -X DELETE \
 }
 ```
 
-## Get execution
+## Obtener ejecución
 
 ### Endpoint
 ```http
 GET /ai/assistants/threads/{thread_id}/executions/{execution_id}
 ```
 
-### Path parameters
-
-| Parametro | Tipo | Descripcion |
+### Parámetros de ruta
+| Parámetro | Tipo | Descripción |
 | --- | --- | --- |
-| `{thread_id}` | string | Thread dueño de la ejecucion. |
-| `{execution_id}` | string | Identificador UUID de la ejecucion. |
+| `{thread_id}` | cadena | Hilo dueño de la ejecucion. |
+| `{execution_id}` | cadena | Identificador UUID de la ejecución. |
 
-### Sample request
+### Solicitud de muestra
 ```bash
 curl \
   -H "Authorization: <TOKEN>" \
@@ -305,7 +304,7 @@ curl \
   /ai/assistants/threads/01JQ8Y2NQ0QJ8S2R3A7R5JYV4N/executions/84bc5e7e-2b9b-4c58-9ef7-6d6fd8bc7f74
 ```
 
-### Sample response
+### Respuesta de muestra
 ```json
 {
   "execution_id": "84bc5e7e-2b9b-4c58-9ef7-6d6fd8bc7f74",
@@ -344,40 +343,40 @@ curl \
 }
 ```
 
-### Notes
-- `status` es persistido por la ejecucion y suele moverse entre `QUEUE`, `IN_PROGRESS`, `FINISHED` y `FAILED`.
-- `steps` refleja progreso incremental, llamadas a herramientas y mensajes intermedios.
+### Notas
+- `status` es persistente por la ejecucion y suele moverse entre `QUEUE`, `IN_PROGRESS`, `FINISHED` y `FAILED`.
+- `steps` refleja el progreso incremental, llamadas a herramientas y mensajes intermedios.
 
-## Retry execution
+## Reintentar la ejecución
 
 ### Endpoint
 ```http
 POST /ai/assistants/threads/{thread_id}/executions/{execution_id}/retry
 ```
 
-### Path parameters
+### Parámetros de ruta
 
-| Parametro | Tipo | Descripcion |
+| Parámetro | Tipo | Descripción |
 | --- | --- | --- |
-| `{thread_id}` | string | Thread dueño de la ejecucion. |
-| `{execution_id}` | string | Ejecucion fallida a reintentar. |
+| `{thread_id}` | cadena | Hilo dueño de la ejecucion. |
+| `{execution_id}` | cadena | Ejecucion fallida a reintentar. |
 
-### Request body
+### Cuerpo de la solicitud
 
-| Campo | Requerido | Tipo | Default | Descripcion |
+| Campo | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
-| `config.history_limit` | no | int | `20` | Cantidad de mensajes previos a incluir. |
-| `config.tools_enabled.mcp_clickie_api` | no | bool | `false` | Habilita MCP Clickie API. |
-| `config.tools_enabled.mcp_soporte` | no | bool | `false` | Habilita MCP soporte. |
-| `config.llm_provider` | no | `openai` | `null` | Provider persistido para el nuevo intento. |
+| `config.history_limit` | no | entero | `20` | Cantidad de mensajes anteriores a incluir. |
+| `config.tools_enabled.mcp_clickie_api` | no | booleano | `false` | Habilita MCP Clickie API. |
+| `config.tools_enabled.mcp_soporte` | no | booleano | `false` | Habilita soporte MCP. |
+| `config.llm_provider` | no | `openai` | `null` | Proveedor persistido para el nuevo intento. |
 | `config.llm_model` | no | `gpt-4o-mini` | `null` | Modelo persistido para el nuevo intento. |
 
-### Notes
-- Solo admite reintento de ejecuciones con estado `FAILED`.
-- Reutiliza el mensaje humano original; genera un `execution_id` nuevo.
-- Si existe otra ejecucion activa para el mismo thread, el retry falla con `409`.
+### Notas
+- Solo admite retento de ejecuciones con estado `FAILED`.
+- Reutilizar el mensaje humano original; genera un `execution_id` nuevo.
+- Si existe otra ejecución activa para el mismo hilo, el reintento falla con `409`.
 
-### Sample request
+### Solicitud de muestra
 ```bash
 curl -X POST \
   -H "Authorization: <TOKEN>" \
@@ -395,7 +394,7 @@ curl -X POST \
   /ai/assistants/threads/01JQ8Y2NQ0QJ8S2R3A7R5JYV4N/executions/84bc5e7e-2b9b-4c58-9ef7-6d6fd8bc7f74/retry
 ```
 
-### Sample response
+### Respuesta de muestra
 ```json
 {
   "execution_id": "36c0f8d9-a881-4c56-9934-fd6cc87b6650",
@@ -404,10 +403,10 @@ curl -X POST \
 }
 ```
 
-### Error catalogue
+### Catálogo de errores
 
 | HTTP | `detail.error` | Cuando aplica |
 | --- | --- | --- |
-| `404` | n/a | El thread o la ejecucion no existen, o no se encuentra el mensaje original del prompt. |
+| `404` | n/a | El hilo o la ejecucion no existe, o no se encuentra el mensaje original del aviso. |
 | `409` | `EXECUTION_NOT_FAILED` | La ejecucion indicada no esta en estado `FAILED`. |
-| `409` | `EXECUTION_IN_PROGRESS` | Ya existe otra ejecucion activa para el thread. |
+| `409` | `EXECUTION_IN_PROGRESS` | Ya existe otra ejecucion activa para el hilo. |

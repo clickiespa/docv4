@@ -6,7 +6,7 @@
 - [conseguir colaborador](#get-collaborator)
 - [Colaborador de actualización](#update-collaborator)
 - [Eliminar colaborador](#delete-collaborator)
-- [Historial de inicio de sesión del colaborador](#collaborator-login-history)
+- [Historial de eventos del colaborador](#collaborator-event-history)
 
 Endpoints relacionados con la gestión de usuarios dentro de una cuenta.
 
@@ -223,7 +223,8 @@ DELETE /collaborators/{id_user}
 | `Authorization` | si | Clave API de tu perfil | cadena |
 | `Account` | si | ID de cuenta de destino | entero |
 
-### Parámetro de ruta| Parámetro | Descripción | Tipo |
+### Parámetro de ruta
+| Parámetro | Descripción | Tipo |
 | --- | --- | --- |
 | `{id_user}` | Identificador numérico del colaborador | entero |
 
@@ -243,13 +244,14 @@ curl -X DELETE -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" <HOST_NA
 }
 ```
 
-## Historial de inicio de sesión del colaborador
 
-Recuperar eventos de autenticación para un colaborador.
+## Historial de eventos del colaborador
+
+Recuperar el historial de eventos de clics de un colaborador en la cuenta actual. Se requiere autorización 7 para utilizar este endpoint.
 
 ### Endpoint
 ```
-GET /collaborators/{id_user}/login_history
+GET /collaborators/{id_user}/history
 ```
 
 ### Encabezados
@@ -257,22 +259,80 @@ GET /collaborators/{id_user}/login_history
 | Encabezado | Requerido | Descripción | Tipo |
 | --- | --- | --- | --- |
 | `Authorization` | si | Clave API generada desde su perfil | cadena |
-| `Account` | si | ID de cuenta de destino | entero |
+| `Account` | si | Identificador de cuenta de destino. Utilice `Account: <ID_ACCOUNT>` | entero |
 
 ### Parámetro de ruta
 
-| Parámetro | Descripción | Tipo |
-| --- | --- | --- |
-| `{id_user}` | Identificador numérico del colaborador | entero |
+| Parámetro | Requerido | Descripción | Tipo |
+| --- | --- | --- | --- |
+| `{id_user}` | si | Identificador numérico del colaborador de [conseguir colaborador](#get-collaborator) | entero |
+
+### Parámetros de consulta
+
+| Parámetro | Requerido | Descripción | Tipo |
+| --- | --- | --- | --- |
+| `skip` | no | Desplazamiento para paginación. El valor predeterminado es `0` | entero |
+| `limit` | no | Número máximo de filas de eventos que se devolverán. El valor predeterminado es `100` | entero |
+| `id_event_type` | no | Filtrar resultados por tipo de evento: `1` inicio de sesión, `2` creación, `3` modificación, `4` eliminación | entero |
+
+### Ejemplo de encabezados de solicitud
+```json
+{
+  "Authorization": "<API_KEY>",
+  "Account": "<ID_ACCOUNT>"
+}
+```
 
 ### Solicitud de muestra
 ```bash
-curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" <HOST_NAME>/collaborators/<ID_USER>/login_history
+curl -H "Authorization: <API_KEY>" \
+  -H "Account: <ID_ACCOUNT>" \
+  "<HOST_NAME>/collaborators/<ID_USER>/history?skip=0&limit=100&id_event_type=3"
 ```
 
 ### Respuesta de muestra
 ```json
-[
-  {"event": "SignIn", "timestamp": "2023-09-01T00:00:00Z"}
-]
+{
+  "status": "success",
+  "message": "Elements obtained successfully",
+  "data": [
+    {
+      "id_event": 1250,
+      "id_resource": 42,
+      "event_description": "API actualización de activo Main compressor",
+      "event_changes": "{\"asset_name\":{\"before\":\"Old\",\"after\":\"Main compressor\"}}",
+      "created_at": "2026-05-06T12:00:00Z",
+      "event_type_description": "Modification",
+      "entity_name": "assets"
+    }
+  ],
+  "context": {},
+  "instance": "/collaborators/<ID_USER>/history"
+}
 ```
+
+### Respuestas de error
+```json
+{
+  "status": "error",
+  "message": "Element not found",
+  "data": null,
+  "context": {},
+  "instance": "/collaborators/<ID_USER>/history"
+}
+```
+
+### Códigos de estado
+
+| Código de estado | Descripción |
+| --- | --- |
+| `200` | El historial de eventos del colaborador se devolvió con éxito |
+| `400` | Parámetros de paginación no válidos |
+| `401` | Clave API faltante o no válida |
+| `403` | El colaborador autenticado no tiene acceso a la cuenta solicitada |
+| `404` | Colaborador no fue encontrado en la cuenta corriente |
+| `500` | Error inesperado del servidor |
+
+### Modelos Pydantic
+
+Los elementos de respuesta utilizan `CollaboratorEventHistoryItem` de `schemas.users.history`. El sobre de respuesta JSON estándar contiene `status`, `message`, `data`, `context` y `instance` como se describe en [Guía de introducción](../Getting_started_with_v4/getting_started.md).

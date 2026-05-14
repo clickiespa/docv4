@@ -1,48 +1,48 @@
-# Analysis
+# Análisis
 
 ## Endpoints
-- [Create analysis](#create-analysis)
-- [Get analysis](#get-analysis)
-- [Get analysis KPI](#get-analysis-kpi)
-- [Get analysis insight](#get-analysis-insight)
-- [Get analysis score](#get-analysis-score)
+- [Crear análisis](#create-analysis)
+- [Obtener análisis](#get-analysis)
+- [Obtener KPI de análisis](#get-analysis-kpi)
+- [Obtenga información de análisis](#get-analysis-insight)
+- [Obtener puntuación de análisis](#get-analysis-score)
 
-Los endpoints `analysis` crean ejecuciones asincronas de analisis y exponen sus resultados ya procesados.
+Los endpoints `analysis` crean ejecuciones asincronas de análisis y exponen sus resultados ya procesados.
 
-## Headers
+## encabezados
 
-Todos los endpoints de esta pagina requieren:
+Todos los endpoints de esta página requieren:
 
-| Header | Requerido | Tipo | Descripcion |
+| Encabezado | Requerido | Tipo | Descripción |
 | --- | --- | --- | --- |
-| `Authorization` | si | string | Credencial validada por el authorizer |
-| `Account` | si | string | Cuenta propietaria del analisis |
+| `Authorization` | si | cadena | Credencial validada por el autorizador |
+| `Account` | si | cadena | Cuenta propietaria del análisis |
 
-## Create analysis
+## Crear análisis
 
 ### Endpoint
 ```http
 POST /ai/analysis
 ```
 
-### Request body
+### Cuerpo de la solicitud
 
-| Campo | Requerido | Tipo | Default | Descripcion |
+| Campo | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
-| `date` | si | int | No | Timestamp en segundos que representa la fecha del analisis. |
-| `format` | no | `week` \| `month` | `month` | Periodicidad del analisis. |
-| `input` | no | object | `{"prompt":"Centrate en oportunidades de mayor impacto."}` | Payload arbitrario consumido por el worker. |
-| `scope` | no | `account` | `account` | Alcance del analisis. Actualmente solo se acepta `account`. |
-| `report_format` | no | `dashboard` \| `markdown` | `dashboard` | Formato de salida esperado para `insight`. |
-| `comparison.mode` | no | `none` \| `explicit` \| `auto` | `none` | Estrategia de comparacion entre periodos. |
-| `comparison.previous_analysis_id` | condicional | string | `null` | Requerido cuando `comparison.mode` es `explicit`. |
+| `date` | si | entero | No | Marca de tiempo en segundos que representa la fecha del análisis. |
+| `format` | no | `week` \| `month` | `month` | Periodicidad del análisis. |
+| `input` | no | objeto | `{"prompt":"Centrate en oportunidades de mayor impacto."}` | Carga útil arbitrario consumido por el trabajador. |
+| `scope` | no | `account` | `account` | Alcance del análisis. Actualmente solo se acepta `account`. |
+| `report_format` | no | `dashboard` \| `markdown` \| `email` | `dashboard` | Formato de salida esperado para `insight`. |
+| `comparison.mode` | no | `none` \| `explicit` \| `auto` | `none` | Estrategia de comparación entre periodos. |
+| `comparison.previous_analysis_id` | condicional | cadena | `null` | Requerido cuando `comparison.mode` es `explicit`. |
 
-### Notes
-- El `analysis_id` es deterministico: se calcula a partir del body normalizado y del `Account`.
-- Si envias exactamente la misma solicitud para la misma cuenta, el endpoint reutiliza el mismo `analysis_id` en lugar de crear una nueva ejecucion.
-- Cuando `comparison.mode` es `auto`, el backend intenta resolver el analisis del periodo anterior usando la misma configuracion.
+### Notas
+- El `analysis_id` es determinístico: se calcula a partir del cuerpo normalizado y del `Account`.
+- Si envías exactamente la misma solicitud para la misma cuenta, el endpoint reutiliza el mismo `analysis_id` en lugar de crear una nueva ejecución.
+- Cuando `comparison.mode` es `auto`, el backend intenta resolver el análisis del periodo anterior usando la misma configuración.
 
-### Sample request
+### Solicitud de muestra
 ```bash
 curl -X POST \
   -H "Authorization: <TOKEN>" \
@@ -65,34 +65,34 @@ curl -X POST \
   /ai/analysis
 ```
 
-### Sample response
+### Respuesta de muestra
 ```json
 {
   "analysis_id": "75b3832b2cc7d6f9185ef1dce8da8e9d1e8ec2d4da4bd3db4dbf2b7fd11f9c7c"
 }
 ```
 
-### Error catalogue
+### Catálogo de errores
 
 | HTTP | Cuando aplica |
 | --- | --- |
-| `422` | Error de validacion del body, por ejemplo `comparison.mode="explicit"` sin `previous_analysis_id`. |
-| `404` | El `previous_analysis_id` explicitado no existe para la cuenta autenticada. |
+| `422` | Error de validación del cuerpo, por ejemplo `comparison.mode="explicit"` sin `previous_analysis_id`. |
+| `404` | El `previous_analysis_id` explícito no existe para la cuenta autenticada. |
 
-## Get analysis
+## Obtener análisis
 
 ### Endpoint
 ```http
 GET /ai/analysis/{analysis_id}
 ```
 
-### Path parameter
+### Parámetro de ruta
 
-| Parametro | Tipo | Descripcion |
+| Parámetro | Tipo | Descripción |
 | --- | --- | --- |
-| `{analysis_id}` | string | Identificador SHA-256 del analisis. |
+| `{analysis_id}` | cadena | Identificador SHA-256 del análisis. |
 
-### Sample request
+### Solicitud de muestra
 ```bash
 curl \
   -H "Authorization: <TOKEN>" \
@@ -100,7 +100,7 @@ curl \
   /ai/analysis/75b3832b2cc7d6f9185ef1dce8da8e9d1e8ec2d4da4bd3db4dbf2b7fd11f9c7c
 ```
 
-### Sample response
+### Respuesta de muestra
 ```json
 {
   "analysis_id": "75b3832b2cc7d6f9185ef1dce8da8e9d1e8ec2d4da4bd3db4dbf2b7fd11f9c7c",
@@ -123,24 +123,24 @@ curl \
 }
 ```
 
-### Notes
+### Notas
 - `status` puede tomar los valores `QUEUE`, `IN_PROGRESS`, `FINISHED` o `FAILED`.
-- Si `status` es `FAILED`, el campo `error` contiene el detalle persistido por el worker.
+- Si `status` es `FAILED`, el campo `error` contiene el detalle persistido por el trabajador.
 
-## Get analysis KPI
+## Obtener KPI de análisis
 
 ### Endpoint
 ```http
 GET /ai/analysis/{analysis_id}/kpi
 ```
 
-### Path parameter
+### Parámetro de ruta
 
-| Parametro | Tipo | Descripcion |
+| Parámetro | Tipo | Descripción |
 | --- | --- | --- |
-| `{analysis_id}` | string | Analisis del cual se quieren los KPIs. |
+| `{analysis_id}` | cadena | Análisis del cual se quieren los KPIs. |
 
-### Sample request
+### Solicitud de muestra
 ```bash
 curl \
   -H "Authorization: <TOKEN>" \
@@ -148,7 +148,7 @@ curl \
   /ai/analysis/75b3832b2cc7d6f9185ef1dce8da8e9d1e8ec2d4da4bd3db4dbf2b7fd11f9c7c/kpi
 ```
 
-### Sample response
+### Respuesta de muestra
 ```json
 {
   "energy_consumption": {
@@ -166,32 +166,32 @@ curl \
 }
 ```
 
-### Error catalogue
+### Catálogo de errores
 
 | HTTP | Cuando aplica |
 | --- | --- |
-| `404` | El analisis o sus archivos/resultados KPI no existen, o su metadata es invalida. |
-| `409` | El analisis aun esta en `QUEUE` o `IN_PROGRESS`. |
-| `422` | El analisis termino en `FAILED`; el detalle se devuelve en `detail`. |
+| `404` | El análisis de sus archivos/resultados KPI no existe, o sus metadatos no son válidos. |
+| `409` | El análisis aún está en `QUEUE` o `IN_PROGRESS`. |
+| `422` | El análisis finaliza en `FAILED`; el detalle se devuelve en `detail`. |
 
-## Get analysis insight
+## Obtenga información de análisis
 
 ### Endpoint
 ```http
 GET /ai/analysis/{analysis_id}/insight
 ```
 
-### Path parameter
+### Parámetro de ruta
 
-| Parametro | Tipo | Descripcion |
+| Parámetro | Tipo | Descripción |
 | --- | --- | --- |
-| `{analysis_id}` | string | Analisis del cual se quiere el insight. |
+| `{analysis_id}` | cadena | Análisis del cual se quiere el insight. |
 
-### Response variants
+### Variantes de respuesta
 
-La respuesta depende del `report_format` con el que fue creado el analisis.
+La respuesta depende del `report_format` con el que fue creado el análisis.
 
-#### Dashboard response
+#### Respuesta del panel
 ```json
 {
   "report_format": "dashboard",
@@ -206,36 +206,44 @@ La respuesta depende del `report_format` con el que fue creado el analisis.
 }
 ```
 
-#### Markdown response
+#### Respuesta de rebajas
 ```json
 {
   "report_format": "markdown",
-  "markdown": "# Executive summary\n\nThe building reduced peak demand by 6%..."
+  "markdown": "
+# Executive summary\n\nThe building reduced peak demand by 6%..."
 }
 ```
 
-### Error catalogue
+#### Respuesta por correo electrónico
+```json
+{
+  "report_format": "email",
+  "email": "<div style=\"font-family:Arial,sans-serif\"><h1>Resumen ejecutivo</h1><p>La demanda de enfriamiento disminuyo tras corregir horarios nocturnos.</p><h2>Hallazgos principales</h2><ul><li>El consumo nocturno bajo respecto al periodo anterior.</li></ul><h2>Oportunidades de mejora</h2><ul><li>Reducir simultaneidad entre calefaccion y enfriamiento.</li></ul><h2>Acciones recomendadas</h2><p>Validar programaciones y monitorear el impacto durante la proxima semana.</p></div>"
+}
+```
 
+### Catálogo de errores
 | HTTP | Cuando aplica |
 | --- | --- |
-| `404` | El analisis no existe, falta el archivo `insight` o el payload persistido es invalido. |
-| `409` | El analisis aun esta en `QUEUE` o `IN_PROGRESS`. |
-| `422` | El analisis termino en `FAILED`; el detalle se devuelve en `detail`. |
+| `404` | El análisis no existe, falta el archivo `insight` o la carga útil persistido es inválido. |
+| `409` | El análisis aún está en `QUEUE` o `IN_PROGRESS`. |
+| `422` | El análisis finaliza en `FAILED`; el detalle se devuelve en `detail`. |
 
-## Get analysis score
+## Obtener puntuación de análisis
 
 ### Endpoint
 ```http
 GET /ai/analysis/{analysis_id}/score
 ```
 
-### Path parameter
+### Parámetro de ruta
 
-| Parametro | Tipo | Descripcion |
+| Parámetro | Tipo | Descripción |
 | --- | --- | --- |
-| `{analysis_id}` | string | Analisis del cual se quieren los scores por activo. |
+| `{analysis_id}` | cadena | Analisis del cual se quieren los puntajes por activo. |
 
-### Sample request
+### Solicitud de muestra
 ```bash
 curl \
   -H "Authorization: <TOKEN>" \
@@ -243,7 +251,7 @@ curl \
   /ai/analysis/75b3832b2cc7d6f9185ef1dce8da8e9d1e8ec2d4da4bd3db4dbf2b7fd11f9c7c/score
 ```
 
-### Sample response
+### Respuesta de muestra
 ```json
 {
   "asset_001": {
@@ -267,10 +275,10 @@ curl \
 }
 ```
 
-### Error catalogue
+### Catálogo de errores
 
 | HTTP | Cuando aplica |
 | --- | --- |
-| `404` | El analisis no existe o no se encuentra el archivo `score.json`. |
-| `409` | El analisis aun esta en `QUEUE` o `IN_PROGRESS`. |
-| `422` | El analisis termino en `FAILED`; el detalle se devuelve en `detail`. |
+| `404` | El análisis no existe o no se encuentra el archivo `score.json`. |
+| `409` | El análisis aún está en `QUEUE` o `IN_PROGRESS`. |
+| `422` | El análisis finaliza en `FAILED`; el detalle se devuelve en `detail`. |

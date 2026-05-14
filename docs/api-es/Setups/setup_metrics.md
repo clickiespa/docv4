@@ -59,7 +59,8 @@ curl -H "Authorization: <API_KEY>" \
       "id_setup_metric": 12,
       "id_setup": 3,
       "id_metric": 5,
-      "id_alias": null
+      "id_alias": null,
+      "dms_attribute_name": "temperature"
     }
   ],
   "context": {},
@@ -75,6 +76,7 @@ curl -H "Authorization: <API_KEY>" \
 | `id_setup` | entero | Identificador de configuración. Ver [Obtener configuración](./setups.md#get-setup). |
 | `id_metric` | entero | Identificador de métrica vinculado a la configuración. Recupérelo de [Obtener métrica](../Metrics_and_data/metrics.md#get-metric). |
 | `id_alias` | entero | Identificador de alias opcional utilizado para nombres para mostrar. |
+| `dms_attribute_name` | cadena | Nombre del atributo de `device_model_settings` asociado hasta `id_device_model_setting`. |
 
 ### Códigos de estado
 
@@ -154,7 +156,8 @@ curl -H "Authorization: <API_KEY>" \
       "id_setup_metric": 12,
       "id_setup": 3,
       "id_metric": 5,
-      "id_alias": null
+      "id_alias": null,
+      "dms_attribute_name": "temperature"
     }
   ],
   "context": {},
@@ -170,6 +173,7 @@ curl -H "Authorization: <API_KEY>" \
 | `id_setup` | entero | Identificador de configuración. Ver [Obtener configuración](./setups.md#get-setup). |
 | `id_metric` | entero | Identificador de métrica vinculado a la configuración. Recupérelo de [Obtener métrica](../Metrics_and_data/metrics.md#get-metric). |
 | `id_alias` | entero | Identificador de alias opcional utilizado para nombres para mostrar. |
+| `dms_attribute_name` | cadena | Nombre del atributo de `device_model_settings` asociado a través de `id_device_model_setting`. |
 
 ### Códigos de estado
 

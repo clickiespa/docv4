@@ -3,6 +3,7 @@
 ## Endpoints
 - [Listar modelos de dispositivos](#list-device-models)
 - [Obtener modelo de dispositivo](#get-device-model)
+- [Listar configuraciones para un modelo de dispositivo](#list-settings-for-a-device-model)
 - [Listar tipos de modelos de dispositivos](#list-device-model-types)
 - [Listar fabricantes de modelos de dispositivos](#list-device-model-manufacturers)
 
@@ -141,7 +142,8 @@ Se requiere un nivel de autorización 4 o inferior para leer los modelos de disp
 GET /device_models/{id_device_model}
 ```
 
-### Encabezados| Encabezado | Requerido | Descripción | Tipo |
+### Encabezados
+| Encabezado | Requerido | Descripción | Tipo |
 | --- | --- | --- | --- |
 | `Authorization` | Sí | Clave API generada desde su perfil | cadena |
 | `Account` | Sí | ID de cuenta de destino | entero |
@@ -238,6 +240,66 @@ curl -H "Authorization: <API_KEY>" \
 }
 ```
 
+## Listar configuraciones para un modelo de dispositivo
+
+Recupera definiciones de configuración para un modelo de dispositivo específico. Este endpoint reemplaza el acceso directo a `device_model_settings`.
+
+Se requiere autorización 4 o inferior para utilizar este endpoint.
+
+### Endpoint
+```
+GET /device_models/{id_device_model}/settings
+```
+
+### Encabezados
+
+| Encabezado | Requerido | Descripción | Tipo |
+| --- | --- | --- | --- |
+| `Authorization` | Sí | Clave API generada desde su perfil | cadena |
+| `Account` | Sí | ID de cuenta de destino | entero |
+
+### Parámetros de ruta
+
+| Parámetro | Requerido | Tipo | Descripción |
+| --- | --- | --- | --- |
+| `id_device_model` | Sí | entero | Identificador de modelo de dispositivo devuelto por [Listar modelos de dispositivos](#list-device-models). |
+
+### Parámetros de consulta
+
+| Parámetro | Requerido | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- | --- |
+| `skip` | No | entero | `0` | Desplazamiento de paginación. |
+| `limit` | No | entero | `100` | Número máximo de registros a devolver. |
+
+### Solicitud de muestra
+```bash
+curl -H "Authorization: <API_KEY>" \
+  -H "Account: <ID_ACCOUNT>" \
+  "/device_models/3/settings?skip=0&limit=20"
+```
+
+### Respuesta de muestra (200)
+```json
+{
+  "status": "success",
+  "message": "Elements obtained successfully",
+  "data": [
+    {
+      "id_device_model_setting": 500101,
+      "id_uom": 12,
+      "id_device_model": 3,
+      "id_function": null,
+      "dms_attribute_name": "temperature",
+      "dms_observations": null,
+      "dms_payload_length": 2,
+      "dms_payload_transform": "raw"
+    }
+  ],
+  "context": {},
+  "instance": "/device_models/3/settings"
+}
+```
+
 ## Listar tipos de modelos de dispositivos
 
 Recupere los tipos de modelo de dispositivo configurados para la cuenta autenticada.
@@ -257,7 +319,6 @@ GET /types/device_models
 | `Account` | Sí | ID de cuenta de destino | entero |
 
 ### Parámetros de consulta
-
 | Parámetro | Requerido | Tipo | Predeterminado | Descripción |
 | --- | --- | --- | --- | --- |
 | `skip` | No | entero | `0` | Desplazamiento de paginación. |
@@ -331,6 +392,7 @@ curl -H "Authorization: <API_KEY>" \
   "instance": "/types/device_models"
 }
 ```
+
 ## Listar fabricantes de modelos de dispositivos
 
 Recupere los fabricantes del modelo de dispositivo configurados para la cuenta autenticada.

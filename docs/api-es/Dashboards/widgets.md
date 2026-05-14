@@ -250,7 +250,8 @@ Eliminar un widget. Se requiere autorización de nivel 1. Los widgets archivados
 DELETE /widgets/{id_widget}
 ```
 
-### Encabezados| Encabezado | Requerido | Descripción | Tipo |
+### Encabezados
+| Encabezado | Requerido | Descripción | Tipo |
 | --- | --- | --- | --- |
 | `Authorization` | si | Clave API de tu perfil | cadena |
 | `Account` | si | ID de cuenta de destino | entero |

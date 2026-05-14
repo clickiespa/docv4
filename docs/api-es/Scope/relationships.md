@@ -187,7 +187,8 @@ La respuesta utiliza el sobre JSON estándar.
 GET /relationships/{entity}/{id}/{child_entity}/{child_id}
 ```
 
-### Encabezados| Encabezado | Requerido | Descripción | Tipo |
+### Encabezados
+| Encabezado | Requerido | Descripción | Tipo |
 | --- | --- | --- | --- |
 | `Authorization` | si | Clave API generada desde su perfil | cadena |
 | `Account` | si | ID de cuenta de destino | entero |
