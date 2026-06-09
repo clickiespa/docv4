@@ -549,9 +549,10 @@ interpret the returned values.
     "1715734800": 41.3
   },
   "confidence_score": {
-    "score": 0.92,
+    "score": 0.95,
     "penalties": {
-      "cp_interpolation": 1
+      "cp_interpolation": 0.08,
+      "cp_aggregation": 0.03
     }
   },
   "request": {
@@ -567,8 +568,9 @@ interpret the returned values.
 
 | Field | Description |
 | --- | --- |
-| `confidence_score.score` | Number between `0` and `1` that summarizes how much post-processing was needed to produce the series. Higher values indicate fewer adjustments. |
+| `confidence_score.score` | Number between `0` and `1` that summarizes how much post-processing was needed to produce the series. Higher values indicate fewer adjustments. Can be `null` if the score could not be computed. |
 | `confidence_score.penalties` | Breakdown of the adjustments that affected the score, such as interpolation or filtering. |
+| `confidence_score.available` | Optional. When `false`, the data was returned but the confidence score could not be computed. |
 | `warning` | Optional message returned when the request completed but some data quality condition should be reviewed. |
 | `request` | Normalized request values. Useful when checking how query parameters were interpreted. |
 
