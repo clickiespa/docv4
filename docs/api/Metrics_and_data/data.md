@@ -16,6 +16,9 @@ These endpoints return a direct payload with `data` or `inspect` at the top
 level, without the API-wide `status`, `message`, and `instance` envelope. When
 `context=true`, responses include additional diagnostic fields.
 
+Data responses also include `stats`, which reports how many source data points
+were read to produce the response. This can help identify expensive requests.
+
 ## Common parameters
 
 ### Headers
@@ -84,7 +87,7 @@ Using `curl --data-urlencode` handles this automatically.
 | Format | Examples | Description |
 | --- | --- | --- |
 | Integer minutes | `1`, `5`, `60`, `1440` | Number of minutes per bucket. |
-| Minute aliases | `min`, `15min`, `T`, `15T` | Minute frequency. `T` is accepted for legacy clients. |
+| Minute aliases | `min`, `15min`, `T`, `15T` | Minute frequency. |
 | Hours | `h`, `6h`, `12h` | Hour frequency. |
 | Days | `D`, `7D` | Day frequency. |
 | Weeks | `W`, `W-MON`, `W-SUN` | Weekly frequency. `W` resolves to `W-SUN`. |
@@ -153,6 +156,11 @@ curl -G '/data/metric' \
     "1715731200": 42.7,
     "1715734800": 41.3,
     "1715738400": 39.9
+  },
+  "stats": {
+    "data_points_read": 120,
+    "raw_points_read": 120,
+    "metric_block_points_read": 0
   }
 }
 ```
@@ -215,6 +223,8 @@ GET /data/formula
 | Operators | `+`, `-`, `*`, `/`, `>`, `<`, `>=`, `<=`, `==`, `!=`, `&&`, `||`, `condition ? A : B` |
 
 Formula expressions use numeric metric IDs in the `@<id_metric>` format.
+
+Pure additive formulas, using only metric references, numeric constants, parentheses, `+`, and `-`, treat missing child values as `0` by default. This keeps totals from becoming empty when one component has no point at a timestamp. The default does not apply to formulas with multiplication, division, functions, logical operators, ternaries, or offsets such as `@123[-1]`; those keep strict missing-data behavior unless the referenced metric uses `force_availability`.
 
 ### Sample request
 
@@ -548,6 +558,11 @@ interpret the returned values.
     "1715731200": 42.7,
     "1715734800": 41.3
   },
+  "stats": {
+    "data_points_read": 120,
+    "raw_points_read": 120,
+    "metric_block_points_read": 0
+  },
   "confidence_score": {
     "score": 0.95,
     "penalties": {
@@ -568,6 +583,9 @@ interpret the returned values.
 
 | Field | Description |
 | --- | --- |
+| `stats.data_points_read` | Total source data points read to produce the response. |
+| `stats.raw_points_read` | Raw metric points read from full-data sources before aggregation, interpolation, or formula evaluation. |
+| `stats.metric_block_points_read` | Pre-aggregated metric block points read when the request can use metric blocks. |
 | `confidence_score.score` | Number between `0` and `1` that summarizes how much post-processing was needed to produce the series. Higher values indicate fewer adjustments. Can be `null` if the score could not be computed. |
 | `confidence_score.penalties` | Breakdown of the adjustments that affected the score, such as interpolation or filtering. |
 | `confidence_score.available` | Optional. When `false`, the data was returned but the confidence score could not be computed. |
@@ -577,23 +595,28 @@ interpret the returned values.
 ## Error responses
 
 Most errors that clients can fix are validation errors and return status `400`
-with an `error` message.
+with an `error` message and a stable `code` that clients can branch on. The
+`error` value is safe to display, while `code` is intended for programmatic
+handling.
 
 ```json
 {
-  "error": "Missing required parameter: metric"
+  "error": "Missing required parameter: metric",
+  "code": "MISSING_REQUIRED_PARAMETER"
 }
 ```
 
 ```json
 {
-  "error": "Parameter 'dimension' must be one of: mean, sum, max, min, first, last"
+  "error": "Parameter 'dimension' must be one of: mean, sum, max, min, first, last",
+  "code": "INVALID_PARAMETER"
 }
 ```
 
 ```json
 {
-  "error": "For 'metric' type, do not mix explicit 'from/to' with 'earliest_recorded'/'latest_recorded' flags."
+  "error": "For 'metric' type, do not mix explicit 'from/to' with 'earliest_recorded'/'latest_recorded' flags.",
+  "code": "INVALID_PARAMETER"
 }
 ```
 
