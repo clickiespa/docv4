@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "af73015e-64d8-4c90-8f97-3c5fae818f52",
+    "_postman_id": "1f495618-c3f5-46c3-a011-d912e20198b4",
     "name": "Lambda API-V4 Production (/v4)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": "Auto-generated collection of Lambda API-V4 endpoints"
@@ -63,7 +63,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id_category\": 1,\n  \"asset_name\": \"string\",\n  \"asset_description\": \"string\",\n  \"asset_observations\": \"string\"\n}\n",
+              "raw": "{\n  \"id_category\": 1,\n  \"id_location\": 1,\n  \"asset_name\": \"string\",\n  \"asset_description\": \"string\",\n  \"asset_observations\": \"string\"\n}\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -132,6 +132,198 @@
                   "language": "json"
                 }
               }
+            }
+          }
+        },
+        {
+          "name": "POST /assets/{id_asset}/files/prepare-upload",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/assets/{id_asset}/files/prepare-upload",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "assets",
+                "{id_asset}",
+                "files",
+                "prepare-upload"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"file\": {\n    \"name\": \"manual tecnico.pdf\",\n    \"type\": \"application/pdf\",\n    \"size\": 184234\n  },\n  \"target\": {\n    \"folder_path\": [\"Visitas tecnicas\", \"2026\"]\n  }\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /assets/{id_asset}/folders/root",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/assets/{id_asset}/folders/root",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "assets",
+                "{id_asset}",
+                "folders",
+                "root"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /files/{id_file}/complete-upload",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/files/{id_file}/complete-upload",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "files",
+                "{id_file}",
+                "complete-upload"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"uploaded\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /files/{id_file}/signed-url",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/files/{id_file}/signed-url",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "files",
+                "{id_file}",
+                "signed-url"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /files/{id_file}/cancel-upload",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/files/{id_file}/cancel-upload",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "files",
+                "{id_file}",
+                "cancel-upload"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /folders/{id_folder}/contents",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/folders/{id_folder}/contents?recursive=false&include_pending=false",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "folders",
+                "{id_folder}",
+                "contents"
+              ],
+              "query": [
+                {
+                  "key": "recursive",
+                  "value": "false",
+                  "description": "Default: false",
+                  "disabled": false
+                },
+                {
+                  "key": "include_pending",
+                  "value": "false",
+                  "description": "Default: false",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE /files/{id_file}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/files/{id_file}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "files",
+                "{id_file}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE /folders/{id_folder}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/folders/{id_folder}?recursive=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "folders",
+                "{id_folder}"
+              ],
+              "query": [
+                {
+                  "key": "recursive",
+                  "value": "true",
+                  "description": "Default: false",
+                  "disabled": false
+                }
+              ]
             }
           }
         }
@@ -1042,6 +1234,33 @@
           }
         },
         {
+          "name": "PUT /device_models/{id_device_model}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/device_models/{id_device_model}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "device_models",
+                "{id_device_model}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_gateway_protocol\": 2,\n  \"model_name\": \"string\",\n  \"model_description\": \"string\",\n  \"model_observations\": \"string\",\n  \"model_sends_data\": true,\n  \"model_trace_by_quantity\": false,\n  \"model_archived\": false\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
           "name": "GET /device_models/{id_device_model}/settings",
           "request": {
             "method": "GET",
@@ -1111,7 +1330,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id_device_model\": 1,\n  \"id_inventory\": 1,\n  \"device_custom_id\": \"DEVICE-001\",\n  \"device_observations\": \"Test device\",\n  \"device_archived\": false\n}\n",
+              "raw": "{\n  \"id_location\": 1,\n  \"id_device_model\": 1,\n  \"id_inventory\": 1,\n  \"device_custom_id\": \"DEVICE-001\",\n  \"device_observations\": \"Test device\",\n  \"device_archived\": false\n}\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1199,7 +1418,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id_inventory\": 2,\n  \"device_observations\": \"Updated device notes\",\n  \"device_archived\": false\n}\n",
+              "raw": "{\n  \"id_location\": 1,\n  \"id_inventory\": 2,\n  \"device_observations\": \"Updated device notes\",\n  \"device_archived\": false\n}\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1299,7 +1518,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"inventory_name\": \"string\",\n  \"inventory_description\": \"string\"\n}\n",
+              "raw": "{\n  \"id_environment\": 1,\n  \"id_account\": 1,\n  \"inventory_name\": \"string\",\n  \"inventory_description\": \"string\"\n}\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1344,7 +1563,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"inventory_name\": \"string\",\n  \"inventory_description\": \"string\"\n}\n",
+              "raw": "{\n  \"id_environment\": 1,\n  \"id_account\": 1,\n  \"inventory_name\": \"string\",\n  \"inventory_description\": \"string\"\n}\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1407,6 +1626,93 @@
                 "v4",
                 "entities",
                 "{id_entity}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /definitions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/definitions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "definitions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /entities/{entity_name}/attributes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/entities/metric/attributes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "entities",
+                "metric",
+                "attributes"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /entities/{entity_name}/resources/{id_resource}/values",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/entities/metric/resources/1/values",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "entities",
+                "metric",
+                "resources",
+                "1",
+                "values"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /entities/{entity_name}/resources/{id_resource}/values",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"values\": [\n    {\"assignment_id\": 1, \"value\": \"sample\"}\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v4/entities/metric/resources/1/values",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "entities",
+                "metric",
+                "resources",
+                "1",
+                "values"
               ]
             }
           }
@@ -1511,6 +1817,132 @@
           }
         },
         {
+          "name": "GET /locations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/locations?skip=0&limit=100&search=string",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "locations"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Default: 0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Default: 100",
+                  "disabled": false
+                },
+                {
+                  "key": "search",
+                  "value": "string",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /locations",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/locations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "locations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"location_name\": \"string\",\n  \"location_description\": \"string\",\n  \"location_address\": \"string\",\n  \"location_city\": \"string\",\n  \"location_province\": \"string\",\n  \"location_region\": \"string\",\n  \"location_country\": \"string\",\n  \"location_longitude\": 1,\n  \"location_latitude\": 1\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /locations/{id_location}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/locations/{id_location}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "locations",
+                "{id_location}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /locations/{id_location}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/locations/{id_location}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "locations",
+                "{id_location}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"location_name\": \"string\",\n  \"location_description\": \"string\",\n  \"location_address\": \"string\",\n  \"location_city\": \"string\",\n  \"location_province\": \"string\",\n  \"location_region\": \"string\",\n  \"location_country\": \"string\",\n  \"location_longitude\": 1,\n  \"location_latitude\": 1\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /locations/{id_location}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/locations/{id_location}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "locations",
+                "{id_location}"
+              ]
+            }
+          }
+        },
+        {
           "name": "GET /time_zones",
           "request": {
             "method": "GET",
@@ -1540,6 +1972,44 @@
               ]
             }
           }
+        }
+      ]
+    },
+    {
+      "name": "scores",
+      "item": [
+        {
+          "name": "GET /scores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/scores?month=6&year=2026",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "scores"
+              ],
+              "query": [
+                {
+                  "key": "month",
+                  "value": "6",
+                  "description": "Defaults to the current UTC month.",
+                  "disabled": false
+                },
+                {
+                  "key": "year",
+                  "value": "2026",
+                  "description": "Defaults to the current UTC year.",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Returns monthly score aggregates from BigQuery for the active non-archived assets in the requested account."
+          },
+          "response": []
         }
       ]
     },
@@ -3042,10 +3512,65 @@
           }
         },
         {
+          "name": "POST /setups/{id_setup}/devices",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_device\": 1001,\n  \"setup_install_observations\": \"Installed via API\",\n  \"replace_existing\": true\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/setups/{id_setup}/devices",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "setups",
+                "{id_setup}",
+                "devices"
+              ]
+            }
+          }
+        },
+        {
           "name": "GET /setups/{id_setup}/metrics",
           "request": {
             "method": "GET",
             "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/setups/{id_setup}/metrics",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "setups",
+                "{id_setup}",
+                "metrics"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /setups/{id_setup}/metrics",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metrics\": [\n    {\n      \"id_device_model_setting\": 1,\n      \"setup_metric_order\": 100\n    }\n  ]\n}\n"
+            },
             "url": {
               "raw": "{{baseUrl}}/v4/setups/{id_setup}/metrics",
               "host": [
@@ -3937,6 +4462,1862 @@
                 }
               ],
               "raw": "{{baseUrl}}/v4/form_input_types?skip=0&limit=100"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "device_model_points",
+      "item": [
+        {
+          "name": "GET /device_models/{id_device_model}/points",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/device_models/{id_device_model}/points",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "device_models",
+                "{id_device_model}",
+                "points"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /device_models/{id_device_model}/points",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/device_models/{id_device_model}/points",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "device_models",
+                "{id_device_model}",
+                "points"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"point_key\": \"Ea\",\n  \"point_label\": \"Energy A\",\n  \"point_name\": \"energy_a\",\n  \"point_type\": \"modbus_register\",\n  \"address\": 100,\n  \"count\": 2,\n  \"value_format\": \"float\",\n  \"factor_default\": 1,\n  \"read_function\": \"read_holding_registers\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /device_models/{id_device_model}/points/{point_label}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/device_models/{id_device_model}/points/{point_label}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "device_models",
+                "{id_device_model}",
+                "points",
+                "{point_label}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /device_models/{id_device_model}/points/{point_label}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/device_models/{id_device_model}/points/{point_label}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "device_models",
+                "{id_device_model}",
+                "points",
+                "{point_label}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"point_name\": \"energy_active_a\",\n  \"factor_default\": 0.1\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /device_models/{id_device_model}/points/{point_label}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/device_models/{id_device_model}/points/{point_label}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "device_models",
+                "{id_device_model}",
+                "points",
+                "{point_label}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /device_models/{id_device_model}/points/{point_label}/setting",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/device_models/{id_device_model}/points/{point_label}/setting",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "device_models",
+                "{id_device_model}",
+                "points",
+                "{point_label}",
+                "setting"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "mgd",
+      "item": [
+        {
+          "name": "GET /mgd/gateways/templates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/templates",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "templates"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/templates/{id_gateway_config_template}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/templates/{id_gateway_config_template}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "templates",
+                "{id_gateway_config_template}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /mgd",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_device_model\": 3,\n  \"device_custom_id\": \"GW-STORE-01\",\n  \"device_observations\": \"Main retail gateway\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /mgd/gateways/{id_setup}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"device_observations\": \"Updated from Postman\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /mgd/gateways/{id_setup}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/components",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/components",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "components"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /mgd/gateways/{id_setup}/components",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/components",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "components"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_gateway_component_type\": 4,\n  \"settings\": {\n    \"mode_profile\": \"standard\"\n  }\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/components/{id_setup_gateway_component}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/components/{id_setup_gateway_component}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "components",
+                "{id_setup_gateway_component}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /mgd/gateways/{id_setup}/components/{id_setup_gateway_component}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/components/{id_setup_gateway_component}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "components",
+                "{id_setup_gateway_component}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"component_period_unit\": \"seconds\",\n  \"component_period_interval\": 60\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /mgd/gateways/{id_setup}/components/{id_setup_gateway_component}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/components/{id_setup_gateway_component}?recursive=false",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "components",
+                "{id_setup_gateway_component}"
+              ],
+              "query": [
+                {
+                  "key": "recursive",
+                  "value": "false"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/devices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices?id_setup_gateway_component=7001",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices"
+              ],
+              "query": [
+                {
+                  "key": "id_setup_gateway_component",
+                  "value": "7001"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/devices/{child_id_setup}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}?id_setup_gateway_component=7001",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}"
+              ],
+              "query": [
+                {
+                  "key": "id_setup_gateway_component",
+                  "value": "7001"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/devices (child/component filter)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices?child_id_setup=901&id_setup_gateway_component=7001",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices"
+              ],
+              "query": [
+                {
+                  "key": "child_id_setup",
+                  "value": "901"
+                },
+                {
+                  "key": "id_setup_gateway_component",
+                  "value": "7001"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /mgd/gateways/{id_setup}/devices",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_setup\": 901,\n  \"id_setup_gateway_component\": 7001,\n  \"device_key\": \"SerialMedidor1\",\n  \"connection\": {\n    \"port\": \"/dev/ttyAMA2\",\n    \"unit\": 20\n  },\n  \"function_status\": 1\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/devices/{child_id_setup} (selected)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}?id_setup_gateway_component=7001",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}"
+              ],
+              "query": [
+                {
+                  "key": "id_setup_gateway_component",
+                  "value": "7001"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /mgd/gateways/{id_setup}/devices/{child_id_setup}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}?id_setup_gateway_component=7001",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}"
+              ],
+              "query": [
+                {
+                  "key": "id_setup_gateway_component",
+                  "value": "7001"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"function_status\": 0,\n  \"device_key\": \"SerialMedidor1\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /mgd/gateways/{id_setup}/devices/{child_id_setup}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}?id_setup_gateway_component=7001&recursive=false",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}"
+              ],
+              "query": [
+                {
+                  "key": "id_setup_gateway_component",
+                  "value": "7001"
+                },
+                {
+                  "key": "recursive",
+                  "value": "false"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/devices/{child_id_setup}/points",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}/points?id_setup_gateway_component=7001",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}",
+                "points"
+              ],
+              "query": [
+                {
+                  "key": "id_setup_gateway_component",
+                  "value": "7001"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /mgd/gateways/{id_setup}/devices/{child_id_setup}/points",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}/points",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}",
+                "points"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_setup_gateway_component\": 7001,\n  \"point_names\": [\n    \"active_energy\"\n  ]\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/devices/{child_id_setup}/points/{name}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}/points/{name}?id_setup_gateway_component=7001",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}",
+                "points",
+                "{name}"
+              ],
+              "query": [
+                {
+                  "key": "id_setup_gateway_component",
+                  "value": "7001"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /mgd/gateways/{id_setup}/devices/{child_id_setup}/points/{name}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}/points/{name}?id_setup_gateway_component=7001",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}",
+                "points",
+                "{name}"
+              ],
+              "query": [
+                {
+                  "key": "id_setup_gateway_component",
+                  "value": "7001"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"factor_override\": 1.0,\n  \"available_status\": {}\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /mgd/gateways/{id_setup}/devices/{child_id_setup}/points/{name}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}/points/{name}?id_setup_gateway_component=7001&recursive=false",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}",
+                "points",
+                "{name}"
+              ],
+              "query": [
+                {
+                  "key": "id_setup_gateway_component",
+                  "value": "7001"
+                },
+                {
+                  "key": "recursive",
+                  "value": "false"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups?schedule=7201",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}",
+                "point-groups"
+              ],
+              "query": [
+                {
+                  "key": "schedule",
+                  "value": "7201"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}",
+                "point-groups"
+              ],
+              "query": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"point_group_name\": \"Group1\",\n  \"control_mode\": \"automatico\",\n  \"id_setup_gateway_schedule\": 7201\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}",
+                "point-groups",
+                "{point_group_name}"
+              ],
+              "query": []
+            }
+          }
+        },
+        {
+          "name": "PUT /mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}",
+                "point-groups",
+                "{point_group_name}"
+              ],
+              "query": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"control_mode\": \"manual\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}?recursive=false",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}",
+                "point-groups",
+                "{point_group_name}"
+              ],
+              "query": [
+                {
+                  "key": "recursive",
+                  "value": "false"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}/points",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}/points",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}",
+                "point-groups",
+                "{point_group_name}",
+                "points"
+              ],
+              "query": []
+            }
+          }
+        },
+        {
+          "name": "POST /mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}/points",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}/points",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}",
+                "point-groups",
+                "{point_group_name}",
+                "points"
+              ],
+              "query": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_setup_gateway_device_point_ids\": [\n    9100\n  ]\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}/points/{name}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}/points/{name}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}",
+                "point-groups",
+                "{point_group_name}",
+                "points",
+                "{name}"
+              ],
+              "query": []
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}/special-days",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}/special-days",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}",
+                "point-groups",
+                "{point_group_name}",
+                "special-days"
+              ],
+              "query": []
+            }
+          }
+        },
+        {
+          "name": "POST /mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}/special-days",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}/special-days",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}",
+                "point-groups",
+                "{point_group_name}",
+                "special-days"
+              ],
+              "query": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_setup_gateway_special_day_ids\": [\n    7501\n  ]\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}/special-days/{id_setup_gateway_special_day}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups/{point_group_name}/special-days/{id_setup_gateway_special_day}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "devices",
+                "{child_id_setup}",
+                "point-groups",
+                "{point_group_name}",
+                "special-days",
+                "{id_setup_gateway_special_day}"
+              ],
+              "query": []
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/special-days",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/special-days?id_setup_gateway_component=7002",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "special-days"
+              ],
+              "query": []
+            }
+          }
+        },
+        {
+          "name": "POST /mgd/gateways/{id_setup}/special-days",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/special-days",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "special-days"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"day_group_name\": \"Holidays\",\n  \"dates\": [\n    \"25-12\"\n  ]\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/special-days/{special_day_id}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/special-days/{special_day_id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "special-days",
+                "{special_day_id}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /mgd/gateways/{id_setup}/special-days/{special_day_id}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/special-days/{special_day_id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "special-days",
+                "{special_day_id}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"day_group_name\": \"HolidayOverrides\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /mgd/gateways/{id_setup}/special-days/{special_day_id}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/special-days/{special_day_id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "special-days",
+                "{special_day_id}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/schedules",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/schedules",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "schedules"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /mgd/gateways/{id_setup}/schedules",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/schedules",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "schedules"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schedule_type\": \"lighting\",\n  \"schedule_number\": 1,\n  \"schedule_scope_type\": \"everyday\",\n  \"schedule_name\": \"Retail weekdays\",\n  \"schedule_config\": []\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/schedules/{schedule_id}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/schedules/{schedule_id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "schedules",
+                "{schedule_id}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /mgd/gateways/{id_setup}/schedules/{schedule_id}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/schedules/{schedule_id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "schedules",
+                "{schedule_id}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schedule_name\": \"Retail weekdays updated\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /mgd/gateways/{id_setup}/schedules/{schedule_id}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/schedules/{schedule_id}?recursive=false",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "schedules",
+                "{schedule_id}"
+              ],
+              "query": [
+                {
+                  "key": "recursive",
+                  "value": "false",
+                  "description": "When true, delete extensions linked to the schedule before removing it"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/components/{id_setup_gateway_component}/schedules",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/components/{id_setup_gateway_component}/schedules",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "components",
+                "{id_setup_gateway_component}",
+                "schedules"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/components/{id_setup_gateway_component}/schedules/{schedule_id}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/components/{id_setup_gateway_component}/schedules/{schedule_id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "components",
+                "{id_setup_gateway_component}",
+                "schedules",
+                "{schedule_id}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /mgd/gateways/{id_setup}/components/{id_setup_gateway_component}/schedules/{schedule_id}",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/components/{id_setup_gateway_component}/schedules/{schedule_id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "components",
+                "{id_setup_gateway_component}",
+                "schedules",
+                "{schedule_id}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"point_group_ids\": [\n    1,\n    2\n  ]\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /mgd/gateways/{id_setup}/components/{id_setup_gateway_component}/schedules/{schedule_id}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/components/{id_setup_gateway_component}/schedules/{schedule_id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "components",
+                "{id_setup_gateway_component}",
+                "schedules",
+                "{schedule_id}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/schedules/{schedule_id}/extensions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/schedules/{schedule_id}/extensions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "schedules",
+                "{schedule_id}",
+                "extensions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /mgd/gateways/{id_setup}/schedules/{schedule_id}/extensions",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/schedules/{schedule_id}/extensions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "schedules",
+                "{schedule_id}",
+                "extensions"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"extension_name\": \"Night closure\",\n  \"time_start\": \"2026-07-02T18:00:00\",\n  \"time_end\": \"2026-07-02T22:00:00\",\n  \"desired_status\": \"off\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /mgd/gateways/{id_setup}/schedules/{schedule_id}/extensions",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/schedules/{schedule_id}/extensions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "schedules",
+                "{schedule_id}",
+                "extensions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/schedules/{schedule_id}/special_days",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/schedules/{schedule_id}/special_days",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "schedules",
+                "{schedule_id}",
+                "special_days"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT /mgd/gateways/{id_setup}/schedules/{schedule_id}/special_days",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/schedules/{schedule_id}/special_days",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "schedules",
+                "{schedule_id}",
+                "special_days"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_setup_gateway_special_day_ids\": [\n    1,\n    2\n  ]\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE /mgd/gateways/{id_setup}/schedules/{schedule_id}/special_days",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/schedules/{schedule_id}/special_days",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "schedules",
+                "{schedule_id}",
+                "special_days"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/extensions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/extensions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "extensions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/extensions/{extension_id}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/extensions/{extension_id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "extensions",
+                "{extension_id}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /mgd/gateways/{id_setup}/templates/{id_gateway_config_template}/apply",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/mgd/gateways/{id_setup}/templates/{id_gateway_config_template}/apply",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "templates",
+                "{id_gateway_config_template}",
+                "apply"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_setup_gateway_component\": 7002,\n  \"overrides\": {}\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/{id_setup}/config-changes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/mgd/gateways/{id_setup}/config-changes?change_status=pending&change_group_key=&operation=",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "config-changes"
+              ],
+              "query": [
+                {
+                  "key": "change_status",
+                  "value": "pending"
+                },
+                {
+                  "key": "change_group_key",
+                  "value": ""
+                },
+                {
+                  "key": "operation",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PATCH /mgd/gateways/{id_setup}/config-changes/status",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/mgd/gateways/{id_setup}/config-changes/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "config-changes",
+                "status"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"change_status\": \"cancelled\",\n  \"id_setup_gateway_config_change_ids\": [\n    55\n  ]\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PATCH /mgd/gateways/{id_setup}/config-changes/{id_setup_gateway_config_change}/status",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/mgd/gateways/{id_setup}/config-changes/{id_setup_gateway_config_change}/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mgd",
+                "gateways",
+                "{id_setup}",
+                "config-changes",
+                "{id_setup_gateway_config_change}",
+                "status"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"change_status\": \"applied\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "POST /mgd/gateways/{id_setup}/imports",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/{id_setup}/imports?dry_run=false&strict=false",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "{id_setup}",
+                "imports"
+              ],
+              "query": [
+                {
+                  "key": "dry_run",
+                  "value": "false",
+                  "disabled": false
+                },
+                {
+                  "key": "strict",
+                  "value": "false",
+                  "disabled": false
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"GW-STORE-01\",\n  \"json_version\": \"v4.1\",\n  \"lambda_functions\": {}\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/component-types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/component-types",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "component-types"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/component-types/{id_gateway_component_type}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/component-types/{id_gateway_component_type}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "component-types",
+                "{id_gateway_component_type}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/protocols",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/protocols",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "protocols"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /mgd/gateways/component-protocols",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v4/mgd/gateways/component-protocols",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v4",
+                "mgd",
+                "gateways",
+                "component-protocols"
+              ]
             }
           }
         }
