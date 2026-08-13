@@ -64,12 +64,14 @@ curl -H "Authorization: <API_KEY>" \
       "id_setup_gateway": 3,
       "id_asset": 25,
       "id_device_model": 4,
+      "id_device_model_role": 4,
       "setup_name": "Packaging Line",
       "setup_description": "Default configuration for packaging",
       "setup_identifier": "setup-00012",
       "setup_recommended_equipment": "Gateway X2",
       "setup_gateway_order": 1,
       "setup_gateway_port": "A1",
+      "setup_role": 3,
       "setup_archived": false,
       "asset": {
         "asset_name": "Packaging Line 1",
@@ -90,12 +92,14 @@ curl -H "Authorization: <API_KEY>" \
 | `id_setup_gateway` | int | Identifier of the gateway assigned to the setup. |
 | `id_asset` | int | Asset associated with the setup. May be `null` when `include_without_asset` is enabled. Retrieve full details through [Get asset](../Assets/assets.md#get-asset). |
 | `id_device_model` | int | Device model configured in the setup. See [Get device model](../Devices/device_models.md#get-device-model). |
+| `id_device_model_role` | int | Device model role assigned to the setup. Gateway and child setup routing depend on this field. |
 | `setup_name` | string | Human-readable setup name. |
 | `setup_description` | string | Optional description of the setup. |
 | `setup_identifier` | string | Unique identifier used to reference the setup in external systems. |
 | `setup_recommended_equipment` | string | Optional note describing the recommended equipment. |
 | `setup_gateway_order` | int | Order in which the setup communicates with the gateway. |
 | `setup_gateway_port` | string | Gateway port assigned to this setup. |
+| `setup_role` | int | Setup role, for example regular, gateway, or node. |
 | `setup_archived` | bool | Indicates whether the setup is archived. |
 | `asset` | object | Summary of the linked asset, including the name and identifier returned by [Get asset](../Assets/assets.md#get-asset). |
 
@@ -176,12 +180,14 @@ curl -H "Authorization: <API_KEY>" \
     "id_setup_gateway": 3,
     "id_asset": 25,
     "id_device_model": 4,
+    "id_device_model_role": 4,
     "setup_name": "Packaging Line",
     "setup_description": "Default configuration for packaging",
     "setup_identifier": "setup-00012",
     "setup_recommended_equipment": "Gateway X2",
     "setup_gateway_order": 1,
     "setup_gateway_port": "A1",
+    "setup_role": 3,
     "setup_archived": false,
     "asset": {
       "asset_name": "Packaging Line 1",
@@ -201,12 +207,14 @@ curl -H "Authorization: <API_KEY>" \
 | `id_setup_gateway` | int | Identifier of the gateway assigned to the setup. |
 | `id_asset` | int | Asset associated with the setup. May be `null` when the setup is not linked to an asset. Retrieve full details through [Get asset](../Assets/assets.md#get-asset). |
 | `id_device_model` | int | Device model configured in the setup. See [Get device model](../Devices/device_models.md#get-device-model). |
+| `id_device_model_role` | int | Device model role assigned to the setup. Gateway and child setup routing depend on this field. |
 | `setup_name` | string | Human-readable setup name. |
 | `setup_description` | string | Optional description of the setup. |
 | `setup_identifier` | string | Unique identifier used to reference the setup externally. |
 | `setup_recommended_equipment` | string | Optional note describing the recommended equipment. |
 | `setup_gateway_order` | int | Order in which the setup communicates with the gateway. |
 | `setup_gateway_port` | string | Gateway port assigned to this setup. |
+| `setup_role` | int | Setup role, for example regular, gateway, or node. |
 | `setup_archived` | bool | Indicates whether the setup is archived. |
 | `asset` | object | Summary of the linked asset, including the name and identifier returned by [Get asset](../Assets/assets.md#get-asset). |
 
