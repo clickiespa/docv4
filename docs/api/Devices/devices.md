@@ -64,6 +64,7 @@ curl -H "Authorization: <API_KEY>" \
   "data": [
     {
       "id_device": 1,
+      "id_location": 500010,
       "id_inventory": 8,
       "id_device_model": 3,
       "id_device_status": 2,
@@ -75,6 +76,7 @@ curl -H "Authorization: <API_KEY>" \
     },
     {
       "id_device": 2,
+      "id_location": null,
       "id_inventory": null,
       "id_device_model": 5,
       "id_device_status": 1,
@@ -95,6 +97,7 @@ curl -H "Authorization: <API_KEY>" \
 | Field | Type | Description |
 | --- | --- | --- |
 | `id_device` | int | Numeric identifier of the device. Use [Get device](#get-device) to retrieve its details. |
+| `id_location` | int | Location identifier assigned to the device. |
 | `id_inventory` | int | Inventory identifier where the device is located. |
 | `id_device_model` | int | Identifier of the device model that defines the capabilities of the hardware. |
 | `id_device_status` | int | Identifier representing the device operational status (`1` is connected, `2` is disconnected). |
@@ -244,6 +247,7 @@ curl -H "Authorization: <API_KEY>" \
   "message": "Element obtained successfully",
   "data": {
     "id_device": 1,
+    "id_location": 500010,
     "id_inventory": 8,
     "id_device_model": 3,
     "id_device_status": 2,
@@ -321,6 +325,7 @@ POST /devices
 | Field | Required | Type | Default | Description |
 | --- | --- | --- | --- | --- |
 | `id_inventory` | No | int | No | Inventory where the device is stored. Retrieve it from [List inventories](../Setups/inventories.md#list-inventories). |
+| `id_location` | No | int | No | Reusable location assigned to the device. Obtain it from [List locations](../Global_resources/locations.md#list-locations). |
 | `id_device_model` | Yes | int | No | Device model that defines the capabilities of the hardware. Obtain it from [Get device model](./device_models.md#get-device-model). |
 | `id_device_status` | No | int | No | Operational status identifier (`1` for connected, `2` for disconnected). |
 | `device_custom_id` | No | string | No | Account-specific identifier assigned to the device. |
@@ -344,6 +349,7 @@ curl -X POST -H "Authorization: <API_KEY>" \
   -d '{
     "id_device_model": 3,
     "id_inventory": 8,
+    "id_location": 500010,
     "device_custom_id": "NODE-100",
     "device_observations": "Installed in warehouse"
   }' \
@@ -357,6 +363,7 @@ curl -X POST -H "Authorization: <API_KEY>" \
   "message": "Element created successfully",
   "data": {
     "id_device": 120,
+    "id_location": 500010,
     "id_inventory": 8,
     "id_device_model": 3,
     "id_device_status": null,
@@ -370,6 +377,7 @@ curl -X POST -H "Authorization: <API_KEY>" \
     "body": {
       "id_device_model": 3,
       "id_inventory": 8,
+      "id_location": 500010,
       "device_custom_id": "NODE-100",
       "device_observations": "Installed in warehouse"
     }
@@ -434,6 +442,7 @@ PUT /devices/{id_device}
 | Field | Required | Type | Default | Description |
 | --- | --- | --- | --- | --- |
 | `id_inventory` | No | int | No | Inventory where the device is stored. |
+| `id_location` | No | int | No | Reusable location assigned to the device. |
 | `id_device_model` | No | int | No | Device model assigned to the hardware. |
 | `id_device_status` | No | int | No | Operational status identifier. |
 | `device_custom_id` | No | string | No | Account-specific identifier assigned to the device. |
@@ -455,6 +464,7 @@ curl -X PUT -H "Authorization: <API_KEY>" \
   -H "Account: <ID_ACCOUNT>" \
   -H "Content-Type: application/json" \
   -d '{
+    "id_location": 500011,
     "id_inventory": 9,
     "device_archived": true
   }' \
@@ -468,6 +478,7 @@ curl -X PUT -H "Authorization: <API_KEY>" \
   "message": "Element updated successfully",
   "data": {
     "id_device": 120,
+    "id_location": 500011,
     "id_inventory": 9,
     "id_device_model": 3,
     "id_device_status": null,
@@ -479,6 +490,7 @@ curl -X PUT -H "Authorization: <API_KEY>" \
   },
   "context": {
     "body": {
+      "id_location": 500011,
       "id_inventory": 9,
       "device_archived": true
     },
