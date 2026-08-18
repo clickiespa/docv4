@@ -19,7 +19,7 @@ This page is designed as a client-facing guide so you can quickly find the right
 - [AI assistants endpoints](ai/assistants.md)
 
 ### `assets`
-- [Assets endpoints](Assets/assets.md) — `GET /assets`, `POST /assets`, `GET /assets/{id_asset}`, `PUT /assets/{id_asset}`, `DELETE /assets/{id_asset}`.
+- [Assets endpoints](Assets/assets.md) — asset CRUD plus asset file/folder operations: `POST /assets/{id_asset}/files/prepare-upload`, `GET /assets/{id_asset}/folders/root`, `POST /files/{id_file}/complete-upload`, `POST /files/{id_file}/cancel-upload`, `GET /files/{id_file}/signed-url`, `GET /folders/{id_folder}/contents`, `DELETE /files/{id_file}`, `DELETE /folders/{id_folder}`.
 
 ### `collaborators`
 - [Collaborators endpoints](Collaborators/collaborators.md) — `GET /collaborators`, `POST /collaborators`, `GET /collaborators/{id_user}`, `PUT /collaborators/{id_user}`, `DELETE /collaborators/{id_user}`, `GET /collaborators/{id_user}/history`.
@@ -30,16 +30,17 @@ This page is designed as a client-facing guide so you can quickly find the right
 
 ### `data`
 - [Data ingestion and deletion](Metrics_and_data/data_ingestion_and_deletion.md) — datapoint ingestion and deletion for `/metrics/{metric_identifier}/datapoints`.
-- [Legacy data notes](Metrics_and_data/data.md) — historical reference file.
+- [Data extraction](Metrics_and_data/data.md) — Historical timeseries for `/data/metric`, `data/formula` and `data/tags`.
 
 ### `devices`
 - [Devices endpoints](Devices/devices.md) — device CRUD and related operations.
-- [Device models endpoints](Devices/device_models.md) — device models, model types, and manufacturers.
+- [Device models endpoints](Devices/device_models.md) — device models, model points, model types, and manufacturers.
 - [Device setups endpoints](Setups/device_setups.md) — setup/device linkage endpoints.
 - [Inventories endpoints](Setups/inventories.md) — inventory operations.
 
 ### `eav`
 - [Entities endpoints](Entities/eav_entities.md) — EAV entities catalog endpoints.
+- [Entity attributes endpoints](Entities/entity_attributes.md) — definitions, assignments, and values for `user`, `metric`, `inventory`, and `globalcontext`.
 
 ### `filters`
 - [Filters endpoints](Filters/filters.md) — `GET /filters`.
@@ -55,8 +56,14 @@ This page is designed as a client-facing guide so you can quickly find the right
 - [Gateway logs endpoints](gateways/logs.md) — `GET /devices/{identifier}/logs`, `GET /devices/{identifier}/disk`, `GET /devices/{identifier}/backup/coverage`.
 - [Gateway changelog](gateways/changelog.md) — gateway-specific release notes and documentation history.
 
+### `mgd`
+- [MGD gateway configuration endpoints](gateways/mgd_gateways.md) — `/mgd/gateways`: template CRUD and apply, component/protocol/schedule-type catalogs, gateway configuration, components, child-device bindings, model points keyed by canonical IDs, point groups and their point/special-day bridges, per-name everyday/special-day behavior rules with singular-route scope selection, special days, schedules using numeric scope IDs, extensions, config-change list/status endpoints, reconciliation, and canonical JSON imports.
+- [MGD config-change states](gateways/mgd_config_change_states.md) — state machine, installation eligibility, target isolation, reconciliation, notifications, and import behavior.
+- [MGD gateway contract tests](gateways/mgd_gateway_smoke_tests.md) — route, state, event, and importer coverage that protects the public contract.
+
 ### `global_resources`
 - [Languages endpoints](Global_resources/languages.md)
+- [Locations endpoints](Global_resources/locations.md)
 - [Time zones endpoints](Global_resources/time_zones.md)
 - [Icons endpoints](Global_resources/icons.md)
 - [Methods endpoints](Global_resources/methods.md) — aggregation and interpolation methods.
@@ -81,6 +88,9 @@ This page is designed as a client-facing guide so you can quickly find the right
 - [Roles endpoints](Scope/roles.md)
 - [Clearances endpoints](Scope/clearances.md)
 - [Relationships endpoints](Scope/relationships.md)
+
+### `scores`
+- [Scores endpoints](Scores/scores.md) — `GET /scores`.
 
 ### `search`
 - [Metrics search endpoint](Search/Metrics.md) — `POST /search/metrics`.
