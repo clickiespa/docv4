@@ -4,6 +4,7 @@ Associations between setups and the metrics they expose.
 
 ## Endpoints
 - [Metrics by setup](#metrics-by-setup)
+- [Enable setup metrics](#enable-setup-metrics)
 - [Setups by metric](#setups-by-metric)
 
 ## Metrics by setup
@@ -60,6 +61,7 @@ curl -H "Authorization: <API_KEY>" \
       "id_setup": 3,
       "id_metric": 5,
       "id_alias": null,
+      "id_device_model_point": 701,
       "dms_attribute_name": "temperature"
     }
   ],
@@ -76,6 +78,7 @@ curl -H "Authorization: <API_KEY>" \
 | `id_setup` | int | Setup identifier. See [Get setup](./setups.md#get-setup). |
 | `id_metric` | int | Metric identifier linked to the setup. Retrieve it from [Get metric](../Metrics_and_data/metrics.md#get-metric). |
 | `id_alias` | int | Optional alias identifier used for display names. |
+| `id_device_model_point` | int | Optional technical point identifier linked to the setup metric for gateway exports. |
 | `dms_attribute_name` | string | Attribute name from `device_model_settings` associated through `id_device_model_setting`. |
 
 ### Status codes
@@ -102,6 +105,74 @@ curl -H "Authorization: <API_KEY>" \
   "instance": "/setups/3/metrics"
 }
 ```
+
+## Enable setup metrics
+
+Create `setup_metrics` rows for a setup from `device_model_settings`. The API creates a new `metrics` row per setting (device source, UOM aggregation/interpolation) and links it through `setup_metrics`. An active `device_setups` installation is not required.
+
+Clearance level 6 or lower (level 1 is admin) is required to use this endpoint.
+
+### Endpoint
+```
+POST /setups/{id_setup}/metrics
+```
+
+### Request body
+
+| Field | Required | Type | Default | Description |
+| --- | --- | --- | --- | --- |
+| `metrics` | Yes | array | No | List of device model settings to enable. |
+| `metrics[].id_device_model_setting` | Yes | int | No | Setting that belongs to the setup device model. A new metric is created automatically from this setting. |
+| `metrics[].id_alias` | No | int | No | Optional alias identifier. |
+| `metrics[].id_device_model_point` | No | int | No | Optional device model point link. |
+| `metrics[].setup_metric_hidden` | No | bool | `false` | Hide the metric in UI lists. |
+| `metrics[].setup_metric_order` | No | int | `100` | Display order. |
+| `metrics[].setup_metric_transform` | No | string | No | Optional transform expression. |
+
+### Sample request
+```json
+{
+  "metrics": [
+    {
+      "id_device_model_setting": 44,
+      "setup_metric_order": 10
+    }
+  ]
+}
+```
+
+### Sample response (201)
+```json
+{
+  "status": "success",
+  "message": "Elements created successfully",
+  "data": [
+    {
+      "id_setup_metric": 12,
+      "id_setup": 901,
+      "id_metric": 5,
+      "id_device_model_setting": 44,
+      "setup_metric_hidden": false,
+      "setup_metric_order": 10,
+      "setup_metric_transform": null,
+      "dms_attribute_name": "active_energy"
+    }
+  ],
+  "context": {},
+  "instance": "/setups/901/metrics"
+}
+```
+
+### Status codes
+
+| Status | Description |
+| --- | --- |
+| `201` | Setup metrics created or returned when already enabled. |
+| `400` | A setting does not belong to the setup model. |
+| `401` | Authentication failed. |
+| `403` | Insufficient clearance. |
+| `404` | Setup or device model setting not found. |
+| `500` | Unexpected server error. |
 
 ## Setups by metric
 
@@ -157,6 +228,7 @@ curl -H "Authorization: <API_KEY>" \
       "id_setup": 3,
       "id_metric": 5,
       "id_alias": null,
+      "id_device_model_point": 701,
       "dms_attribute_name": "temperature"
     }
   ],
@@ -173,6 +245,7 @@ curl -H "Authorization: <API_KEY>" \
 | `id_setup` | int | Setup identifier. See [Get setup](./setups.md#get-setup). |
 | `id_metric` | int | Metric identifier linked to the setup. Retrieve it from [Get metric](../Metrics_and_data/metrics.md#get-metric). |
 | `id_alias` | int | Optional alias identifier used for display names. |
+| `id_device_model_point` | int | Optional technical point identifier linked to the setup metric for gateway exports. |
 | `dms_attribute_name` | string | Attribute name from `device_model_settings` associated through `id_device_model_setting`. |
 
 ### Status codes
