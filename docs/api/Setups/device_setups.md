@@ -4,6 +4,7 @@ Historical relationship between physical devices and the setups they implement.
 
 ## Endpoints
 - [Devices by setup](#devices-by-setup)
+- [Install device in setup](#install-device-in-setup)
 - [Setups by device](#setups-by-device)
 
 ## Devices by setup
@@ -106,6 +107,79 @@ curl -H "Authorization: <API_KEY>" \
   "instance": "/setups/5/devices"
 }
 ```
+
+## Install device in setup
+
+Create an active main device installation by inserting a row in `device_setups`.
+
+Clearance level 6 or lower (level 1 is admin) is required to use this endpoint.
+
+### Endpoint
+```
+POST /setups/{id_setup}/devices
+```
+
+### Headers
+
+| Header | Required | Description | Type |
+| --- | --- | --- | --- |
+| `Authorization` | Yes | API key generated from your profile | string |
+| `Account` | Yes | Target account ID | int |
+
+### Path parameters
+
+| Parameter | Required | Type | Description |
+| --- | --- | --- | --- |
+| `id_setup` | Yes | int | Setup where the device will be installed. |
+
+### Request body
+
+| Field | Required | Type | Default | Description |
+| --- | --- | --- | --- | --- |
+| `id_device` | Yes | int | No | Device to install. |
+| `setup_install_observations` | No | string | No | Installation notes. |
+| `replace_existing` | No | bool | `false` | Uninstall the current main device before installing the new one. |
+
+### Sample request
+```json
+{
+  "id_device": 1001,
+  "setup_install_observations": "Installed via API",
+  "replace_existing": true
+}
+```
+
+### Sample response (201)
+```json
+{
+  "status": "success",
+  "message": "Element created successfully",
+  "data": {
+    "id_device_setup": 43,
+    "id_device": 1001,
+    "id_setup": 5,
+    "device_setup_is_accessory": false,
+    "setup_install_date": "2026-07-07T12:00:00Z",
+    "setup_install_observations": "Installed via API",
+    "setup_uninstall_date": null,
+    "setup_uninstall_observations": null
+  },
+  "context": {},
+  "instance": "/setups/5/devices"
+}
+```
+
+### Status codes
+
+| Status | Description |
+| --- | --- |
+| `201` | Device installed successfully. |
+| `400` | Device model does not match setup model. |
+| `401` | Authentication failed. |
+| `403` | Insufficient permissions. |
+| `404` | Setup or device not found. |
+| `409` | Device already active elsewhere, or setup already has a main device and `replace_existing` is false. |
+| `500` | Unexpected server error. |
 
 ## Setups by device
 
