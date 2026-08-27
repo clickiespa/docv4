@@ -10,7 +10,8 @@ Entities used in the attribute-value model. An entity represents an account-spec
 
 Retrieve every EAV entity configured for the authenticated account.
 
-Clearance level 2 (Read) or any lower clearance level is required to use this endpoint.
+Clearance note: the route uses the `EavEntity` entity permissions for `read`;
+it has no fixed numeric clearance declared in the handler.
 
 ### Endpoint
 ```
@@ -31,6 +32,10 @@ This endpoint does not accept query parameters.
 ### Request body
 
 This endpoint does not accept a request body.
+
+### Pydantic models
+
+- Response item: `ShowEavEntity` (`List[ShowEavEntity]`).
 
 ### Sample headers
 ```json
@@ -88,7 +93,7 @@ curl -X GET \
 | `200` | Entities retrieved successfully. |
 | `400` | The request could not be processed due to invalid headers or account metadata. |
 | `401` | Authentication failed. |
-| `403` | The authenticated user lacks clearance to list entities. |
+| `403` | The authenticated user lacks `EavEntity` read permission. |
 | `500` | Unexpected server error. |
 
 ### Error response (401)
@@ -132,7 +137,8 @@ curl -X GET \
 
 Retrieve a single EAV entity by its numeric identifier.
 
-Clearance level 2 (Read) or any lower clearance level is required to use this endpoint.
+Clearance note: the route uses the `EavEntity` entity permissions for `read`;
+it has no fixed numeric clearance declared in the handler.
 
 ### Endpoint
 ```
@@ -159,6 +165,10 @@ This endpoint does not accept query parameters.
 ### Request body
 
 This endpoint does not accept a request body.
+
+### Pydantic models
+
+- Response: `ShowEavEntity`.
 
 ### Sample headers
 ```json
@@ -211,7 +221,7 @@ This endpoint returns the [Entity object](#entity-object) described in the List 
 | `200` | Entity retrieved successfully. |
 | `400` | The request could not be processed due to invalid headers or account metadata. |
 | `401` | Authentication failed. |
-| `403` | The authenticated user lacks clearance to view the entity. |
+| `403` | The authenticated user lacks `EavEntity` read permission. |
 | `404` | The requested entity was not found. |
 | `500` | Unexpected server error. |
 
