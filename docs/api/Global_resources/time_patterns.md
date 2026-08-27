@@ -1,5 +1,7 @@
 # Time Patterns
 
+> **Not exposed by the current AP-v4 deployment.** The `/time_patterns` router is not registered in the active AP-v4 route table. This page is retained as a reference for a possible future reactivation and is not a callable production endpoint today.
+
 ## Endpoints
 - [Create or get pattern](#create-or-get-pattern)
 - [Get pattern by ID](#get-pattern-by-id)
@@ -167,4 +169,3 @@ curl -H "Authorization: <API_KEY>" \
 - `403` — Clearance level is insufficient.
 - `404` — Time pattern was not found.
 - `500` — Internal server error.
-

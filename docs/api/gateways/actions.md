@@ -213,10 +213,10 @@ Submit read/write operations to IoT devices via MQTT. Supports two configuration
 
 ```json
 {
-  "action": "read" | "write",
+  "action": "read",
   "comm_type": "rtu",
-  "config_type": "preconfig" | "custom",
-  "payload": {...},
+  "config_type": "preconfig",
+  "payload": {},
   "task_id": "optional-uuid-or-string"
 }
 ```
