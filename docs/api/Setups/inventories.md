@@ -58,8 +58,10 @@ curl -H "Authorization: <API_KEY>" \
   "data": [
     {
       "id_inventory": 1,
+      "id_environment": 1,
+      "id_account": 25,
       "inventory_name": "Main",
-      "inventory_identifier": "inv-main",
+      "inventory_identifier": "5e5f8aa8-4f17-4691-b0f8-8240f196ea1a",
       "inventory_description": "Primary devices"
     }
   ],
@@ -73,6 +75,8 @@ curl -H "Authorization: <API_KEY>" \
 | Field | Type | Description |
 | --- | --- | --- |
 | `id_inventory` | int | Numeric identifier of the inventory. |
+| `id_environment` | int | Environment that owns the inventory. |
+| `id_account` | int | Account associated with the inventory. This value can be `null` for environment-level inventories. |
 | `inventory_name` | string | Human-readable inventory name. |
 | `inventory_identifier` | string | Unique identifier used to reference the inventory. |
 | `inventory_description` | string | Optional description of the inventory. |
@@ -151,8 +155,10 @@ curl -H "Authorization: <API_KEY>" \
   "message": "Element obtained successfully",
   "data": {
     "id_inventory": 1,
+    "id_environment": 1,
+    "id_account": 25,
     "inventory_name": "Main",
-    "inventory_identifier": "inv-main",
+    "inventory_identifier": "5e5f8aa8-4f17-4691-b0f8-8240f196ea1a",
     "inventory_description": "Primary devices"
   },
   "context": {},
@@ -165,6 +171,8 @@ curl -H "Authorization: <API_KEY>" \
 | Field | Type | Description |
 | --- | --- | --- |
 | `id_inventory` | int | Numeric identifier of the inventory. |
+| `id_environment` | int | Environment that owns the inventory. |
+| `id_account` | int | Account associated with the inventory. This value can be `null` for environment-level inventories. |
 | `inventory_name` | string | Human-readable inventory name. |
 | `inventory_identifier` | string | Unique identifier used to reference the inventory. |
 | `inventory_description` | string | Optional description of the inventory. |
@@ -196,7 +204,7 @@ curl -H "Authorization: <API_KEY>" \
 
 ## Create inventory
 
-Create a new inventory available to the authenticated account.
+Create a new inventory. The `inventory_identifier` is always generated server-side.
 
 Clearance level 2 or lower (level 1 is admin) is required to use this endpoint.
 
@@ -216,10 +224,12 @@ POST /inventories
 
 | Field | Required | Type | Default | Description |
 | --- | --- | --- | --- | --- |
+| `id_environment` | Yes | int | No | Target environment for the inventory. Role `1` sessions may set any valid environment. Other sessions must use their active environment. |
+| `id_account` | No | int | Active `Account` header | Target account for the inventory. Role `1` sessions may set any valid account in the selected environment or `null`. Other sessions may only use their active account. |
 | `inventory_name` | Yes | string | No | Human-readable inventory name. |
 | `inventory_description` | No | string | No | Optional description for the inventory. |
 
-The `inventory_identifier` is generated automatically and is not accepted in the request payload.
+If `id_account` is omitted, the API assigns the active `Account: <ID_ACCOUNT>` from the request context.
 
 ### Sample headers
 ```json
@@ -235,6 +245,8 @@ curl -X POST -H "Authorization: <API_KEY>" \
   -H "Account: <ID_ACCOUNT>" \
   -H "Content-Type: application/json" \
   -d '{
+    "id_environment": 1,
+    "id_account": 25,
     "inventory_name": "Warehouse",
     "inventory_description": "Devices stored in the main warehouse"
   }' \
@@ -248,12 +260,16 @@ curl -X POST -H "Authorization: <API_KEY>" \
   "message": "Element created successfully",
   "data": {
     "id_inventory": 15,
+    "id_environment": 1,
+    "id_account": 25,
     "inventory_name": "Warehouse",
-    "inventory_identifier": "inv-warehouse",
+    "inventory_identifier": "0b5e9e57-5df5-4947-bdc6-93ed8f280b70",
     "inventory_description": "Devices stored in the main warehouse"
   },
   "context": {
     "body": {
+      "id_environment": 1,
+      "id_account": 25,
       "inventory_name": "Warehouse",
       "inventory_description": "Devices stored in the main warehouse"
     }
@@ -315,6 +331,8 @@ PUT /inventories/{id_inventory}
 
 | Field | Required | Type | Default | Description |
 | --- | --- | --- | --- | --- |
+| `id_environment` | No | int | Current value | Updated environment for the inventory. Role `1` sessions may move the inventory to another valid environment. Other sessions may only keep their current environment. |
+| `id_account` | No | int | Current value | Updated account for the inventory. Role `1` sessions may move the inventory to another valid account in the selected environment or set it to `null`. Other sessions may only keep or restate their active account. |
 | `inventory_name` | No | string | No | Updated inventory name. |
 | `inventory_description` | No | string | No | Updated description. |
 
@@ -334,6 +352,7 @@ curl -X PUT -H "Authorization: <API_KEY>" \
   -H "Account: <ID_ACCOUNT>" \
   -H "Content-Type: application/json" \
   -d '{
+    "id_environment": 1,
     "inventory_description": "Devices stored in the refurbished warehouse"
   }' \
   /inventories/15
@@ -346,12 +365,15 @@ curl -X PUT -H "Authorization: <API_KEY>" \
   "message": "Element updated successfully",
   "data": {
     "id_inventory": 15,
+    "id_environment": 1,
+    "id_account": 25,
     "inventory_name": "Warehouse",
-    "inventory_identifier": "inv-warehouse",
+    "inventory_identifier": "0b5e9e57-5df5-4947-bdc6-93ed8f280b70",
     "inventory_description": "Devices stored in the refurbished warehouse"
   },
   "context": {
     "body": {
+      "id_environment": 1,
       "inventory_description": "Devices stored in the refurbished warehouse"
     },
     "path": {
@@ -393,6 +415,8 @@ curl -X PUT -H "Authorization: <API_KEY>" \
 Remove an inventory from the authenticated account.
 
 Clearance level 2 or lower (level 1 is admin) is required to use this endpoint.
+
+Inventories with active devices assigned cannot be removed.
 
 ### Endpoint
 ```
@@ -450,6 +474,7 @@ curl -X DELETE -H "Authorization: <API_KEY>" \
 | `401` | Authentication failed. |
 | `403` | The authenticated user lacks clearance to delete inventories. |
 | `404` | Inventory not found for the provided identifier. |
+| `409` | Inventory still has devices assigned. |
 | `500` | Unexpected server error. |
 
 ### Error response (404)
@@ -457,6 +482,21 @@ curl -X DELETE -H "Authorization: <API_KEY>" \
 {
   "status": "error",
   "message": "Inventory 15 was not found",
+  "data": null,
+  "context": {
+    "path": {
+      "id_inventory": "15"
+    }
+  },
+  "instance": "/inventories/15"
+}
+```
+
+### Error response (409)
+```json
+{
+  "status": "error",
+  "message": "The inventory still has devices assigned.",
   "data": null,
   "context": {
     "path": {
