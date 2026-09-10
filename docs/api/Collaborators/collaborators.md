@@ -270,11 +270,18 @@ GET /collaborators/{id_user}/history
 
 ### Query parameters
 
-| Parameter | Required | Description | Type |
-| --- | --- | --- | --- |
-| `skip` | no | Offset for pagination. Defaults to `0` | int |
-| `limit` | no | Maximum number of event rows to return. Defaults to `100` | int |
-| `id_event_type` | no | Filter results by event type: `1` login, `2` creation, `3` modification, `4` deletion | int |
+| Parameter | Required | Description | Type | Default |
+| --- | --- | --- | --- | --- |
+| `from` | no | Inclusive start of the time range in UNIX seconds. | int | `now - 7 days` when `to` is omitted; otherwise `to - 7 days` |
+| `to` | no | Inclusive end of the time range in UNIX seconds. | int | `now` |
+| `skip` | no | Offset for pagination. | int | `0` |
+| `limit` | no | Maximum number of event rows to return. | int | `100` |
+| `id_event_type` | no | Filter results by event type: `1` login, `2` creation, `3` modification, `4` deletion. | int | none |
+
+`from` and `to` are optional and inclusive. If both are omitted, the endpoint
+uses the last seven days. If only one is present, the missing boundary is
+derived from that value or the current UTC time. An inverted explicit range
+(`from > to`) returns `400`; the API does not swap the values.
 
 ### Request headers example
 ```json
@@ -288,7 +295,7 @@ GET /collaborators/{id_user}/history
 ```bash
 curl -H "Authorization: <API_KEY>" \
   -H "Account: <ID_ACCOUNT>" \
-  "<HOST_NAME>/collaborators/<ID_USER>/history?skip=0&limit=100&id_event_type=3"
+  "<HOST_NAME>/collaborators/<ID_USER>/history?from=1788307200&to=1788393600&skip=0&limit=100&id_event_type=3"
 ```
 
 ### Sample response
@@ -328,7 +335,7 @@ curl -H "Authorization: <API_KEY>" \
 | Status code | Description |
 | --- | --- |
 | `200` | Collaborator event history returned successfully |
-| `400` | Invalid pagination parameters |
+| `400` | Invalid pagination parameters or an inverted time range (`from > to`) |
 | `401` | Missing or invalid API key |
 | `403` | The authenticated collaborator does not have access to the requested account |
 | `404` | Collaborator was not found in the current account |

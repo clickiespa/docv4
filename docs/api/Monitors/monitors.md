@@ -1126,7 +1126,13 @@ Clearance level 7 or any lower clearance is required to use this endpoint.
 
 Monitor history entries are read-only; they cannot be created, updated, or deleted through the API.
 
-If no timestamps are provided, the API returns the last seven days of activity by default. When the `from_timestamp` is greater than the `to_timestamp`, the service automatically swaps them to build a valid range.
+The canonical query parameters are `from` and `to`, expressed as inclusive
+UNIX timestamps in seconds. If both are omitted, the API returns the last seven
+days of activity. If only one is present, the missing boundary is derived from
+that value or the current UTC time. When `from` is greater than `to`, the API
+returns `400` and does not swap the values. The old `from_timestamp` and
+`to_timestamp` names remain accepted as hidden compatibility aliases, but they
+are not the documented contract.
 
 ### Endpoint
 ```
@@ -1148,15 +1154,15 @@ GET /monitors/{id_monitor}/history
 
 ### Query parameters
 
-| Parameter | Required | Type | Description |
-| --- | --- | --- | --- |
-| `from_timestamp` | no | int | Inclusive start of the range in UNIX seconds. Defaults to 7 days before the current time when omitted. |
-| `to_timestamp` | no | int | Inclusive end of the range in UNIX seconds. Defaults to the current time when omitted. |
+| Parameter | Required | Type | Default | Description |
+| --- | --- | --- | --- | --- |
+| `from` | no | int | `now - 7 days` | Inclusive start of the range in UNIX seconds. If only `to` is supplied, defaults to `to - 7 days`. |
+| `to` | no | int | `now` | Inclusive end of the range in UNIX seconds. If only `from` is supplied, defaults to the current UTC time. |
 
 ### Sample request
 ```bash
 curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" \
-  /monitors/1/history?from_timestamp=1713312000&to_timestamp=1713916800
+  /monitors/1/history?from=1713312000&to=1713916800
 ```
 
 ### Sample response
@@ -1185,7 +1191,7 @@ curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" \
 | Status | Description |
 | --- | --- |
 | `200` | Monitor history retrieved successfully. |
-| `400` | Invalid timestamp format provided. |
+| `400` | Invalid timestamp format or inverted range (`from > to`). |
 | `401` | Missing or invalid authentication headers. |
 | `403` | The authenticated user lacks the required clearance. |
 | `404` | Monitor not found for the provided identifier. |
