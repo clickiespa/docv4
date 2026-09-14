@@ -1,38 +1,27 @@
 ---
 title: "Concepts"
-version: "v4"
-last_updated: "2026-02-26"
+version: "v4.2.3"
+last_updated: "2026-09-14"
 owner: "Product"
 status: "stable"
 ---
+
 # Concepts
 
-Base section to understand how information is structured in Clickie and why that structure directly impacts the quality of analysis and automation.
+These four ideas help you choose data and interpret the results.
 
-## Why start here
+| Concept | Meaning | Example |
+| --- | --- | --- |
+| Metric | A measurement with values and dates. | Temperatura ambiente, in °C. |
+| Asset | A place, area or piece of equipment associated with metrics. | Edificio principal. |
+| Period | The dates you want to inspect. | One complete day. |
+| Widget | A dashboard card displaying data or content. | A line showing electrical power during that day. |
 
-Before creating a monitoring, dashboard or digital twin, it is key to align language and criteria on metrics.
+## From a measurement to a daily view
 
-This section seeks to ensure that all profiles (technical and business) share the same conceptual basis to avoid inconsistent configurations and reprocessing.
+1. Find **Potencia eléctrica** in the [metric selector](selector.md).
+2. Inspect one day in the [data viewer](../analisis/visor-datos.md).
+3. Choose a resolution that reveals the changes you need to see.
+4. Create a widget with this selection in **Resumen operativo** to consult it again.
 
-## Scope
-
-- Definition of metrics and their life cycle.
-- Use of the Metric Selector as a transversal tool.
-- Fundamentals for formulas, monitoring and visualizations.
-- Criteria to move from exploration to operation.
-
-## Expected result
-
-By completing this section you should be able to:
-
-- identify the correct metric for each case,
-- configure parameters without affecting the original data,
-- build first combinations and calculations,
-- and leave a ready base for the Analysis, Automation and Modeling modules.
-
-## Related documents
-
-- [Metrics and formulas](./metricas.md)
-- [Metric Selector](./selector.md)
-- [Data viewer](../analisis/visor-datos.md)
+**Resolution** determines the size of each displayed interval; **aggregation** determines how its data is summarized. An hourly average and an hourly maximum answer different questions. See the [metric examples](metricas.md#choosing-period-resolution-and-aggregation).

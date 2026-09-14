@@ -1,76 +1,39 @@
 ---
-title: "Newsletters - Recipient Groups"
-version: "v4"
-last_updated: "2026-02-26"
+title: "Newsletters: recipient groups"
+version: "v4.2.3"
+last_updated: "2026-09-14"
 owner: "Product"
 status: "stable"
 ---
-# Newsletters - Recipient Groups
 
-Recipient groups bring together people who will receive newsletters together.
-They function as reusable containers to segment teams and user cohorts with common operational goals.
+# Newsletters: recipient groups
 
-:::module-strip
-Using groups provides consistency, reduces manual work and improves governance when bulletins are part of service agreements or regulatory reports.
-:::
+A list groups collaborators so that the same recipients can be used in several newsletters. Open **Configuration > Newsletters > Distribution lists**.
 
-## Why use groups instead of single recipients
+## List controls
 
-- Each newsletter automatically inherits changes from the group.
-- They are reused in multiple newsletters and languages.
-- They allow you to delegate contact management with limited permissions.
-- The usage indicator prevents changes with unwanted impact on active shipments.
-- They guarantee that only current users of the platform receive communication.
+1. **Name**: open the list.
+2. **Overview**: see its description, member count and usage.
+3. **Members**: add or remove account collaborators.
+4. **Usage**: see which newsletters use the list.
+5. **Settings**: change its name and description.
+6. **Actions**: edit or delete the list according to your permissions.
 
-## Access and listing
+## Example: plant supervisors
 
-- Path: **Settings -> Newsletters -> Recipient Groups**.
-- Table with search, order by date and bulk actions.
-- **Create group** requests name and description.
-- Member and usage columns help prioritize maintenance.
+1. Create a list called **Responsables de la planta**.
+2. Open **Members** and add the collaborators who should receive the summary.
+3. Open **Resumen semanal > Recipients**.
+4. Select **Distribution list** as the type, choose **Responsables de la planta** and save it as an enabled destination.
 
-## Detail of a group
+Creating a list does not schedule emails: it must be added to an enabled newsletter.
 
-Headed with:
+## Change who receives the newsletter
 
-- internal identifier,
-- functional description,
-- member summary,
-- number of newsletters that consume it,
-- editing/deleting actions based on permissions.
+To update every newsletter that uses the list, edit its **Members**. Check **Usage** first.
 
-## Summary Tab
+To stop using the list in just one newsletter, disable its entry in that newsletter's **Recipients** tab. The list stays available to other newsletters.
 
-- Cards with member totals and linked newsletters.
-- Last update date.
-- Shortcuts to create new newsletter or duplicate group.
+Selectors show collaborators from the account. Subscription cancellations appear in the newsletter's recipient information.
 
-## Use in newsletters tab
-
-- Read-only table with bulletins that the group uses.
-- Status and next execution to evaluate impact before editing audience.
-
-## Members Tab
-
-- Table of members by joining date.
-- **Add Member** to link enabled users.
-- Actions per row to pause or remove members.
-- Language counter to check template compatibility.
-
-## Settings tab
-
-- Editing name and description.
-- Audit log (last editor and date).
-- Changes are automatically reflected in bulletins that reuse the group.
-
-## Best practices
-
-- Use descriptive group names (example: "LATAM Operations Team").
-- Periodically review usage indicator and clean obsolete groups.
-- Prefer centralized administration from Groups to maintain consistency.
-- Duplicate a group before testing so as not to affect active audiences.
-
-## References
-
-- [Newsletters](./boletines.md)
-- [Newsletters - Templates](./boletines-plantillas.md)
+See also [Newsletters](./boletines.md).

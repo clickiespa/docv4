@@ -1,82 +1,39 @@
 ---
-title: "Boletines - Grupos de destinatarios"
-version: "v4"
-last_updated: "2026-03-25"
+title: "Boletines: grupos de destinatarios"
+version: "v4.2.3"
+last_updated: "2026-09-14"
 owner: "Product"
 status: "stable"
 ---
 
-# Boletines - Grupos de destinatarios
+# Boletines: grupos de destinatarios
 
-Los grupos de destinatarios reúnen personas que recibirán boletines en conjunto.
-Funcionan como contenedores reutilizables para segmentar equipos y cohorts de usuarios con objetivos operativos comunes.
+Una lista reúne colaboradores para reutilizar los mismos destinatarios en varios boletines. Abre **Configuración > Boletines > Listas de distribución**.
 
-:::module-strip
-Usar grupos aporta consistencia, reduce trabajo manual y mejora gobernanza cuando los boletines forman parte de acuerdos de servicio o reportes regulatorios.
-:::
+## Controles de la lista
 
-## Captura de la sección
+1. **Nombre**: abre la lista.
+2. **Resumen**: muestra su descripción, cantidad de miembros y uso.
+3. **Miembros**: añade o quita colaboradores de la cuenta.
+4. **Uso**: consulta qué boletines utilizan la lista.
+5. **Configuración**: cambia nombre y descripción.
+6. **Acciones**: permite modificar o eliminar la lista según tus permisos.
 
-![Listado de listas de distribución para boletines](../assets/screenshots/modules/newsletter_lists.png)
-*Vista de grupos/listas de destinatarios con búsqueda, filtros y acciones de mantenimiento.*
+## Ejemplo: responsables de la planta
 
-## Por qué usar grupos en lugar de destinatarios sueltos
+1. Crea una lista llamada **Responsables de la planta**.
+2. Abre **Miembros** y añade los colaboradores que deben recibir el resumen.
+3. Abre **Resumen semanal > Destinatarios**.
+4. Selecciona **Lista de distribución** como tipo, elige **Responsables de la planta** y guarda el destino habilitado.
 
-- Cada boletín hereda automáticamente cambios del grupo.
-- Se reutilizan en múltiples boletines e idiomas.
-- Permiten delegar gestión de contactos con permisos limitados.
-- El indicador de uso evita cambios con impacto no deseado en envios activos.
-- Garantizan que solo usuarios vigentes de la plataforma reciban comunicación.
+Crear una lista no programa envíos: debe estar añadida a un boletín habilitado.
 
-## Acceso y listado
+## Cambiar quién recibe el boletín
 
-- Ruta: **Configuración -> Boletines -> Grupos de destinatarios**.
-- Tabla con búsqueda, orden por fecha y acciones masivas.
-- **Crear grupo** solicita nombre y descripción.
-- Columnas de miembros y uso ayudan a priorizar mantenimiento.
+Para actualizar todos los boletines que usan la lista, modifica sus **Miembros**. Consulta **Uso** antes de hacerlo.
 
-## Detalle de un grupo
+Para detener sólo el uso de esa lista en un boletín, deshabilita su entrada en la pestaña **Destinatarios** de ese boletín. La lista seguirá disponible para los demás.
 
-Encabezado con:
+Los selectores muestran colaboradores de la cuenta. Las bajas de suscripción se reflejan en la información de destinatarios del boletín.
 
-- identificador interno,
-- descripción funcional,
-- resumen de miembros,
-- cantidad de boletines que lo consumen,
-- acciones de edición/eliminación según permisos.
-
-## Pestaña Resumen
-
-- Tarjetas con totales de miembros y boletines vinculados.
-- Fecha de última actualización.
-- Atajos para crear boletín nuevo o duplicar grupo.
-
-## Pestaña Uso en boletines
-
-- Tabla de solo lectura con boletines que usan el grupo.
-- Estado y próxima ejecución para evaluar impacto antes de editar audiencia.
-
-## Pestaña Miembros
-
-- Tabla de miembros por fecha de incorporación.
-- **Agregar miembro** para vincular usuarios habilitados.
-- Acciones por fila para pausar o quitar miembros.
-- Contador de idiomas para revisar compatibilidad de plantillas.
-
-## Pestaña Configuración
-
-- Edición de nombre y descripción.
-- Registro de auditoría (último editor y fecha).
-- Cambios se reflejan automáticamente en boletines que reutilizan el grupo.
-
-## Mejores prácticas
-
-- Usar nombres de grupo descriptivos (ejemplo: "Equipo Operaciones LATAM").
-- Revisar periódicamente indicador de uso y limpiar grupos obsoletos.
-- Preferir administración centralizada desde Grupos para sostener consistencia.
-- Duplicar un grupo antes de pruebas para no afectar audiencias activas.
-
-## Referencias
-
-- [Boletines](./boletines.md)
-- [Boletines - Plantillas](./boletines-plantillas.md)
+Consulta también [Boletines](./boletines.md).

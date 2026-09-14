@@ -1,117 +1,54 @@
 ---
-title: "Boletines - Plantillas"
-version: "v4"
-last_updated: "2026-03-25"
+title: "Boletines: plantillas"
+version: "v4.2.3"
+last_updated: "2026-09-14"
 owner: "Product"
 status: "stable"
 ---
 
-# Boletines - Plantillas
+# Boletines: plantillas
 
-Las plantillas definen estructura visual y estilos base para todos los boletines.
-Controlan cabeceras, pie de página y contenedor donde se inyectan bloques dinámicos.
+Una plantilla define la estructura visual que comparten uno o más boletines: encabezado, espacio para los bloques y pie. Para cambiar qué datos se envían, edita los bloques del boletín.
 
-:::module-strip
-Una plantilla bien diseñada mantiene identidad de marca, respeta políticas de correo y permite personalizaciones sin romper layout.
-:::
+Abre **Configuración > Boletines > Plantillas** y selecciona una plantilla.
 
-## Captura de la sección
+## Controles de la plantilla
 
-![Listado de plantillas de boletines en Clickie](../assets/screenshots/modules/newsletter_templates.png)
-*Vista de plantillas disponibles para estructurar y estandarizar envíos.*
+1. **Nombre, autor e identificador**: permiten reconocer la plantilla.
+2. **Boletines asociados**: indica cuántos boletines la utilizan.
+3. **Vista previa**: muestra el HTML guardado de la plantilla.
+4. **Editor HTML**: modifica su estructura y estilos cuando tienes permisos.
+5. **Configuración**: cambia nombre y descripción.
+6. **Acciones**: abre las opciones permitidas para la plantilla.
+7. **Enviar correo de prueba**: aparece deshabilitado en v4.2.3; no permite realizar un envío.
 
-## Acceso y listado
+Las plantillas globales de Clickie son de sólo lectura para usuarios sin permiso de administración global.
 
-- Ruta: **Configuración -> Boletines -> Plantillas**.
-- Tabla con nombre, descripción, fecha de creación y cantidad de boletines asociados.
-- **Crear plantilla** solicita nombre y descripción; el HTML se edita después.
-- Plantillas globales aparecen diferenciadas de las de la cuenta.
+## Usar una plantilla
 
-## Cuando crear una plantilla nueva
+1. Abre **Resumen semanal > Configuración**.
+2. Selecciona una plantilla y guarda.
+3. En **Diseño**, actualiza la vista previa para revisar la plantilla junto con los bloques y datos del boletín.
 
-- Para adaptar identidad visual (colores, tipografías, logotipo) por marca o cuenta.
-- Para manejar disclaimers o pie legal específico por audiencia.
-- Para estandarizar componentes repetitivos entre múltiples boletines.
-- Para mantener variantes (por ejemplo, versión compacta) sin afectar envíos existentes.
+## Crear una plantilla propia
 
-## Detalle de plantilla
+1. Crea la plantilla con nombre y descripción.
+2. Abre **Editor HTML** y añade su contenido.
+3. Guarda y revisa **Vista previa**.
+4. Asígnala al boletín y revisa también la vista previa de su **Diseño**.
 
-Incluye:
+El editor requiere conocer HTML para correo. La vista previa de la plantilla muestra su estructura; la del boletín permite revisar el resultado con su contenido.
 
-- identificador, autor y descripción,
-- contador de boletines que la usan,
-- acciones de editar/eliminar según permisos,
-- botón de enviar prueba (puede estar deshabilitado según estado de feature).
+## Elementos que debes conservar al editar HTML
 
-## Pestaña Vista previa
+| Marcador | Contenido |
+| --- | --- |
+| `{{ blocks }}` | Bloques del boletín, en el orden definido en Diseño. |
+| `{{ account_name }}` | Nombre de la cuenta. |
+| `{{ generated_at }}` | Fecha de generación. |
+| `{{ brand_logo_url }}` | Dirección del logotipo configurado. |
+| `{{ unsubscribe_url }}` | Enlace para cancelar la suscripción. |
 
-- Renderiza la plantilla con HTML guardado para validar escritorio y móvil.
-- Ayuda a detectar quiebres de layout antes de impactar boletines activos.
+Conserva el espacio de bloques y el enlace de baja. Si cambias una plantilla compartida, el cambio se utilizará en los siguientes envíos de todos sus boletines asociados.
 
-## Pestaña Editor HTML
-
-- Editor de código para estructuras complejas.
-- Plantillas de cuenta: modo editable.
-- Plantillas globales: modo lectura para evitar cambios accidentales.
-- Recomendado duplicar antes de cambios mayores.
-
-## Pestaña Configuración
-
-- Actualiza nombre y descripción.
-- Cambios impactan boletines asociados sin reasignar plantilla.
-- Registro de auditoría del último cambio.
-
-## Componentes esenciales de una plantilla
-
-- **Barra de marca**: logotipo y color principal.
-- **Preheader**: `{{ preheader }}` para resumen visible en bandejas.
-- **Contenedor de bloques**: `{{ blocks }}` para inyectar contenido del boletín.
-- **Pie de página**: fecha de generación, cuenta y baja (`{{ unsubscribe_url }}`).
-
-## Variables y personalizacion
-
-| Tipo de marcador | Sintaxis | Cuando se reemplaza | Ejemplos |
-| --- | --- | --- | --- |
-| Contexto del boletín | `{{ variable }}` | Una vez por envío | `{{ platform_name }}`, `{{ brand_logo_url }}`, `{{ generated_at }}` |
-| Personalizacion por destinatario | `[variable]` | Por cada destinatario | `[first_name]`, `[account_custom_field]`, `[unsubscribe_link]` |
-
-### Variables frecuentes disponibles
-
-- `{{ brand_primary }}`
-- `{{ brand_logo_url }}`
-- `{{ brand_logo_width }}`
-- `{{ platform_name }}`
-- `{{ domain_url }}`
-- `{{ account_name }}`
-- `{{ generated_at }}`
-- `{{ user_language }}`
-- `{{ user_timezone }}`
-- `{{ subject }}`
-- `{{ preheader }}`
-- `{{ unsubscribe_url }}`
-- `{{ t_unsubscribe }}`
-- `{{ blocks }}`
-
-## Plantilla base de referencia
-
-La plataforma incluye una plantilla base con:
-
-- contenedor responsive,
-- barra de marca,
-- bloque central para `{{ blocks }}`,
-- pie obligatorio con contexto de cuenta y baja.
-
-Recomendación: clonar la base para crear variantes por segmento o idioma, y documentar alcance de cada variante.
-
-## Recomendaciones operativas
-
-- Versionar cambios relevantes duplicando plantilla antes de editar.
-- Documentar restricciones de diseño en descripción (ancho, estilos, compatibilidad).
-- Coordinar cambios de plantillas globales con el equipo de diseño/plataforma.
-- Programar revisiones periódicas de compatibilidad de correo.
-
-## Referencias
-
-- [Boletines](./boletines.md)
-- [Boletines - Bloques de contenido](./boletines-bloques.md)
-- [Boletines - Grupos de destinatarios](./boletines-grupos.md)
+Consulta también [Boletines](./boletines.md) y [Bloques de contenido](./boletines-bloques.md).

@@ -65,8 +65,8 @@ Cada archivo Markdown debe iniciar con:
 ```yaml
 ---
 title: "<Título humano>"
-version: "v4"
-last_updated: "2026-02-23"
+version: "v4.2.3"
+last_updated: "2026-09-14"
 owner: "Product"
 status: "stable"
 ---
@@ -216,3 +216,39 @@ Los cambios en `/docs` se reflejan en la web pública porque el workflow del sit
 4. Registrar el cambio en `/docs/changelog.md` con fecha (`YYYY-MM-DD`) y resumen del ajuste.
 5. Verificar `mkdocs build --strict`.
 6. Hacer push a `main`.
+
+
+## Manual de uso v4.2.3
+
+La revisión funcional usa Clickie v4.2.3 (`80841bd6`). La referencia API conserva su versión propia. ES y EN se revisan en paralelo; no regenerar `docs/en` sin revisar el resultado editorial.
+
+- Escribir para clientes de cualquier rol, con sólo el texto necesario para completar una tarea o interpretar un dato.
+- Usar nombres genéricos en español y un ejemplo conectado: Planta de demostración → Edificio principal → Sala de equipos.
+- Explicar cada control visible y el resultado de usarlo; distinguir permisos, datos faltantes y períodos incompletos.
+- Mantener los logos oficiales sin alterarlos. Origen y hashes en `public/assets/brand/README.md`.
+- Conservar las capturas sin retoques. Los números son una capa HTML accesible, no forman parte de la imagen.
+
+### Capturas numeradas
+
+```md
+:::screen id="captura-unica" src="../assets/screenshots/v4.2.3/archivo.png" title="Tarea que muestra" points="12,20;80,30"
+1. **Primer control.** Qué hace y cuándo usarlo.
+2. **Segundo control.** Qué cambia al utilizarlo.
+:::
+```
+
+Cada par `x,y` indica un porcentaje de la imagen y corresponde a un elemento de la lista. Mantener puntos cerca del control sin tapar su etiqueta. La cantidad de puntos y descripciones debe coincidir. La web permite ir del número a la descripción y ampliar la captura. En EN se reutilizan las capturas de la interfaz española con leyendas traducidas.
+
+El generador copia los assets referenciados desde `docs/assets` a `public/assets`. Las salidas externas que sólo eliminan wrappers de directivas no conservan las anotaciones interactivas; revisar su representación antes de publicarlas.
+
+### Servir la copia local
+
+```sh
+npm install --package-lock=false
+npm run build -- --base /
+npm run check:docs
+```
+
+Valet sirve `dist` mediante el enlace `docs.clickie`, en `https://docs.clickie.test`. Recompilar después de editar. No publicar ni cambiar el dominio productivo para revisar esta copia.
+
+Fixture reproducible de Clickie4: `clickie4/docs/tools/documentation-fixture.md`, en la rama local `feature/main/clickie4/v4.2.3/documentation-fixture`. Distingue registros locales de las series sintéticas del renderer y registra dimensiones, recortes y rutas de las capturas.

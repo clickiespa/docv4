@@ -1,108 +1,76 @@
 ---
 title: "Monitoring"
-version: "v4"
-last_updated: "2026-02-26"
+version: "v4.2.3"
+last_updated: "2026-09-14"
 owner: "Product"
 status: "stable"
 ---
+
 # Monitoring
 
-The **Monitoring** module evaluates conditions on metrics and generates automatic operational states for early detection, monitoring and communication.
+A monitor checks a metric at regular intervals and changes state when its rules are met. Triggers define when to notify people and who receives the notification.
 
-:::module-strip
-Monitoring turns behavioral data into operational alerts. The objective is to detect deviation, prioritize impact and communicate to the correct team with clear rules.
+## Read the list
+
+1. **Name**: open the monitor and its settings.
+2. **Status**: shows **OK**, **WARNING**, **ALARM** or **NO DATA**. No data does not mean the condition is normal.
+3. **Frequency**: combines the sampling window and how often it is evaluated. “10 mins c/5 mins” checks the last ten minutes every five minutes.
+4. **Type**: classifies the monitor's importance, such as notice, warning or critical. It is separate from its current status.
+5. **New monitor and actions**: create or modify monitors according to your permissions.
+
+Inside the monitor, **Overview** shows its details; **Rules**, its conditions; **Triggers**, its notifications; **History**, its status changes; and **Activity**, its recorded events.
+
+## Example: Temperatura fuera de rango
+
+The **Sala de equipos** should stay between 18 and 28 °C. These values illustrate the settings; use the limits for your installation.
+
+1. Create **Temperatura fuera de rango**, with a **10-minute** window and **5-minute** frequency.
+2. In **Rules**, add a rule for **Temperatura ambiente**.
+3. Choose **Out of range**, a lower limit of **18**, upper limit of **28** and threshold of **90%**.
+4. Save the enabled rule. It activates when the configured proportion of the window falls outside the band.
+5. In **Triggers**, add a communication, select **ALARM** and choose the responsible recipients.
+6. Check **History** to see when its status changed.
+
+## Prepare a limit rule
+
+:::screen id="monitoreo-regla" src="../../assets/screenshots/v4.2.3/monitoreo-regla.png" title="Temperature rule (Spanish interface)" points="32,13;32,28;85,36;93,47;33,54;64,64;85,79;38,80;83,93;94,93;97,7"
+1. **Name.** Describe the condition so it is recognizable in the list.
+2. **Description.** Add context needed to interpret it.
+3. **Metric.** Select the measurement to evaluate.
+4. **Method.** Choose the condition. The following fields depend on it.
+5. **Upper limit.** For Greater than, set the value to exceed in the metric’s unit.
+6. **Threshold.** Sets the proportion of the window that must meet the condition; it is not the temperature limit.
+7. **Method help.** Explains its behavior and provides an example.
+8. **Enabled.** Allows evaluation. It is off in this preparation example.
+9. **Cancel.** Discard the draft.
+10. **Save.** Save the rule configuration.
+11. **Close.** Exit the form.
 :::
 
-## What does it contribute to the operation
+## Choose a condition
 
-Monitoring transforms continuous data into actionable signals.
+| Method | What it checks | Typical use |
+| --- | --- | --- |
+| Greater than / Less than | Whether the value is above or below a limit for the specified proportion of the window. | Excessive power or low flow. |
+| Within range / Out of range | Whether values are inside or outside two limits. | Temperature outside its operating band. |
+| Increased / Decreased / Changed by at least a percentage | The change between the first and last value in the window. | A rapid increase in power. |
+| Increased / Decreased / Changed by at least a value | The difference between the first and last value, in the metric's unit. | Temperature rising by several degrees. |
+| Data volume decreased / increased | The number of points compared with the previous window of the same size. | Detecting a drop in measurement reception. |
 
-In practice it allows:
+Form fields change with the method. Read the explanation and example shown when you select it.
 
-- detect deviations in time,
-- prioritize events by severity,
-- and notify the right team at the right frequency.
+## Configure notifications
 
-## Monitoring list
+| Trigger control | Purpose |
+| --- | --- |
+| Type | Choose a communication or event forwarding, from the available options. |
+| States | Choose which states activate the notification. |
+| Time pattern | Limit notifications to specific days and times. |
+| Time zone | Interpret that schedule in the account's time zone or in UTC. |
+| Notify when the active window starts | Notify at the start of the schedule if the monitor is still in a selected state from an earlier change. |
+| Repeat | Set the minimum interval between reminders while the state continues. |
+| Enabled | Enable or disable this trigger. |
 
-Each monitoring includes:
+Without the start-of-window notification, a change outside the schedule is not sent later for that reason. Configure reminders only when the recipient needs follow-up.
 
-- name,
-- type,
-- severity,
-- current status,
-- creation/update date,
-- actions available.
-
-Common monitor types:
-
-- Notice
-- Information
-- Warning
-- Bug
-- Critical
-- Alert
-- Emergency
-- Debugging
-
-Operating states:
-
-- OK
-- Warning
-- Alarm
-- No data
-
-## Recommended configuration flow
-
-:::steps
-1. **Create base monitoring**: From **Monitoring** choose **+ New monitoring** and define name, type, window and evaluation frequency.
-2. **Define rules**: Enter monitoring, open **Rules** and assign metric, method (`Mayor que`, `Menor que`, `Dentro de rango`, `Fuera de rango`) and threshold.
-3. **Configure Triggers**: In **Triggers** create event notification or forwarding and complete status, time pattern and recipients.
-:::
-
-## Practical example: power factor monitoring
-
-Reference case for training:
-
-- **Metric**: `F. de Pot.`
-- **Rule**: go into alarm when in a 10-minute window at least 10% of the points are below 0.93.
-- **Evaluation frequency**: every 5 min.
-
-Clickie configuration in three logical steps:
-
-:::steps
-1. **Monitoring**: Name `Control de Factor de Potencia`, type `Alerta`, sampling window `10 min`, frequency `5 min`.
-2. **Rule**: Name `F. de Pot.`, method `Menor que`, limit `0.93`, threshold `10%`.
-3. **Trigger**: Type `Comunicacion`, trigger in state `ALARMA`, time pattern according to operation, notify responsible collaborators.
-:::
-
-:::monitoring-example-fpot
-:::
-
-Trigger types:
-
-- Communication (notifications)
-- Event forwarding (custom endpoint)
-
-Common fields:
-
-- trigger status,
-- observations,
-- time pattern,
-- collaborator or recipient,
-- title/summary/content of the communication.
-
-## Design useful alerts
-
-To avoid noise and alert fatigue:
-
-- use severities consistent with the real impact,
-- separate warning and criticism rules,
-- define time windows according to the process,
-- periodically review rules that do not add value.
-
-## References
-
-- [Metrics and formulas](../conceptos/metricas.md)
-- [Metric Selector](../conceptos/selector.md)
-- [Data viewer](../analisis/visor-datos.md)
+See also [Metrics](../conceptos/metricas.md) and [Data viewer](../analisis/visor-datos.md).

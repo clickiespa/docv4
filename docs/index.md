@@ -1,90 +1,35 @@
 ---
 title: "Manual de uso de Clickie"
-version: "v4"
-last_updated: "2026-03-25"
+version: "v4.2.3"
+last_updated: "2026-09-14"
 owner: "Product"
 status: "stable"
 ---
 
 # Manual de uso de Clickie
 
-Guía oficial de la plataforma Clickie para operación de datos, métricas, monitoreos, visor, paneles, activos y gemelos digitales.
+Documentación de uso de **Clickie v4.2.3**. Busca una tarea o entra en la sección que necesitas.
 
-## Para quién está pensado este manual
+| Quiero… | Ir a |
+| --- | --- |
+| Encontrar una medición y entender su unidad | [Métricas y fórmulas](conceptos/metricas.md) |
+| Elegir datos y ajustar cómo se muestran | [Selector de métricas](conceptos/selector.md) |
+| Revisar un período o comparar mediciones | [Visor de datos](analisis/visor-datos.md) |
+| Consultar o armar un panel | [Paneles y reportes](analisis/paneles.md) |
+| Elegir un gráfico o indicador | [Widgets](analisis/widgets.md) |
+| Organizar edificios, áreas o equipos | [Activos](organizacion/activos.md) |
+| Configurar condiciones de seguimiento | [Monitoreos](automatizacion/monitoreos.md) |
+| Mostrar datos sobre una imagen o plano | [Gemelos digitales](modelado/gemelos-digitales.md) |
+| Preparar envíos periódicos | [Boletines](configuracion/boletines.md) |
 
-Este manual está escrito para equipos de operación, analistas, líderes de negocio y clientes que necesitan entender rápido qué puede resolver la plataforma y cómo llevarla a producción.
+## El ejemplo de esta guía
 
-El objetivo no es solo mostrar pantallas: es explicar decisiones, criterios de configuración y resultados esperados en cada módulo.
+Usamos **Planta de demostración**, el activo **Edificio principal** y el panel **Resumen operativo**. Sus mediciones de ejemplo son Consumo de energía, Potencia eléctrica, Temperatura ambiente y Caudal de agua. Los nombres son genéricos; busca las mediciones equivalentes de tu cuenta.
 
-## Principio base de la plataforma
+Para empezar, abre el [Visor de datos](analisis/visor-datos.md), elige **Potencia eléctrica** y revisa un día completo. Después puedes guardar una vista de seguimiento en un [panel](analisis/paneles.md).
 
-:::intro-principle icon="◆"
-Todo en Clickie se construye a partir de **métricas**. Cada métrica representa una serie temporal de datos que evoluciona en el tiempo y sirve como base para:
-:::
+## Acceso y opciones disponibles
 
-- Monitoreos
-- Paneles y reportes
-- Visor de datos
-- Gemelos digitales
-- Activos
+Entra en [Clickie](https://my.clickie.io/authentication) con tu usuario. Si tienes acceso a varias cuentas, comprueba cuál está activa antes de buscar datos.
 
-Cuando la capa de métricas está bien definida, el resto de los módulos se vuelve predecible, reutilizable y escalable.
-
-## Acceso a la plataforma
-
-:::access-box
-[https://my.clickie.io/authentication](https://my.clickie.io/authentication)
-Ingreso oficial a la plataforma Clickie para comenzar la operación.
-:::
-
-- Recuperación de contraseña: opción "Olvidaste tu contraseña" en login
-- Idiomas disponibles: Español, Inglés y Portugués
-- Contacto: [contacto@clickie.io](mailto:contacto@clickie.io)
-
-## Estructura general de la interfaz
-
-La interfaz principal incluye:
-
-1. Menú lateral con módulos funcionales.
-2. Buscador global para métricas, activos, paneles, reportes, monitoreos y gemelos digitales.
-3. Perfil de usuario para configuraciones de cuenta e idioma.
-
-![Vista general de navegación de módulos en Clickie](./assets/screenshots/modules/home.png)
-*Vista de inicio con menú lateral, buscador global y accesos por módulo.*
-
-## Camino de aprendizaje recomendado
-
-:::learning-path title="Camino de aprendizaje recomendado"
-1. **Comprender las métricas**: Entender qué es una métrica, cómo se registra y qué calidad de dato tiene.
-2. **Seleccionar y combinar**: Aprender a elegir métricas, aplicar etiquetas y construir fórmulas útiles.
-3. **Validar en Visor**: Contrastar tendencias, rangos y visualizaciones antes de publicar resultados.
-4. **Automatizar con Monitoreos**: Definir reglas y disparadores para pasar de análisis a acción operativa.
-5. **Comunicar en paneles**: Convertir hallazgos en lectura ejecutiva para equipos y clientes.
-6. **Modelar con Gemelos**: Llevar el contexto visual del activo para acelerar interpretación y decisiones.
-:::
-
-## Qué resultado deberías esperar
-
-Si seguís el recorrido de este manual, deberías poder:
-
-- pasar de datos crudos a decisiones operativas,
-- estandarizar criterios entre equipos,
-- reducir tiempos de diagnóstico,
-- y comunicar mejor el valor del dato hacia clientes y stakeholders.
-
-## Navegación de esta documentación
-
-- [Conceptos](./conceptos/index.md)
-- [Métricas](./conceptos/metricas.md)
-- [Selector de métricas](./conceptos/selector.md)
-- [Visor de datos](./analisis/visor-datos.md)
-- [Paneles y reportes](./analisis/paneles.md)
-- [Monitoreos](./automatizacion/monitoreos.md)
-- [Gemelos digitales](./modelado/gemelos-digitales.md)
-- [Activos](./organizacion/activos.md)
-- [Configuración de cuenta](./configuracion/cuenta.md)
-- [Datos y fuentes](./configuracion/datos-y-fuentes.md)
-- [Boletines](./configuracion/boletines.md)
-- [Boletines - Bloques de contenido](./configuracion/boletines-bloques.md)
-- [Boletines - Grupos de destinatarios](./configuracion/boletines-grupos.md)
-- [Boletines - Plantillas](./configuracion/boletines-plantillas.md)
+Las secciones, datos y acciones visibles dependen de tus permisos. Si no aparece una opción de creación o edición, pide al administrador de tu cuenta que revise tu acceso.

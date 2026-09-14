@@ -1,111 +1,54 @@
 ---
 title: "Boletines"
-version: "v4"
-last_updated: "2026-03-25"
+version: "v4.2.3"
+last_updated: "2026-09-14"
 owner: "Product"
 status: "stable"
 ---
 
 # Boletines
 
-Los boletines permiten compartir información periódica con audiencias definidas dentro de la plataforma.
-Cada envío combina contenido dinámico basado en métricas con bloques editoriales y se distribuye automáticamente según la programación indicada.
+Un boletín envía por correo un resumen de datos a los colaboradores seleccionados, con una programación definida.
 
-:::module-strip
-Boletines está pensado para automatizar reportes recurrentes, reducir tareas manuales y mantener equipos y stakeholders alineados con la evolución de datos.
-:::
+Abre **Configuración > Boletines**. El listado muestra el nombre, si está habilitado y la fecha de creación. Puedes buscarlo, filtrar por plantilla y abrir sus acciones.
 
-## Captura de la sección
+## Qué encontrarás al abrirlo
 
-![Listado de boletines en Clickie](../assets/screenshots/modules/newsletters.png)
-*Vista de Boletines con estado de envíos, búsqueda y acciones por boletín.*
+| Sección o control | Para qué sirve |
+| --- | --- |
+| Cabecera | Consultar el estado, la plantilla, la programación y los totales del boletín. |
+| Resumen | Revisar próximos envíos, envíos recientes y destinatarios. |
+| Diseño | Añadir bloques, ordenarlos y generar una vista previa. |
+| Destinatarios | Añadir colaboradores o listas y habilitar o deshabilitar cada destino. |
+| Historial de envíos | Revisar los envíos de este boletín, sus resultados y errores. |
+| Configuración | Cambiar nombre, descripción, plantilla, programación y zona horaria. |
+| Habilitar / Deshabilitar | Permitir o detener los próximos envíos programados. |
 
-Cada boletín coordina tres componentes:
+## Ejemplo: Resumen semanal
 
-- **Destinatarios**: usuarios individuales o grupos reutilizables de la plataforma.
-- **Plantilla**: estructura visual y estilos comunes para todos los envíos.
-- **Bloques de contenido**: componentes ordenables para texto, KPIs y graficos.
+1. Crea **Resumen semanal**. El boletín empieza deshabilitado.
+2. En **Configuración**, elige la plantilla, la programación semanal y su zona horaria.
+3. En **Diseño**, añade una cabecera, el consumo semanal y el historial de **Temperatura fuera de rango**.
+4. En **Destinatarios**, selecciona el tipo de destino y añade colaboradores o una lista de la cuenta.
+5. Genera una vista previa y revisa los datos, las unidades y el período.
+6. Habilita el boletín cuando quieras comenzar los envíos programados.
 
-## Cuándo crear un boletín
+## Revisar sin enviar
 
-- Cuando necesitas comunicar resultados periódicos (diarios, semanales o mensuales) sin exportaciones manuales.
-- Cuando quieres distribuir paneles o métricas clave a una audiencia acotada y mantener historial de envío.
+En **Diseño**, la columna izquierda contiene los bloques y la derecha, la vista previa.
 
-## Acceso y vista general
+1. **Añadir bloque**: incorpora un contenido.
+2. **Asa de movimiento**: arrastra para cambiar el orden.
+3. **Acciones del bloque**: modifica sus opciones o elimínalo.
+4. **Fecha**: selecciona una de las fechas de referencia calculadas a partir de la programación.
+5. **Actualizar**: genera la vista previa para esa fecha.
 
-- Ruta: **Configuración -> Boletines -> Boletines**.
-- La tabla principal incluye búsqueda global, filtros por plantilla y acciones masivas.
-- El botón **Crear boletín** abre un formulario inicial con nombre y descripción.
-- El listado muestra estado (Activo/Pausado), plantilla y señales de salud para detectar boletines detenidos.
+**La vista previa no envía correos.** En v4.2.3 no hay un botón **Enviar ahora** en esta pantalla. Si no hay fechas disponibles, configura primero la programación. Algunos administradores también ven **Depuración**, que añade información de diagnóstico a la vista previa.
 
-## Estructura de la ficha del boletín
+## Consultar un envío
 
-El encabezado del detalle muestra:
+En **Historial de envíos**, abre un envío y selecciona un destinatario para consultar el contenido guardado, cuando esté disponible. El historial muestra sólo los envíos del boletín abierto.
 
-- estado y acción rápida para activar o pausar,
-- identificador interno, plantilla, patrón horario y zona horaria,
-- resumen de envíos (último/próximo disparo y cantidad de destinatarios),
-- acciones contextuales según permisos (editar, duplicar, eliminar, enviar manualmente).
+La programación usa la zona horaria del boletín; las fechas que consultas se muestran en tu zona horaria. Si todavía no hubo envíos, algunas cifras aparecen como no disponibles.
 
-## Pestaña Resumen
-
-- Historial de envíos con totales enviados/fallidos y tasa de entrega.
-- Direcciones suprimidas para identificar rebotes o bajas.
-- Cronología de ejecuciones con próximos disparos y eventos completados.
-
-## Pestaña Diseño
-
-- Columna de **bloques de contenido** con orden, edición y eliminación.
-- **Vista previa** interactiva con fecha de referencia para validar variables relativas.
-- Para perfiles administrativos: modo depuración y acción **Enviar ahora**.
-
-## Pestaña Destinatarios
-
-- Tabla de audiencia por tipo (usuario o grupo).
-- Formulario de alta con selector por tipo de destinatario.
-- Soporte de filtros por cuenta/idioma para reutilizar grupos.
-- Solo se admiten miembros activos de la plataforma.
-
-## Pestaña Historial
-
-- Lista de despachos ejecutados con estado y marca temporal.
-- Vista de detalle por despacho para revisar destinatarios y diagnosticar fallos.
-
-## Pestaña Configuración
-
-- Formulario completo: nombre, descripción, plantilla, patrón horario y zona horaria.
-- Cambios de patrón/horario recalculan próximos disparos.
-- Si el boletín está pausado, no se ejecuta ninguna programación.
-
-## Organizacion recomendada de contenido
-
-:::steps
-1. **Abrir contexto**: Comenzar con un bloque narrativo (Free Text) que explique objetivo y alcance.
-2. **Priorizar datos**: Ubicar KPIs y tendencias por importancia de negocio.
-3. **Cerrar con acción**: Agregar recordatorios operativos o próximos pasos.
-4. **Validar antes de enviar**: Usar vista previa y modo depuración para revisar cálculos y consistencia visual.
-:::
-
-## Bloques disponibles
-
-Catálogo actual:
-
-- **Free Text**
-- **KPI Snapshot**
-- **Line Chart**
-- **Bar Chart**
-
-Para detalle de parámetros y casos de uso, revisar [Boletines - Bloques de contenido](./boletines-bloques.md).
-
-## Buenas prácticas operativas
-
-- Mantener solo bloques necesarios para facilitar lectura.
-- Coordinar cambios de plantilla con administradores de estilos.
-- Revisar rebotes periódicamente para limpiar audiencias inactivas.
-- Documentar objetivo del boletín en descripción para facilitar reutilización.
-
-## Recursos complementarios
-
-- [Boletines - Grupos de destinatarios](./boletines-grupos.md)
-- [Boletines - Plantillas](./boletines-plantillas.md)
-- [Boletines - Bloques de contenido](./boletines-bloques.md)
+Consulta [Bloques de contenido](./boletines-bloques.md), [Grupos de destinatarios](./boletines-grupos.md) y [Plantillas](./boletines-plantillas.md).

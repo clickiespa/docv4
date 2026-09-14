@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Manual de Uso — Clickie Plataforma</title>
+<link rel="icon" type="image/svg+xml" href="./public/assets/brand/clickie-logo-gray.svg" />
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -32,8 +33,7 @@
   .sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:2px;}
   .sb-logo{padding:24px 20px 18px;border-bottom:1px solid rgba(255,255,255,0.1);}
   .sb-logo a{display:flex;align-items:center;gap:11px;text-decoration:none;}
-  .sb-badge{width:36px;height:36px;background:var(--yellow);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Raleway',sans-serif;font-weight:900;font-size:17px;color:var(--violet);flex-shrink:0;}
-  .sb-title{font-family:'Raleway',sans-serif;font-weight:800;font-size:18px;color:#fff;letter-spacing:-.3px;}
+  .sb-brand{display:block;width:128px;height:auto;flex-shrink:0;}
   .sb-sub{font-size:10.5px;color:var(--violet-l);font-weight:300;margin-top:1px;}
   nav{padding:12px 0;flex:1;}
   .nav-sec{margin-bottom:2px;}
@@ -218,7 +218,7 @@
 
   /* ── FOOTER ── */
   .footer{margin-top:68px;padding:24px 0 44px;border-top:2px solid var(--border);display:flex;align-items:center;gap:14px;}
-  .ft-logo{width:32px;height:32px;background:var(--violet);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Raleway',sans-serif;font-weight:900;font-size:15px;color:var(--yellow);flex-shrink:0;}
+  .ft-logo{display:block;width:112px;height:auto;flex-shrink:0;}
   .ft-text{color:var(--muted);font-size:11.5px;line-height:1.6;}
   .ft-text strong{color:var(--violet);font-weight:600;}
 
@@ -239,11 +239,8 @@
 <aside class="sidebar">
   <div class="sb-logo">
     <a href="#inicio">
-      <div class="sb-badge">C</div>
-      <div>
-        <div class="sb-title">Clickie</div>
-        <div class="sb-sub">Manual de uso · v1.1</div>
-      </div>
+      <img class="sb-brand" src="./public/assets/brand/clickie-logo-white.svg" alt="Clickie" width="1330" height="528" />
+      <span class="sb-sub">Manual de uso · v1.1</span>
     </a>
   </div>
   <nav>
@@ -1007,7 +1004,7 @@
 
       <!-- FOOTER -->
       <div class="footer">
-        <div class="ft-logo">C</div>
+        <img class="ft-logo" src="./public/assets/brand/clickie-logo-gray.svg" alt="Clickie" width="1330" height="528" />
         <div class="ft-text">
           <strong>Clickie · energía consciente</strong><br>
           Manual de uso de la Plataforma v1.1 &nbsp;·&nbsp; hola@clickie.io &nbsp;·&nbsp; www.clickie.io

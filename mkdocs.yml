@@ -19,7 +19,9 @@ nav:
       - Selector de métricas: conceptos/selector.md
   - Análisis:
       - Visor de datos: analisis/visor-datos.md
+      - Exportador de datos: analisis/exportador-datos.md
       - Paneles y reportes: analisis/paneles.md
+      - Widgets: analisis/widgets.md
   - Automatización:
       - Monitoreos: automatizacion/monitoreos.md
   - Modelado:
@@ -93,7 +95,7 @@ nav:
               - Logs: api/gateways/logs.md
               - Gateway Changelog: api/gateways/changelog.md
       - API Changelog: api/changelog.md
-  - Changelog: changelog.md
+  - Cambios del manual: changelog.md
 
 markdown_extensions:
   - admonition

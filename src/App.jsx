@@ -1,439 +1,307 @@
 import { useEffect, useRef } from 'react';
 import manualHtml from './manual.generated.html?raw';
-
-const LANG_STORAGE_KEY = 'clickie_manual_lang';
-const SUPPORTED_LANGS = ['es', 'en'];
-
-const SEARCH_MESSAGES = {
-  es: {
-    empty: 'Escribe algo para buscar',
-    noResults: 'Sin resultados para esa búsqueda',
-    noMatches: 'Sin coincidencias',
-    suggestions: (count) => `${count} sugerencias`,
-    goTo: (title) => `Ir a: ${title}`,
-  },
-  en: {
-    empty: 'Type something to search',
-    noResults: 'No results for this search',
-    noMatches: 'No matches',
-    suggestions: (count) => `${count} suggestions`,
-    goTo: (title) => `Go to: ${title}`,
-  },
-};
-
-const normalizeText = (value = '') =>
-  value
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .trim();
-
-const tokenize = (value = '') => normalizeText(value).split(/\s+/).filter((token) => token.length > 1);
-
-const escapeHtml = (value = '') =>
-  value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-
-function initShellInteractions(shell, lang) {
-  const messages = SEARCH_MESSAGES[lang] || SEARCH_MESSAGES.es;
-  const navItems = Array.from(shell.querySelectorAll('.nav-item[href], .nav-sub[href]'));
-  const navToggles = Array.from(shell.querySelectorAll('[data-nav-toggle]'));
-  const sections = Array.from(shell.querySelectorAll('.hero[id], .section[id]'));
-
-  const setGroupExpanded = (toggle, expanded) => {
-    const groupId = toggle.getAttribute('data-nav-toggle');
-    if (!groupId) {
-      return;
-    }
-    const groupContainer = shell.querySelector(`#${groupId}`);
-    if (!groupContainer) {
-      return;
-    }
-
-    groupContainer.hidden = !expanded;
-    toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-    toggle.classList.toggle('is-open', expanded);
-  };
-
-  const expandParentGroups = (navItem) => {
-    let current = navItem.parentElement;
-    while (current && current !== shell) {
-      if (current.classList.contains('nav-group-children')) {
-        current.hidden = false;
-        const groupId = current.getAttribute('id');
-        if (groupId) {
-          const toggle = shell.querySelector(`[data-nav-toggle="${groupId}"]`);
-          if (toggle) {
-            toggle.setAttribute('aria-expanded', 'true');
-            toggle.classList.add('is-open');
-          }
-        }
-      }
-      current = current.parentElement;
-    }
-  };
-
-  navToggles.forEach((toggle) => setGroupExpanded(toggle, false));
-
-  let observer;
-  if ('IntersectionObserver' in window && navItems.length > 0 && sections.length > 0) {
-    observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return;
-          }
-
-          const id = entry.target.id;
-          navItems.forEach((item) => {
-            const isActive = item.getAttribute('href') === `#${id}`;
-            item.classList.toggle('active', isActive);
-            if (isActive) {
-              expandParentGroups(item);
-            }
-          });
-        });
-      },
-      { threshold: 0.15, rootMargin: '-60px 0px -65% 0px' }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-  }
-
-  const clickHandlers = navItems.map((item) => {
-    const onClick = () => {
-      navItems.forEach((navItem) => navItem.classList.remove('active'));
-      item.classList.add('active');
-      expandParentGroups(item);
-    };
-
-    item.addEventListener('click', onClick);
-    return { item, onClick };
-  });
-
-  const toggleHandlers = navToggles.map((toggle) => {
-    const onToggle = () => {
-      const currentlyExpanded = toggle.getAttribute('aria-expanded') === 'true';
-      setGroupExpanded(toggle, !currentlyExpanded);
-    };
-    toggle.addEventListener('click', onToggle);
-    return { toggle, onToggle };
-  });
-
-  const searchForm = shell.querySelector('.top-search-form');
-  const searchInput = shell.querySelector('.top-search-input');
-  const searchStatus = shell.querySelector('.top-search-status');
-  const searchDropdown = shell.querySelector('.top-search-dropdown');
-  const suggestionsList = shell.querySelector('.top-search-suggestions');
-
-  const navById = new Map(
-    navItems.map((item) => {
-      const href = item.getAttribute('href') || '';
-      const id = href.startsWith('#') ? href.slice(1) : href;
-      return [id, (item.textContent || '').replace(/\s+/g, ' ').trim()];
-    })
-  );
-
-  const indexedSections = Array.from(shell.querySelectorAll('.hero[id], .section[id]')).map((node) => {
-    const id = node.id;
-    const title =
-      (node.querySelector('h1, h2, h3')?.textContent || '').replace(/\s+/g, ' ').trim() ||
-      navById.get(id) ||
-      id;
-    const subtitle = (node.querySelector('.sec-desc, .hero-desc')?.textContent || '')
-      .replace(/\s+/g, ' ')
-      .trim();
-    const navLabel = navById.get(id) || '';
-    const text = (node.textContent || '').replace(/\s+/g, ' ').trim();
-
-    return {
-      id,
-      node,
-      title,
-      subtitle,
-      navLabel,
-      titleNorm: normalizeText(title),
-      navNorm: normalizeText(navLabel),
-      searchNorm: normalizeText([title, subtitle, navLabel, text].join(' ')),
-    };
-  });
-
-  let currentSuggestions = [];
-  let highlightedIndex = -1;
-
-  const hideSuggestions = () => {
-    currentSuggestions = [];
-    if (searchDropdown) {
-      searchDropdown.hidden = true;
-    }
-    if (suggestionsList) {
-      suggestionsList.innerHTML = '';
-    }
-    highlightedIndex = -1;
-  };
-
-  const setStatus = (text) => {
-    if (searchStatus) {
-      searchStatus.textContent = text;
-    }
-  };
-
-  const setHighlight = (nextIndex) => {
-    highlightedIndex = nextIndex;
-    const buttons = suggestionsList?.querySelectorAll('.top-search-suggestion') || [];
-    buttons.forEach((button, index) => {
-      button.classList.toggle('active', index === highlightedIndex);
-    });
-    if (highlightedIndex >= 0 && buttons[highlightedIndex]) {
-      buttons[highlightedIndex].scrollIntoView({ block: 'nearest' });
-    }
-  };
-
-  const scoreEntry = (entry, rawQuery) => {
-    const queryNorm = normalizeText(rawQuery);
-    const tokens = tokenize(rawQuery);
-    if (!queryNorm) {
-      return 0;
-    }
-
-    let score = 0;
-    if (entry.id === queryNorm) {
-      score += 130;
-    }
-    if (entry.titleNorm === queryNorm) {
-      score += 110;
-    }
-    if (entry.titleNorm.startsWith(queryNorm)) {
-      score += 90;
-    }
-    if (entry.navNorm.startsWith(queryNorm)) {
-      score += 70;
-    }
-    if (entry.searchNorm.includes(queryNorm)) {
-      score += 45;
-    }
-
-    tokens.forEach((token) => {
-      if (entry.titleNorm.includes(token)) {
-        score += 24;
-      } else if (entry.navNorm.includes(token)) {
-        score += 16;
-      } else if (entry.searchNorm.includes(token)) {
-        score += 8;
-      }
-    });
-
-    return score;
-  };
-
-  const getSuggestions = (rawQuery) =>
-    indexedSections
-      .map((entry) => ({ entry, score: scoreEntry(entry, rawQuery) }))
-      .filter(({ score }) => score > 0)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 6)
-      .map(({ entry }) => entry);
-
-  const renderSuggestions = (items) => {
-    currentSuggestions = items;
-
-    if (!suggestionsList || !searchDropdown) {
-      return;
-    }
-
-    if (items.length === 0) {
-      hideSuggestions();
-      return;
-    }
-
-    suggestionsList.innerHTML = items
-      .map(
-        (item, index) => `
-            <li role="option" aria-selected="false">
-              <button type="button" class="top-search-suggestion" data-index="${index}">
-                <span class="suggestion-title">${escapeHtml(item.title)}</span>
-                <span class="suggestion-meta">#${escapeHtml(item.id)}</span>
-              </button>
-            </li>
-          `
-      )
-      .join('');
-
-    searchDropdown.hidden = false;
-    setHighlight(-1);
-  };
-
-  const goToSection = (entry) => {
-    entry.node.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    if (searchInput) {
-      searchInput.value = entry.title;
-    }
-    setStatus(messages.goTo(entry.title));
-    hideSuggestions();
-  };
-
-  const runSearch = (event) => {
-    event.preventDefault();
-    const term = searchInput?.value?.trim() || '';
-
-    if (!term) {
-      setStatus(messages.empty);
-      return;
-    }
-
-    if (currentSuggestions.length === 0) {
-      renderSuggestions(getSuggestions(term));
-    }
-
-    const picked = highlightedIndex >= 0 ? currentSuggestions[highlightedIndex] : currentSuggestions[0];
-    if (picked) {
-      goToSection(picked);
-    } else {
-      setStatus(messages.noResults);
-    }
-  };
-
-  const onInput = () => {
-    const term = searchInput?.value?.trim() || '';
-    if (term.length < 2) {
-      hideSuggestions();
-      setStatus('');
-      return;
-    }
-
-    const suggestions = getSuggestions(term);
-    renderSuggestions(suggestions);
-    if (suggestions.length === 0) {
-      setStatus(messages.noMatches);
-    } else {
-      setStatus(messages.suggestions(suggestions.length));
-    }
-  };
-
-  const onKeyDown = (event) => {
-    if (currentSuggestions.length === 0) {
-      return;
-    }
-
-    if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      const next = highlightedIndex + 1 >= currentSuggestions.length ? 0 : highlightedIndex + 1;
-      setHighlight(next);
-    } else if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      const next = highlightedIndex - 1 < 0 ? currentSuggestions.length - 1 : highlightedIndex - 1;
-      setHighlight(next);
-    } else if (event.key === 'Escape') {
-      hideSuggestions();
-    } else if (event.key === 'Enter' && highlightedIndex >= 0) {
-      event.preventDefault();
-      goToSection(currentSuggestions[highlightedIndex]);
-    }
-  };
-
-  const onSuggestionsClick = (event) => {
-    const target = event.target.closest('.top-search-suggestion');
-    if (!target) {
-      return;
-    }
-    const index = Number(target.getAttribute('data-index'));
-    if (!Number.isNaN(index) && currentSuggestions[index]) {
-      goToSection(currentSuggestions[index]);
-    }
-  };
-
-  const onOutsideClick = (event) => {
-    if (!searchForm?.contains(event.target)) {
-      hideSuggestions();
-    }
-  };
-
-  searchForm?.addEventListener('submit', runSearch);
-  searchInput?.addEventListener('input', onInput);
-  searchInput?.addEventListener('keydown', onKeyDown);
-  searchInput?.addEventListener('focus', onInput);
-  suggestionsList?.addEventListener('click', onSuggestionsClick);
-  document.addEventListener('click', onOutsideClick);
-
-  return () => {
-    observer?.disconnect();
-    clickHandlers.forEach(({ item, onClick }) => item.removeEventListener('click', onClick));
-    toggleHandlers.forEach(({ toggle, onToggle }) => toggle.removeEventListener('click', onToggle));
-    searchForm?.removeEventListener('submit', runSearch);
-    searchInput?.removeEventListener('input', onInput);
-    searchInput?.removeEventListener('keydown', onKeyDown);
-    searchInput?.removeEventListener('focus', onInput);
-    suggestionsList?.removeEventListener('click', onSuggestionsClick);
-    document.removeEventListener('click', onOutsideClick);
-  };
-}
-
+const normalize = (value = '') => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+const escape = (value = '') => value.replace(/[&<>"']/g, character => ({
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;'
+})[character]);
+const languageKey = 'clickie_manual_lang';
 function App() {
   const containerRef = useRef(null);
-
   useEffect(() => {
     const root = containerRef.current;
-    if (!root) {
-      return undefined;
-    }
-
-    const shells = Array.from(root.querySelectorAll('.manual-shell[data-lang]'));
-    const langSelectors = Array.from(root.querySelectorAll('.lang-select'));
-    if (shells.length === 0) {
-      return undefined;
-    }
-
-    let cleanupShell = null;
-    let activeLang = 'es';
-
-    const setLanguage = (lang, persist = true) => {
-      const normalized = SUPPORTED_LANGS.includes(lang) ? lang : 'es';
-      activeLang = normalized;
-
-      shells.forEach((shell) => {
-        shell.hidden = shell.getAttribute('data-lang') !== normalized;
-      });
-
-      langSelectors.forEach((selector) => {
-        selector.value = normalized;
-      });
-
-      cleanupShell?.();
-      const activeShell = shells.find((shell) => shell.getAttribute('data-lang') === normalized);
-      cleanupShell = activeShell ? initShellInteractions(activeShell, normalized) : null;
-
-      if (persist) {
-        window.localStorage.setItem(LANG_STORAGE_KEY, normalized);
+    const shells = [...root.querySelectorAll('.manual-shell')];
+    let lang = 'es';
+    let cleanup = () => {};
+    const readHash = () => {
+      try {
+        return decodeURIComponent(location.hash.slice(1));
+      } catch {
+        return '';
       }
     };
-
-    const onLanguageChange = (event) => {
-      setLanguage(event.target.value, true);
+    const storage = value => {
+      try {
+        if (value) localStorage.setItem(languageKey, value);else return localStorage.getItem(languageKey);
+      } catch {
+        return null;
+      }
     };
-
-    langSelectors.forEach((selector) => {
-      selector.addEventListener('change', onLanguageChange);
-    });
-
-    const storedLang = window.localStorage.getItem(LANG_STORAGE_KEY);
-    setLanguage(storedLang || 'es', false);
-
+    function activate(nextLang, preserveArticle = false) {
+      const previousShell = shells.find(shell => !shell.hidden);
+      const previousId = previousShell?.querySelector('.section:not([hidden])')?.id;
+      cleanup();
+      lang = nextLang === 'en' ? 'en' : 'es';
+      shells.forEach(shell => {
+        shell.hidden = shell.dataset.lang !== lang;
+      });
+      root.querySelectorAll('.lang-select').forEach(select => {
+        select.value = lang;
+      });
+      document.documentElement.lang = lang;
+      const shell = shells.find(item => item.dataset.lang === lang);
+      const sections = [...shell.querySelectorAll('.section')];
+      const navLinks = [...shell.querySelectorAll('.sidebar a[href^="#"]')];
+      const toc = shell.querySelector('.article-toc');
+      const pagination = shell.querySelector('.article-pagination');
+      const menuButton = shell.querySelector('.contents-toggle');
+      const backdrop = shell.querySelector('.sidebar-backdrop');
+      const searchForm = shell.querySelector('.top-search-form');
+      const input = shell.querySelector('.top-search-input');
+      const dropdown = shell.querySelector('.top-search-dropdown');
+      const suggestions = shell.querySelector('.top-search-suggestions');
+      const status = shell.querySelector('.top-search-status');
+      const dialog = shell.querySelector('.screen-dialog');
+      let zoomTrigger = null;
+      let results = [];
+      let selectedResult = -1;
+      let currentSection = null;
+      const entries = sections.map(node => ({
+        node,
+        title: node.querySelector('h1').textContent,
+        group: node.dataset.group,
+        headings: normalize([...node.querySelectorAll('h2,h3')].map(heading => heading.textContent).join(' ')),
+        text: normalize(node.textContent)
+      }));
+      const menu = open => {
+        shell.classList.toggle('menu-open', open);
+        menuButton.setAttribute('aria-expanded', String(open));
+        backdrop.hidden = !open;
+      };
+      const hideResults = () => {
+        dropdown.hidden = true;
+        input.setAttribute('aria-expanded', 'false');
+        selectedResult = -1;
+      };
+      const navigate = id => {
+        if (readHash() === id) renderRoute(true);else location.hash = id;
+      };
+      const expandParents = node => {
+        for (let parent = node?.parentElement; parent && parent !== shell; parent = parent.parentElement) if (parent.classList.contains('nav-group-children')) {
+          parent.hidden = false;
+          const toggle = shell.querySelector(`[data-nav-toggle="${parent.id}"]`);
+          toggle?.setAttribute('aria-expanded', 'true');
+          toggle?.classList.add('is-open');
+        }
+      };
+      function renderRoute(moveFocus = false) {
+        let id = readHash();
+        if (id === `${lang}-inicio`) id = `${lang}-index`;
+        let target = id ? document.getElementById(id) : null;
+        if (!target || !shell.contains(target)) target = shell.querySelector(`#${lang}-index`);
+        const section = target?.closest('.section') || sections[0];
+        const changed = section !== currentSection;
+        currentSection = section;
+        shell.querySelector('.skip-link').href = `#${section.id}`;
+        sections.forEach(node => {
+          node.hidden = node !== section;
+        });
+        navLinks.forEach(link => {
+          const active = link.hash === `#${section.id}`;
+          link.classList.toggle('active', active);
+          if (active) {
+            link.setAttribute('aria-current', 'page');
+            expandParents(link);
+          } else link.removeAttribute('aria-current');
+        });
+        document.title = `${section.querySelector('h1').textContent} · Clickie v4.2.3`;
+        const headings = [...section.querySelectorAll('.prose h2[id],.prose h3[id]')];
+        toc.innerHTML = headings.length ? `<div class="toc-title">${lang === 'es' ? 'En esta página' : 'On this page'}</div>` + headings.map(heading => `<a href="#${heading.id}" class="${heading.tagName === 'H3' ? 'toc-sub' : ''}">${escape(heading.textContent)}</a>`).join('') : '';
+        const index = sections.indexOf(section);
+        pagination.innerHTML = [sections[index - 1], sections[index + 1]].map((node, i) => node ? `<a href="#${node.id}"><small>${lang === 'es' ? i ? 'Siguiente' : 'Anterior' : i ? 'Next' : 'Previous'}</small>${escape(node.querySelector('h1').textContent)}</a>` : '<span></span>').join('');
+        menu(false);
+        hideResults();
+        requestAnimationFrame(() => {
+          if (target && target !== section && section.contains(target)) {
+            target.scrollIntoView({
+              block: 'start'
+            });
+          } else if (changed || moveFocus) {
+            window.scrollTo({
+              top: 0,
+              behavior: 'instant'
+            });
+          }
+          if (moveFocus) {
+            section.querySelector('h1').focus({
+              preventScroll: true
+            });
+          }
+        });
+      }
+      function routeChanged() {
+        const prefix = readHash().split('-')[0];
+        if ((prefix === 'es' || prefix === 'en') && prefix !== lang) {
+          activate(prefix);
+          storage(prefix);
+          return;
+        }
+        renderRoute(true);
+      }
+      function renderSearch() {
+        const query = normalize(input.value.trim());
+        if (query.length < 2) {
+          results = [];
+          hideResults();
+          status.textContent = '';
+          return;
+        }
+        const tokens = query.split(/\s+/);
+        results = entries.map(entry => ({
+          entry,
+          score: (normalize(entry.title).includes(query) ? 100 : 0) + tokens.reduce((score, token) => score + (entry.headings.includes(token) ? 20 : 0), 0)
+        })).filter(item => tokens.every(token => item.entry.text.includes(token))).sort((a, b) => b.score - a.score).slice(0, 7).map(item => item.entry);
+        suggestions.innerHTML = results.map((entry, i) => `<li><button type="button" class="top-search-suggestion" data-result="${i}"><span class="suggestion-title">${escape(entry.title)}</span><span class="suggestion-meta">${escape(entry.group)}</span></button></li>`).join('');
+        dropdown.hidden = false;
+        input.setAttribute('aria-expanded', 'true');
+        selectedResult = -1;
+        if (!results.length) suggestions.innerHTML = `<li class="search-empty">${lang === 'es' ? 'No se encontraron resultados.' : 'No results found.'}</li>`;
+        status.textContent = results.length ? `${results.length} ${lang === 'es' ? 'resultados' : 'results'}` : lang === 'es' ? 'No se encontraron resultados.' : 'No results found.';
+      }
+      function submitSearch(event) {
+        event.preventDefault();
+        if (!input.value.trim()) {
+          status.textContent = lang === 'es' ? 'Escribe una función o tarea.' : 'Enter a feature or task.';
+          return;
+        }
+        const chosenIndex = selectedResult;
+        renderSearch();
+        const picked = results[Math.max(0, chosenIndex)];
+        if (picked) {
+          navigate(picked.node.id);
+          hideResults();
+        }
+      }
+      function keySearch(event) {
+        if (event.key === 'Escape') {
+          hideResults();
+          return;
+        }
+        if (!results.length || dropdown.hidden) return;
+        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+          event.preventDefault();
+          selectedResult = selectedResult < 0 ? event.key === 'ArrowDown' ? 0 : results.length - 1 : (selectedResult + (event.key === 'ArrowDown' ? 1 : -1) + results.length) % results.length;
+          [...suggestions.querySelectorAll('button')].forEach((button, i) => button.classList.toggle('active', i === selectedResult));
+        }
+      }
+      function click(event) {
+        const toggle = event.target.closest('[data-nav-toggle]');
+        if (toggle) {
+          const group = shell.querySelector(`#${toggle.dataset.navToggle}`);
+          const open = toggle.getAttribute('aria-expanded') !== 'true';
+          toggle.setAttribute('aria-expanded', String(open));
+          toggle.classList.toggle('is-open', open);
+          group.hidden = !open;
+          return;
+        }
+        if (event.target.closest('.contents-toggle')) {
+          menu(!shell.classList.contains('menu-open'));
+          return;
+        }
+        if (event.target.closest('.sidebar-backdrop')) {
+          menu(false);
+          menuButton.focus();
+          return;
+        }
+        const result = event.target.closest('[data-result]');
+        if (result) {
+          navigate(results[Number(result.dataset.result)].node.id);
+          return;
+        }
+        const marker = event.target.closest('.screen-marker');
+        if (marker && !dialog.contains(marker)) {
+          const figure = marker.closest('.annotated-screen');
+          figure.querySelectorAll('[data-point]').forEach(node => node.classList.toggle('selected', node.dataset.point === marker.dataset.point));
+          const item = figure.querySelector(`.screen-legend [data-point="${marker.dataset.point}"]`);
+          item?.focus({
+            preventScroll: true
+          });
+          item?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest'
+          });
+          return;
+        }
+        const enlarge = event.target.closest('.screen-enlarge');
+        if (enlarge) {
+          zoomTrigger = enlarge;
+          const figure = enlarge.closest('figure');
+          dialog.querySelector('.screen-dialog-content').innerHTML = figure.querySelector('.screen-stage').outerHTML;
+          dialog.querySelectorAll('.screen-marker').forEach(marker => {
+            marker.tabIndex = -1;
+            marker.setAttribute('aria-hidden', 'true');
+          });
+          dialog.showModal();
+          return;
+        }
+        if (event.target.closest('.screen-close') || event.target === dialog) {
+          dialog.close();
+          return;
+        }
+        const link = event.target.closest('a[href^="#"]');
+        if (link && !event.metaKey && !event.ctrlKey) {
+          event.preventDefault();
+          navigate(link.hash.slice(1));
+        }
+      }
+      function outside(event) {
+        if (!searchForm.contains(event.target)) hideResults();
+      }
+      function escapeMenu(event) {
+        if (event.key === 'Escape' && shell.classList.contains('menu-open')) {
+          menu(false);
+          menuButton.focus();
+        }
+      }
+      function closed() {
+        dialog.querySelector('.screen-dialog-content').innerHTML = '';
+        zoomTrigger?.focus();
+      }
+      shell.addEventListener('click', click);
+      input.addEventListener('input', renderSearch);
+      input.addEventListener('keydown', keySearch);
+      searchForm.addEventListener('submit', submitSearch);
+      document.addEventListener('click', outside);
+      document.addEventListener('keydown', escapeMenu);
+      window.addEventListener('hashchange', routeChanged);
+      dialog.addEventListener('close', closed);
+      cleanup = () => {
+        menu(false);
+        if (dialog.open) dialog.close();
+        shell.removeEventListener('click', click);
+        input.removeEventListener('input', renderSearch);
+        input.removeEventListener('keydown', keySearch);
+        searchForm.removeEventListener('submit', submitSearch);
+        document.removeEventListener('click', outside);
+        document.removeEventListener('keydown', escapeMenu);
+        window.removeEventListener('hashchange', routeChanged);
+        dialog.removeEventListener('close', closed);
+      };
+      if (preserveArticle && previousId) {
+        const nextId = previousId.replace(/^(es|en)-/, `${lang}-`);
+        history.replaceState(null, '', `#${nextId}`);
+      }
+      renderRoute();
+    }
+    const changeLanguage = event => {
+      if (event.target.matches('.lang-select')) {
+        activate(event.target.value, true);
+        storage(lang);
+      }
+    };
+    root.addEventListener('change', changeLanguage);
+    const prefix = readHash().split('-')[0];
+    activate(['es', 'en'].includes(prefix) ? prefix : storage() || 'es');
     return () => {
-      cleanupShell?.();
-      langSelectors.forEach((selector) => {
-        selector.removeEventListener('change', onLanguageChange);
-      });
-      if (activeLang) {
-        window.localStorage.setItem(LANG_STORAGE_KEY, activeLang);
-      }
+      cleanup();
+      root.removeEventListener('change', changeLanguage);
     };
   }, []);
-
-  return <div ref={containerRef} className="manual-root" dangerouslySetInnerHTML={{ __html: manualHtml }} />;
+  return <div ref={containerRef} className="manual-root" dangerouslySetInnerHTML={{
+    __html: manualHtml
+  }} />;
 }
-
 export default App;

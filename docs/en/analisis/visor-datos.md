@@ -1,79 +1,49 @@
 ---
 title: "Data viewer"
-version: "v4"
-last_updated: "2026-02-26"
+version: "v4.2.3"
+last_updated: "2026-09-14"
 owner: "Product"
 status: "stable"
 ---
+
 # Data viewer
 
-**Data Viewer** functions as a sandbox to explore metrics, validate behavior, and transform observations into actionable decisions.
+Open the metric visualizer from the metrics menu to inspect a period, compare measurements or try a visualization.
 
-:::module-strip
-Data Viewer is the recommended environment to validate a hypothesis before scaling it to dashboards, reports or monitoring. First the data is compared, then it is communicated.
+## What the screen shows
+
+:::screen id="visor-seleccion" src="../../assets/screenshots/v4.2.3/visor-seleccion.png" title="Data viewer (Spanish interface)" points="50,20;93,14;11,63;31,63;53,63;91,57;5,69;91,71;6,82;91,84"
+1. **Chart.** Shows the selection; no metrics are selected yet. See the Widgets examples to learn how to read values.
+2. **Period.** Select chart dates.
+3. **Browse metrics.** Find and select measurements.
+4. **Customize selection.** Change order, colors and processing.
+5. **Visualization options.** Choose a widget type and its settings.
+6. **Minimize.** Collapse selection to give the chart more space.
+7. **Search.** Find a measurement.
+8. **Filters.** Narrow catalog results.
+9. **Checkboxes.** Add or remove metrics.
+10. **Unit and references.** Check the unit or copy the identifier.
 :::
 
-## Value for users and customers
 
-Before setting a view on a dashboard or triggering alerts in Monitoring, the Data Viewer helps you answer key questions:
+The [integrated selector](../conceptos/selector.md) updates the view when the selection changes. It does not require the Confirm button used by selection windows in other forms.
 
-- What is really happening with the variable.
-- Whether the behavior is stable or abnormal.
-- What resolution and configuration best represent the phenomenon.
+## Example: finding a power peak
 
-This step reduces interpretation errors and improves the quality of what is later communicated in reports.
+1. Search for **Potencia eléctrica** from **Edificio principal**.
+2. Use a line chart and select one complete day.
+3. In Customize selection, use 15 minutes and maximum to inspect peaks, if that resolution suits the metric.
+4. Point at the highest observations to read their time and value. On a line chart, drag across a horizontal area to zoom in.
+5. Switch to average to inspect the usual trend and observe how the reading changes.
 
-## Common use cases
+**Result:** you can identify when a high value occurred. The chart alone does not determine its cause.
 
-- Test a metric in different time ranges.
-- Compare series in the same view.
-- Evaluate resolution, aggregation and interpolation.
-- Build a validation visualization before publishing.
-- Export data for external analysis.
+## Comparing values consistently
 
-## Suggested step-by-step flow
+- Use the same interval and aggregation when comparing consumption across days.
+- Keep separate units and check each series' axis when displaying power and temperature together.
+- If data is missing, try another period and read the series message. A gap does not mean zero consumption.
 
-:::steps
-1. **Open analysis context**: Enter **My metrics**, open **Data viewer** and define the time range.
-2. **Select sources**: From **Explore** choose metrics and, if applicable, add labels or formulas.
-3. **Adjust reading**: In **Current selection** customize parameters and choose graph type.
-4. **Validate and scale**: Check consistency and decide whether to export or promote to dashboard/report.
-:::
+The selection is preserved in the page address. Copy it to restore this selection; anyone opening it needs access to the same metrics.
 
-## Common display types
-
-- Time series
-- Bars
-- Table
-- Summary indicators
-
-## Criteria for choosing a view
-
-- If you are looking for a trend: use time series.
-- If you compare periods or categories: use bars.
-- If you prioritize a specific audit: use a table.
-- If you need quick executive reading: use summary indicators.
-
-## Data exporter
-
-From the **Data Exporter** you can download information for external analysis or integration with other flows.
-
-Common configuration fields:
-
-- date range,
-- set of metrics,
-- resolution,
-- output format.
-
-## Good practices
-
-- Validate units before comparing series.
-- Review data gaps to avoid wrong conclusions.
-- Save analysis configurations used by the device.
-- Move to panels only visualizations that have already been validated in Viewer.
-
-## References
-
-- [Metric Selector](../conceptos/selector.md)
-- [Dashboards and reports](./paneles.md)
-- [Monitoring](../automatizacion/monitoreos.md)
+For a view you will consult often, create a widget in [Dashboards and reports](paneles.md). See [Widgets](widgets.md) to choose its presentation.

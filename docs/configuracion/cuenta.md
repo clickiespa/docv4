@@ -1,42 +1,51 @@
 ---
 title: "Configuración de cuenta"
-version: "v4"
-last_updated: "2026-03-25"
+version: "v4.2.3"
+last_updated: "2026-09-14"
 owner: "Product"
 status: "stable"
 ---
 
 # Configuración de cuenta
 
-La sección de **Configuración de cuenta** centraliza la administración de colaboradores, datos de cuenta y apariencia.
+La configuración de cuenta reúne los datos de la organización y sus preferencias compartidas. Revisa qué cuenta está activa antes de cambiar estos valores.
 
-## Captura de la sección
+## Datos de la cuenta
 
-![Pantalla de configuración de cuenta en Clickie](../assets/screenshots/modules/account.png)
-*Vista de los campos generales de cuenta, dashboard por defecto y zona horaria.*
+| Campo | Para qué sirve |
+| --- | --- |
+| Nombre | Identificar la cuenta en listados, selectores y navegación. |
+| Descripción | Guardar una referencia interna. |
+| Imagen | Identificar visualmente la cuenta. |
+| País e identificación tributaria | Definir el contexto fiscal y regional. |
+| Zona horaria principal | Establecer la zona operativa de indicadores, monitoreos y procesos de la cuenta. |
+| Zonas horarias optimizadas | Indicar otras zonas donde se optimiza la entrega de datos. |
+| Responsable | Asignar el colaborador que se utiliza para los procesos de la cuenta. |
+| Panel de página principal | Elegir el panel que se abre en la página principal. |
+| Atributos opcionales | Completar los atributos adicionales que use la cuenta. |
 
-## Gestión de cuenta
+Modifica los campos necesarios y guarda el formulario. Los campos obligatorios están marcados en la pantalla.
 
-Incluye:
+## Ejemplo: abrir siempre el panel de la planta
 
-- Colaboradores (ver, modificar, eliminar)
-- Datos de cuenta
-- Zona horaria
-- Dashboard para home
+1. Entra en la configuración de **Planta de demostración**.
+2. En **Panel de página principal**, selecciona el panel de seguimiento de la planta.
+3. Guarda y vuelve a **Inicio** para abrirlo.
 
-## Apariencia de cuenta
+## Colaboradores
 
-Permite ajustar:
+En **Configuración > Gestión de Cuenta > Colaboradores**, consulta las personas con acceso y, si tienes permisos, modifica su rol, idioma y etiquetas. Bloquear a una persona impide su acceso sin eliminarla.
 
-- Nombre del sitio
-- Texto descriptivo
-- Encabezado de bienvenida
-- Icono de pestaña
-- Subdominio de Clickie
-- Logo de autenticación e imagen de autenticación
-- Logo interno
-- Color de marca
+La disponibilidad de un módulo y sus acciones depende de los permisos de cada colaborador.
 
-## Referencias
+## Apariencia
 
-- [Datos y fuentes](./datos-y-fuentes.md)
+En **Configuración > Gestión de Cuenta > Apariencia**, puedes configurar el nombre del sitio, los textos de acceso, los logotipos, la imagen de acceso, el icono de la pestaña y el color de marca. El subdominio define la dirección de acceso de la cuenta.
+
+- **Logo de autenticación**: aparece en el acceso.
+- **Logo interno**: aparece en el encabezado y el menú.
+- **Icono de pestaña**: identifica la pestaña del navegador.
+
+Cuando la cuenta hereda la apariencia del entorno, la pantalla lo indica. Quitar la apariencia propia vuelve a usar la del entorno.
+
+Consulta también [Datos y fuentes](./datos-y-fuentes.md).

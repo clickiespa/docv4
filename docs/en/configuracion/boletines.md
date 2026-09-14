@@ -1,103 +1,54 @@
 ---
 title: "Newsletters"
-version: "v4"
-last_updated: "2026-02-26"
+version: "v4.2.3"
+last_updated: "2026-09-14"
 owner: "Product"
 status: "stable"
 ---
+
 # Newsletters
 
-Newsletters allow you to share periodic information with defined audiences within the platform.
-Each delivery combines dynamic, metrics-based content with editorial blocks and is automatically distributed according to your indicated schedule.
+A newsletter emails a data summary to selected collaborators on a defined schedule.
 
-:::module-strip
-Newsletters are designed to automate recurring reports, reduce manual tasks and keep teams and stakeholders aligned with the evolution of data.
-:::
+Open **Configuration > Newsletters**. The list shows the name, whether it is enabled and its creation date. You can search, filter by template and open its actions.
 
-Each newsletter coordinates three components:
+## What you will find inside
 
-- **Recipients**: individual users or reusable groups of the platform.
-- **Template**: visual structure and common styles for all shipments.
-- **Content blocks**: sortable components for text, KPIs and graphics.
+| Section or control | Purpose |
+| --- | --- |
+| Header | View the newsletter's status, template, schedule and totals. |
+| Overview | Review upcoming sends, recent sends and recipients. |
+| Design | Add and reorder blocks and generate a preview. |
+| Recipients | Add collaborators or lists and enable or disable each destination. |
+| Send history | Review this newsletter's sends, results and errors. |
+| Settings | Change name, description, template, schedule and time zone. |
+| Enable / Disable | Allow or stop upcoming scheduled sends. |
 
-## When to create a newsletter
+## Example: Resumen semanal
 
-- When you need to communicate periodic results (daily, weekly or monthly) without manual exports.
-- When you want to distribute dashboards or key metrics to a limited audience and maintain delivery history.
+1. Create **Resumen semanal**. The newsletter starts disabled.
+2. In **Settings**, choose the template, weekly schedule and its time zone.
+3. In **Design**, add a header, weekly consumption and the history of **Temperatura fuera de rango**.
+4. In **Recipients**, select the destination type and add collaborators or an account list.
+5. Generate a preview and check values, units and period.
+6. Enable the newsletter when you want scheduled sends to start.
 
-## Access and overview
+## Review without sending
 
-- Path: **Settings -> Newsletters -> Newsletters**.
-- The main table includes global search, filters by template and bulk actions.
-- The **Create newsletter** button opens an initial form with a name and description.
-- The list shows status (Active/Paused), template and health signals to detect stopped newsletters.
+In **Design**, the left column contains blocks and the right column contains the preview.
 
-## Structure of the newsletter sheet
+1. **Add block**: add content.
+2. **Drag handle**: drag to change the order.
+3. **Block actions**: edit its options or delete it.
+4. **Date**: select a reference date calculated from the schedule.
+5. **Refresh**: generate the preview for that date.
 
-The detail header shows:
+**Previewing does not send emails.** There is no **Send now** button on this screen in v4.2.3. If dates are unavailable, configure the schedule first. Some administrators also see **Debug mode**, which adds diagnostic details to the preview.
 
-- status and quick action to activate or pause,
-- internal identifier, template, time pattern and time zone,
-- shipment summary (last/next shot and number of recipients),
-- Contextual actions based on permissions (edit, duplicate, delete, send manually).
+## Review a send
 
-## Summary Tab
+In **Send history**, open a send and select a recipient to view its saved content, when available. History only shows sends for the newsletter you opened.
 
-- Shipping history with totals sent/failed and delivery rate.
-- Suppressed addresses to identify bounces or unsubscribes.
-- Chronology of executions with upcoming shots and completed events.
+The schedule uses the newsletter's time zone; displayed dates use your time zone. Some figures appear as unavailable until the first send.
 
-## Design Tab
-
-- Column of **content blocks** with order, editing and deletion.
-- Interactive **Preview** with reference date to validate relative variables.
-- For administrative profiles: debug mode and **Send now** action.
-
-## Recipients Tab
-
-- Audience table by type (user or group).
-- Registration form with selector by recipient type.
-- Support filters by account/language to reuse groups.
-- Only active members of the platform are allowed.
-
-## History Tab
-
-- List of executed dispatches with status and time stamp.
-- Detail view by dispatch to review recipients and diagnose errors.
-
-## Settings tab
-
-- Complete form: name, description, template, time pattern and time zone.
-- Pattern/schedule changes recalculate upcoming shots.
-- If the bulletin is paused, no programming is executed.
-
-## Recommended content organization
-
-:::steps
-1. **Open context**: Start with a narrative block (Free Text) that explains objective and scope.
-2. **Prioritize data**: Locate KPIs and trends by business importance.
-3. **Close with action**: Add operational reminders or next steps.
-4. **Validate before submit**: Use preview and debug mode to check calculations and visual consistency.
-:::
-
-## Available blocks
-
-Current catalog:
-
-- **Free Text**
-- **KPI Snapshot**
-- **Line Chart**
-- **Bar Chart**
-
-For details of parameters and use cases, review [Newsletters - Content Blocks](./boletines-bloques.md).
-
-## Good operational practices- Keep only necessary blocks for easy reading.
-- Coordinate template changes with style administrators.
-- Review bounces periodically to clean up inactive audiences.
-- Document the objective of the newsletter in description to facilitate reuse.
-
-## Supplementary resources
-
-- [Newsletters - Recipient Groups](./boletines-grupos.md)
-- [Newsletters - Templates](./boletines-plantillas.md)
-- [Newsletters - Content Blocks](./boletines-bloques.md)
+See [Content blocks](./boletines-bloques.md), [Recipient groups](./boletines-grupos.md) and [Templates](./boletines-plantillas.md).

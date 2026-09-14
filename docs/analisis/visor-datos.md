@@ -1,85 +1,49 @@
 ---
 title: "Visor de datos"
-version: "v4"
-last_updated: "2026-03-25"
+version: "v4.2.3"
+last_updated: "2026-09-14"
 owner: "Product"
 status: "stable"
 ---
 
 # Visor de datos
 
-El **Visor de datos** funciona como una caja de arena para explorar métricas, validar comportamiento y transformar observaciones en decisiones accionables.
+Abre **Mis métricas → Visor de Datos** para consultar un período, comparar mediciones o probar una visualización.
 
-:::module-strip
-Visor de datos es el entorno recomendado para validar una hipótesis antes de escalarla a paneles, reportes o monitoreos. Primero se contrasta el dato, después se comunica.
+## Qué muestra la pantalla
+
+:::screen id="visor-seleccion" src="../assets/screenshots/v4.2.3/visor-seleccion.png" title="Visor antes de seleccionar métricas" points="50,20;93,14;11,63;31,63;53,63;91,57;5,69;91,71;6,82;91,84"
+1. **Gráfico.** Muestra la selección; aquí aún no hay métricas elegidas. Consulta los ejemplos de Widgets para aprender a leer los datos.
+2. **Período.** Elige las fechas del gráfico.
+3. **Explorar métricas.** Busca y selecciona las mediciones.
+4. **Personalizar selección.** Cambia orden, colores y procesamiento.
+5. **Opciones de visualización.** Elige el tipo de widget y sus ajustes.
+6. **Minimizar.** Contrae la selección para dar más espacio al gráfico.
+7. **Buscar.** Encuentra una medición.
+8. **Filtros.** Limita los resultados del catálogo.
+9. **Casillas.** Añade o quita métricas.
+10. **Unidad y referencias.** Comprueba la unidad o copia el identificador.
 :::
 
-## Captura de la sección
 
-![Pantalla del Visor de datos en Clickie](../assets/screenshots/modules/metrics_viewer.png)
-*Vista del gráfico principal y del área de selección de métricas en el visor.*
+El [selector integrado](../conceptos/selector.md) actualiza la vista al cambiar la selección. No necesita el botón Confirmar de la ventana de selección de otros formularios.
 
-## Valor para usuarios y clientes
+## Ejemplo: encontrar un pico de potencia
 
-Antes de fijar una vista en un panel o disparar alertas en Monitoreos, el Visor de datos permite responder preguntas clave:
+1. Busca **Potencia eléctrica** de **Edificio principal**.
+2. Usa un gráfico de línea y selecciona un día completo.
+3. En Personalizar selección, elige 15 minutos y máximo para revisar picos, si la métrica admite esa resolución.
+4. Señala los puntos más altos para leer su hora y valor. En el gráfico de línea puedes arrastrar sobre una zona horizontal para ampliarla.
+5. Cambia a promedio si quieres revisar la evolución habitual y observa cómo cambia la lectura.
 
-- Qué está pasando realmente con la variable.
-- Si el comportamiento es estable o anómalo.
-- Qué resolución y configuración representan mejor el fenómeno.
+**Resultado:** puedes identificar cuándo ocurrió un valor alto. El gráfico no determina por sí solo su causa.
 
-Este paso reduce errores de interpretación y mejora la calidad de lo que luego se comunica en reportes.
+## Comparar sin mezclar significados
 
-## Casos de uso frecuentes
+- Para comparar días de consumo, usa el mismo intervalo y la misma agregación.
+- Para observar potencia y temperatura juntas, conserva sus unidades y revisa los ejes de cada serie.
+- Si faltan datos, prueba otro período y revisa el mensaje de la serie. Un hueco no equivale a un consumo nulo.
 
-- Probar una métrica en distintos rangos de tiempo.
-- Comparar series en una misma vista.
-- Evaluar resolución, agregación e interpolación.
-- Construir una visualización de validación antes de publicarla.
-- Exportar datos para análisis externo.
+La selección se conserva en la dirección de la página. Puedes copiarla para recuperar esta selección; quien la abra necesita acceso a las mismas métricas.
 
-## Flujo sugerido paso a paso
-
-:::steps
-1. **Abrir contexto de análisis**: Ingresar a **Mis métricas**, abrir **Visor de datos** y definir el rango temporal.
-2. **Seleccionar fuentes**: Desde **Explorar** elegir métricas y, si aplica, agregar etiquetas o fórmulas.
-3. **Ajustar lectura**: En **Selección actual** personalizar parámetros y elegir tipo de gráfico.
-4. **Validar y escalar**: Revisar consistencia y decidir si exportar o promover a panel/reporte.
-:::
-
-## Tipos de visualización comunes
-
-- Serie temporal
-- Barras
-- Tabla
-- Indicadores resumidos
-
-## Criterios para elegir una vista
-
-- Si buscas tendencia: usar serie temporal.
-- Si comparas periodos o categorías: usar barras.
-- Si priorizas auditoría puntual: usar tabla.
-- Si necesitas lectura ejecutiva rápida: usar indicadores resumidos.
-
-## Exportador de datos
-
-Desde el **Exportador de datos** se puede descargar información para análisis externo o integración con otros flujos.
-
-Campos habituales de configuración:
-
-- rango de fechas,
-- conjunto de métricas,
-- resolución,
-- formato de salida.
-
-## Buenas prácticas
-
-- Validar unidades antes de comparar series.
-- Revisar huecos de datos para evitar conclusiones erradas.
-- Guardar configuraciones de análisis usadas por el equipo.
-- Pasar a paneles solo visualizaciones que ya fueron validadas en Visor.
-
-## Referencias
-
-- [Selector de métricas](../conceptos/selector.md)
-- [Paneles y reportes](./paneles.md)
-- [Monitoreos](../automatizacion/monitoreos.md)
+Si vas a consultar esta vista con frecuencia, crea un widget en [Paneles y reportes](paneles.md). Revisa el [catálogo de widgets](widgets.md) para elegir la presentación.

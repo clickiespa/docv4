@@ -11,46 +11,21 @@ const MKDOCS_CONFIG = path.join(ROOT, 'mkdocs.yml');
 const OUTPUT_FILE = path.join(ROOT, 'src', 'manual.generated.html');
 const referencedStaticAssets = new Set();
 
-const ICON_BY_GROUP = {
-  Inicio: '◆',
-  Home: '◆',
-  Conceptos: '◆',
-  Concepts: '◆',
-  Análisis: '▦',
-  Analysis: '▦',
-  Automatización: '◉',
-  Automation: '◉',
-  Modelado: '✦',
-  Modeling: '✦',
-  Organización: '◈',
-  Organization: '◈',
-  Configuración: '⚙',
-  Configuration: '⚙',
-  'API v4': '⧉',
-  Changelog: '≡',
-};
-
 const UI_TEXT = {
   es: {
-    topSubtitle: 'Manual de uso · v4',
     searchAria: 'Buscar en el manual',
     searchPlaceholder: 'Buscar contenido del manual...',
     searchButton: 'Buscar',
     searchSuggestions: 'Sugerencias de búsqueda',
-    heroTag: '◆ Documentación oficial · Plataforma Clickie',
-    heroVersion: 'v4 · Plataforma Clickie',
     languageLabel: 'Idioma',
     languageEs: 'Español',
     languageEn: 'English',
   },
   en: {
-    topSubtitle: 'User manual · v4',
     searchAria: 'Search in manual',
     searchPlaceholder: 'Search documentation content...',
     searchButton: 'Search',
     searchSuggestions: 'Search suggestions',
-    heroTag: '◆ Official documentation · Clickie Platform',
-    heroVersion: 'v4 · Clickie Platform',
     languageLabel: 'Language',
     languageEs: 'Español',
     languageEn: 'English',
@@ -60,12 +35,14 @@ const UI_TEXT = {
 const LABEL_TRANSLATIONS = {
   en: {
     Inicio: 'Home',
+    'Cambios del manual': 'Manual updates',
     Conceptos: 'Concepts',
     Introducción: 'Introduction',
     'Métricas y fórmulas': 'Metrics and formulas',
     'Selector de métricas': 'Metrics selector',
     Análisis: 'Analysis',
     'Visor de datos': 'Data viewer',
+    'Exportador de datos': 'Data exporter',
     'Paneles y reportes': 'Dashboards and reports',
     Automatización: 'Automation',
     Monitoreos: 'Monitoring',
@@ -420,6 +397,7 @@ function rewriteRelativeMediaSources(html, currentDocPath) {
       return fullMatch;
     }
 
+    referencedStaticAssets.add(resolvedSrcPath);
     return `src="./${resolvedSrcPath}${suffix}"`;
   });
 }
@@ -660,6 +638,27 @@ function renderDirective(type, args, body, locale = 'es', markdownRenderer = DEF
   const isEnglish = locale === 'en';
   const normalizedType = type.toLowerCase();
   const parsedBody = body.trim();
+
+  if (normalizedType === 'screen') {
+    const items = parseOrderedItems(parsedBody);
+    const points = String(args.points || '').split(';').filter(Boolean).map((point) => point.split(',').map(Number));
+    if (!args.src || items.length === 0 || points.length !== items.length ||
+        points.some(point => point.length !== 2 || point.some(n => !Number.isFinite(n) || n < 0 || n > 100))) {
+      throw new Error(`Invalid numbered screenshot: ${args.id || args.src || 'unnamed'}`);
+    }
+    const title = args.title || (isEnglish ? 'Screen controls' : 'Elementos de la pantalla');
+    const markers = items.map((item, index) => {
+      const label = stripMarkdownSyntax(item).split('.')[0];
+      return `<button type="button" class="screen-marker" data-point="${index}" style="--point-x:${points[index][0]}%;--point-y:${points[index][1]}%" aria-label="${index + 1}. ${escapeHtml(label)}">${index + 1}</button>`;
+    }).join('');
+    const legend = items.map((item, index) => `<li tabindex="-1" data-point="${index}"><span class="legend-number" aria-hidden="true">${index + 1}</span><div>${markdownRenderer.parseInline(item)}</div></li>`).join('');
+    return `<figure class="annotated-screen" data-screen="${escapeHtml(args.id || '')}">
+      <figcaption>${escapeHtml(title)}</figcaption>
+      <div class="screen-stage"><img src="${escapeHtml(args.src)}" alt="${escapeHtml(title)}" loading="lazy" decoding="async" />${markers}</div>
+      <div class="screen-tools"><button type="button" class="screen-enlarge">${isEnglish ? 'Enlarge screenshot' : 'Ampliar captura'}</button></div>
+      <ol class="screen-legend" aria-label="${isEnglish ? 'Numbered controls' : 'Controles numerados'}">${legend}</ol>
+    </figure>`;
+  }
 
   if (normalizedType === 'module-strip') {
     return `<div class="module-strip">${markdownRenderer.parse(parsedBody)}</div>`;
@@ -938,20 +937,6 @@ function renderMarkdownWithBlocks(
   return htmlParts.join('\n');
 }
 
-function extractHeroDescription(content) {
-  const cleaned = content
-    .replace(/^:::[^\n]*$/gm, '')
-    .replace(/^\s*:::\s*$/gm, '')
-    .trim();
-
-  const paragraph = cleaned
-    .split('\n\n')
-    .map((part) => part.trim())
-    .find((part) => part && !part.startsWith('#') && !part.startsWith('<'));
-
-  return paragraph ? paragraph.replace(/\s+/g, ' ') : '';
-}
-
 function parseNavEntry(label, value, groupName, docItems, docPathToSectionId, locale) {
   const displayLabel = translateLabel(label, locale);
   if (typeof value === 'string') {
@@ -1081,15 +1066,15 @@ function renderSidebarEntries(entries, activeState, treeState, level = 0) {
         }
 
         const activeClass = isFirst ? ' active' : '';
-        return `<a class="nav-item${activeClass}" href="#${entry.sectionId}"><span class="nav-icon">◆</span>${escapeHtml(entry.label)}</a>`;
+        return `<a class="nav-item${activeClass}" href="#${entry.sectionId}">${escapeHtml(entry.label)}</a>`;
       }
 
       if (entry.type === 'group') {
-        const groupId = `nav-group-${treeState.counter}`;
+        const groupId = `nav-group-${treeState.locale}-${treeState.counter}`;
         treeState.counter += 1;
         const nestedHtml = renderSidebarEntries(entry.children || [], activeState, treeState, level + 1);
         const parentClass = level > 0 ? 'nav-sub nav-sub-parent nav-group-toggle' : 'nav-item nav-item-parent nav-group-toggle';
-        const iconHtml = level > 0 ? '' : '<span class="nav-icon">◆</span>';
+        const iconHtml = '';
         return `
           <div class="nav-group">
             <button type="button" class="${parentClass}" data-nav-toggle="${groupId}" aria-expanded="false">
@@ -1115,14 +1100,6 @@ async function buildLocaleShell(locale, nav) {
   const { docItems, docPathToSectionId, sidebarGroups } = parseNav(nav, locale);
   const sectionsHtml = [];
 
-  let heroTitle = locale === 'es' ? 'Manual de uso' : 'User manual';
-  const heroEmphasis = 'Clickie';
-  let heroDesc =
-    locale === 'es'
-      ? 'Guía completa para operar la plataforma: métricas, gemelos digitales, monitoreos, visor de datos, activos y configuración.'
-      : 'Complete guide to operate the platform: metrics, digital twins, monitoring, data viewer, assets and configuration.';
-  const heroSectionId = `${locale}-inicio`;
-
   for (let idx = 0; idx < docItems.length; idx += 1) {
     const { group, label, docPath, sectionId } = docItems[idx];
     const absolutePath = path.join(DOCS_DIR, docPath);
@@ -1137,17 +1114,6 @@ async function buildLocaleShell(locale, nav) {
     const parsed = matter(raw);
     const title = String(parsed.data?.title || label);
 
-    if (docPath === resolveDocPathForLocale('index.md', locale)) {
-      const h1 = parsed.content.match(/^#\s+(.+)$/m);
-      if (h1?.[1]) {
-        heroTitle = h1[1].trim();
-      }
-      const paragraph = extractHeroDescription(parsed.content);
-      if (paragraph) {
-        heroDesc = paragraph;
-      }
-    }
-
     const bodyNoH1 = normalizeMarkdownForRendering(removeFirstH1(parsed.content));
     const headingTargets = await buildHeadingTargets(docPath, bodyNoH1, sectionId);
     const markdownRenderer = createMarkdownRenderer(headingTargets);
@@ -1159,26 +1125,22 @@ async function buildLocaleShell(locale, nav) {
       docPathToSectionId
     );
     const bodyHtml = rewriteRelativeMediaSources(bodyWithRewrittenLinks, docPath);
-    const icon = ICON_BY_GROUP[group] || '◆';
-    const dividerHtml = idx < docItems.length - 1 ? '<div class="divider"></div>' : '';
+
 
     sectionsHtml.push(`
-    <section class="section" id="${sectionId}">
+    <section class="section" id="${sectionId}" data-group="${escapeHtml(group)}" ${idx ? 'hidden' : ''}>
       <div class="sec-header">
-        <div class="sec-icon">${icon}</div>
-        <div>
-          <div class="sec-label">${escapeHtml(group)}</div>
-          <h2>${escapeHtml(title)}</h2>
-          <div class="sec-desc">${escapeHtml(label)}</div>
-        </div>
+        <div class="sec-label">${escapeHtml(group)}</div>
+        <h1 tabindex="-1">${escapeHtml(title)}</h1>
+        <div class="article-version">${docPath.includes('api/') || docPath.includes('api-es/') ? (locale === 'es' ? 'Referencia API v4' : 'API v4 reference') : 'Clickie v4.2.3'}</div>
       </div>
       <div class="prose">${bodyHtml}</div>
     </section>
-    ${dividerHtml}`);
+    `);
   }
 
   const activeState = { assigned: false };
-  const treeState = { counter: 0 };
+  const treeState = { counter: 0, locale };
   const navHtml = sidebarGroups
     .map(({ groupName, entries }) => {
       const links = renderSidebarEntries(entries, activeState, treeState);
@@ -1192,49 +1154,28 @@ async function buildLocaleShell(locale, nav) {
 
   return `
 <section class="manual-shell" data-lang="${locale}" ${locale === 'es' ? '' : 'hidden'}>
+  <a class="skip-link" href="#${locale}-index">${locale === 'es' ? 'Ir al contenido' : 'Skip to content'}</a>
   <header class="topbar">
-    <a class="sb-logo" href="#${heroSectionId}">
-      <div class="sb-badge">C</div>
-      <div>
-        <div class="sb-title">Clickie</div>
-        <div class="sb-sub">${escapeHtml(ui.topSubtitle)}</div>
-      </div>
+    <a class="sb-logo" href="#${locale}-index">
+      <img class="sb-brand" src="./assets/brand/clickie-logo-gray.svg" alt="Clickie" width="1330" height="528" />
+      <span class="sb-sub">${locale === 'es' ? 'Manual de uso' : 'User guide'}</span>
     </a>
-
+    <button class="contents-toggle" type="button" aria-controls="sidebar-${locale}" aria-expanded="false">${locale === 'es' ? 'Contenido' : 'Contents'}</button>
     <form class="top-search-form" role="search" aria-label="${escapeHtml(ui.searchAria)}">
-      <input class="top-search-input" type="search" placeholder="${escapeHtml(ui.searchPlaceholder)}" autocomplete="off" aria-label="${escapeHtml(ui.searchAria)}" />
+      <input class="top-search-input" type="search" placeholder="${locale === 'es' ? 'Buscar una función o tarea' : 'Search for a feature or task'}" autocomplete="off" aria-label="${escapeHtml(ui.searchAria)}" aria-controls="suggestions-${locale}" aria-expanded="false" />
       <button class="top-search-btn" type="submit">${escapeHtml(ui.searchButton)}</button>
-      <div class="top-search-dropdown" hidden>
-        <ul class="top-search-suggestions" role="listbox" aria-label="${escapeHtml(ui.searchSuggestions)}"></ul>
-      </div>
+      <div class="top-search-dropdown" hidden><ul class="top-search-suggestions" id="suggestions-${locale}"></ul></div>
+      <span class="top-search-status sr-only" role="status"></span>
     </form>
-
     <div class="topbar-controls">
-      <label class="lang-label" for="lang-select-${locale}">${escapeHtml(ui.languageLabel)}</label>
-      <select id="lang-select-${locale}" class="lang-select" aria-label="${escapeHtml(ui.languageLabel)}">
-        <option value="es">${escapeHtml(ui.languageEs)}</option>
-        <option value="en">${escapeHtml(ui.languageEn)}</option>
-      </select>
-      <div class="top-search-status" aria-live="polite"></div>
+      <label class="sr-only" for="lang-select-${locale}">${escapeHtml(ui.languageLabel)}</label>
+      <select id="lang-select-${locale}" class="lang-select" aria-label="${escapeHtml(ui.languageLabel)}"><option value="es">Español</option><option value="en">English</option></select>
     </div>
   </header>
-
-  <aside class="sidebar">
-    <nav>${navHtml}
-    </nav>
-  </aside>
-
-  <main class="main">
-    <header class="hero" id="${heroSectionId}">
-      <div class="hero-tag">${escapeHtml(ui.heroTag)}</div>
-      <h1>${escapeHtml(heroTitle)}<br><em>${escapeHtml(heroEmphasis)}</em></h1>
-      <p class="hero-desc">${escapeHtml(heroDesc)}</p>
-      <div class="hero-version">${escapeHtml(ui.heroVersion)}</div>
-    </header>
-
-    <div class="content">${sectionsHtml.join('')}
-    </div>
-  </main>
+  <button type="button" class="sidebar-backdrop" aria-label="${locale === 'es' ? 'Cerrar contenido' : 'Close contents'}" hidden></button>
+  <aside class="sidebar" id="sidebar-${locale}"><div class="sidebar-version">Clickie <strong>v4.2.3</strong></div><nav aria-label="${locale === 'es' ? 'Secciones del manual' : 'Guide sections'}">${navHtml}</nav></aside>
+  <main class="main"><div class="reading-layout"><div class="content">${sectionsHtml.join('')}<nav class="article-pagination" aria-label="${locale === 'es' ? 'Artículos relacionados' : 'Related articles'}"></nav></div><aside class="article-toc" aria-label="${locale === 'es' ? 'En esta página' : 'On this page'}"></aside></div></main>
+  <dialog class="screen-dialog" aria-label="${locale === 'es' ? 'Captura ampliada' : 'Enlarged screenshot'}"><button type="button" class="screen-close">${locale === 'es' ? 'Cerrar' : 'Close'} ✕</button><div class="screen-dialog-content"></div></dialog>
 </section>`;
 }
 
@@ -1254,7 +1195,7 @@ ${shellEn}
 `;
 
   await copyReferencedStaticAssets();
-  await fs.writeFile(OUTPUT_FILE, html, 'utf-8');
+  await fs.writeFile(OUTPUT_FILE, html.replace(/^[\t ]+$/gm, ''), 'utf-8');
   console.log(`Generated ${OUTPUT_FILE}`);
 }
 

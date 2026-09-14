@@ -1,120 +1,57 @@
 ---
-title: "Boletines - Bloques de contenido"
-version: "v4"
-last_updated: "2026-03-25"
+title: "Boletines: bloques de contenido"
+version: "v4.2.3"
+last_updated: "2026-09-14"
 owner: "Product"
 status: "stable"
 ---
 
-# Boletines - Bloques de contenido
+# Boletines: bloques de contenido
 
-Los bloques determinan qué información aparece en un boletín y en qué formato se presenta.
-Cada bloque combina una plantilla visual con parámetros de configuración (títulos, métricas, ventanas temporales o HTML) y el orden final define la narrativa del envío.
+Los bloques forman el contenido del boletín. Añádelos desde **Boletín > Diseño > Añadir bloque** y arrástralos para ordenar la lectura.
 
-## Captura de referencia
+## Elegir un bloque
 
-![Vista general del módulo Boletines](../assets/screenshots/modules/newsletters.png)
-*Desde el detalle de cada boletín se gestionan los bloques de contenido y su orden de presentación.*
+Los nombres del catálogo pueden aparecer en inglés.
 
-## Cómo funcionan los bloques
+| Bloque | Qué muestra | Ejemplo de uso |
+| --- | --- | --- |
+| **Free Text** | Texto con formato HTML. | Una nota breve sobre una parada de mantenimiento. |
+| **Newsletter Header** | Título, subtítulo y fecha o período del resumen. | “Resumen semanal · Planta de demostración”. |
+| **KPI Snapshot** | Valores resumidos por métrica, con comparación y minigráfico opcionales. | Consumo de energía de la semana frente a la anterior. |
+| **Line, Bar & Area Chart** | Evolución en líneas, áreas o barras; también admite una barra por métrica. | Temperatura ambiente durante la semana o consumo por edificio. |
+| **Metric Comparison Feedback** | Comparación de una métrica con otra o consigo misma en otro período. | Comprobar si bajó el consumo respecto de la semana anterior. |
+| **Comparative Table** | Tabla de una métrica principal y otras comparativas, con porcentaje opcional respecto de la principal. | Consumo total del edificio y participación de cada sistema. |
+| **Monitoring History** | Resumen o detalle del historial de los monitoreos seleccionados. | Cuándo estuvo en alarma **Temperatura fuera de rango**. |
 
-:::steps
-1. **Selección del tipo**: Al crear un bloque se elige el tipo desde catálogo y se carga su formulario específico.
-2. **Configuración**: Se completan campos según tipo con validaciones de consistencia.
-3. **Descripción interna**: Documenta propósito del bloque para otros editores.
-4. **Orden**: El drag and drop guarda la secuencia para la próxima ejecución.
-5. **Previsualización**: Cada cambio se valida en vista previa con datos reales para una fecha elegida.
-:::
+## Configurar los datos
 
-## Resumen de bloques disponibles
+1. **Descripción del bloque**: identifica su función dentro del editor. Usa un nombre corto, como “Consumo semanal”.
+2. **Métricas o monitoreos**: elige los datos que debe mostrar.
+3. **Intervalo**: define el período de datos del bloque.
+4. **Usar último intervalo cerrado**: usa el período completo más reciente en lugar del período actual, que puede estar incompleto.
+5. **Presentación**: elige las opciones que ofrece ese tipo, como título, leyenda, puntos, estilo o porcentaje.
+6. **Vista previa**: revisa el resultado usando una fecha de referencia del boletín.
 
-| Bloque | Cuando usarlo |
-| --- | --- |
-| **Free Text** | Mensajes editoriales, disclaimers o contexto narrativo sin dependencia de métricas. |
-| **KPI Snapshot** | Resumen rápido de indicadores críticos y comparaciones. |
-| **Line Chart** | Evolución temporal de una o varias métricas con resolución alineada. |
-| **Bar Chart** | Comparaciones por periodo o entre métricas (incluye stacking). |
+No todos los bloques muestran los mismos campos. Al modificar un bloque puedes cambiar su descripción y opciones; para usar otro tipo, añade un bloque nuevo.
 
-## Free Text
+## Ejemplo: un resumen de la semana completa
 
-**Propósito**: insertar HTML personalizado para introducciones, notas operativas o llamados a la acción.
+Para **Resumen semanal**, añade:
 
-Campos:
+- **Newsletter Header** con el nombre de la planta y el período.
+- **KPI Snapshot** con **Consumo de energía**, intervalo semanal y último intervalo cerrado.
+- **Line, Bar & Area Chart** con **Temperatura ambiente** para ver en qué momentos subió.
+- **Monitoring History** con **Temperatura fuera de rango** y el mismo período cerrado.
 
-- **HTML** (obligatorio): contenido renderizado dentro de `{{ blocks }}`.
+Así el total, la evolución y los eventos se refieren a la misma semana completa.
 
-## KPI Snapshot
+## Leer las comparaciones
 
-**Propósito**: responder rápidamente "cómo vamos" con tarjetas de indicadores agregados.
+En **Metric Comparison Feedback**, elige **Comparar con otra métrica** o **Comparar consigo misma**. Configura el intervalo y desplazamiento de cada lado. **Invertir tendencia** invierte la interpretación visual. Por defecto, un valor menor o igual se considera favorable, como en el consumo; inviértelo cuando un valor mayor represente un mejor resultado.
 
-Campos:
+En **Comparative Table**, el porcentaje se calcula respecto de la métrica principal. Compara magnitudes y unidades equivalentes. El patrón horario opcional limita qué horas entran en el cálculo.
 
-- **Título** (obligatorio)
-- **Subtítulo**
-- **Métricas** (obligatorio, multiple)
-- **Ventana** (obligatorio): `P1D`, `P1W`, `P1M`, `P1Y`
-- **Usar último periodo cerrado**
-- **Modo de comparación**
-- **Mostrar sparkline**
+En gráficos, **Líneas / área** sirve para ver la evolución; **Barras en el tiempo**, para comparar intervalos; **Barras apiladas**, para ver aportes; y **Una barra por métrica**, para comparar valores resumidos.
 
-Casos de uso:
-
-- Consumo energético vs metas.
-- Eficiencia operativa por línea o sede.
-- Indicadores de mantenimiento con impacto en gasto diario.
-
-## Line Chart
-
-**Propósito**: visualizar tendencias temporales sincronizadas en una resolución común.
-
-Campos:
-
-- **Título** (obligatorio)
-- **Subtítulo**
-- **Métricas** (obligatorio, multiple, misma resolución)
-- **Ventana** (obligatorio)
-- **Usar último periodo cerrado**
-- **Habilitar comparación**
-- **Modo de comparación**
-- **Mostrar leyenda**
-- **Mostrar puntos**
-
-Casos de uso:
-
-- Tendencias de consumo por planta.
-- Generación vs demanda.
-- Comparación de estacionalidad contra año anterior.
-
-## Bar Chart
-
-**Propósito**: comparar magnitudes por periodo o por métrica individual.
-
-Campos:
-
-- **Título** (obligatorio)
-- **Subtítulo**
-- **Métricas** (obligatorio)
-- **Ventana** (obligatorio)
-- **Usar último periodo cerrado**
-- **Modo de comparación**
-- **Modo de barras** (obligatorio): `time`, `stacked_time`, `aggregate_per_metric`
-- **Bucket** (opcional): hora, día, semana, mes
-
-Casos de uso:
-
-- Comparativas por turno/sede.
-- Distribución de fuentes energéticas.
-- Ranking de activos con desvío.
-
-## Buenas prácticas al combinar bloques
-
-- Alternar bloques narrativos y cuantitativos para mejorar legibilidad.
-- Documentar dependencias en descripción interna del bloque.
-- Mantener 5-6 bloques para evitar fatiga de lectura.
-- Para escenarios excepcionales, duplicar boletin en lugar de editar sobre la marcha.
-
-## Próximos pasos
-
-- [Boletines](./boletines.md)
-- [Boletines - Plantillas](./boletines-plantillas.md)
-- [Boletines - Grupos de destinatarios](./boletines-grupos.md)
+Consulta también [Boletines](./boletines.md).

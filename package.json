@@ -8,7 +8,8 @@
     "dev": "vite",
     "prebuild": "node scripts/generate_web_docs.mjs",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check:docs": "node scripts/check_web_docs.mjs"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
