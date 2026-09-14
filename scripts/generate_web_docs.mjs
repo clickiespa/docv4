@@ -291,9 +291,15 @@ async function buildHeadingTargets(docPath, markdownText, sectionId) {
   });
 }
 
-function createMarkdownRenderer(headingTargets) {
+function createMarkdownRenderer(headingTargets, locale) {
   const renderer = new marked.Renderer();
+  const renderTable = renderer.table;
   let headingIndex = 0;
+
+  renderer.table = function table(...args) {
+    const label = locale === 'es' ? 'Tabla de datos' : 'Data table';
+    return `<div class="table-scroll" role="region" aria-label="${label}" tabindex="0">${renderTable.apply(this, args)}</div>\n`;
+  };
 
   renderer.heading = function heading({ tokens, depth }) {
     const html = this.parser.parseInline(tokens);
@@ -1116,7 +1122,7 @@ async function buildLocaleShell(locale, nav) {
 
     const bodyNoH1 = normalizeMarkdownForRendering(removeFirstH1(parsed.content));
     const headingTargets = await buildHeadingTargets(docPath, bodyNoH1, sectionId);
-    const markdownRenderer = createMarkdownRenderer(headingTargets);
+    const markdownRenderer = createMarkdownRenderer(headingTargets, locale);
     const bodyMarkdownHtml = renderMarkdownWithBlocks(bodyNoH1, locale, markdownRenderer);
     const bodyWithRewrittenLinks = rewriteInternalDocLinks(
       bodyMarkdownHtml,
