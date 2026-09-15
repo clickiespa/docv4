@@ -7,10 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- `POST /v4/mgd/gateways/{id_setup}/imports` — Documented the v4.3 per-device
+  `special_days` list-only contract, including `special_days_invalid_format` in
+  non-strict mode and `400` rejection in strict mode for legacy dictionaries.
+- MGD importer documentation — Clarified `json_version >= v4.1`, component-level
+  special-day mappings, `channel_configs` in component settings, ignored
+  `connection.resource`, and the unchanged model-point catalog-gap behavior.
+
 ### Added
 - `GET /v4/gateways/devices/{identifier}/config` — Added `device_read` query parameter; when set to `true`, bypasses the DynamoDB history cache and reads the configuration directly from the device via MQTT
 
 ### Changed
+- MGD documentation — replaced proposal-only storage with eager write and
+  compensation; documented option-B use-edge promotion, graph/catalog 409s,
+  per-row sync, gateway snapshot apply, and cancellable states including
+  `pending` with transactional compensation.
+- MGD documentation — synchronized the canonical child-config routes,
+  gateway JSON projection, config-change pagination/replay, cancellation rules,
+  sparse history semantics, complete-snapshot importer reconciliation, and the explicit
+  distinction between proposal-storage preparation and strict proposal-only
+  activation.
 - Endpoints related to configurations now filter *CMWS* from the device identifier to not use it on MQTT interactions nor saving the config on the database.
 - `PUT /v4/gateways/devices/{identifier}/config` - Changed query param `subscription` to a body field.
 - `GET /v4/gateways/devices/{identifier}/config` — Configuration reads now serve from DynamoDB (`cm-config-history`) instead of the SQL `devices.device_configuration` column; falls back to MQTT if no history entry exists
