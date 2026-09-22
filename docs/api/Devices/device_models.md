@@ -22,7 +22,11 @@ A1. This API surface does not expose a device-model creation endpoint.
 
 ## List device models
 
-Retrieve device models visible to the authenticated account, with optional filters for archival status, model type, manufacturer and name.
+Retrieve device models visible to the authenticated account, with optional
+filters for archival status, model type, manufacturer, name, and whether the
+model has catalog points. Each item includes a point-count summary so clients
+can identify models that still lack point definitions without requesting the
+point collection for every model.
 
 Clearance level 4 or lower is required to read device models through this endpoint.
 
@@ -48,6 +52,7 @@ GET /device_models
 | `id_device_model_type` | No | int | No | Filter models by the related type identifier configured for the account. See [Related catalogs](#related-catalogs). |
 | `id_device_model_manufacturer` | No | int | No | Filter models by the manufacturer identifier associated with the account. See [Related catalogs](#related-catalogs). |
 | `model_name` | No | string | No | Filter models using a case-insensitive match on the model name. |
+| `has_points` | No | bool | No | Filter models by whether at least one row is defined in the `device_model_points` catalog. |
 
 ### Sample headers
 ```json
@@ -84,7 +89,9 @@ curl -H "Authorization: <API_KEY>" \
       "model_sends_data": true,
       "device_model_protocol": "tcp",
       "model_trace_by_quantity": false,
-      "model_archived": false
+      "model_archived": false,
+      "points_count": 7,
+      "has_points": true
     }
   ],
   "context": {},
@@ -110,6 +117,8 @@ curl -H "Authorization: <API_KEY>" \
 | `device_model_protocol` | string | Read-only protocol label resolved from `id_gateway_protocol` through `gateway_protocols`. |
 | `model_trace_by_quantity` | bool | Determines if stock is tracked by quantity for the model. |
 | `model_archived` | bool | Indicates whether the model is archived. |
+| `points_count` | int | Number of points defined in the `device_model_points` catalog for the model; `0` means no points are defined. |
+| `has_points` | bool | Whether the model has at least one point defined in the `device_model_points` catalog. Equivalent to `points_count > 0`. |
 
 ### Related catalogs
 
@@ -120,7 +129,7 @@ Use the following endpoints to obtain identifiers referenced by device models:
 
 ### Pydantic models
 
-- Response item: `ShowDeviceModel` (`List[ShowDeviceModel]`).
+- Response item: `DeviceModelListSummary` (`List[DeviceModelListSummary]`).
 
 ### Status codes
 
@@ -623,7 +632,7 @@ POST /device_models/{id_device_model}/points
 | `point_key` | Yes | string | No | Stable technical key used by exports and cross-references. |
 | `point_label` | Yes | string | No | Human-readable display label. |
 | `point_type` | Yes | enum | No | One of the six supported point types listed above. |
-| `address` | Conditional | int | No | Required for physical types (`modbus_*` and `gpio`); optional for `virtual`. |
+| `address` | Yes | int | No | Required non-negative register, channel, or GPIO address for every API-created point. |
 | `count` | No | int | No | Register count when the protocol requires more than one register. |
 | `bit` | No | int | No | Bit number for packed values. |
 | `value_format` | No | string | No | Stored value format. |
@@ -634,9 +643,12 @@ POST /device_models/{id_device_model}/points
 | `write_function` | No | string | No | Writer function name. Its presence marks the point as writable. |
 | `available_status_default` | No | object | No | Default status mapping for writable/control points. Omit for read-only points. |
 
-`point_name` is not a request field. Use `point_key` for the technical
-identity and `point_label` for display. `modbus_register` is not a supported
-value; use the specific input- or holding-register type.
+`address` is mandatory for every point created through this endpoint, including
+`virtual` points. `point_name` is not a request field. Use `point_key` for the
+technical identity and `point_label` for display. `modbus_register` is not a
+supported value; use the specific input- or holding-register type. The
+`point_type` query filter and request body accept only the six values listed
+above.
 
 The default factor is part of the public contract. A deployment that persists
 or returns a null effective factor is out of sync with this contract and must

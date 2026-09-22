@@ -139,8 +139,17 @@ compensate, because the setup is no longer deployed. Accessories neither
 enable nor cancel MGD changes for the setup.
 
 A schedule may exist without a point group. It is a valid resource, but its
-change stays `on_hold` until the relationship required for dispatch exists.
-`everyday` is a point-group rule, not a device-config rule.
+create or update change stays `on_hold` until the relationship required for
+dispatch exists. `everyday` is a point-group rule, not a device-config rule.
+
+Deletion is an intentional exception: `DELETE
+/mgd/gateways/{id_setup}/schedules/{schedule_id}` goes directly to `pending`
+when the gateway is installed, even when the schedule has no active point
+group. This allows the worker to remove a schedule that is still present in
+the gateway's previous snapshot, even if it has become orphaned. If the
+gateway is not installed, deletion stays `on_hold`. `reconcile` also promotes
+an existing schedule deletion that was held when the target becomes
+installed; it does not change the create or update rule.
 
 ### Use-edge promotion (option B)
 
@@ -164,9 +173,11 @@ extensions bound to **another** schedule, or use `include_children`. Attaching
 an existing extension promotes that extension, not the schedule and not other
 extensions of the same component.
 
-`CREATE`, `UPDATE`, and `reconcile` share `change_dependencies_are_ready`. A
-detached schedule, group, membership, or extension stays `on_hold` even if the
-target is installed. A gateway `reconcile` does not pend detached extensions.
+`CREATE`, `UPDATE`, and `reconcile` share `change_dependencies_are_ready`,
+with the explicit schedule `DELETE` exception above. A detached schedule,
+group, membership, or extension stays `on_hold` when created or updated even
+if the target is installed. A gateway `reconcile` does not pend detached
+extensions.
 An extension is dispatchable only when it is bound to a schedule that itself
 is dispatchable (the schedule has a live point group) and the gateway is
 installed. A detached `CREATE` is always `on_hold`.
@@ -220,7 +231,10 @@ related resources.
 A non-terminal exists for the same `(id_entity, id_resource)` under another
 `change_group_key`. There is no second PUT/DELETE of that row until a
 terminal or `retry`. `next_action` is `cancel_then_retry`
-(`on_hold`/`retry`) or `wait_for_worker` (`pending`/`in_progress`).
+(`on_hold`/`pending`/`retry`) or `wait_for_worker` (`in_progress`). If a client
+needs to change a pending proposal, it must cancel the proposal through its
+status endpoint and then retry the mutation; the API does not create an
+exception for an immediate device-point PUT.
 
 `reason`: `resource_has_active_change`. The 409 names the change, the status,
 and `look_at` (resource GET or that change’s PATCH).
@@ -460,6 +474,21 @@ POST /mgd/setups/{id_setup}/config-changes/replay
 
 resends existing `pending` rows. It does not create an outbox table, rewrite
 the entity, or change status.
+
+## Dispatch windows and group cancellation
+
+Creating a new change wakes existing `retry` rows for the same gateway in the
+same approximate `now + 1 minute` dispatch window. The row keeps its current
+retry number; the worker owns the backoff and increments the number only after
+another failed attempt. `on_hold` is not scheduled and never receives a
+`scheduled_at` value from this flow.
+
+Cancelling a change through
+`PATCH /mgd/gateways/{id_setup}/config-changes/{change_id}/status` with
+`{"change_status":"cancelled"}` also cancels its cancellable siblings in the
+same gateway and `change_group_key`. The cancellable states are `on_hold`,
+`pending`, and `retry`; terminal rows are left unchanged. If any sibling is
+`in_progress`, the API returns `409` and rolls back the complete operation.
 
 ## Importer
 

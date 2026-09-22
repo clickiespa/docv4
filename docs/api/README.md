@@ -2,6 +2,11 @@
 
 Welcome to the API v4 documentation hub.
 
+> This repository is documentation-only. The canonical AP-v4 implementation,
+> OpenAPI contract, and local E2E test target live in
+> [`clickie-platform`](https://github.com/clickiespa/clickie-platform). The
+> historical `API-V4/` tree is not an implementation source.
+
 This page is designed as a client-facing guide so you can quickly find the right documentation file, understand where each endpoint group is documented, and navigate the platform with confidence.
 
 ## Quick references
@@ -62,10 +67,11 @@ This page is designed as a client-facing guide so you can quickly find the right
 
 ### `mgd`
 - [MGD canonical contract](gateways/mgd_canonical_contract.md) — route map, response fields, canonical identities, uniqueness rules, relationship semantics, and controlled ambiguity behavior.
-- [MGD gateway configuration endpoints](gateways/mgd_gateways.md) — `/mgd/gateways`: template CRUD and apply, component/protocol/schedule-type catalogs, gateway configuration, components, child-device bindings, model points keyed by canonical IDs, point groups and their point/special-day bridges, per-name everyday/special-day behavior rules, special days, schedules using numeric scope IDs, extensions, config-change list/status endpoints with optional `scheduled_at`, cancellation including `pending`, reconciliation, replay, and complete-snapshot JSON imports with v4.3 per-device `special_days` list validation.
+- [MGD gateway configuration endpoints](gateways/mgd_gateways.md) — `/mgd/gateways`: template CRUD and apply, component/protocol/schedule-type catalogs, gateway configuration, components, child-device bindings, model points keyed by canonical IDs, point groups and their point/special-day bridges, point-level membership rules, multiple special-day groups per point, special-day prerequisites, schedules using numeric scope IDs, extensions, config-change list/status endpoints with optional `scheduled_at`, cancellation including `pending`, reconciliation, replay, and complete-snapshot JSON imports with v4.3 per-device `special_days` list validation.
+- [MGD endpoint reference](gateways/mgd_endpoint_reference.md) — every MGD operation with exact path parameters, query parameters, filters, defaults, request-body fields, Pydantic models, examples, and status codes.
 - [MGD device points](gateways/mgd_points.md) — explicit device-config point routes, catalog IDs, filters, per-device overrides, atomic-creation contract, change locks, and reader JSON projection rules.
 - [MGD device-config identity](gateways/mgd_device_config_model.md) — child setup versus device-config selectors, uniqueness, and eager writes under `/devices/{child}/configs`.
-- [MGD config-change states](gateways/mgd_config_change_states.md) — eager-write state machine, option-B use-edge promotion, installation eligibility, compensation including `pending`, mutex 409s, optional `scheduled_at`, reconciliation, worker snapshot, and complete-snapshot import behavior including strict/non-strict payload validation.
+- [MGD config-change states](gateways/mgd_config_change_states.md) — eager-write state machine, option-B use-edge promotion, installation eligibility, compensation including `pending`, mutex 409s, optional `scheduled_at`, same-gateway retry wake-up, group cancellation, reconciliation, worker snapshot, and complete-snapshot import behavior including strict/non-strict payload validation.
 - [MGD JSON projection](gateways/mgd_json_projection.md) — assembled `applied` and `proposed` gateway JSON responses after eager persist.
 - [MGD eager persistence](gateways/mgd_proposal_storage.md) — real `id_resource`, `id_setup_target`, immutable history, API-owned compensation, SQS replay.
 - [MGD gateway contract tests](gateways/mgd_gateway_smoke_tests.md) — route, state, event, timestamp, and complete-snapshot importer coverage that protects the public contract.

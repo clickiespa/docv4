@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `GET /v4/gateways/devices/{identifier}/config` — Added `device_read` query parameter; when set to `true`, bypasses the DynamoDB history cache and reads the configuration directly from the device via MQTT
 
 ### Changed
+- MGD release `deploy/api/20260909T130511Z` (AP-v4 `Production`, Lambda
+  version `32`) documents resource-centric `config-sync`, same-gateway retry
+  wake-up, group cancellation by `change_group_key`, and the v4.3 importer
+  contract.
+- History examples now use inclusive `from`/`to` UNIX-second filters; omitted
+  boundaries use the seven-day window and inverted ranges return `400`.
 - MGD documentation — replaced proposal-only storage with eager write and
   compensation; documented option-B use-edge promotion, graph/catalog 409s,
   per-row sync, gateway snapshot apply, and cancellable states including
