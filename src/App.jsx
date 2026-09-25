@@ -107,7 +107,7 @@ function App() {
             expandParents(link);
           } else link.removeAttribute('aria-current');
         });
-        document.title = `${section.querySelector('h1').textContent} · Clickie v4.2.3`;
+        document.title = `${section.querySelector('h1').textContent} · Clickie v4.2.4`;
         const headings = [...section.querySelectorAll('.prose h2[id],.prose h3[id]')];
         toc.innerHTML = headings.length ? `<div class="toc-title">${lang === 'es' ? 'En esta página' : 'On this page'}</div>` + headings.map(heading => `<a href="#${heading.id}" class="${heading.tagName === 'H3' ? 'toc-sub' : ''}">${escape(heading.textContent)}</a>`).join('') : '';
         const index = sections.indexOf(section);

@@ -22,6 +22,7 @@ nav:
       - Exportador de datos: analisis/exportador-datos.md
       - Paneles y reportes: analisis/paneles.md
       - Widgets: analisis/widgets.md
+      - Matriz de activos: analisis/matriz-activos.md
   - Automatización:
       - Monitoreos: automatizacion/monitoreos.md
   - Modelado:
@@ -31,6 +32,7 @@ nav:
       - Activos: organizacion/activos.md
   - Configuración:
       - Configuración de cuenta: configuracion/cuenta.md
+      - Recursos compartidos: configuracion/recursos-compartidos.md
       - Datos y fuentes: configuracion/datos-y-fuentes.md
       - Boletines:
           - Vista general: configuracion/boletines.md

@@ -1,7 +1,7 @@
 ---
 title: "Metric Selector"
-version: "v4.2.3"
-last_updated: "2026-09-14"
+version: "v4.2.4"
+last_updated: "2026-09-25"
 owner: "Product"
 status: "stable"
 ---
@@ -77,3 +77,9 @@ Read each series in its own unit: kW and °C do not share a magnitude scale. Cho
 A **synthetic metric** lets you enter an expression referencing metrics. A **tag metric** combines metrics sharing a tag; check the combination method and which metrics that tag includes.
 
 See [Metrics and formulas](metricas.md) for aggregation and calculation order. In the **data viewer**, the selector appears in tabs and updates the visualization as you use it. The final Confirm action applies to the selector opened as a separate window.
+
+## Select a single metric
+
+Fields that accept only one metric open a simplified selector with search and filters. Select the metric and confirm; these fields do not require a customization step.
+
+For asset selection and tag-based grouping, see [Asset matrix](../analisis/matriz-activos.md).

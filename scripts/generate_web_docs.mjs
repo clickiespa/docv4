@@ -53,6 +53,8 @@ const LABEL_TRANSLATIONS = {
     Activos: 'Assets',
     Configuración: 'Configuration',
     'Configuración de cuenta': 'Account settings',
+    'Matriz de activos': 'Asset matrix',
+    'Recursos compartidos': 'Shared resources',
     'Datos y fuentes': 'Data and sources',
     Boletines: 'Newsletters',
     'Vista general': 'Overview',
@@ -1138,7 +1140,7 @@ async function buildLocaleShell(locale, nav) {
       <div class="sec-header">
         <div class="sec-label">${escapeHtml(group)}</div>
         <h1 tabindex="-1">${escapeHtml(title)}</h1>
-        <div class="article-version">${docPath.includes('api/') || docPath.includes('api-es/') ? (locale === 'es' ? 'Referencia API v4' : 'API v4 reference') : 'Clickie v4.2.3'}</div>
+        <div class="article-version">${docPath.includes('api/') || docPath.includes('api-es/') ? (locale === 'es' ? 'Referencia API v4' : 'API v4 reference') : 'Clickie v4.2.4'}</div>
       </div>
       <div class="prose">${bodyHtml}</div>
     </section>
@@ -1179,7 +1181,7 @@ async function buildLocaleShell(locale, nav) {
     </div>
   </header>
   <button type="button" class="sidebar-backdrop" aria-label="${locale === 'es' ? 'Cerrar contenido' : 'Close contents'}" hidden></button>
-  <aside class="sidebar" id="sidebar-${locale}"><div class="sidebar-version">Clickie <strong>v4.2.3</strong></div><nav aria-label="${locale === 'es' ? 'Secciones del manual' : 'Guide sections'}">${navHtml}</nav></aside>
+  <aside class="sidebar" id="sidebar-${locale}"><div class="sidebar-version">Clickie <strong>v4.2.4</strong></div><nav aria-label="${locale === 'es' ? 'Secciones del manual' : 'Guide sections'}">${navHtml}</nav></aside>
   <main class="main"><div class="reading-layout"><div class="content">${sectionsHtml.join('')}<nav class="article-pagination" aria-label="${locale === 'es' ? 'Artículos relacionados' : 'Related articles'}"></nav></div><aside class="article-toc" aria-label="${locale === 'es' ? 'En esta página' : 'On this page'}"></aside></div></main>
   <dialog class="screen-dialog" aria-label="${locale === 'es' ? 'Captura ampliada' : 'Enlarged screenshot'}"><button type="button" class="screen-close">${locale === 'es' ? 'Cerrar' : 'Close'} ✕</button><div class="screen-dialog-content"></div></dialog>
 </section>`;

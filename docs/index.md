@@ -1,14 +1,14 @@
 ---
 title: "Manual de uso de Clickie"
-version: "v4.2.3"
-last_updated: "2026-09-14"
+version: "v4.2.4"
+last_updated: "2026-09-25"
 owner: "Product"
 status: "stable"
 ---
 
 # Manual de uso de Clickie
 
-Documentación de uso de **Clickie v4.2.3**. Busca una tarea o entra en la sección que necesitas.
+Documentación de uso de **Clickie v4.2.4**. Busca una tarea o entra en la sección que necesitas.
 
 | Quiero… | Ir a |
 | --- | --- |
@@ -33,3 +33,7 @@ Para empezar, abre el [Visor de datos](analisis/visor-datos.md), elige **Potenci
 Entra en [Clickie](https://my.clickie.io/authentication) con tu usuario. Si tienes acceso a varias cuentas, comprueba cuál está activa antes de buscar datos.
 
 Las secciones, datos y acciones visibles dependen de tus permisos. Si no aparece una opción de creación o edición, pide al administrador de tu cuenta que revise tu acceso.
+
+## Novedades de 4.2.4
+
+[Matriz de activos](analisis/matriz-activos.md) · [Recursos compartidos](configuracion/recursos-compartidos.md) · [Gestión de cuenta y colaboradores](configuracion/cuenta.md) · [Todas las novedades](changelog.md)

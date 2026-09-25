@@ -1,7 +1,7 @@
 ---
 title: "Widgets"
-version: "v4.2.3"
-last_updated: "2026-09-14"
+version: "v4.2.4"
+last_updated: "2026-09-25"
 owner: "Product"
 status: "stable"
 ---
@@ -153,3 +153,7 @@ Screenshots use fictional data for **Edificio principal** in the Spanish interfa
 4. **Value and state.** Each cell shows consumption and its range. Read its details for the meaning of the color.
 5. **Legend.** Defines the example ranges: below 70, 70 through 190 inclusive, and above 190 kWh. These are fictional limits; no data is a separate state.
 :::
+
+## Asset matrix
+
+Use the [Asset matrix](matriz-activos.md) to compare assets by period, select metrics by tags and combine them into groups. Its guide explains every setting, calculation order, totals and missing data.

@@ -1,14 +1,14 @@
 ---
 title: "Clickie User Manual"
-version: "v4.2.3"
-last_updated: "2026-09-14"
+version: "v4.2.4"
+last_updated: "2026-09-25"
 owner: "Product"
 status: "stable"
 ---
 
 # Clickie User Manual
 
-Usage documentation for **Clickie v4.2.3**. Search for a task or open the section you need.
+Usage documentation for **Clickie v4.2.4**. Search for a task or open the section you need.
 
 | I want to… | Go to |
 | --- | --- |
@@ -33,3 +33,7 @@ To start, open the [data viewer](analisis/visor-datos.md), choose **Potencia el�
 Sign in to [Clickie](https://my.clickie.io/authentication). If you have access to several accounts, check the active account before looking for data.
 
 Visible sections, data and actions depend on your permissions. If a creation or editing option is missing, ask your account administrator to check your access.
+
+## New in 4.2.4
+
+[Asset matrix](analisis/matriz-activos.md) · [Shared resources](configuracion/recursos-compartidos.md) · [Account and collaborator management](configuracion/cuenta.md) · [All updates](changelog.md)

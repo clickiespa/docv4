@@ -1,7 +1,7 @@
 ---
 title: "Selector de métricas"
-version: "v4.2.3"
-last_updated: "2026-09-14"
+version: "v4.2.4"
+last_updated: "2026-09-25"
 owner: "Product"
 status: "stable"
 ---
@@ -77,3 +77,9 @@ Lee cada serie con su unidad: kW y °C no comparten una escala de magnitud. Usa 
 **Métrica sintética** permite escribir una expresión con referencias a métricas. **Métrica por tag** combina las métricas que comparten una etiqueta; revisa la combinación elegida y qué métricas incluye esa etiqueta.
 
 Consulta [Métricas y fórmulas](metricas.md) para elegir la agregación y el orden del cálculo. En el **Visor de datos**, el selector aparece integrado en pestañas y actualiza la vista mientras lo usas; el paso final Confirmar corresponde al selector que se abre como ventana.
+
+## Elegir una sola métrica
+
+Los campos que admiten una sola métrica abren una selección simplificada con búsqueda y filtros. Elige la métrica y confirma; en estos campos no necesitas un paso de personalización.
+
+Para seleccionar activos y agrupar sus métricas por etiquetas, consulta [Matriz de activos](../analisis/matriz-activos.md).

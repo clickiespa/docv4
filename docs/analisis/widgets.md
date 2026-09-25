@@ -1,7 +1,7 @@
 ---
 title: "Widgets"
-version: "v4.2.3"
-last_updated: "2026-09-14"
+version: "v4.2.4"
+last_updated: "2026-09-25"
 owner: "Product"
 status: "stable"
 ---
@@ -154,3 +154,7 @@ Las capturas usan datos ficticios del **Edificio principal**. Cada número ident
 4. **Valor y estado.** Cada celda muestra el consumo y el rango en que cae. Consulta su detalle para leer el significado del color.
 5. **Leyenda.** Define los rangos de este ejemplo: menos de 70, de 70 a 190 inclusive y más de 190 kWh. Son límites ficticios; sin datos es un estado distinto.
 :::
+
+## Matriz de activos
+
+Usa la [Matriz de activos](matriz-activos.md) para comparar activos por período, seleccionar sus métricas por etiquetas y combinarlas en grupos. La guía explica cada ajuste, el orden del cálculo, los totales y los datos faltantes.
