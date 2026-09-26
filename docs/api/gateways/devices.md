@@ -198,6 +198,10 @@ Retrieve the latest configuration snapshot saved or tries to obtain it from the 
 * When the config cannot be fetched, returns `503 service_unavailable` with `code: mqtt_bridge_unavailable`.
 * Subscription can be optionally specified via query parameter (default: `"edge"`).
 * Supports reading a specific nested property using `mode=read_specific` with a `route` parameter.
+* With `device_read=true`, bypasses the DynamoDB history cache and asks the
+  device through MQTT. A timeout may fall back to the last cached configuration
+  with `source: "dynamodb_fallback"`; a device rejection is authoritative and
+  returns `422 device_rejected_request` instead of serving stale data.
 
 ### Request examples
 
@@ -284,6 +288,17 @@ When `mode=read_specific&route=app/thresholds/temperature`:
 }
 ```
 
+**422 Unprocessable Entity** — Device rejected the live request
+```json
+{
+  "status": "failed",
+  "code": "device_rejected_request",
+  "errors": [
+    {"message": "The device rejected the requested configuration read."}
+  ]
+}
+```
+
 **503 Service Unavailable** — MQTT bridge unavailable
 ```json
 {
@@ -311,10 +326,13 @@ When `mode=read_specific&route=app/thresholds/temperature`:
 Publish a configuration change to the device via MQTT.
 
 * Accepts a JSON payload matching the device capabilities.
-* Subscription can be optionally specified via query parameter (default: `"edge"`).
+* Subscription can be optionally specified in the request body (default: `"edge"`).
 * Supports two modes:
   - **Full replacement** (default): Replace the entire device configuration. Requires `database`, `id`, and `lambda_functions` keys in the config.
   - **Targeted update** (`mode=write_specific`): Update a specific nested property using a JSON path (`route`).
+  - **Key deletion** (`mode=delete_specific`): Delete `key` from the object at
+    `route`; set `missing_ok=true` to make an already absent key a successful
+    no-op.
 * Returns `200 OK` when the device confirms the configuration was applied immediately.
 * Returns `202 Accepted` when the device queues the change for asynchronous processing.
 * Returns `503 Service Unavailable` when the MQTT bridge or device is not reachable.
@@ -323,7 +341,7 @@ Publish a configuration change to the device via MQTT.
 
 Full configuration update:
 ```http
-PUT /v4/gateways/devices/cm-001/config?subscription=edge HTTP/1.1
+PUT /v4/gateways/devices/cm-001/config HTTP/1.1
 Host: api.clickie.io
 Authorization: <api-key>
 Account: 33
@@ -331,6 +349,7 @@ Content-Type: application/json
 Idempotency-Key: 4b0fd0b0-4ef1-4b61-b7ce-73e1e7afc9be
 
 {
+  "subscription": "edge",
   "config": {
     "database": {...},
     "id": "cm-001",
@@ -359,12 +378,31 @@ Idempotency-Key: 4b0fd0b0-4ef1-4b61-b7ce-73e1e7afc9be
 
 {
   "mode": "write_specific",
+  "subscription": "edge",
   "route": "app/thresholds/temperature",
   "config": {
     "min": 16,
     "max": 24
   },
   "create_missing_path": false
+}
+```
+
+### Request example — Delete one nested key
+
+```http
+PUT /v4/gateways/devices/cm-001/config HTTP/1.1
+Host: api.clickie.io
+Authorization: <api-key>
+Account: 33
+Content-Type: application/json
+
+{
+  "mode": "delete_specific",
+  "subscription": "edge",
+  "route": "app/thresholds",
+  "key": "temperature",
+  "missing_ok": true
 }
 ```
 
@@ -465,6 +503,17 @@ Device queues the change for asynchronous processing:
 }
 ```
 
+**422 Unprocessable Entity** — Device rejected the request
+```json
+{
+  "status": "failed",
+  "code": "device_rejected_request",
+  "errors": [
+    {"message": "The device rejected the requested configuration update."}
+  ]
+}
+```
+
 **503 Service Unavailable** — MQTT bridge unavailable
 ```json
 {
@@ -480,22 +529,22 @@ Device queues the change for asynchronous processing:
 
 | Parameter            | Type    | Required | Mode              | Description                                           |
 | -------------------- | ------- | -------- | ----------------- | ----------------------------------------------------- |
-| `config`             | object  | Yes      | Both              | Configuration object or specific update payload       |
-| `mode`               | string  | No       | Both              | Set to "write_specific" for targeted updates; omit for full replacement |
+| `subscription`       | string  | No       | Both              | Target subscription: `edge-dev`, `edge`, or `core`; default: `edge`. |
+| `config`             | object  | Yes*     | full/write_specific | Configuration object or specific update payload; not required for `delete_specific`. |
+| `mode`               | string  | No       | Both              | Set to `write_specific`, `replace_key`, or `delete_specific`; omit for full replacement. |
 | `route`              | string  | Yes*     | write_specific    | JSON path to target property; format: `key/nested/path` (*required when mode="write_specific") |
 | `create_missing_path` | boolean | No       | write_specific    | If true, create intermediate paths that don't exist; default: false |
+| `old_key`             | string  | Yes*     | replace_key       | Existing key to rename; required when mode=`replace_key`. |
+| `new_key`             | string  | Yes*     | replace_key       | Replacement key name; required when mode=`replace_key`. |
+| `overwrite_existing`  | boolean | No       | replace_key       | Allow replacing an existing `new_key`; default: false. |
+| `key`                | string  | Yes*     | delete_specific   | Key to remove at `route`; required when mode=`delete_specific`. |
+| `missing_ok`         | boolean | No       | delete_specific   | Treat an already absent key as a successful no-op; default: false. |
 
 ### Request headers
 
 | Header           | Required | Description                                                                |
 | ---------------- | -------- | -------------------------------------------------------------------------- |
 | `Idempotency-Key` | No       | UUID for tracking. Logged for audit; full idempotency coming in Phase B.   |
-
-### Query parameters
-
-| Parameter     | Default | Description                                           |
-| ------------- | ------- | ----------------------------------------------------- |
-| `subscription` | "edge"  | Target subscription: "edge-dev", "edge", or "core"   |
 
 ### Response fields
 
@@ -510,7 +559,10 @@ Device queues the change for asynchronous processing:
 
 ## Error catalogue
 
-| HTTP | code                  | When                    |
-| ---- | --------------------- | ----------------------- |
-| 500  | internal_server_error | Any unexpected failure. |
-
+| HTTP | code | When |
+| --- | --- | --- |
+| 400 | `empty_config`, `invalid_config`, `invalid_config_schema`, `missing_route`, `missing_key`, `invalid_subscription` | The request body or mode-specific fields are invalid. |
+| 404 | `device_not_found` | The device is not visible in the authenticated account. |
+| 422 | `device_rejected_request` | The device responded but rejected the requested read or update. |
+| 503 | `mqtt_bridge_unavailable` | The device did not respond and no successful live operation was confirmed. |
+| 500 | `internal_server_error` | An unexpected server failure occurred. |

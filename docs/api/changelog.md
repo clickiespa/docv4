@@ -2,6 +2,49 @@
 
 Release notes are organized by FastAPI tag for each API version exposed in `/docs`.
 
+## Published (2026-09-23)
+
+### synchronization
+- Documented bounded incremental reads for account, collaborator, device, and
+  monitor collections with `updated_at_from`, the opaque
+  `X-Next-Updated-At-Cursor` header, UTC bounds, stable ordering, and explicit
+  non-tombstone behavior.
+
+### gateways
+- Added the inclusive `from`/`to` `created_at` filters to the MGD
+  `config-changes` guides, generated endpoint reference, and Postman examples.
+- Documented live gateway reads with `device_read=true`, targeted
+  `delete_specific` configuration updates, `cache_only` action reads, and the
+  distinction between `device_rejected_request` and
+  `mqtt_bridge_unavailable`.
+- Expanded the importer contract with structured `400` examples for malformed
+  device containers, physical point addresses, schedules, and relay point
+  groups, including the rollback/no-partial-import guarantee.
+
+### docs
+- Audited the ten most recent API deployment tags and synchronized the guides,
+  roadmap, changelogs, and maintained Postman collections with AP-v4
+  Production version 36 and the gateway changes shipped alongside it.
+
+## Published (2026-09-22)
+
+### history
+- Standardized collaborator, device, and monitor history on inclusive UNIX-second
+  `from`/`to` filters and added account-scoped batch device history at
+  `GET /v4/devices/history` with bounded `skip`/`limit` pagination and optional
+  repeated `id_device` filters.
+
+### mgd
+- Documented resource-centric `config-sync`, retry wake-up, atomic group
+  cancellation, and multiple special-day groups per point while retaining one
+  everyday group and the everyday prerequisite.
+- Documented actionable `400` importer validation responses, strict/non-strict
+  behavior, ignored legacy fields, and catalog warnings.
+
+### docs
+- Synchronized the gateway guides, generated endpoint reference, roadmap, and
+  all maintained Postman collections with AP-v4 Production Lambda version 36.
+
 ## Published (2026-09-10)
 
 ### history
@@ -28,16 +71,48 @@ Release notes are organized by FastAPI tag for each API version exposed in `/doc
 ### docs
 - Updated the maintained MGD guides, roadmap coverage, and both Postman
   collections with the importer payload contract.
+## Unreleased (2026-08-31)
+
+### mgd
+- Clarified that point-group cardinality is evaluated per
+  `id_device_model_point`: a point can belong to at most one `everyday` group,
+  while multiple `special_day` groups are allowed for different day groups;
+  every special-day membership requires an everyday membership, and unscheduled
+  groups are allowed.
+- Removed the documented dependency on pairing groups by name; group names are
+  descriptive data only.
+
+### docs
+- Defined this repository as documentation-only. The active implementation and
+  local E2E target are maintained in `clickie-platform`.
+- Regenerated the MGD endpoint reference from the active AP-v4 OpenAPI contract
+  and aligned all maintained Postman collections with canonical point-group IDs.
 
 ## Unreleased (2026-08-27)
 
 ### devices
 - Corrected the device-model point guide to use catalog IDs, current point
-  types, conditional physical addresses, and the factor default contract.
+  types, mandatory addresses for API-created points, and the factor default
+  contract.
+- Extended `GET /device_models` with `points_count`, `has_points`, and a
+  `has_points` filter so clients can find models without catalog points in
+  one paginated request.
 
 ### mgd
+- Fixed reader JSON projection so `factor` inherits from the device override,
+  model default, or `1`, while `available_status` is omitted for read-only
+  points and inherited from the model only for writable points.
+- Schedule deletes on installed gateways now become `pending` even without a
+  point group, allowing orphan schedules from a previous snapshot to be
+  removed; reconciliation promotes older held deletes after installation.
 - Added the device-point guide for explicit config routes, filters, per-device
   overrides, proposal locks, reader projection, and effective-value precedence.
+- Extended the canonical point-creation examples to accept per-point
+  `factor_override` and writable-only `available_status` in the same proposal;
+  the legacy ID-only body remains supported.
+- Added a generated MGD endpoint reference covering all active paths and
+  operations with exact path parameters, query parameters, filters, request
+  bodies, models, examples, and status codes.
 
 ### docs
 - Replaced stale device-model point examples, added canonical MGD point
@@ -107,7 +182,10 @@ Release notes are organized by FastAPI tag for each API version exposed in `/doc
   `resource_key`, API-owned materialization on `applied`, and the importer as
   the direct applied/upsert path.
 - MGD REST contracts now use `id_device_model_point`, `id_device_model_point_ids`, `id_gateway_schedule_type`, and numeric `schedule_scope_type` values (`0` for `everyday`, `1` for `special_day`).
-- Point-group behavior cardinality is scoped by `(device config, point_group_name)`: multiple names are allowed, each name may have one `everyday` and one `special_day` behavior, `special_day` requires its matching `everyday`, and singular routes accept `scope` when a name has both behaviors.
+- Point-group behavior cardinality is evaluated per catalog point: one
+  `everyday` group is allowed, multiple `special_day` groups may represent
+  different day groups, and every special-day membership requires an everyday
+  membership.
 - Added `GET /mgd/gateways/schedule-types` and `POST /mgd/setups/{id_setup}/config-changes/reconcile`.
 - Documented the independent `on_hold`/`pending` installation flow, `retry` state, target conflict guard, `config_sync`, post-commit SQS event, and the `force` import option.
 - Corrected the public transition contract so `pending -> on_hold` is a reconciliation-only demotion, clarified that accessories do not satisfy the main-installation predicate, and aligned manual status examples with the Pydantic contract.
@@ -160,7 +238,7 @@ Published at `/v4/`.
 - Point writes on `setup_gateway_device_points` now flush every `on_hold` change of the gateway to `pending`, stamp `exported_at`, and emit one SQS event `{"id_setup_gateway": <id>}` (queue via `MGD_CONFIG_CHANGES_QUEUE_URL`, region via `MGD_EVENTS_REGION`; no-op when unset). External systems resolve `pending -> in_progress | cancelled` and `in_progress -> applied | cancelled | failed`.
 - Added `GET /mgd/gateways/{id_setup}/config-changes` (filters: `change_status`, `change_group_key`, `operation`), `PATCH /mgd/gateways/{id_setup}/config-changes/{id_setup_gateway_config_change}/status`, and bulk `PATCH /mgd/gateways/{id_setup}/config-changes/status`.
 - Device configs are addressed as lists under `/mgd/gateways/{id_setup}/devices` and `/mgd/gateways/{id_setup}/devices/{child_id_setup}` (filterable by `setup_gateway_component`) and as unique resources under `/mgd/gateways/{id_setup}/components/{id_setup_gateway_component}/devices/{child_id_setup}`. Points now nest under the component-scoped device.
-- Added point-group CRUD and its bridge families under `/mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups` (keyed by `point_group_name`, with relay_control device-config resolution) plus a gateway special-days catalog (`/mgd/gateways/{id_setup}/special-days`). A shared validator allows one `everyday` and one `special_day` behavior per point-group name and requires `everyday` before `special_day`.
+- Added point-group CRUD and its bridge families under `/mgd/gateways/{id_setup}/devices/{child_id_setup}/point-groups` plus a gateway special-days catalog (`/mgd/gateways/{id_setup}/special-days`). The validator allows one everyday group per point, multiple special-day groups for distinct day groups, and requires everyday before special-day.
 - Added `POST /mgd/gateways/{id_setup}/templates/{id_gateway_config_template}/apply` for `operating_schedule` and `operating_extension` templates, materialized under one `change_group_key`.
 - `POST /mgd/gateways/{id_setup}/imports` now delegates to the canonical importer in `repository/import_gateway_configs.py` through `mgd_gateway_config_importer.py`.
 - The importer still surfaces `duplicate_device_key` and `point_group_scope_conflict` flags (hard error under `strict`) while bypassing `setup_gateway_config_changes`.
@@ -272,7 +350,9 @@ Published at `/v4/`.
 ### devices
 - Replaced direct `device_model_settings` access with `GET /device_models/{id_device_model}/settings`.
 - Kept `GET /devices/{id_device}/history` with `from`, `to`, `skip`, and `limit` query filters.
-- Temporarily removed `GET /devices/history` while the route conflict (`id_device` parsing) is reviewed.
+- The route conflict was resolved in a later release; the current contract
+  exposes `GET /devices/history` for account-scoped batch history alongside the
+  individual device history endpoint.
 
 ### setups
 - `GET /setups/{id_setup}/metrics` now includes `dms_attribute_name`, sourced from `device_model_settings` through `setup_metrics.id_device_model_setting`.

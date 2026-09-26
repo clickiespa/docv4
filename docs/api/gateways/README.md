@@ -5,6 +5,9 @@ resource identity, response fields, uniqueness rules, and relationship
 semantics.
 See [MGD gateway configuration endpoints](mgd_gateways.md) for endpoint-level
 request and response examples.
+See [MGD endpoint reference](mgd_endpoint_reference.md) for the complete
+operation-by-operation tables of headers, path parameters, query parameters,
+filters, request bodies, models, examples, and status codes.
 See [MGD device points](mgd_points.md) for explicit config point routes,
 catalog IDs, overrides, locks, and reader projection rules.
 See [MGD device-config identity](mgd_device_config_model.md) for child versus

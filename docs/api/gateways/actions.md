@@ -209,6 +209,12 @@ Submit read/write operations to IoT devices via MQTT. Supports two configuration
 | `Account`       | Account identifier | Yes      |
 | `Content-Type`  | `application/json` | Yes      |
 
+### Query parameters
+
+| Parameter | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| `cache_only` | boolean | No | `false` | When `true`, return the cached result for this exact action without contacting the device. If no cached result is available, return `404 cache_not_found`. |
+
 ### Request Body
 
 ```json
@@ -379,6 +385,9 @@ Submit read/write operations to IoT devices via MQTT. Supports two configuration
 | 400  | `preconfig_validation_failed` | Preconfig validation failed (see error details)  |
 | 400  | `custom_validation_failed`    | Custom validation failed (see error details)     |
 | 400  | `missing_device_id`           | Device ID is missing from path parameters        |
+| 404  | `cache_not_found`             | `cache_only=true` was requested but no cached result exists |
+| 422  | `device_rejected_request`     | The device responded but rejected the action request |
+| 503  | `mqtt_bridge_unavailable`     | The device or MQTT bridge did not respond |
 | 500  | `device_action_error`         | Unexpected error during action submission        |
 | 500  | `internal_server_error`       | Unexpected server error                          |
 
@@ -431,6 +440,11 @@ Submit read/write operations to IoT devices via MQTT. Supports two configuration
 | `medidor_control` | `"wm"`              |
 
 > **Note:** The API does not validate device names or register values. Validation is performed on the device side. Ensure that payloads conform to the supported devices and registers for successful execution.
+
+`cache_only=true` is a read of the gateway request cache, not a new device
+operation. It never sends MQTT traffic. The cache key includes the action
+body and, when present, the original `Idempotency-Key`; a missing or expired
+entry returns `404 cache_not_found`.
 ### Notes
 - `task_id` is automatically generated as a UUID if not provided
 - MQTT timeout is 60 seconds

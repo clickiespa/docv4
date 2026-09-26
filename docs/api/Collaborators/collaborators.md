@@ -36,6 +36,23 @@ GET /collaborators
 | --- | --- | --- | --- |
 | `skip` | no | int | Offset for pagination |
 | `limit` | no | int | Max records to return |
+| `updated_at_from` | no | int | Inclusive UNIX timestamp in seconds for an incremental read. |
+| `cursor` | no | string | Opaque cursor from the `X-Next-Updated-At-Cursor` response header. |
+
+### Incremental reads
+
+For the first page, provide `updated_at_from`. The API fixes the upper bound
+to the current UTC second and compares the effective timestamp
+(`updated_at`, or `created_at` when `updated_at` is null). Rows are ordered by
+that timestamp and `id_user` in ascending order. If more rows remain, the
+response includes `X-Next-Updated-At-Cursor`; pass it as `cursor` on the next
+request with `skip=0`.
+
+`updated_at_from` and `cursor` cannot be combined, and a non-zero `skip` with a
+cursor returns `400`. Requests without either parameter keep the existing
+offset pagination. The collection contains current account-visible users only;
+it does not provide deletion tombstones. Use reconciliation or event history
+when removals must be detected.
 
 ### Request headers example
 ```json
@@ -47,7 +64,14 @@ GET /collaborators
 
 ### Sample request
 ```bash
-curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" <HOST_NAME>/collaborators
+curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" \
+  <HOST_NAME>/collaborators?updated_at_from=1788307200&limit=100
+```
+
+When another page exists, continue with the response header:
+
+```http
+X-Next-Updated-At-Cursor: <opaque-cursor>
 ```
 
 ### Sample response

@@ -31,6 +31,9 @@ and does not require production data or a live queue.
   strict/non-strict rejection of the legacy dictionary shape;
 - invalid paths, payloads, scopes, duplicate links, and deterministic `409`
   responses instead of unexpected `500` errors.
+- point-level group membership cardinality, the everyday prerequisite for a
+  special-day membership, allowed unscheduled groups, and independence from
+  point-group names;
 
 The endpoint sweep runs representative reads and controlled invalid mutation
 cases against the local API and dump. Valid writes use disposable MySQL
@@ -42,7 +45,7 @@ Every singular route uses the ID exposed by its parent collection. In
 particular:
 
 ```text
-/devices/{child}/configs/{config}/points/{id_device_model_point}
+/devices/{child_id_setup}/configs/{id_setup_gateway_device_config}/points/{id_device_model_point}
 /devices/{child}/point-groups/{id_setup_gateway_point_group}
 /schedules/{schedule}
 /special-days/{special_day}

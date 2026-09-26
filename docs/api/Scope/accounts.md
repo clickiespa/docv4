@@ -38,10 +38,36 @@ GET /accounts
 | `skip` | no | int | Number of records to skip |
 | `limit` | no | int | Max records to return |
 | `archived` | no | bool | Include archived accounts |
+| `updated_at_from` | no | int | Inclusive UNIX timestamp in seconds for an incremental read. |
+| `cursor` | no | string | Opaque cursor from the `X-Next-Updated-At-Cursor` response header. |
+
+### Incremental reads
+
+Use `updated_at_from` for the first page of a synchronization window. The API
+captures the current UTC second as the window's upper bound and uses
+`updated_at`, falling back to `created_at` when `updated_at` is null. Results
+within that window are ordered by the effective timestamp and account ID in
+ascending order. When another page exists, the response includes
+`X-Next-Updated-At-Cursor`; send that opaque value as `cursor` on the next
+request with `skip=0`.
+
+`updated_at_from` and `cursor` are mutually exclusive, and a non-zero `skip`
+with a cursor returns `400`. Without either parameter, the existing offset
+pagination is unchanged. Incremental reads return current account-visible rows;
+they do not emit deletion tombstones. Clients that must detect removals need a
+separate reconciliation or event-history flow.
 
 ### Sample request
 ```bash
-curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /accounts?skip=0&limit=10&archived=false
+curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" \
+  /accounts?skip=0&limit=10&archived=false&updated_at_from=1788307200
+```
+
+If the page is truncated, continue with the response header rather than
+calculating an offset:
+
+```http
+X-Next-Updated-At-Cursor: <opaque-cursor>
 ```
 
 ### Sample response

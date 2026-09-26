@@ -65,7 +65,7 @@ Clearance level 4 or lower is required to read device points.
 
 ### Endpoint
 ```http
-GET /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{config_id}/points
+GET /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{id_setup_gateway_device_config}/points
 ```
 
 ### Path parameters
@@ -74,7 +74,7 @@ GET /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{config_id}/points
 | --- | --- | --- | --- |
 | `id_setup` | Yes | int | Gateway setup identifier. |
 | `child_id_setup` | Yes | int | Child setup identifier. |
-| `config_id` | Yes | int | `id_setup_gateway_device_config` selected for the child. |
+| `id_setup_gateway_device_config` | Yes | int | Explicit device configuration identifier selected for the child. |
 
 ### Query parameters
 
@@ -149,13 +149,14 @@ curl -H "Authorization: <API_KEY>" \
 ## Create device points
 
 Assign one or more existing model points to an explicit device configuration.
-The current canonical body uses catalog IDs only.
+The body supports the legacy catalog-ID list and an atomic `points` list that
+sets per-device overrides during the same proposal.
 
 Clearance A2 or A1 is required to create device-point assignments.
 
 ### Endpoint
 ```http
-POST /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{config_id}/points
+POST /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{id_setup_gateway_device_config}/points
 ```
 
 ### Path parameters
@@ -164,7 +165,7 @@ POST /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{config_id}/point
 | --- | --- | --- | --- |
 | `id_setup` | Yes | int | Gateway setup identifier. |
 | `child_id_setup` | Yes | int | Child setup identifier. |
-| `config_id` | Yes | int | Device configuration receiving the point assignments. |
+| `id_setup_gateway_device_config` | Yes | int | Device configuration receiving the point assignments. |
 
 ### Query parameters
 
@@ -176,7 +177,17 @@ POST /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{config_id}/point
 
 | Field | Required | Type | Default | Description |
 | --- | --- | --- | --- | --- |
-| `id_device_model_point_ids` | No | array of int | `[]` | Catalog point IDs belonging to the child device model. An empty list produces no new assignments. |
+| `id_device_model_point_ids` | No | array of int | `[]` | Legacy catalog point IDs belonging to the child device model. An empty list produces no new assignments. |
+| `points` | No | array of object | `[]` | Atomic point assignments. Each item may include the per-device overrides below. |
+| `points[].id_device_model_point` | Yes, when item is present | int | No | Catalog point ID belonging to the child device model. |
+| `points[].factor_override` | No | number or null | `null` | Device-specific factor. Omit it to inherit the model factor. |
+| `points[].available_status` | No | object or null | `null` | Status mapping for writable points only. Omit it for read-only points. |
+
+An ID may appear only once across both fields. `factor_override` applies to
+read and writable points. `available_status` is rejected for a read-only model
+point so the device configuration cannot store an inapplicable status mapping.
+If a point is already assigned, sending an override returns `409`; use the
+point PUT route for a later edit.
 
 ### Pydantic models
 
@@ -198,7 +209,7 @@ curl -X POST \
   -H "Authorization: <API_KEY>" \
   -H "Account: <ID_ACCOUNT>" \
   -H "Content-Type: application/json" \
-  -d '{"id_device_model_point_ids": [900, 901]}' \
+  -d '{"points":[{"id_device_model_point":900,"factor_override":0.1},{"id_device_model_point":901,"factor_override":1,"available_status":{"off":0,"on":1}}]}' \
   /mgd/gateways/501234/devices/501709/configs/44/points
 ```
 
@@ -215,13 +226,28 @@ curl -X POST \
       "id_setup_target": 501709,
       "value": {
         "id_setup_gateway_device_config": 44,
-        "id_device_model_point": 900
+        "id_device_model_point": 900,
+        "factor_override": 0.1
       }
     },
     "changes": [
       {
         "operation": "C",
         "id_resource": 9100,
+        "after_value": {
+          "id_device_model_point": 900,
+          "factor_override": 0.1
+        },
+        "change_status": "on_hold"
+      },
+      {
+        "operation": "C",
+        "id_resource": 9101,
+        "after_value": {
+          "id_device_model_point": 901,
+          "factor_override": 1,
+          "available_status": {"off": 0, "on": 1}
+        },
         "change_status": "on_hold"
       }
     ]
@@ -245,9 +271,7 @@ curl -X POST \
 
 ### Initial overrides
 
-The current body cannot set `factor_override` or `available_status`. Sending a
-second PUT immediately after this POST can collide with the first non-terminal
-change on the same resource. The target contract for the atomic workflow is:
+The `points` form is the atomic workflow and is accepted by the current API:
 
 ```json
 {
@@ -265,10 +289,13 @@ change on the same resource. The target contract for the atomic workflow is:
 }
 ```
 
-This payload is a planned contract extension, not an additional field accepted
-by the current `id_device_model_point_ids` body. It should be implemented as a
-single transaction and one change group. Until then, clients must wait for the
-first proposal to reach a terminal state before issuing a separate update.
+All assignments and overrides in the request are persisted in one transaction
+and share one `change_group_key`. Prefer including the initial overrides in
+this POST so the point is created with its complete configuration. The
+`id_device_model_point_ids` form remains available for clients that only need
+to assign points. If a later PUT collides with an active same-resource
+proposal, follow the cancellation flow described in [MGD change states](mgd_config_change_states.md)
+and retry; an `in_progress` proposal must finish in the worker first.
 
 ## Get a device point
 
@@ -278,7 +305,7 @@ Clearance level 4 or lower is required to read a device point.
 
 ### Endpoint
 ```http
-GET /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{config_id}/points/{id_device_model_point}
+GET /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{id_setup_gateway_device_config}/points/{id_device_model_point}
 ```
 
 ### Path parameters
@@ -287,7 +314,7 @@ GET /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{config_id}/points
 | --- | --- | --- | --- |
 | `id_setup` | Yes | int | Gateway setup identifier. |
 | `child_id_setup` | Yes | int | Child setup identifier. |
-| `config_id` | Yes | int | Explicit device configuration identifier. |
+| `id_setup_gateway_device_config` | Yes | int | Explicit device configuration identifier. |
 | `id_device_model_point` | Yes | int | Model catalog point identifier. |
 
 ### Query parameters
@@ -353,7 +380,7 @@ Clearance A2 or A1 is required to update a device point.
 
 ### Endpoint
 ```http
-PUT /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{config_id}/points/{id_device_model_point}
+PUT /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{id_setup_gateway_device_config}/points/{id_device_model_point}
 ```
 
 ### Path parameters
@@ -362,7 +389,7 @@ PUT /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{config_id}/points
 | --- | --- | --- | --- |
 | `id_setup` | Yes | int | Gateway setup identifier. |
 | `child_id_setup` | Yes | int | Child setup identifier. |
-| `config_id` | Yes | int | Explicit device configuration identifier. |
+| `id_setup_gateway_device_config` | Yes | int | Explicit device configuration identifier. |
 | `id_device_model_point` | Yes | int | Model catalog point identifier. |
 
 ### Query parameters
@@ -377,6 +404,12 @@ PUT /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{config_id}/points
 | --- | --- | --- | --- | --- |
 | `factor_override` | No | number or null | No | Device-specific factor. If null or omitted, inherit the model factor. |
 | `available_status` | No | object or null | No | Status mapping for writable points. Omit for read-only points. |
+
+If this PUT targets a point with an active same-resource proposal, AP-v4
+applies the general MGD resource lock and returns `409`. When the response
+provides `next_action=cancel_then_retry`, cancel the `pending`, `on_hold`, or
+`retry` proposal through its status endpoint and retry the PUT. A point already
+in `in_progress` remains locked; wait for the worker and then retry.
 
 ### Pydantic models
 
@@ -429,7 +462,7 @@ curl -X PUT \
 | `401` | Authentication failed. |
 | `403` | The authenticated user cannot modify this gateway configuration. |
 | `404` | Gateway, child, config, or point was not found in scope. |
-| `409` | A non-terminal change already owns the same resource or the override is incompatible. |
+| `409` | A non-terminal change already owns the same resource or the override is incompatible. Follow `next_action`: cancel and retry for cancellable states, or wait for the worker for `in_progress`. |
 | `500` | Unexpected server error. |
 
 ## Delete a device point
@@ -440,7 +473,7 @@ Clearance A2 or A1 is required to delete a device point.
 
 ### Endpoint
 ```http
-DELETE /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{config_id}/points/{id_device_model_point}
+DELETE /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{id_setup_gateway_device_config}/points/{id_device_model_point}
 ```
 
 ### Path parameters
@@ -449,7 +482,7 @@ DELETE /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{config_id}/poi
 | --- | --- | --- | --- |
 | `id_setup` | Yes | int | Gateway setup identifier. |
 | `child_id_setup` | Yes | int | Child setup identifier. |
-| `config_id` | Yes | int | Explicit device configuration identifier. |
+| `id_setup_gateway_device_config` | Yes | int | Explicit device configuration identifier. |
 | `id_device_model_point` | Yes | int | Model catalog point identifier. |
 
 ### Query parameters
