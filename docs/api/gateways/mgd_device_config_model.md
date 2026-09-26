@@ -11,9 +11,9 @@ GET  /mgd/gateways/{gateway}/devices
 GET  /mgd/gateways/{gateway}/devices/{child}
 GET  /mgd/gateways/{gateway}/devices/{child}/configs
 POST /mgd/gateways/{gateway}/devices/{child}/configs
-GET  /mgd/gateways/{gateway}/devices/{child}/configs/{config}
-PUT  /mgd/gateways/{gateway}/devices/{child}/configs/{config}
-DELETE /mgd/gateways/{gateway}/devices/{child}/configs/{config}
+GET  /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{config_id}
+PUT  /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{config_id}
+DELETE /mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{config_id}
 ```
 
 `GET /devices` lists each child once and reports:
@@ -62,14 +62,21 @@ selected config and keep `setup_gateway_config_changes` as history.
 Points are operated only under an explicit config:
 
 ```text
-/mgd/gateways/{gateway}/devices/{child}/configs/{config}/points
-/mgd/gateways/{gateway}/devices/{child}/configs/{config}/points/{id_device_model_point}
+/mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{id_setup_gateway_device_config}/points
+/mgd/gateways/{id_setup}/devices/{child_id_setup}/configs/{id_setup_gateway_device_config}/points/{id_device_model_point}
 ```
 
 Groups are operated under the devices tree, but `{group}` is always
 `id_setup_gateway_point_group`. There are no name or `scope` resolvers for
 singular operations. `everyday` is a group rule; it is not accepted as an
 invented device-config rule.
+
+Membership is validated per catalog point. A point can belong to at most one
+`everyday` group, while multiple `special_day` groups are allowed for different
+day groups. A special-day membership requires the point's everyday membership
+to exist first. A group without a schedule is valid and has `unscheduled`
+scope; it does not consume an everyday or special-day slot. Group names do not
+pair these memberships and have no effect on the rule.
 
 ## Eager write
 

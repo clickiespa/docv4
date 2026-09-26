@@ -169,10 +169,20 @@ gateway setup
 - Schedules belong to the component; point groups belong to the device
   config. The API validates that the group and schedule are compatible and
   that the schedule belongs to the same component.
+- Point-group membership rules are evaluated per model point: at most one
+  `everyday` group, multiple `special_day` groups for different day groups, and
+  a special-day membership only after an everyday membership. Groups without a
+  schedule are allowed as `unscheduled`; names do not pair or influence these
+  rules.
 - The importer is the reverse path: it receives an effective JSON snapshot,
   reconciles gateway MGD rows by upserting present rows and deleting absent
   rows, and records every effective write as `applied`. It is not a proposal
   source.
+- The read projection currently serializes device-level `special_days` as a
+  dictionary keyed by the reusable day-group name. This is separate from the
+  importer input contract: importer input accepts only the v4.3 list of
+  objects, while component-level reusable `special_days` remains a mapping.
+  The database schema is unchanged.
 
 The per-device `special_days` shape in the v4.3 gateway JSON is a list of
 objects, each carrying `day_groups` and its `config_x_relay` overrides. The

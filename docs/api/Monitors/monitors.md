@@ -37,10 +37,33 @@ GET /monitors
 | --- | --- | --- | --- |
 | `skip` | no | int | Offset for pagination |
 | `limit` | no | int | Max records to return |
+| `updated_at_from` | no | int | Inclusive UNIX timestamp in seconds for an incremental read. |
+| `cursor` | no | string | Opaque cursor from the `X-Next-Updated-At-Cursor` response header. |
+
+### Incremental reads
+
+Provide `updated_at_from` for the first page of a synchronization window. The
+API fixes the upper bound to the current UTC second, uses `updated_at` with a
+`created_at` fallback, and orders results by the effective timestamp and
+`id_monitor` in ascending order. When more rows exist, the response includes
+`X-Next-Updated-At-Cursor`; pass it as `cursor` on the next request with
+`skip=0`.
+
+`updated_at_from` and `cursor` cannot be combined, and a non-zero `skip` with a
+cursor returns `400`. Without either parameter, the existing offset
+pagination is unchanged. Incremental reads return current account-visible
+monitors only; deletion tombstones are not part of this contract.
 
 ### Sample request
 ```bash
-curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" /monitors?skip=0&limit=100
+curl -H "Authorization: <API_KEY>" -H "Account: <ID_ACCOUNT>" \
+  /monitors?skip=0&limit=100&updated_at_from=1788307200
+```
+
+When another page exists, continue with the response header:
+
+```http
+X-Next-Updated-At-Cursor: <opaque-cursor>
 ```
 
 ### Sample response

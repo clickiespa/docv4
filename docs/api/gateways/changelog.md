@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Documentation audit — 2026-09-23
+- `GET /v4/mgd/gateways/{id_setup}/config-changes` — Documented inclusive
+  `from`/`to` UNIX-second filters over `created_at`, including inverted-range
+  validation and composition with existing filters and pagination.
+- MGD imports — Documented structured `400` validation for malformed device
+  containers, missing physical point addresses, invalid schedules, and
+  incomplete relay point groups, with rollback before commit.
+- `PUT /v4/gateways/devices/{identifier}/config` — Documented body-level
+  `subscription`, `mode=delete_specific`, `route`, `key`, and `missing_ok`.
+- `POST /v4/gateways/devices/{identifier}/actions` — Documented `cache_only`
+  and the `cache_not_found`, `device_rejected_request`, and
+  `mqtt_bridge_unavailable` outcomes.
+
 ### Changed
 - `POST /v4/mgd/gateways/{id_setup}/imports` — Documented the v4.3 per-device
   `special_days` list-only contract, including `special_days_invalid_format` in
@@ -19,6 +32,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `GET /v4/gateways/devices/{identifier}/config` — Added `device_read` query parameter; when set to `true`, bypasses the DynamoDB history cache and reads the configuration directly from the device via MQTT
 
 ### Changed
+- MGD release `deploy/api/20260909T130511Z` (AP-v4 `Production`, Lambda
+  version `32`) documents resource-centric `config-sync`, same-gateway retry
+  wake-up, group cancellation by `change_group_key`, and the v4.3 importer
+  contract.
+- History examples now use inclusive `from`/`to` UNIX-second filters; omitted
+  boundaries use the seven-day window and inverted ranges return `400`.
 - MGD documentation — replaced proposal-only storage with eager write and
   compensation; documented option-B use-edge promotion, graph/catalog 409s,
   per-row sync, gateway snapshot apply, and cancellable states including

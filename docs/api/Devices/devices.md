@@ -2,6 +2,7 @@
 
 ## Endpoints
 - [List devices](#list-devices)
+- [Get device history for an account](#get-device-history-for-an-account)
 - [Get device history](#get-device-history)
 - [Get device](#get-device)
 - [Create device](#create-device)
@@ -40,6 +41,23 @@ GET /devices
 | `id_device_model` | No | int | No | Filter devices by the related model identifier returned by [List device models](./device_models.md#list-device-models). |
 | `id_device_status` | No | int | No | Filter devices by their operational status identifier (`1` for connected, `2` for disconnected). |
 | `device_custom_id` | No | string | No | Filter devices by the account-specific custom identifier. |
+| `updated_at_from` | No | int | No | Inclusive UNIX timestamp in seconds for an incremental read. |
+| `cursor` | No | string | No | Opaque cursor from the `X-Next-Updated-At-Cursor` response header. |
+
+### Incremental reads
+
+Use `updated_at_from` on the first request of a synchronization window. The
+service captures the current UTC second as the upper bound, compares
+`updated_at` with a `created_at` fallback, and orders incremental results by
+the effective timestamp and `id_device` in ascending order. If another page
+exists, the response includes `X-Next-Updated-At-Cursor`; send that opaque
+value as `cursor` on the next request with `skip=0`.
+
+`updated_at_from` and `cursor` are mutually exclusive. A non-zero `skip` with
+a cursor returns `400`. Without either parameter, the normal offset pagination
+and collection ordering are unchanged. Incremental device reads contain
+current account-visible devices only and do not emit deletion tombstones; use
+an event-history or reconciliation flow to detect removals.
 
 ### Sample headers
 ```json
@@ -53,7 +71,13 @@ GET /devices
 ```bash
 curl -H "Authorization: <API_KEY>" \
   -H "Account: <ID_ACCOUNT>" \
-  "/devices?limit=20&device_custom_id=NODE-01"
+  "/devices?limit=20&device_custom_id=NODE-01&updated_at_from=1788307200"
+```
+
+If the response contains another page, continue with:
+
+```http
+X-Next-Updated-At-Cursor: <opaque-cursor>
 ```
 
 ### Sample response (200)
@@ -132,6 +156,82 @@ curl -H "Authorization: <API_KEY>" \
   "instance": "/devices"
 }
 ```
+
+## Get device history for an account
+
+Retrieve status changes for several devices in one account-scoped request. When
+`id_device` is omitted, the endpoint covers every visible device; repeat the
+parameter to restrict the result to a selected set. This avoids one HTTP call
+per device for historical exports.
+
+Clearance 5 is required to use this endpoint.
+
+### Endpoint
+```
+GET /devices/history
+```
+
+### Headers
+
+| Header | Required | Description | Type |
+| --- | --- | --- | --- |
+| `Authorization` | Yes | API key generated from your profile | string |
+| `Account` | Yes | Target account ID | int |
+
+### Query parameters
+
+| Parameter | Required | Type | Default | Description |
+| --- | --- | --- | --- | --- |
+| `from` | No | int | `now - 7 days` | Inclusive UNIX timestamp for the beginning of the window. |
+| `to` | No | int | `now` | Inclusive UNIX timestamp for the end of the window. |
+| `id_device` | No | int, repeatable | All visible devices | Restrict results to one or more device identifiers. |
+| `skip` | No | int | `0` | Pagination offset across the combined result. |
+| `limit` | No | int | `100` | Maximum number of events; capped at `500`. |
+
+`from` and `to` use the same inclusive UNIX-second semantics as the individual
+history endpoint. An explicitly inverted range returns `400`. Results are
+ordered newest first with a deterministic event-id tie breaker.
+
+### Sample request
+```bash
+curl -H "Authorization: <API_KEY>" \
+  -H "Account: <ID_ACCOUNT>" \
+  "/devices/history?from=1711929600&to=1712016000&id_device=500010&id_device=500011&limit=100"
+```
+
+### Sample response (200)
+```json
+{
+  "status": "success",
+  "message": "Elements obtained successfully",
+  "data": [
+    {
+      "id_event": 6050,
+      "id_device": 500010,
+      "status_change_timestamp": "2024-04-01T09:15:00Z",
+      "id_device_status": 1
+    },
+    {
+      "id_event": 6049,
+      "id_device": 500011,
+      "status_change_timestamp": "2024-04-01T09:10:00Z",
+      "id_device_status": 2
+    }
+  ],
+  "context": {},
+  "instance": "/devices/history"
+}
+```
+
+### Status codes
+
+| Status | Description |
+| --- | --- |
+| `200` | History retrieved successfully. |
+| `400` | Date range, device filter, or pagination validation failed. |
+| `401` | Authentication failed. |
+| `403` | The authenticated user is not authorized to read device history. |
+| `500` | Unexpected server error. |
 
 ## Get device history
 
