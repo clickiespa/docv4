@@ -2,6 +2,17 @@
 
 Release notes are organized by FastAPI tag for each API version exposed in `/docs`.
 
+## Unreleased (2026-10-07)
+
+### devices
+- Documented the optional `device_ip` field on `PUT /devices/{id_device}`
+  requests and device responses, including the 45-character limit for IPv4 and
+  IPv6 values.
+
+### docs
+- Synchronized the device guide, roadmap, and maintained Postman collections
+  with the deployed AP-v4 device IP update.
+
 ## Published (2026-09-23)
 
 ### synchronization

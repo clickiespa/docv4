@@ -93,6 +93,7 @@ X-Next-Updated-At-Cursor: <opaque-cursor>
       "id_device_model": 3,
       "id_device_status": 2,
       "device_custom_id": "NODE-01",
+      "device_ip": "192.0.2.101",
       "device_observations": "Outdoor gateway",
       "device_configuration": null,
       "device_archived": false,
@@ -105,6 +106,7 @@ X-Next-Updated-At-Cursor: <opaque-cursor>
       "id_device_model": 5,
       "id_device_status": 1,
       "device_custom_id": "NODE-02",
+      "device_ip": null,
       "device_observations": null,
       "device_configuration": "{}",
       "device_archived": false,
@@ -126,6 +128,7 @@ X-Next-Updated-At-Cursor: <opaque-cursor>
 | `id_device_model` | int | Identifier of the device model that defines the capabilities of the hardware. |
 | `id_device_status` | int | Identifier representing the device operational status (`1` is connected, `2` is disconnected). |
 | `device_custom_id` | string | Account-specific identifier assigned to the device. |
+| `device_ip` | string | Device IP address, when available; supports IPv4 or IPv6 values up to 45 characters. |
 | `device_observations` | string | Free-form notes about the device. |
 | `device_configuration` | string | Serialized configuration applied to the device. |
 | `device_archived` | bool | Indicates whether the device is archived. |
@@ -356,6 +359,7 @@ curl -H "Authorization: <API_KEY>" \
     "id_device_model": 3,
     "id_device_status": 2,
     "device_custom_id": "NODE-01",
+    "device_ip": "192.0.2.101",
     "device_observations": "Outdoor gateway",
     "device_configuration": null,
     "device_archived": false,
@@ -375,6 +379,7 @@ curl -H "Authorization: <API_KEY>" \
 | `id_device_model` | int | Identifier of the device model that defines the capabilities of the hardware. Use [Get device model](./device_models.md#get-device-model) to retrieve its catalog entry. |
 | `id_device_status` | int | Identifier representing the device operational status (`1` is connected, `2` is disconnected). |
 | `device_custom_id` | string | Account-specific identifier assigned to the device. |
+| `device_ip` | string | Device IP address, when available; supports IPv4 or IPv6 values up to 45 characters. |
 | `device_observations` | string | Free-form notes about the device. |
 | `device_configuration` | string | Serialized configuration applied to the device. |
 | `device_archived` | bool | Indicates whether the device is archived. |
@@ -550,6 +555,7 @@ PUT /devices/{id_device}
 | `id_device_model` | No | int | No | Device model assigned to the hardware. |
 | `id_device_status` | No | int | No | Operational status identifier. |
 | `device_custom_id` | No | string | No | Account-specific identifier assigned to the device. |
+| `device_ip` | No | string | No | IPv4 or IPv6 address to persist for the device; maximum length is 45 characters. |
 | `device_observations` | No | string | No | Updated notes about the device. |
 | `device_configuration` | No | string | No | Updated serialized configuration. |
 | `device_archived` | No | bool | No | Set to `true` to archive the device. |
@@ -570,6 +576,7 @@ curl -X PUT -H "Authorization: <API_KEY>" \
   -d '{
     "id_location": 500011,
     "id_inventory": 9,
+    "device_ip": "192.0.2.120",
     "device_archived": true
   }' \
   /devices/120
@@ -587,6 +594,7 @@ curl -X PUT -H "Authorization: <API_KEY>" \
     "id_device_model": 3,
     "id_device_status": null,
     "device_custom_id": "NODE-100",
+    "device_ip": "192.0.2.120",
     "device_observations": "Installed in warehouse",
     "device_configuration": null,
     "device_archived": true,
@@ -596,6 +604,7 @@ curl -X PUT -H "Authorization: <API_KEY>" \
     "body": {
       "id_location": 500011,
       "id_inventory": 9,
+      "device_ip": "192.0.2.120",
       "device_archived": true
     },
     "path": {

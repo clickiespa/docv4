@@ -1508,7 +1508,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id_location\": 1,\n  \"id_inventory\": 2,\n  \"device_observations\": \"Updated device notes\",\n  \"device_archived\": false\n}\n",
+              "raw": "{\n  \"id_location\": 1,\n  \"id_inventory\": 2,\n  \"device_ip\": \"192.0.2.120\",\n  \"device_observations\": \"Updated device notes\",\n  \"device_archived\": false\n}\n",
               "options": {
                 "raw": {
                   "language": "json"
