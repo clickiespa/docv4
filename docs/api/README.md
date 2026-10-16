@@ -11,6 +11,8 @@ This page is designed as a client-facing guide so you can quickly find the right
 
 ## Quick references
 - [Postman collection (production v4)](lambda-api-v4-v4.postman_collection.json) — executable request examples aligned with the `/v4` API surface.
+- [AP-v4 agent context pack](agent-context/ap-v4/README.md) — intent-based endpoint routing, source authority, and a downloadable documentation snapshot for AI agents.
+- [Download AP-v4 agent context ZIP](agent-context/ap-v4.zip) — portable bundle with the agent guide and the complete endpoint documentation reference.
 
 ## Recommended reading order
 1. Start here: [Getting Started with v4](Getting_started_with_v4/getting_started.md)
