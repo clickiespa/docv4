@@ -1,7 +1,7 @@
 ---
 title: "Clickie User Manual"
 version: "v4.2.4"
-last_updated: "2026-09-25"
+last_updated: "2026-11-03"
 owner: "Product"
 status: "stable"
 ---
@@ -9,6 +9,8 @@ status: "stable"
 # Clickie User Manual
 
 Usage documentation for **Clickie v4.2.4**. Search for a task or open the section you need.
+
+To work with the API, see the [official API documentation](https://docs.api.clickie.io/).
 
 | I want to… | Go to |
 | --- | --- |

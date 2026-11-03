@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Build bilingual markdown copies without modifying original sources.
 
-Outputs:
-- docs/api-es/** : Spanish translation of docs/api/** (original English kept intact)
-- docs/en/**     : English translation of docs/** excluding docs/api/**
+Default output:
+- docs/en/** : English translation of the user guide, excluding API copies.
+
+Historical API translation remains available only through explicit --only options.
 """
 
 from __future__ import annotations
@@ -236,17 +237,18 @@ def main() -> int:
     parser.add_argument(
         "--only",
         choices=["api-es", "en", "all"],
-        default="all",
-        help="Generate only one target language set",
+        default="en",
+        help="Generate a language set (default: user guide in English; API copies are archived)",
     )
     args = parser.parse_args()
 
     if args.only in ("api-es", "all"):
         build_api_es()
+        print(f"Generated archived API translation: {API_ES_DST}")
     if args.only in ("en", "all"):
         build_manual_en()
+        print(f"Generated user guide translation: {EN_DST}")
 
-    print(f"Generated: {API_ES_DST} and {EN_DST}")
     return 0
 
 

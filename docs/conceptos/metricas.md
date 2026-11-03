@@ -1,7 +1,7 @@
 ---
 title: "Métricas y fórmulas"
 version: "v4.2.3"
-last_updated: "2026-09-14"
+last_updated: "2026-11-03"
 owner: "Product"
 status: "stable"
 ---
@@ -22,7 +22,7 @@ En **Mis métricas → Todas las métricas**:
 5. **ID.** Identifica la métrica; también se usa en fórmulas.
 6. **Nombre y descripción.** Abre el detalle de la medición.
 7. **Unidad de medida.** Distingue magnitudes como energía, potencia y temperatura.
-8. **Fuente de métrica.** Indica de dónde procede, por ejemplo Dispositivo, Calculado o API.
+8. **Fuente de métrica.** Indica de dónde procede, por ejemplo Dispositivo, Calculado o [API](https://docs.api.clickie.io/).
 9. **Creado.** Muestra cuándo se registró; permite ordenar el listado.
 10. **Casillas.** Selecciona una o varias métricas para operar sobre ellas.
 11. **Acciones.** Abre las operaciones permitidas; Exportar prepara la descarga de datos.

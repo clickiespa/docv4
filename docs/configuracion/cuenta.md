@@ -1,7 +1,7 @@
 ---
 title: "Configuración de cuenta"
 version: "v4.2.4"
-last_updated: "2026-09-25"
+last_updated: "2026-11-03"
 owner: "Product"
 status: "stable"
 ---
@@ -66,6 +66,8 @@ La actividad describe la acción, el recurso afectado y el cambio disponible; po
 
 ## Tu perfil y seguridad
 
-Desde el menú de usuario, revisa tus datos personales, foto, idioma, zona horaria y preferencias de comunicación. Las opciones de correo, contraseña y autenticación multifactor incluyen sus pasos de verificación. Puedes consultar el historial de acceso y, si tienes permisos, copiar tu clave de API; se mantiene oculta en pantalla hasta que la necesitas.
+Desde el menú de usuario, revisa tus datos personales, foto, idioma, zona horaria y preferencias de comunicación. Las opciones de correo, contraseña y autenticación multifactor incluyen sus pasos de verificación. También puedes consultar tu historial de acceso.
+
+Para consultas sobre la API y sus credenciales, visita la [documentación oficial de la API](https://docs.api.clickie.io/).
 
 Si cambias de cuenta, comprueba la cuenta activa antes de editar un colaborador o compartir un recurso: las opciones se ajustan a tus permisos en esa cuenta.

@@ -4,6 +4,18 @@ import assert from 'node:assert/strict';
 
 // Validate the generated artifact, including anchors across both languages.
 const html = await fs.readFile('src/manual.generated.html', 'utf8');
+const apiDocsUrl = 'https://docs.api.clickie.io/';
+assert.doesNotMatch(html, /\bid="(?:es|en)-api-/, 'API articles must not be embedded in the guide');
+assert.doesNotMatch(html, /(?:href|src)="(?:[^"#]*\/)?api(?:-es)?\//, 'API files must not be published locally');
+assert.doesNotMatch(html, /postman_collection|api\.clickie\.io\/v4|Authorization:|curl --/, 'API usage content must stay in the official documentation');
+const apiNavLinks = [...html.matchAll(/<a class="nav-item" href="https:\/\/docs\.api\.clickie\.io\/"[^>]*>/g)];
+assert.equal(apiNavLinks.length, 2, 'Both languages need an external API documentation link');
+for (const directory of ['api', 'api-es']) {
+  await assert.rejects(fs.access(path.join('public', directory)), { code: 'ENOENT' }, `Stale API downloads: ${directory}`);
+}
+for (const [, href] of html.matchAll(/href="([^"]*api\.clickie\.io[^" ]*)"/g)) {
+  assert.equal(href, apiDocsUrl, 'API links must use the official documentation URL');
+}
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
 const known = new Set(ids);
 assert.equal(known.size, ids.length, 'Duplicate HTML IDs');

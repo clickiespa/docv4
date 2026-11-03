@@ -8,10 +8,9 @@ Repositorio docs-first para Clickie.
 - **Salida documental**: MkDocs compila la documentación a `/site`.
 - **Salida editorial externa**: `scripts/sync_to_gdocs.py` publica el contenido Markdown en Google Docs.
 - **Sitio público**: GitHub Pages despliega la app React/Vite del repositorio, con contenido generado desde `/docs` mediante `scripts/generate_web_docs.mjs`.
-- **Capa bilingüe web**:
-  - `docs/api/**`: fuente original API en inglés (no se modifica).
-  - `docs/api-es/**`: traducción al español de API.
-  - `docs/en/**`: traducción al inglés de la documentación funcional.
+- **Capa bilingüe web**: `/docs` contiene el manual en español y `docs/en/**` su traducción al inglés.
+- **Documentación de la API**: se consulta exclusivamente en [docs.api.clickie.io](https://docs.api.clickie.io/). El manual no incluye instrucciones de uso, endpoints, ejemplos ni descargas de la API.
+- **Copias históricas de API**: `docs/api/**` y `docs/api-es/**` se conservan fuera de las salidas publicadas (web, MkDocs y Google Docs). No añadirlas a la navegación ni traducirlas como parte del manual. Cualquier referencia a la API debe enlazar a su documentación oficial.
 
 > Google Doc es salida generada: no se edita manualmente como fuente primaria.
 
@@ -122,7 +121,7 @@ Notas:
 - El selector de idioma está en la topbar del sitio público.
 - Idioma por defecto: **Español**.
 - La preferencia se persiste en `localStorage`.
-- Para regenerar traducciones:
+- El generador traduce únicamente el manual funcional a inglés por defecto. Para regenerar traducciones:
 
 ```bash
 python scripts/build_bilingual_docs.py
@@ -131,7 +130,6 @@ python scripts/build_bilingual_docs.py
 Opciones:
 
 ```bash
-python scripts/build_bilingual_docs.py --only api-es
 python scripts/build_bilingual_docs.py --only en
 ```
 
@@ -220,7 +218,7 @@ Los cambios en `/docs` se reflejan en la web pública porque el workflow del sit
 
 ## Manual de uso v4.2.3
 
-La revisión funcional usa Clickie v4.2.3 (`80841bd6`). La referencia API conserva su versión propia. ES y EN se revisan en paralelo; no regenerar `docs/en` sin revisar el resultado editorial.
+La revisión funcional usa Clickie v4.2.3 (`80841bd6`). La documentación de la API se mantiene en [su sitio oficial](https://docs.api.clickie.io/). ES y EN se revisan en paralelo; no regenerar `docs/en` sin revisar el resultado editorial.
 
 - Escribir para clientes de cualquier rol, con sólo el texto necesario para completar una tarea o interpretar un dato.
 - Usar nombres genéricos en español y un ejemplo conectado: Planta de demostración → Edificio principal → Sala de equipos.

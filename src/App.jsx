@@ -89,6 +89,10 @@ function App() {
       };
       function renderRoute(moveFocus = false) {
         let id = readHash();
+        if (/^(?:(?:es|en)-)?api(?:-es)?(?:-|$)/.test(id)) {
+          window.location.replace('https://docs.api.clickie.io/');
+          return;
+        }
         if (id === `${lang}-inicio`) id = `${lang}-index`;
         let target = id ? document.getElementById(id) : null;
         if (!target || !shell.contains(target)) target = shell.querySelector(`#${lang}-index`);

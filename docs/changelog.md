@@ -1,12 +1,16 @@
 ---
 title: "Cambios del manual"
 version: "v4.2.4"
-last_updated: "2026-09-25"
+last_updated: "2026-11-03"
 owner: "Product"
 status: "stable"
 ---
 
 # Cambios del manual
+
+## 3 de noviembre de 2026 · Documentación de la API
+
+Las consultas sobre la API remiten a su [documentación oficial](https://docs.api.clickie.io/). Esta guía se centra en el uso de la plataforma Clickie.
 
 ## 25 de septiembre de 2026 · Clickie 4.2.4
 

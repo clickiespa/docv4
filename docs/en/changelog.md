@@ -1,12 +1,16 @@
 ---
 title: "Manual updates"
 version: "v4.2.4"
-last_updated: "2026-09-25"
+last_updated: "2026-11-03"
 owner: "Product"
 status: "stable"
 ---
 
 # Manual updates
+
+## 3 November 2026 · API documentation
+
+API information is available in the [official API documentation](https://docs.api.clickie.io/). This guide focuses on using the Clickie platform.
 
 ## 25 September 2026 · Clickie 4.2.4
 

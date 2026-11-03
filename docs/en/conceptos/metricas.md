@@ -1,7 +1,7 @@
 ---
 title: "Metrics and formulas"
 version: "v4.2.3"
-last_updated: "2026-09-14"
+last_updated: "2026-11-03"
 owner: "Product"
 status: "stable"
 ---
@@ -22,7 +22,7 @@ In the metric list:
 5. **ID.** Identifies the metric, including in formulas.
 6. **Name and description.** Open measurement details.
 7. **Unit of measure.** Distinguish energy, power and temperature.
-8. **Metric source.** Shows where data comes from, such as Device, Calculated or API.
+8. **Metric source.** Shows where data comes from, such as Device, Calculated or [API](https://docs.api.clickie.io/).
 9. **Created.** Shows registration time; use the heading to sort.
 10. **Checkboxes.** Select one or more metrics.
 11. **Actions.** Open permitted operations; Export prepares a download.

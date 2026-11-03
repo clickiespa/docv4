@@ -1,7 +1,7 @@
 ---
 title: "Manual de uso de Clickie"
 version: "v4.2.4"
-last_updated: "2026-09-25"
+last_updated: "2026-11-03"
 owner: "Product"
 status: "stable"
 ---
@@ -9,6 +9,8 @@ status: "stable"
 # Manual de uso de Clickie
 
 Documentación de uso de **Clickie v4.2.4**. Busca una tarea o entra en la sección que necesitas.
+
+Para trabajar con la API, consulta la [documentación oficial de la API](https://docs.api.clickie.io/).
 
 | Quiero… | Ir a |
 | --- | --- |

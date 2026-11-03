@@ -1,7 +1,7 @@
 ---
 title: "Account settings"
 version: "v4.2.4"
-last_updated: "2026-09-25"
+last_updated: "2026-11-03"
 owner: "Product"
 status: "stable"
 ---
@@ -66,6 +66,8 @@ Activity describes the action, affected resource and available change details; f
 
 ## Your profile and security
 
-From the user menu, review your personal details, photo, language, time zone and communication preferences. Email, password and multifactor authentication options include their verification steps. You can review access history and, if permitted, copy your API key; it remains masked on screen until needed.
+From the user menu, review your personal details, photo, language, time zone and communication preferences. Email, password and multifactor authentication options include their verification steps. You can also review your access history.
+
+For information about the API and its credentials, see the [official API documentation](https://docs.api.clickie.io/).
 
 After switching accounts, check the active account before editing a collaborator or sharing a resource: available options follow your permissions in that account.

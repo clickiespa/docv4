@@ -267,7 +267,8 @@ def read_mkdocs_nav_order(mkdocs_config_path: Path) -> List[str]:
 
     def collect(items: Any) -> None:
         if isinstance(items, str):
-            ordered_paths.append(items)
+            if not items.startswith(('https://', 'http://')):
+                ordered_paths.append(items)
             return
 
         if isinstance(items, list):
@@ -336,7 +337,9 @@ def resolve_markdown_files(docs_dir: Path, mkdocs_config_path: Path) -> List[Pat
                 files.append(resolved)
                 seen.add(resolved)
 
-    return files
+    # Synced API sources are archived here, but are not part of the user guide.
+    docs_root = docs_dir.resolve()
+    return [file for file in files if file.relative_to(docs_root).parts[0] not in {"api", "api-es"}]
 
 
 def load_service_account_credentials():
